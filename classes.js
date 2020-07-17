@@ -19025,10 +19025,17 @@ function okttsg_SSAOTest__init_() {
 function okttsg_SSAOTest_testMain($this) {
     var var$1, var$2;
     oktg_GL_$callClinit();
-    if (oktg_GL_isGLES(oktg_GL_INSTANCE) && oktg_GL_getGlesMajVer(oktg_GL_INSTANCE) < 3) {
-        okt_APP_$callClinit();
-        okt_APP_messageBox(okt_APP_INSTANCE, $rt_s(30), $rt_s(464));
-        return;
+    if (oktg_GL_isGLES(oktg_GL_INSTANCE)) {
+        if (oktg_GL_getGlesMajVer(oktg_GL_INSTANCE) < 3) {
+            okt_APP_$callClinit();
+            okt_APP_messageBox(okt_APP_INSTANCE, $rt_s(30), $rt_s(464));
+            return;
+        }
+        if (!oktg_GL_enableExtension(oktg_GL_INSTANCE, $rt_s(29))) {
+            okt_APP_$callClinit();
+            okt_APP_messageBox(okt_APP_INSTANCE, $rt_s(30), $rt_s(31));
+            return;
+        }
     }
     var$1 = new oktt_GLTFModel;
     var$2 = oktgg_GLTFConf__init_1(0, 0, 0, 0, 0, 0, 0, 1, 0, null, 887, null);
@@ -32849,10 +32856,17 @@ function oktts_SSAOBaseTest__init_() {
 function oktts_SSAOBaseTest_testMain($this) {
     var $sceneShader, var$2, var$3, var$4, var$5, $screenQuad, $gBuffer, $ssao, var$9, $cube, $plane, $cubeMatrix, $planeMatrix;
     oktg_GL_$callClinit();
-    if (oktg_GL_isGLES(oktg_GL_INSTANCE) && oktg_GL_getGlesMajVer(oktg_GL_INSTANCE) < 3) {
-        okt_APP_$callClinit();
-        okt_APP_messageBox(okt_APP_INSTANCE, $rt_s(30), $rt_s(464));
-        return;
+    if (oktg_GL_isGLES(oktg_GL_INSTANCE)) {
+        if (oktg_GL_getGlesMajVer(oktg_GL_INSTANCE) < 3) {
+            okt_APP_$callClinit();
+            okt_APP_messageBox(okt_APP_INSTANCE, $rt_s(30), $rt_s(464));
+            return;
+        }
+        if (!oktg_GL_enableExtension(oktg_GL_INSTANCE, $rt_s(29))) {
+            okt_APP_$callClinit();
+            okt_APP_messageBox(okt_APP_INSTANCE, $rt_s(30), $rt_s(31));
+            return;
+        }
     }
     $sceneShader = new okts_Shader;
     var$2 = null;
@@ -34510,77 +34524,78 @@ function otp_Platform_prepareNewInstance() {
     k_NotImplementedError[c] = k_NotImplementedError__init_0;
     jl_ConsoleOutputStreamStdout[c] = jl_ConsoleOutputStreamStdout__init_;
     jnci_UTF8Charset[c] = jnci_UTF8Charset__init_0;
-    oktm_ScreenQuad$TextureRenderer[c] = oktm_ScreenQuad$TextureRenderer__init_0;
-    oktm_ScreenQuad[c] = oktm_ScreenQuad__init_4;
-    oktt_GBuffer[c] = oktt_GBuffer__init_4;
     oktmb_BoxMeshBuilder[c] = oktmb_BoxMeshBuilder__init_0;
     oktmb_MeshBuilder[c] = oktmb_MeshBuilder__init_0;
-    oktu_Color[c] = oktu_Color__init_;
-    oktgc_OrbitCameraControl[c] = oktgc_OrbitCameraControl__init_4;
-    oktt_KeyboardTest$testMain$1[c] = oktt_KeyboardTest$testMain$1__init_0;
-    oktt_Texture2D[c] = oktt_Texture2D__init_1;
-    oktt_GLTFModel[c] = oktt_GLTFModel__init_4;
-    oktgg_GLTFConf[c] = oktgg_GLTFConf__init_4;
+    oktm_ScreenQuad[c] = oktm_ScreenQuad__init_4;
+    oktt_GBuffer[c] = oktt_GBuffer__init_4;
     oktmb_PlaneMeshBuilder[c] = oktmb_PlaneMeshBuilder__init_4;
     oktm_VertexInputs[c] = oktm_VertexInputs__init_1;
+    oktgc_OrbitCameraControl[c] = oktgc_OrbitCameraControl__init_4;
+    oktt_CubeModel[c] = oktt_CubeModel__init_0;
     oktt_SimpleFrameBuffer[c] = oktt_SimpleFrameBuffer__init_1;
+    oktt_GLTFModel[c] = oktt_GLTFModel__init_4;
+    oktgg_GLTFConf[c] = oktgg_GLTFConf__init_4;
+    oktsp_FXAA[c] = oktsp_FXAA__init_0;
+    oktm_ScreenQuad$TextureRenderer[c] = oktm_ScreenQuad$TextureRenderer__init_0;
+    oktt_FrameBuffer[c] = oktt_FrameBuffer__init_4;
+    oktsp_Threshold[c] = oktsp_Threshold__init_4;
+    oktsp_MotionBlur[c] = oktsp_MotionBlur__init_4;
+    kji_Ref$BooleanRef[c] = kji_Ref$BooleanRef__init_0;
+    oktg_ShaderChannel[c] = oktg_ShaderChannel__init_0;
+    oktt_Texture2D[c] = oktt_Texture2D__init_1;
     kji_Ref$IntRef[c] = kji_Ref$IntRef__init_0;
     oktm_Vec2[c] = oktm_Vec2__init_4;
-    oktt_CubeModel[c] = oktt_CubeModel__init_0;
-    oktt_FrameBuffer[c] = oktt_FrameBuffer__init_4;
-    oktm_IVertexInput$Companion[c] = oktm_IVertexInput$Companion__init_;
-    oktsp_Threshold[c] = oktsp_Threshold__init_4;
-    oktsp_FXAA[c] = oktsp_FXAA__init_0;
     oktt_TextureCube[c] = oktt_TextureCube__init_4;
+    oktu_Color[c] = oktu_Color__init_;
+    kji_Ref$FloatRef[c] = kji_Ref$FloatRef__init_;
+    oktm_IVertexInput$Companion[c] = oktm_IVertexInput$Companion__init_;
+    oktt_MouseTest$testMain$1[c] = oktt_MouseTest$testMain$1__init_0;
     oktg_Scene[c] = oktg_Scene__init_4;
     oktg_Object3D[c] = oktg_Object3D__init_0;
     oktsg_GeneratedShader[c] = oktsg_GeneratedShader__init_0;
     oktsg_VertexNode[c] = oktsg_VertexNode__init_0;
-    oktsp_MotionBlur[c] = oktsp_MotionBlur__init_4;
-    kji_Ref$FloatRef[c] = kji_Ref$FloatRef__init_;
-    kji_Ref$BooleanRef[c] = kji_Ref$BooleanRef__init_0;
+    oktt_KeyboardTest$testMain$1[c] = oktt_KeyboardTest$testMain$1__init_0;
     oktmb_BoxMeshBuilder$Companion[c] = oktmb_BoxMeshBuilder$Companion__init_;
     oktsg_GLSL[c] = oktsg_GLSL__init_;
-    oktg_ShaderChannel[c] = oktg_ShaderChannel__init_0;
-    oktt_MouseTest$testMain$1[c] = oktt_MouseTest$testMain$1__init_0;
     oktm_IMesh$Companion[c] = oktm_IMesh$Companion__init_;
-    okttsg_EmissionBloomTest$testMain$1[c] = okttsg_EmissionBloomTest$testMain$1__init_0;
     oktt_CubeModel$Companion[c] = oktt_CubeModel$Companion__init_;
+    okttsg_SSAOTest$testMain$1[c] = okttsg_SSAOTest$testMain$1__init_0;
     oktt_Attachments[c] = oktt_Attachments__init_0;
+    okttsg_CascadedShadowMappingTest$testMain$1[c] = okttsg_CascadedShadowMappingTest$testMain$1__init_0;
     oktm_IVertexBuffer$Companion[c] = oktm_IVertexBuffer$Companion__init_;
+    okttsg_EmissionBloomTest$testMain$1[c] = okttsg_EmissionBloomTest$testMain$1__init_0;
+    oktt_GLTFLoaderAnimTest$testMain$1[c] = oktt_GLTFLoaderAnimTest$testMain$1__init_0;
     oktgn_Node[c] = oktgn_Node__init_0;
     oktgn_ITransformNode$Companion[c] = oktgn_ITransformNode$Companion__init_0;
-    okttsg_SSAOTest$testMain$1[c] = okttsg_SSAOTest$testMain$1__init_0;
-    oktt_GLTFLoaderAnimTest$testMain$1[c] = oktt_GLTFLoaderAnimTest$testMain$1__init_0;
-    okttsg_CascadedShadowMappingTest$testMain$1[c] = okttsg_CascadedShadowMappingTest$testMain$1__init_0;
     okts_Shader$Companion[c] = okts_Shader$Companion__init_0;
     oktmb_MeshBuilder$Companion[c] = oktmb_MeshBuilder$Companion__init_0;
-    oktm_IVec4$Companion[c] = oktm_IVec4$Companion__init_;
-    oktmb_FrustumMeshBuilder$Companion[c] = oktmb_FrustumMeshBuilder$Companion__init_0;
-    oktt_Texture2D$Companion[c] = oktt_Texture2D$Companion__init_1;
-    oktgl_DirectionalLight[c] = oktgl_DirectionalLight__init_4;
-    oktt_GLTFModel$1[c] = oktt_GLTFModel$1__init_0;
+    oktsp_SSAO$Companion[c] = oktsp_SSAO$Companion__init_0;
+    kr_Random$Default[c] = kr_Random$Default__init_1;
     ju_LinkedHashMap[c] = ju_LinkedHashMap__init_0;
     oktt_FrameBufferAttachment[c] = oktt_FrameBufferAttachment__init_0;
-    oktm_Vec2$Companion[c] = oktm_Vec2$Companion__init_1;
     oktsp_Bloom$Companion[c] = oktsp_Bloom$Companion__init_0;
-    oktm_IndexBufferObject$Companion[c] = oktm_IndexBufferObject$Companion__init_0;
-    oktsp_Threshold$Companion[c] = oktsp_Threshold$Companion__init_0;
+    oktgl_DirectionalLight[c] = oktgl_DirectionalLight__init_4;
+    oktt_GLTFModel$1[c] = oktt_GLTFModel$1__init_0;
     oktsp_FXAA$Companion[c] = oktsp_FXAA$Companion__init_0;
+    oktsp_Threshold$Companion[c] = oktsp_Threshold$Companion__init_0;
+    oktsp_MotionBlur$Companion[c] = oktsp_MotionBlur$Companion__init_0;
+    oktt_Texture2D$Companion[c] = oktt_Texture2D$Companion__init_1;
+    oktm_Vec2$Companion[c] = oktm_Vec2$Companion__init_1;
+    oktm_IVec4$Companion[c] = oktm_IVec4$Companion__init_;
+    oktmb_FrustumMeshBuilder$Companion[c] = oktmb_FrustumMeshBuilder$Companion__init_0;
+    oktm_IndexBufferObject$Companion[c] = oktm_IndexBufferObject$Companion__init_0;
     oktg_IWorld$Companion[c] = oktg_IWorld$Companion__init_0;
     oktg_Scene$Companion[c] = oktg_Scene$Companion__init_1;
-    oktsp_MotionBlur$Companion[c] = oktsp_MotionBlur$Companion__init_0;
     oktsg_GLSLFloatInline[c] = oktsg_GLSLFloatInline__init_4;
     oktsg_GLSLVec2Inline[c] = oktsg_GLSLVec2Inline__init_;
     oktsg_GLSLVec3Inline[c] = oktsg_GLSLVec3Inline__init_4;
     oktsg_GLSLVec4Inline[c] = oktsg_GLSLVec4Inline__init_;
     oktsg_SkyboxVertexNode$Companion[c] = oktsg_SkyboxVertexNode$Companion__init_0;
-    oktsp_SSAO$Companion[c] = oktsp_SSAO$Companion__init_0;
-    kr_Random$Default[c] = kr_Random$Default__init_1;
     otjb_Performance[c] = otjb_Performance__init_;
+    oktgg_GLTF$Companion[c] = oktgg_GLTF$Companion__init_0;
     oktm_IVertexBuffer$Companion$Build$1[c] = oktm_IVertexBuffer$Companion$Build$1__init_;
     oktg_Scene$objectSorter$1[c] = oktg_Scene$objectSorter$1__init_;
-    oktgg_GLTF$Companion[c] = oktgg_GLTF$Companion__init_0;
+    ki_PlatformImplementations[c] = ki_PlatformImplementations__init_0;
     oktgl_DirectionalLight$Companion[c] = oktgl_DirectionalLight$Companion__init_0;
     oktm_IVertexInput$Companion$UV$1[c] = oktm_IVertexInput$Companion$UV$1__init_;
     oktm_IVertexInput$Companion$Color$1[c] = oktm_IVertexInput$Companion$Color$1__init_0;
@@ -34588,18 +34603,17 @@ function otp_Platform_prepareNewInstance() {
     oktm_IVertexInput$Companion$BoneWeights$1[c] = oktm_IVertexInput$Companion$BoneWeights$1__init_;
     oktgn_AdapterTransformNode[c] = oktgn_AdapterTransformNode__init_0;
     kc_EmptyList[c] = kc_EmptyList__init_0;
-    ki_PlatformImplementations[c] = ki_PlatformImplementations__init_0;
     oktm_IMesh$Companion$Build$1[c] = oktm_IMesh$Companion$Build$1__init_0;
+    kr_Random$Companion[c] = kr_Random$Companion__init_;
     oktg_World[c] = oktg_World__init_0;
     oktgn_ITransformNode$Companion$Build$1[c] = oktgn_ITransformNode$Companion$Build$1__init_0;
-    kr_Random$Companion[c] = kr_Random$Companion__init_;
     oktgn_AdapterTransformNode$Companion[c] = oktgn_AdapterTransformNode$Companion__init_0;
+    jl_ClassNotFoundException[c] = jl_ClassNotFoundException__init_0;
+    jl_ReflectiveOperationException[c] = jl_ReflectiveOperationException__init_0;
     oktgg_GLTFMaterials$Companion[c] = oktgg_GLTFMaterials$Companion__init_0;
     oktgg_GLTFMeshes$Companion[c] = oktgg_GLTFMeshes$Companion__init_;
     oktgg_GLTFMeshes$Vec3I[c] = oktgg_GLTFMeshes$Vec3I__init_4;
     oktgg_GLTFAnimations$Companion[c] = oktgg_GLTFAnimations$Companion__init_1;
-    jl_ClassNotFoundException[c] = jl_ClassNotFoundException__init_0;
-    jl_ReflectiveOperationException[c] = jl_ReflectiveOperationException__init_0;
     ju_Properties[c] = ju_Properties__init_0;
     ju_Hashtable[c] = ju_Hashtable__init_0;
     kt_StringsKt[c] = kt_StringsKt__init_0;
