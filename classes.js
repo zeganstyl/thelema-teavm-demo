@@ -1152,7 +1152,8 @@ function oktm_VertexBufferObject_bind($this, $shader) {
                 if ($location !== null) {
                     oktg_GL_glEnableVertexAttribArray(oktg_GL_INSTANCE, $location.$intValue());
                     oktg_GL_glVertexAttribPointer(oktg_GL_INSTANCE, $location.$intValue(), $input.$getSize(), $input.$getType(), $input.$getNormalized(), $bytesPerVertex, $input.$getByteOffset());
-                    oktg_GL_glVertexAttribDivisor(oktg_GL_INSTANCE, $location.$intValue(), oktm_VertexBufferObject_getInstancesToRender($this) <= 0 ? 0 : 1);
+                    if (!(!(oktg_GL_isGLES(oktg_GL_INSTANCE) && oktg_GL_getMajVer(oktg_GL_INSTANCE) >= 3) && oktg_GL_isGLES(oktg_GL_INSTANCE)))
+                        oktg_GL_glVertexAttribDivisor(oktg_GL_INSTANCE, $location.$intValue(), oktm_VertexBufferObject_getInstancesToRender($this) <= 0 ? 0 : 1);
                 }
                 $i = $i + 1 | 0;
             }
@@ -2998,10 +2999,18 @@ function oktgc_CameraAdapter__clinit_() {
 function oktgc_CameraAdapter_getAspectRatio($this) {
     return oktgc_ICamera$DefaultImpls_getAspectRatio($this);
 }
+function oktgc_CameraAdapter_dst2($this, $position, $isLocal) {
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
+    return oktgc_ICamera$DefaultImpls_dst2($this, $position, $isLocal);
+}
+function oktgc_CameraAdapter_getPosition($this, $out, $isLocal) {
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
+    return oktgc_ICamera$DefaultImpls_getPosition($this, $out, $isLocal);
+}
 function oktgc_CameraAdapter_lookAt($this, $from, $to, $up) {
-    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(53));
-    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(54));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     oktgc_ICamera$DefaultImpls_lookAt($this, $from, $to, $up);
 }
 function oktgc_CameraAdapter_updatePreviousTransform($this) {
@@ -3009,14 +3018,6 @@ function oktgc_CameraAdapter_updatePreviousTransform($this) {
 }
 function oktgc_CameraAdapter_updateTransform($this, $recursive) {
     oktgc_ICamera$DefaultImpls_updateTransform($this, $recursive);
-}
-function oktgc_CameraAdapter_getPosition($this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
-    return oktgc_ICamera$DefaultImpls_getPosition($this, $out, $isLocal);
-}
-function oktgc_CameraAdapter_dst2($this, $position, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
-    return oktgc_ICamera$DefaultImpls_dst2($this, $position, $isLocal);
 }
 function oktgc_Camera() {
     var a = this; oktgc_CameraAdapter.call(a);
@@ -3112,9 +3113,9 @@ function oktgc_Camera_isCentered($this) {
     return $this.$isCentered0;
 }
 function oktgc_Camera__init_2($this, $position, $direction, $up, $near, $far, $fov, $viewportWidth, $viewportHeight, $isOrthographic, $zoom, $name, $isCentered) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     kji_Intrinsics_checkParameterIsNotNull($direction, $rt_s(58));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     kji_Intrinsics_checkParameterIsNotNull($name, $rt_s(17));
     oktgc_CameraAdapter__init_0($this);
     $this.$position1 = $position;
@@ -3168,8 +3169,8 @@ function oktgc_Camera__init_4(var$0) {
     oktgc_Camera__init_0(var$0, null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4095, null);
 }
 function oktgc_Camera__init_6($this, $from, $to, $near, $far) {
-    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(53));
-    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(54));
+    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(56));
     oktgc_Camera__init_0($this, null, null, null, $near, $far, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4071, null);
     oktgc_ICamera$DefaultImpls_lookAt$default($this, $from, $to, null, 4, null);
     $this.$update0();
@@ -7683,7 +7684,7 @@ function okti_IMG_createImage($this) {
 function okti_IMG_load($this, $url, $out, $sourceLocation, $response) {
     var var$5;
     kji_Intrinsics_checkParameterIsNotNull($url, $rt_s(280));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     kji_Intrinsics_checkParameterIsNotNull($response, $rt_s(281));
     var$5 = okti_IMG_api;
     if (var$5 === null)
@@ -7693,7 +7694,7 @@ function okti_IMG_load($this, $url, $out, $sourceLocation, $response) {
 function okti_IMG_load0($this, $file, $out, $response) {
     var var$4;
     kji_Intrinsics_checkParameterIsNotNull($file, $rt_s(282));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     kji_Intrinsics_checkParameterIsNotNull($response, $rt_s(281));
     var$4 = okti_IMG_api;
     if (var$4 === null)
@@ -10147,7 +10148,7 @@ function oktmb_MeshBuilder_createIndicesShort($this, $indicesNum, $block) {
     return oktmb_MeshBuilder_createIndices($this, $indicesNum, 5123, oktmb_MeshBuilder$createIndicesShort$1__init_($block));
 }
 function oktmb_MeshBuilder_build($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$setMaterial($this.$material);
     return $out;
 }
@@ -11111,7 +11112,7 @@ function oktsg_ShaderNode_getAttribute($this) {
     return $this.$getShader().$getVersion() < 130 ? $rt_s(324) : $rt_s(325);
 }
 function oktsg_ShaderNode_getVarOut($this) {
-    return $this.$getShader().$getVersion() < 130 ? $rt_s(326) : $rt_s(56);
+    return $this.$getShader().$getVersion() < 130 ? $rt_s(326) : $rt_s(54);
 }
 function oktsg_ShaderNode_getVarIn($this) {
     return $this.$getShader().$getVersion() < 130 ? $rt_s(326) : $rt_s(325);
@@ -11191,16 +11192,16 @@ function oktsg_ShaderNode_prepareToDrawMesh($this, $mesh) {
     kji_Intrinsics_checkParameterIsNotNull($mesh, $rt_s(43));
 }
 function oktsg_ShaderNode_executionFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
 }
 function oktsg_ShaderNode_executionVert($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
 }
 function oktsg_ShaderNode_declarationVert($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
 }
 function oktsg_ShaderNode_declarationFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
 }
 function oktsg_ShaderNode__init_0($this) {
     oktsg_ShaderNode_$callClinit();
@@ -11239,17 +11240,17 @@ function oktsg_UVNode_getUv($this) {
     return $this.$uv0;
 }
 function oktsg_UVNode_declarationFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$uv0.$isUsed0())
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarIn($this)).$append12(32).$append($this.$uv0.$getTypedRef0()).$append($rt_s(330)).$toString());
 }
 function oktsg_UVNode_executionVert($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$uv0.$isUsed0())
         $out.$append(jl_StringBuilder__init_().$append($this.$uv0.$getRef0()).$append($rt_s(331)).$append($this.$aUVName).$append($rt_s(330)).$toString());
 }
 function oktsg_UVNode_declarationVert($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$uv0.$isUsed0()) {
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getAttribute($this)).$append12(32).$append($this.$uv0.$getTypeStr0()).$append12(32).$append($this.$aUVName).$append($rt_s(330)).$toString());
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append12(32).$append($this.$uv0.$getTypedRef0()).$append($rt_s(330)).$toString());
@@ -14486,7 +14487,7 @@ function oktd_IFloatData$DefaultImpls() {
 function oktd_IFloatData$DefaultImpls_get($$this, $out) {
     var var$3, $i, var$5;
     var$3 = $out.data;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $i = 0;
     var$5 = var$3.length;
     while ($i < var$5) {
@@ -15075,7 +15076,7 @@ function oktt_TvmIMG_createImage($this) {
 function oktt_TvmIMG_load($this, $url, $out, $sourceLocation, $response) {
     var var$5, $img;
     kji_Intrinsics_checkParameterIsNotNull($url, $rt_s(280));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     kji_Intrinsics_checkParameterIsNotNull($response, $rt_s(281));
     var$5 = $out.$getSourceObject0();
     if (var$5 === null)
@@ -15096,7 +15097,7 @@ function oktt_TvmIMG_load($this, $url, $out, $sourceLocation, $response) {
 function oktt_TvmIMG_load0($this, $file, $out, $response) {
     var var$4, $img, var$6;
     kji_Intrinsics_checkParameterIsNotNull($file, $rt_s(282));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     kji_Intrinsics_checkParameterIsNotNull($response, $rt_s(281));
     var$4 = $out.$getSourceObject0();
     if (var$4 === null)
@@ -16166,7 +16167,7 @@ function oktd_DATA_decodeURI($this, $uri) {
 function oktd_DATA_decodeBase64($this, $text, $out) {
     var var$3;
     kji_Intrinsics_checkParameterIsNotNull($text, $rt_s(295));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     var$3 = oktd_DATA_api;
     if (var$3 === null)
         kji_Intrinsics_throwUninitializedPropertyAccessException($rt_s(279));
@@ -22785,7 +22786,7 @@ function oktt_TvmFloat32Array__init_($this, $floatArray) {
     $this.$size3 = $this.$floatArray.length;
 }
 function oktt_TvmFloat32Array_get3($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     oktd_IFloatData$DefaultImpls_get($this, $out);
 }
 function oktt_TvmFloat32Array_put1($this, $values) {
@@ -23673,7 +23674,7 @@ function oktsg_ToneMapNode_prepareToDrawScene($this, $scene) {
 function oktsg_ToneMapNode_declarationFrag($this, $out) {
     var var$2;
     a: {
-        kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+        kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
         $out.$append($rt_s(577));
         $out.$append(jl_StringBuilder__init_().$append($this.$result.$getTypedRef0()).$append($rt_s(578)).$toString());
         $out.$append($rt_s(579));
@@ -23711,7 +23712,7 @@ function oktsg_ToneMapNode_declarationFrag($this, $out) {
     $out.$append($rt_s(599));
 }
 function oktsg_ToneMapNode_executionFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append(jl_StringBuilder__init_().$append($this.$result.$getRef0()).$append($rt_s(600)).$append(oktsg_ToneMapNode_getInputColor($this).$asVec3()).$append($rt_s(601)).$append(oktsg_ToneMapNode_getInputColor($this).$getRef0()).$append($rt_s(602)).$toString());
 }
 function oktsg_ToneMapNode__init_0($this, $inputColor, $toneMapType) {
@@ -23891,6 +23892,9 @@ function oktg_GL_getMainFrameBufferHeight($this) {
 }
 function oktg_GL_getMainFrameBufferHandle($this) {
     return oktg_GL_api.$getMainFrameBufferHandle0();
+}
+function oktg_GL_getMajVer($this) {
+    return oktg_GL_api.$getMajVer();
 }
 function oktg_GL_getGlesMajVer($this) {
     return oktg_GL_api.$getGlesMajVer();
@@ -30095,7 +30099,7 @@ function oktmb_SphereMeshBuilder__init_3() {
 }
 function oktmb_SphereMeshBuilder_build($this, $out) {
     var $pi, $pi2, $hNum, $vNum;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $pi = 3.1415927410125732;
     $pi2 = 6.2831854820251465;
     $hNum = $this.$hDivisions + 1 | 0;
@@ -32068,11 +32072,11 @@ function oktsg_OutputNode_prepareToDrawMesh($this, $mesh) {
         oktg_GL_setCullFaceMode(oktg_GL_INSTANCE, $this.$cullFaceMode);
 }
 function oktsg_OutputNode_executionVert($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append(jl_StringBuilder__init_().$append($rt_s(864)).$append(oktsg_OutputNode_getVertPosition($this).$asVec4()).$append12(59).$toString());
 }
 function oktsg_OutputNode_executionFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append(jl_StringBuilder__init_().$append($rt_s(865)).$append(oktsg_OutputNode_getFragColor($this).$asVec4()).$append($rt_s(330)).$toString());
     if ($this.$alphaMode == 1) {
         $out.$append(jl_StringBuilder__init_().$append($rt_s(866)).$append11($this.$alphaCutoff).$append($rt_s(867)).$toString());
@@ -33297,7 +33301,7 @@ function oktmb_FrustumMeshBuilder$Companion__init_1(var_0) {
 }
 function oktmb_FrustumMeshBuilder$Companion_updateMesh($this, $out, $frustumPoints) {
     var var$3, $i, var$5, $p, var$7, var$8;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     kji_Intrinsics_checkParameterIsNotNull($frustumPoints, $rt_s(898));
     var$3 = $out.$getVertices();
     if (var$3 !== null) {
@@ -33959,7 +33963,7 @@ function oktm_Mat4_setCellValue($this, $cellIndex, $newValue) {
     oktm_IMat4$DefaultImpls_setCellValue($this, $cellIndex, $newValue);
 }
 function oktm_Mat4_getRow3($this, $rowIndex, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktm_IMat4$DefaultImpls_getRow3($this, $rowIndex, $out);
 }
 function oktm_Mat4_isNotEqualTo($this, $other) {
@@ -33978,7 +33982,7 @@ function oktm_Mat4_set1($this, $translationX, $translationY, $translationZ, $qua
     return oktm_IMat4$DefaultImpls_set1($this, $translationX, $translationY, $translationZ, $quaternionX, $quaternionY, $quaternionZ, $quaternionW);
 }
 function oktm_Mat4_set2($this, $position, $orientation, $scale) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     kji_Intrinsics_checkParameterIsNotNull($orientation, $rt_s(899));
     kji_Intrinsics_checkParameterIsNotNull($scale, $rt_s(40));
     return oktm_IMat4$DefaultImpls_set2($this, $position, $orientation, $scale);
@@ -34024,25 +34028,25 @@ function oktm_Mat4_setToRotation($this, $axisX, $axisY, $axisZ, $radians) {
 }
 function oktm_Mat4_setToLookAt($this, $direction, $up) {
     kji_Intrinsics_checkParameterIsNotNull($direction, $rt_s(58));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     return oktm_IMat4$DefaultImpls_setToLookAt($this, $direction, $up);
 }
 function oktm_Mat4_setToLookAt0($this, $position, $direction, $up) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     kji_Intrinsics_checkParameterIsNotNull($direction, $rt_s(58));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     return oktm_IMat4$DefaultImpls_setToLookAt0($this, $position, $direction, $up);
 }
 function oktm_Mat4_getTranslation($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktm_IMat4$DefaultImpls_getTranslation($this, $out);
 }
 function oktm_Mat4_getRotation($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktm_IMat4$DefaultImpls_getRotation($this, $out);
 }
 function oktm_Mat4_getScale($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktm_IMat4$DefaultImpls_getScale($this, $out);
 }
 function oktm_Mat4_rotate($this, $axisX, $axisY, $axisZ, $rad) {
@@ -34054,7 +34058,7 @@ function oktm_Mat4_rotate0($this, $rotation) {
 }
 function oktm_Mat4_project($this, $vec, $out) {
     kji_Intrinsics_checkParameterIsNotNull($vec, $rt_s(901));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktm_IMat4$DefaultImpls_project($this, $vec, $out);
 }
 function oktgg_GLTF$read$12$1() {
@@ -34397,22 +34401,22 @@ function oktt_SimpleFrameBuffer__init_(var$0, var$1, var$2, var$3, var$4, var$5,
 function oktt_SimpleFrameBuffer__init_4(var$0) {
     oktt_SimpleFrameBuffer__init_(var$0, 0, 0, 0, 0, 0, 0, 0, 127, null);
 }
-function oktt_SimpleFrameBuffer_getTexture($this, $index) {
-    return oktt_IFrameBuffer$DefaultImpls_getTexture($this, $index);
-}
-function oktt_SimpleFrameBuffer_buildAttachments($this) {
-    oktt_IFrameBuffer$DefaultImpls_buildAttachments($this);
-}
-function oktt_SimpleFrameBuffer_initBuffersOrder($this, $indices) {
-    kji_Intrinsics_checkParameterIsNotNull($indices, $rt_s(566));
-    oktt_IFrameBuffer$DefaultImpls_initBuffersOrder($this, $indices);
-}
 function oktt_SimpleFrameBuffer_bind($this, $block) {
     kji_Intrinsics_checkParameterIsNotNull($block, $rt_s(301));
     oktt_IFrameBuffer$DefaultImpls_bind($this, $block);
 }
 function oktt_SimpleFrameBuffer_bind0($this, $unit) {
     oktt_ITexture$DefaultImpls_bind0($this, $unit);
+}
+function oktt_SimpleFrameBuffer_buildAttachments($this) {
+    oktt_IFrameBuffer$DefaultImpls_buildAttachments($this);
+}
+function oktt_SimpleFrameBuffer_getTexture($this, $index) {
+    return oktt_IFrameBuffer$DefaultImpls_getTexture($this, $index);
+}
+function oktt_SimpleFrameBuffer_initBuffersOrder($this, $indices) {
+    kji_Intrinsics_checkParameterIsNotNull($indices, $rt_s(566));
+    oktt_IFrameBuffer$DefaultImpls_initBuffersOrder($this, $indices);
 }
 function oktt_SimpleFrameBuffer_render($this, $block) {
     kji_Intrinsics_checkParameterIsNotNull($block, $rt_s(301));
@@ -38170,7 +38174,7 @@ function oktt_TvmDATA_bytes($this, $capacity) {
 }
 function oktt_TvmDATA_decodeBase64($this, $text, $out) {
     kji_Intrinsics_checkParameterIsNotNull($text, $rt_s(295));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $rt_throw(k_NotImplementedError__init_0(jl_StringBuilder__init_().$append($rt_s(840)).$append($rt_s(841)).$toString()));
 }
 function oktt_TvmDATA_decodeURI($this, $uri) {
@@ -38959,7 +38963,7 @@ function oktsg_VertexNode_mat4ToMat3($this, $mat4) {
 }
 function oktsg_VertexNode_executionVert($this, $out) {
     var $pos, $skinningName, $aBonesName, $aBoneWeightsName, $i, var$7, $index, $aTangentName, $aNormalName, $normalRef, $tbnRef;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$position6.$isUsed0()) {
         $pos = jl_StringBuilder__init_().$append($rt_s(608)).$append1(oktsg_VertexNode_getUid($this)).$toString();
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1039)).$append($pos).$append($rt_s(1040)).$append($this.$aPositionName).$append($rt_s(1041)).$toString());
@@ -39030,7 +39034,7 @@ function oktsg_VertexNode_executionVert($this, $out) {
     }
 }
 function oktsg_VertexNode_declarationFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$position6.$isUsed0())
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarIn($this)).$append($rt_s(1061)).$append($this.$position6.$getRef0()).$append($rt_s(330)).$toString());
     if ($this.$normal1.$isUsed0())
@@ -39040,7 +39044,7 @@ function oktsg_VertexNode_declarationFrag($this, $out) {
 }
 function oktsg_VertexNode_declarationVert($this, $out) {
     var var$2, $i, var$4;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$position6.$isUsed0()) {
         a: {
             $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getAttribute($this)).$append($rt_s(1061)).$append($this.$aPositionName).$append($rt_s(330)).$toString());
@@ -39109,7 +39113,7 @@ function oktsg_VertexNode__init_1($this, $maxBones, $worldTransformType, $bonesS
     $this.$aTangentName = $rt_s(855);
     $this.$aBonesName = $rt_s(886);
     $this.$aBoneWeightsName = $rt_s(887);
-    $this.$position6 = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(57)));
+    $this.$position6 = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(53)));
     $this.$normal1 = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(291)));
     $this.$tbn = oktsg_ShaderNode_defOut($this, oktsg_GLSLMat3__init_($rt_s(1072)));
     $this.$bonesTemp = $rt_createFloatArray($this.$maxBones * 16 | 0);
@@ -39292,12 +39296,12 @@ function oktgg_GLTFArray_getSize(var$0) {
 function oktgg_GLTFArray_size(var$0) {
     return oktgg_GLTFArray_getSize(var$0);
 }
-function oktgg_GLTFArray_ready($this, $index) {
-    oktgg_IGLTFArray$DefaultImpls_ready($this, $index);
-}
 function oktgg_GLTFArray_getOrWait($this, $index, $call) {
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     oktgg_IGLTFArray$DefaultImpls_getOrWait($this, $index, $call);
+}
+function oktgg_GLTFArray_ready($this, $index) {
+    oktgg_IGLTFArray$DefaultImpls_ready($this, $index);
 }
 function oktgg_GLTFAnimation$read$1$1() {
     kji_Lambda.call(this);
@@ -40132,7 +40136,7 @@ function oktsg_TextureNode_prepareToDrawMesh($this, $mesh) {
 }
 function oktsg_TextureNode_declarationFrag($this, $out) {
     var var$2;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     var$2 = jl_StringBuilder__init_().$append($rt_s(1085));
     oktsg_GLSLType_$callClinit();
     $out.$append(var$2.$append(oktsg_GLSLType_getTypeName(oktsg_GLSLType_INSTANCE, $this.$textureType)).$append12(32).$append($this.$sampler0.$getRef0()).$append($rt_s(330)).$toString());
@@ -40185,7 +40189,7 @@ function oktsg_TextureNode_getCoordinates($this, $type) {
     return var$2;
 }
 function oktsg_TextureNode_executionFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append(jl_StringBuilder__init_().$append($this.$color.$getRef0()).$append($rt_s(331)).$append(oktsg_TextureNode_getSamplerAccessCode($this, $this.$textureType)).$append12(40).$append($this.$sampler0.$getRef0()).$append($rt_s(268)).$append(oktsg_TextureNode_getCoordinates($this, $this.$textureType)).$append($rt_s(1053)).$toString());
     if ($this.$sRGB)
         $out.$append(jl_StringBuilder__init_().$append($this.$color.$getRef0()).$append($rt_s(1089)).$append($this.$color.$getRef0()).$append($rt_s(1090)).$toString());
@@ -42100,7 +42104,7 @@ function oktmb_BoxMeshBuilder__init_3() {
     return var_0;
 }
 function oktmb_BoxMeshBuilder_build($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$setVertices(oktmb_MeshBuilder_createVerticesFloat($this, 24, oktmb_BoxMeshBuilder$build$1__init_($this)));
     oktmb_BoxMeshBuilder$build$2_$callClinit();
     $out.$setIndices(oktmb_MeshBuilder_createIndicesShort($this, 36, oktmb_BoxMeshBuilder$build$2_INSTANCE));
@@ -42223,7 +42227,7 @@ function oktgn_IDelegateTransformNode$DefaultImpls_updateTransform($$this, $recu
     $$this.$getNode().$updateTransform0($recursive);
 }
 function oktgn_IDelegateTransformNode$DefaultImpls_getWorldMatrix0($$this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return $$this.$getNode().$getWorldMatrix0($out, $isLocal);
 }
 function oktgn_IDelegateTransformNode$DefaultImpls_clear($$this) {
@@ -43017,12 +43021,12 @@ function oktsg_CameraDataNode_prepareToDrawScene($this, $scene) {
     $this.$getShader().$set12($this.$inverseViewProjectionMatrix.$getRef0(), oktgc_ActiveCamera_getInverseViewProjectionMatrix($cam));
 }
 function oktsg_CameraDataNode_executionFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$normalizedViewVector.$isUsed0())
         $out.$append(jl_StringBuilder__init_().$append($this.$normalizedViewVector.$getRef0()).$append($rt_s(1116)).$append($this.$cameraPosition.$asVec3()).$append($rt_s(1117)).$append(oktsg_CameraDataNode_getVertexPosition($this).$asVec3()).$append($rt_s(1053)).$toString());
 }
 function oktsg_CameraDataNode_executionVert($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$clipSpacePosition.$isUsed0() && !$this.$viewZDepth.$isUsed0())) {
         $out.$append(jl_StringBuilder__init_().$append($this.$clipSpacePosition.$getRef0()).$append($rt_s(331)).$append($this.$viewProjectionMatrix1.$getRef0()).$append($rt_s(1032)).$append(oktsg_CameraDataNode_getVertexPosition($this).$asVec4()).$append($rt_s(330)).$toString());
         if ($this.$viewZDepth.$isUsed0())
@@ -43032,7 +43036,7 @@ function oktsg_CameraDataNode_executionVert($this, $out) {
         $out.$append(jl_StringBuilder__init_().$append($this.$viewSpacePosition.$getRef0()).$append($rt_s(331)).$append($this.$viewMatrix1.$getRef0()).$append($rt_s(1032)).$append(oktsg_CameraDataNode_getVertexPosition($this).$asVec4()).$append($rt_s(330)).$toString());
 }
 function oktsg_CameraDataNode_declarationVert($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$cameraPosition.$isUsed0() && !$this.$normalizedViewVector.$isUsed0()))
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1085)).$append($this.$cameraPosition.$getTypedRef0()).$append($rt_s(330)).$toString());
     if (!(!$this.$clipSpacePosition.$isUsed0() && !$this.$viewProjectionMatrix1.$isUsed0()))
@@ -43054,7 +43058,7 @@ function oktsg_CameraDataNode_declarationVert($this, $out) {
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append12(32).$append($this.$viewSpacePosition.$getTypedRef0()).$append($rt_s(330)).$toString());
 }
 function oktsg_CameraDataNode_declarationFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$cameraPosition.$isUsed0() && !$this.$normalizedViewVector.$isUsed0()))
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1085)).$append($this.$cameraPosition.$getTypedRef0()).$append($rt_s(330)).$toString());
     if ($this.$normalizedViewVector.$isUsed0())
@@ -43135,9 +43139,9 @@ function oktgc_ICamera$DefaultImpls_getAspectRatio($$this) {
     return $$this.$getViewportWidth() / $$this.$getViewportHeight();
 }
 function oktgc_ICamera$DefaultImpls_lookAt($$this, $from, $to, $up) {
-    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(53));
-    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(54));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     $$this.$getDirection().$set11($to).$sub0($from).$nor();
     $$this.$getPosition0().$set11($from);
     $up.$set11($up);
@@ -43175,11 +43179,11 @@ function oktgc_ICamera$DefaultImpls_update($$this) {
     $$this.$getViewProjectionMatrix().$mul($$this.$getViewMatrix());
 }
 function oktgc_ICamera$DefaultImpls_getPosition($$this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktgn_ITransformNode$DefaultImpls_getPosition($$this, $out, $isLocal);
 }
 function oktgc_ICamera$DefaultImpls_dst2($$this, $position, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     return oktgn_ITransformNode$DefaultImpls_dst2($$this, $position, $isLocal);
 }
 function oktd_IShortData$DefaultImpls() {
@@ -43999,7 +44003,7 @@ function oktgn_Node_updateTransform($this, $recursive) {
     }
 }
 function oktgn_Node_getWorldMatrix1($this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!$isLocal)
         $out.$set3(oktgn_Node_getWorldMatrix($this));
     else
@@ -44020,7 +44024,7 @@ function oktgn_Node_addChildren($this, $nodes) {
     oktgn_ITransformNode$DefaultImpls_addChildren($this, $nodes);
 }
 function oktgn_Node_getPosition0($this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktgn_ITransformNode$DefaultImpls_getPosition($this, $out, $isLocal);
 }
 function oktgn_Node_clear($this) {
@@ -44223,7 +44227,7 @@ function oktsg_VelocityNode_prepareObjectData($this, $obj) {
 }
 function oktsg_VelocityNode_executionVert($this, $out) {
     var $uid, $prevPos, $prevSkinningName, $aBonesName, $aBoneWeightsName, $i, var$8, $index, $prevPositionRef, $posRef, $stretchedClipSpacePositionRef, var$13;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$prevPosition.$isUsed0() && !$this.$velocity.$isUsed0() && !$this.$stretchedClipSpacePosition.$isUsed0())) {
         $uid = 0;
         $prevPos = jl_StringBuilder__init_().$append($rt_s(1145)).$append1($uid).$toString();
@@ -44278,7 +44282,7 @@ function oktsg_VelocityNode_executionVert($this, $out) {
     }
 }
 function oktsg_VelocityNode_executionFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     oktsg_ShaderNode_executionFrag($this, $out);
     if ($this.$velocity.$isUsed0()) {
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1152)).$append(oktsg_VelocityNode_getClipSpacePosition($this).$asVec4()).$append($rt_s(330)).$toString());
@@ -44288,7 +44292,7 @@ function oktsg_VelocityNode_executionFrag($this, $out) {
     }
 }
 function oktsg_VelocityNode_declarationFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$prevPosition.$isUsed0() && !$this.$velocity.$isUsed0())) {
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarIn($this)).$append($rt_s(1061)).$append($this.$prevPosition.$getRef0()).$append($rt_s(330)).$toString());
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarIn($this)).$append($rt_s(1156)).$toString());
@@ -44298,7 +44302,7 @@ function oktsg_VelocityNode_declarationFrag($this, $out) {
 }
 function oktsg_VelocityNode_declarationVert($this, $out) {
     var $uid;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$prevPosition.$isUsed0() && !$this.$velocity.$isUsed0() && !$this.$stretchedClipSpacePosition.$isUsed0())) {
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append($rt_s(1061)).$append($this.$prevPosition.$getRef0()).$append($rt_s(330)).$toString());
         if (!(!$this.$velocity.$isUsed0() && !$this.$stretchedClipSpacePosition.$isUsed0())) {
@@ -50932,27 +50936,27 @@ function oktgn_AdapterTransformNode__clinit_() {
     oktgn_AdapterTransformNode_Companion = oktgn_AdapterTransformNode$Companion__init_(null);
     oktgn_AdapterTransformNode_childNodesCap = ju_ArrayList__init_();
 }
+function oktgn_AdapterTransformNode_clear($this) {
+    oktgn_ITransformNode$DefaultImpls_clear($this);
+}
+function oktgn_AdapterTransformNode_getPosition0($this, $out, $isLocal) {
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
+    return oktgn_ITransformNode$DefaultImpls_getPosition($this, $out, $isLocal);
+}
+function oktgn_AdapterTransformNode_getWorldMatrix0($this, $out, $isLocal) {
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
+    return oktgn_ITransformNode$DefaultImpls_getWorldMatrix($this, $out, $isLocal);
+}
 function oktgn_AdapterTransformNode_removeChildNode($this, $node) {
     kji_Intrinsics_checkParameterIsNotNull($node, $rt_s(45));
     oktgn_ITransformNode$DefaultImpls_removeChildNode($this, $node);
-}
-function oktgn_AdapterTransformNode_updateTransform($this, $recursive) {
-    oktgn_ITransformNode$DefaultImpls_updateTransform($this, $recursive);
 }
 function oktgn_AdapterTransformNode_set($this, $other) {
     kji_Intrinsics_checkParameterIsNotNull($other, $rt_s(413));
     return oktgn_ITransformNode$DefaultImpls_set($this, $other);
 }
-function oktgn_AdapterTransformNode_getPosition0($this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
-    return oktgn_ITransformNode$DefaultImpls_getPosition($this, $out, $isLocal);
-}
-function oktgn_AdapterTransformNode_getWorldMatrix0($this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
-    return oktgn_ITransformNode$DefaultImpls_getWorldMatrix($this, $out, $isLocal);
-}
-function oktgn_AdapterTransformNode_clear($this) {
-    oktgn_ITransformNode$DefaultImpls_clear($this);
+function oktgn_AdapterTransformNode_updateTransform($this, $recursive) {
+    oktgn_ITransformNode$DefaultImpls_updateTransform($this, $recursive);
 }
 function jnc_MalformedInputException() {
     jnc_CharacterCodingException.call(this);
@@ -52485,7 +52489,7 @@ function oktmb_FrustumMeshBuilder__init_(var_0) {
     return var_1;
 }
 function oktmb_FrustumMeshBuilder_build($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $this.$setUv0(0);
     $this.$setNormals(0);
     $out.$setPrimitiveType(1);
@@ -58268,7 +58272,7 @@ function oktsg_OperationNode_setArgs($this, $args) {
 }
 function oktsg_OperationNode_executionVert($this, $out) {
     var $f, $$this$forEach$iv, var$4, $element$iv;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!($this.$isFragment && !$this.$isVarying)) {
         $f = $this.$function0;
         $$this$forEach$iv = $this.$getInput();
@@ -58282,7 +58286,7 @@ function oktsg_OperationNode_executionVert($this, $out) {
 }
 function oktsg_OperationNode_executionFrag($this, $out) {
     var $f, $$this$forEach$iv, var$4, $element$iv;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$isFragment && !$this.$isVarying)) {
         $f = $this.$function0;
         $$this$forEach$iv = $this.$getInput();
@@ -58456,7 +58460,7 @@ function oktm_IMat4$DefaultImpls_setCellValue($$this, $cellIndex, $newValue) {
 }
 function oktm_IMat4$DefaultImpls_getRow3($$this, $rowIndex, $out) {
     a: {
-        kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+        kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
         switch ($rowIndex) {
             case 0:
                 break;
@@ -58548,7 +58552,7 @@ function oktm_IMat4$DefaultImpls_set1($$this, $translationX, $translationY, $tra
 }
 function oktm_IMat4$DefaultImpls_set2($$this, $position, $orientation, $scale) {
     var var$5, var$6, var$7, var$8, var$9, var$10, var$11, var$12, var$13, var$14;
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     kji_Intrinsics_checkParameterIsNotNull($orientation, $rt_s(899));
     kji_Intrinsics_checkParameterIsNotNull($scale, $rt_s(40));
     var$5 = $position.$getX0();
@@ -58733,7 +58737,7 @@ function oktm_IMat4$DefaultImpls_setToRotation($$this, $axisX, $axisY, $axisZ, $
 }
 function oktm_IMat4$DefaultImpls_setToLookAt($$this, $direction, $up) {
     kji_Intrinsics_checkParameterIsNotNull($direction, $rt_s(58));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     oktm_IMat4_$callClinit();
     oktm_IMat4$Companion_getTmpV1(oktm_IMat4_Companion).$set11($direction).$nor();
     oktm_IMat4$Companion_getTmpV2Right(oktm_IMat4_Companion).$set11($direction).$nor();
@@ -58752,23 +58756,23 @@ function oktm_IMat4$DefaultImpls_setToLookAt($$this, $direction, $up) {
     return $$this;
 }
 function oktm_IMat4$DefaultImpls_setToLookAt0($$this, $position, $direction, $up) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     kji_Intrinsics_checkParameterIsNotNull($direction, $rt_s(58));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     $$this.$setToLookAt2($direction, $up);
     $$this.$mul(oktm_IMat4$Companion_access$getTmp$p(oktm_IMat4_Companion).$setToTranslation0( -$position.$getX0(),  -$position.$getY0(),  -$position.$getZ()));
     return $$this;
 }
 function oktm_IMat4$DefaultImpls_getTranslation($$this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return $out.$set44($$this.$getM030(), $$this.$getM130(), $$this.$getM230());
 }
 function oktm_IMat4$DefaultImpls_getRotation($$this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return $out.$setQuaternion3($$this);
 }
 function oktm_IMat4$DefaultImpls_getScale($$this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return $out.$set44($$this.$getScaleX0(), $$this.$getScaleY0(), $$this.$getScaleZ0());
 }
 function oktm_IMat4$DefaultImpls_rotate($$this, $axisX, $axisY, $axisZ, $rad) {
@@ -58788,7 +58792,7 @@ function oktm_IMat4$DefaultImpls_rotate0($$this, $rotation) {
 function oktm_IMat4$DefaultImpls_project($$this, $vec, $out) {
     var $invW, var$5, var$6, var$7, var$8;
     kji_Intrinsics_checkParameterIsNotNull($vec, $rt_s(901));
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $invW = 1.0 / ($vec.$getX0() * $$this.$getM300() + $vec.$getY0() * $$this.$getM310() + $vec.$getZ() * $$this.$getM320() + $$this.$getM330());
     var$5 = oktm_IMat4$Companion_getTmpV1(oktm_IMat4_Companion);
     var$6 = ($vec.$getX0() * $$this.$getM000() + $vec.$getY0() * $$this.$getM010() + $vec.$getZ() * $$this.$getM020() + $$this.$getM030()) * $invW;
@@ -60555,7 +60559,7 @@ function oktmb_PlaneMeshBuilder__init_3() {
 }
 function oktmb_PlaneMeshBuilder_build($this, $out) {
     var $xNum, $yNum;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $xNum = $this.$xDivisions + 1 | 0;
     $yNum = $this.$yDivisions + 1 | 0;
     $out.$setVertices(oktmb_MeshBuilder_createVerticesFloat($this, $rt_imul($xNum, $yNum), oktmb_PlaneMeshBuilder$build$1__init_($this, $yNum, $xNum)));
@@ -61130,13 +61134,13 @@ function oktsg_NormalMapNode_getNormalResult($this) {
     return $this.$normalResult;
 }
 function oktsg_NormalMapNode_executionFrag($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$normalResult.$isUsed0() && !$this.$tangentResult.$isUsed0() && !$this.$biNormalResult.$isUsed0()))
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1352)).$append(oktsg_NormalMapNode_getNormalizedViewVector($this).$asVec3()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getTbn($this).$getRef0()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getVertexPosition($this).$asVec3()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getUv($this).$asVec2()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getNormalScale($this).$asFloat()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getNormalColor($this).$asVec3()).$append($rt_s(1053)).$toString());
 }
 function oktsg_NormalMapNode_declarationFrag($this, $out) {
     var var$2;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$normalResult.$isUsed0() && !$this.$tangentResult.$isUsed0() && !$this.$biNormalResult.$isUsed0())) {
         var$2 = $out.$append(oktsg_NormalMapNode$Companion_normalCode(oktsg_NormalMapNode_Companion, $this.$tangentResult.$getRef0(), $this.$biNormalResult.$getRef0(), $this.$normalResult.$getRef0()));
         kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(504));
@@ -62901,82 +62905,86 @@ function otp_Platform_prepareNewInstance() {
     k_NotImplementedError[c] = k_NotImplementedError__init_1;
     ji_IOException[c] = ji_IOException__init_0;
     k_Unit[c] = k_Unit__init_0;
+    okts_Shader[c] = okts_Shader__init_4;
+    oktm_ScreenQuad[c] = oktm_ScreenQuad__init_4;
+    oktt_GBuffer[c] = oktt_GBuffer__init_4;
     oktmb_BoxMeshBuilder[c] = oktmb_BoxMeshBuilder__init_4;
     oktmb_MeshBuilder[c] = oktmb_MeshBuilder__init_0;
-    okts_Shader[c] = okts_Shader__init_4;
+    oktmb_PlaneMeshBuilder[c] = oktmb_PlaneMeshBuilder__init_4;
+    oktu_Color[c] = oktu_Color__init_;
     oktgc_OrbitCameraControl[c] = oktgc_OrbitCameraControl__init_4;
+    oktt_CubeModel[c] = oktt_CubeModel__init_0;
+    oktt_SimpleFrameBuffer[c] = oktt_SimpleFrameBuffer__init_4;
+    oktm_VertexInputs[c] = oktm_VertexInputs__init_1;
+    oktsp_FXAA[c] = oktsp_FXAA__init_0;
+    oktsp_Threshold[c] = oktsp_Threshold__init_4;
+    oktm_ScreenQuad$TextureRenderer[c] = oktm_ScreenQuad$TextureRenderer__init_0;
+    oktsp_MotionBlur[c] = oktsp_MotionBlur__init_4;
+    oktt_GLTFModel[c] = oktt_GLTFModel__init_4;
+    kji_Ref$BooleanRef[c] = kji_Ref$BooleanRef__init_0;
+    oktg_ShaderChannel[c] = oktg_ShaderChannel__init_0;
+    oktg_Scene[c] = oktg_Scene__init_4;
     oktg_Object3D[c] = oktg_Object3D__init_0;
-    oktmb_BoxMeshBuilder$Companion[c] = oktmb_BoxMeshBuilder$Companion__init_0;
+    oktsg_VertexNode[c] = oktsg_VertexNode__init_4;
     oktsg_CameraDataNode[c] = oktsg_CameraDataNode__init_4;
+    oktsg_OutputNode[c] = oktsg_OutputNode__init_4;
+    kji_Ref$IntRef[c] = kji_Ref$IntRef__init_0;
+    oktm_Vec2[c] = oktm_Vec2__init_4;
+    oktt_MouseTest$testMain$1[c] = oktt_MouseTest$testMain$1__init_0;
+    oktt_FrameBuffer[c] = oktt_FrameBuffer__init_4;
+    oktgg_GLTFConf[c] = oktgg_GLTFConf__init_4;
+    oktt_KeyboardTest$testMain$1[c] = oktt_KeyboardTest$testMain$1__init_0;
+    oktmb_BoxMeshBuilder$Companion[c] = oktmb_BoxMeshBuilder$Companion__init_0;
     oktsg_GLSL[c] = oktsg_GLSL__init_;
     oktsg_SkyboxVertexNode[c] = oktsg_SkyboxVertexNode__init_1;
     oktt_TextureCube[c] = oktt_TextureCube__init_4;
     oktsg_TextureNode[c] = oktsg_TextureNode__init_4;
-    oktsg_OutputNode[c] = oktsg_OutputNode__init_4;
-    oktg_Scene[c] = oktg_Scene__init_4;
-    oktt_GLTFModel[c] = oktt_GLTFModel__init_4;
-    oktgg_GLTFConf[c] = oktgg_GLTFConf__init_4;
-    oktm_ScreenQuad$TextureRenderer[c] = oktm_ScreenQuad$TextureRenderer__init_0;
-    oktm_ScreenQuad[c] = oktm_ScreenQuad__init_4;
-    oktt_GBuffer[c] = oktt_GBuffer__init_4;
-    oktmb_PlaneMeshBuilder[c] = oktmb_PlaneMeshBuilder__init_4;
-    oktm_VertexInputs[c] = oktm_VertexInputs__init_1;
-    oktt_CubeModel[c] = oktt_CubeModel__init_0;
-    oktt_SimpleFrameBuffer[c] = oktt_SimpleFrameBuffer__init_4;
-    oktmb_SphereMeshBuilder[c] = oktmb_SphereMeshBuilder__init_4;
-    oktt_FrameBuffer[c] = oktt_FrameBuffer__init_4;
-    oktu_Color[c] = oktu_Color__init_;
-    oktsp_MotionBlur[c] = oktsp_MotionBlur__init_4;
-    kji_Ref$BooleanRef[c] = kji_Ref$BooleanRef__init_0;
-    oktg_ShaderChannel[c] = oktg_ShaderChannel__init_0;
-    kji_Ref$IntRef[c] = kji_Ref$IntRef__init_0;
-    oktm_Vec2[c] = oktm_Vec2__init_4;
-    oktt_Texture2D[c] = oktt_Texture2D__init_4;
-    oktt_MouseTest$testMain$1[c] = oktt_MouseTest$testMain$1__init_0;
-    oktt_KeyboardTest$testMain$1[c] = oktt_KeyboardTest$testMain$1__init_0;
     kji_Ref$FloatRef[c] = kji_Ref$FloatRef__init_0;
-    oktsp_FXAA[c] = oktsp_FXAA__init_0;
-    oktsg_VertexNode[c] = oktsg_VertexNode__init_4;
-    oktsp_Threshold[c] = oktsp_Threshold__init_4;
+    oktt_Texture2D[c] = oktt_Texture2D__init_4;
+    oktmb_SphereMeshBuilder[c] = oktmb_SphereMeshBuilder__init_4;
     oktsg_VelocityNode[c] = oktsg_VelocityNode__init_4;
     oktm_IMesh$Companion[c] = oktm_IMesh$Companion__init_0;
+    oktt_CubeModel$Companion[c] = oktt_CubeModel$Companion__init_;
+    oktm_IVertexBuffer$Companion[c] = oktm_IVertexBuffer$Companion__init_;
     oktgn_Node[c] = oktgn_Node__init_0;
     oktgn_ITransformNode$Companion[c] = oktgn_ITransformNode$Companion__init_0;
-    okttsg_SSAOTest$testMain$1[c] = okttsg_SSAOTest$testMain$1__init_0;
-    okttp_TrimeshShapeTest$testMain$plane$1[c] = okttp_TrimeshShapeTest$testMain$plane$1__init_0;
-    oktt_CubeModel$Companion[c] = oktt_CubeModel$Companion__init_;
-    oktt_Attachments[c] = oktt_Attachments__init_0;
     okttsg_CascadedShadowMappingTest$testMain$1[c] = okttsg_CascadedShadowMappingTest$testMain$1__init_0;
+    okttp_TrimeshShapeTest$testMain$plane$1[c] = okttp_TrimeshShapeTest$testMain$plane$1__init_0;
     oktt_GLTFLoaderAnimTest$testMain$1[c] = oktt_GLTFLoaderAnimTest$testMain$1__init_0;
-    oktm_IVertexBuffer$Companion[c] = oktm_IVertexBuffer$Companion__init_;
+    oktt_Attachments[c] = oktt_Attachments__init_0;
+    okttsg_SSAOTest$testMain$1[c] = okttsg_SSAOTest$testMain$1__init_0;
     okttsg_EmissionBloomTest$testMain$1[c] = okttsg_EmissionBloomTest$testMain$1__init_0;
     okts_Shader$Companion[c] = okts_Shader$Companion__init_1;
-    oktsg_GLSLFloatInline[c] = oktsg_GLSLFloatInline__init_4;
-    oktsg_GLSLVec3Inline[c] = oktsg_GLSLVec3Inline__init_4;
-    ju_LinkedHashMap[c] = ju_LinkedHashMap__init_0;
-    oktsg_CameraDataNode$Companion[c] = oktsg_CameraDataNode$Companion__init_1;
-    oktsg_SkyboxVertexNode$Companion[c] = oktsg_SkyboxVertexNode$Companion__init_0;
-    oktsg_TextureNode$Companion[c] = oktsg_TextureNode$Companion__init_1;
-    oktsg_OutputNode$Companion[c] = oktsg_OutputNode$Companion__init_1;
-    oktg_IWorld$Companion[c] = oktg_IWorld$Companion__init_0;
-    oktg_Scene$Companion[c] = oktg_Scene$Companion__init_1;
-    oktgl_DirectionalLight[c] = oktgl_DirectionalLight__init_4;
-    oktt_GLTFModel$1[c] = oktt_GLTFModel$1__init_0;
-    oktmb_FrustumMeshBuilder$Companion[c] = oktmb_FrustumMeshBuilder$Companion__init_0;
-    oktmb_PlaneMeshBuilder$1[c] = oktmb_PlaneMeshBuilder$1__init_;
-    oktm_IndexBufferObject$Companion[c] = oktm_IndexBufferObject$Companion__init_0;
-    oktt_FrameBufferAttachment[c] = oktt_FrameBufferAttachment__init_0;
-    oktsp_Bloom$Companion[c] = oktsp_Bloom$Companion__init_0;
-    oktm_IVec4$Companion[c] = oktm_IVec4$Companion__init_0;
-    oktsp_MotionBlur$Companion[c] = oktsp_MotionBlur$Companion__init_0;
-    oktm_Vec2$Companion[c] = oktm_Vec2$Companion__init_0;
-    oktt_Texture2D$Companion[c] = oktt_Texture2D$Companion__init_1;
-    oktsp_FXAA$Companion[c] = oktsp_FXAA$Companion__init_0;
     oktsp_SSAO$Companion[c] = oktsp_SSAO$Companion__init_1;
     kr_Random$Default[c] = kr_Random$Default__init_1;
-    oktsg_VertexNode$Companion[c] = oktsg_VertexNode$Companion__init_0;
+    oktmb_PlaneMeshBuilder$1[c] = oktmb_PlaneMeshBuilder$1__init_;
+    oktm_IVec4$Companion[c] = oktm_IVec4$Companion__init_0;
+    oktmb_FrustumMeshBuilder$Companion[c] = oktmb_FrustumMeshBuilder$Companion__init_0;
+    oktt_FrameBufferAttachment[c] = oktt_FrameBufferAttachment__init_0;
+    oktsp_Bloom$Companion[c] = oktsp_Bloom$Companion__init_0;
+    ju_LinkedHashMap[c] = ju_LinkedHashMap__init_0;
+    oktm_IndexBufferObject$Companion[c] = oktm_IndexBufferObject$Companion__init_0;
+    oktsp_FXAA$Companion[c] = oktsp_FXAA$Companion__init_0;
     oktsp_Threshold$Companion[c] = oktsp_Threshold$Companion__init_0;
+    oktsp_MotionBlur$Companion[c] = oktsp_MotionBlur$Companion__init_0;
+    oktgl_DirectionalLight[c] = oktgl_DirectionalLight__init_4;
+    oktt_GLTFModel$1[c] = oktt_GLTFModel$1__init_0;
+    oktg_IWorld$Companion[c] = oktg_IWorld$Companion__init_0;
+    oktg_Scene$Companion[c] = oktg_Scene$Companion__init_1;
+    oktsg_VertexNode$Companion[c] = oktsg_VertexNode$Companion__init_0;
+    oktsg_CameraDataNode$Companion[c] = oktsg_CameraDataNode$Companion__init_1;
+    oktsg_OutputNode$Companion[c] = oktsg_OutputNode$Companion__init_1;
+    oktm_Vec2$Companion[c] = oktm_Vec2$Companion__init_0;
+    oktsg_GLSLFloatInline[c] = oktsg_GLSLFloatInline__init_4;
+    oktsg_GLSLVec3Inline[c] = oktsg_GLSLVec3Inline__init_4;
+    oktsg_SkyboxVertexNode$Companion[c] = oktsg_SkyboxVertexNode$Companion__init_0;
+    oktsg_TextureNode$Companion[c] = oktsg_TextureNode$Companion__init_1;
+    oktt_Texture2D$Companion[c] = oktt_Texture2D$Companion__init_1;
     oktsg_VelocityNode$Companion[c] = oktsg_VelocityNode$Companion__init_1;
+    oktm_IVertexBuffer$Companion$Build$1[c] = oktm_IVertexBuffer$Companion$Build$1__init_0;
+    oktgg_GLTF$Companion[c] = oktgg_GLTF$Companion__init_0;
+    oktg_Scene$objectSorter$1[c] = oktg_Scene$objectSorter$1__init_0;
+    oktsg_ShaderNode$Companion[c] = oktsg_ShaderNode$Companion__init_1;
     oktsg_GLSL$1[c] = oktsg_GLSL$1__init_;
     oktsg_GLSL$2[c] = oktsg_GLSL$2__init_;
     oktsg_GLSL$3[c] = oktsg_GLSL$3__init_;
@@ -62992,22 +63000,18 @@ function otp_Platform_prepareNewInstance() {
     oktsg_GLSL$13[c] = oktsg_GLSL$13__init_0;
     oktsg_GLSL$14[c] = oktsg_GLSL$14__init_0;
     oktsg_GLSL$15[c] = oktsg_GLSL$15__init_0;
-    oktsg_ShaderNode$Companion[c] = oktsg_ShaderNode$Companion__init_1;
-    oktg_Scene$objectSorter$1[c] = oktg_Scene$objectSorter$1__init_0;
-    oktgg_GLTF$Companion[c] = oktgg_GLTF$Companion__init_0;
-    oktm_IVertexBuffer$Companion$Build$1[c] = oktm_IVertexBuffer$Companion$Build$1__init_0;
-    oktgn_AdapterTransformNode[c] = oktgn_AdapterTransformNode__init_0;
-    oktgl_DirectionalLight$Companion[c] = oktgl_DirectionalLight$Companion__init_0;
     ki_PlatformImplementations[c] = ki_PlatformImplementations__init_0;
-    oktm_IMesh$Companion$Build$1[c] = oktm_IMesh$Companion$Build$1__init_0;
-    oktgn_ITransformNode$Companion$Build$1[c] = oktgn_ITransformNode$Companion$Build$1__init_0;
-    oktg_World[c] = oktg_World__init_0;
-    oktu_AsyncArrayList[c] = oktu_AsyncArrayList__init_0;
+    oktgl_DirectionalLight$Companion[c] = oktgl_DirectionalLight$Companion__init_0;
+    oktgn_AdapterTransformNode[c] = oktgn_AdapterTransformNode__init_0;
     kr_Random$Companion[c] = kr_Random$Companion__init_0;
+    oktm_IMesh$Companion$Build$1[c] = oktm_IMesh$Companion$Build$1__init_0;
+    oktu_AsyncArrayList[c] = oktu_AsyncArrayList__init_0;
+    oktg_World[c] = oktg_World__init_0;
+    oktgn_ITransformNode$Companion$Build$1[c] = oktgn_ITransformNode$Companion$Build$1__init_0;
     oktgn_AdapterTransformNode$Companion[c] = oktgn_AdapterTransformNode$Companion__init_0;
-    oktu_AsyncArrayList$Companion[c] = oktu_AsyncArrayList$Companion__init_0;
     jl_ClassNotFoundException[c] = jl_ClassNotFoundException__init_0;
     jl_ReflectiveOperationException[c] = jl_ReflectiveOperationException__init_0;
+    oktu_AsyncArrayList$Companion[c] = oktu_AsyncArrayList$Companion__init_0;
     ju_Properties[c] = ju_Properties__init_0;
     ju_Hashtable[c] = ju_Hashtable__init_0;
     kt_StringsKt[c] = kt_StringsKt__init_0;
@@ -63047,8 +63051,8 @@ function otp_Platform_prepareNewInstance() {
     oktu_IPath$Companion[c] = oktu_IPath$Companion__init_0;
     oktm_IIndexBufferObject$Companion[c] = oktm_IIndexBufferObject$Companion__init_0;
     oktg_IMaterial$Companion[c] = oktg_IMaterial$Companion__init_0;
-    oktg_IObject3D$Companion[c] = oktg_IObject3D$Companion__init_0;
     oktg_IScene$Companion[c] = oktg_IScene$Companion__init_0;
+    oktg_IObject3D$Companion[c] = oktg_IObject3D$Companion__init_0;
     oktm_IVec2$Companion[c] = oktm_IVec2$Companion__init_0;
     jl_IllegalMonitorStateException[c] = jl_IllegalMonitorStateException__init_0;
     oktt_IFrameBuffer$buildAttachments$1[c] = oktt_IFrameBuffer$buildAttachments$1__init_0;
@@ -63056,8 +63060,8 @@ function otp_Platform_prepareNewInstance() {
     jl_SystemClassLoader[c] = jl_SystemClassLoader__init_;
     jl_Object$Monitor[c] = jl_Object$Monitor__init_0;
     oktm_IIndexBufferObject$Companion$Build$1[c] = oktm_IIndexBufferObject$Companion$Build$1__init_0;
-    oktg_IObject3D$Companion$Build$1[c] = oktg_IObject3D$Companion$Build$1__init_0;
     oktg_IScene$Companion$Build$1[c] = oktg_IScene$Companion$Build$1__init_0;
+    oktg_IObject3D$Companion$Build$1[c] = oktg_IObject3D$Companion$Build$1__init_0;
     oktm_IVec2$Companion$Pool$1[c] = oktm_IVec2$Companion$Pool$1__init_;
     oktm_IVec2$Companion$Pool$2[c] = oktm_IVec2$Companion$Pool$2__init_;
     jl_ArrayIndexOutOfBoundsException[c] = jl_ArrayIndexOutOfBoundsException__init_0;
@@ -63072,14 +63076,14 @@ function otp_Platform_prepareNewInstance() {
     oooi_Objects_H$dxDampingParameters[c] = oooi_Objects_H$dxDampingParameters__init_0;
     kt_Charsets[c] = kt_Charsets__init_;
     ju_LinkedList[c] = ju_LinkedList__init_0;
-    oktpo_OdePhysicsWorld$Companion[c] = oktpo_OdePhysicsWorld$Companion__init_0;
     ju_Collections[c] = ju_Collections__init_0;
     kt_SystemProperties[c] = kt_SystemProperties__init_0;
+    oktpo_OdePhysicsWorld$Companion[c] = oktpo_OdePhysicsWorld$Companion__init_0;
+    ju_Collections$_clinit_$lambda$_61_0[c] = ju_Collections$_clinit_$lambda$_61_0__init_0;
+    ju_Collections$_clinit_$lambda$_61_1[c] = ju_Collections$_clinit_$lambda$_61_1__init_0;
     oooij_DxJointGroup[c] = oooij_DxJointGroup__init_0;
     oktpo_OdePhysicsWorld$Companion$bodyPairsPool$1[c] = oktpo_OdePhysicsWorld$Companion$bodyPairsPool$1__init_0;
     oktpo_OdePhysicsWorld$Companion$geomPairsPool$1[c] = oktpo_OdePhysicsWorld$Companion$geomPairsPool$1__init_0;
-    ju_Collections$_clinit_$lambda$_61_0[c] = ju_Collections$_clinit_$lambda$_61_0__init_0;
-    ju_Collections$_clinit_$lambda$_61_1[c] = ju_Collections$_clinit_$lambda$_61_1__init_0;
     ju_Collections$5[c] = ju_Collections$5__init_0;
     ju_Collections$6[c] = ju_Collections$6__init_0;
     ju_Collections$3[c] = ju_Collections$3__init_0;
@@ -65166,11 +65170,11 @@ function oktt_ITexture2D$DefaultImpls_bind($$this) {
 function oktt_ITexture2D$DefaultImpls_bind0($$this, $unit) {
     oktt_ITexture$DefaultImpls_bind0($$this, $unit);
 }
-function oktt_ITexture2D$DefaultImpls_generateMipmapsGPU($$this) {
-    oktt_ITexture$DefaultImpls_generateMipmapsGPU($$this);
-}
 function oktt_ITexture2D$DefaultImpls_destroy($$this) {
     oktt_ITexture$DefaultImpls_destroy($$this);
+}
+function oktt_ITexture2D$DefaultImpls_generateMipmapsGPU($$this) {
+    oktt_ITexture$DefaultImpls_generateMipmapsGPU($$this);
 }
 function oooi_DxCapsule$CollideCapsuleCapsule() {
     jl_Object.call(this);
@@ -65370,7 +65374,7 @@ var oktga_AnimPlayer_vec4Pool = null;
 var oktga_AnimPlayer_Companion = null;
 function oktga_AnimPlayer_$callClinit() {
     oktga_AnimPlayer_$callClinit = $rt_eraseClinit(oktga_AnimPlayer);
-    oktga_AnimPlayer__clinit_();
+    $java.oktga_AnimPlayer__clinit_();
 }
 function oktga_AnimPlayer__init_() {
     var var_0 = new oktga_AnimPlayer();
@@ -65894,7 +65898,7 @@ function oktga_AnimPlayer__init_0($this) {
     $this.$tmpRotation = oktm_Vec4__init_(0.0, 0.0, 0.0, 0.0, 15, null);
     $this.$tmpScale = oktm_Vec3__init_(0.0, 0.0, 0.0, 7, null);
 }
-function oktga_AnimPlayer__clinit_() {
+$java.oktga_AnimPlayer__clinit_ = function() {
     var var$1;
     oktga_AnimPlayer_Companion = oktga_AnimPlayer$Companion__init_1(null);
     var$1 = new oktu_Pool;
@@ -65909,7 +65913,7 @@ function oktga_AnimPlayer__clinit_() {
     $java.oktga_AnimPlayer$Companion$vec4Pool$1_$callClinit();
     oktu_Pool__init_2(var$1, $java.oktga_AnimPlayer$Companion$vec4Pool$1_INSTANCE);
     oktga_AnimPlayer_vec4Pool = var$1;
-}
+};
 function jur_DotQuantifierSet() {
     jur_QuantifierSet.call(this);
     this.$lt1 = null;
@@ -69116,11 +69120,11 @@ function oktgn_ITransformNode$DefaultImpls_set($$this, $other) {
     return $$this;
 }
 function oktgn_ITransformNode$DefaultImpls_getPosition($$this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return $out.$set11($$this.$getPosition0());
 }
 function oktgn_ITransformNode$DefaultImpls_getWorldMatrix($$this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return $out.$set3($$this.$getWorldMatrix());
 }
 function oktgn_ITransformNode$DefaultImpls_getWorldMatrix$default(var$1, var$2, var$3, var$4, var$5) {
@@ -69135,7 +69139,7 @@ function oktgn_ITransformNode$DefaultImpls_getWorldMatrix$default(var$1, var$2, 
     return var$1.$getWorldMatrix0(var$2, var$3);
 }
 function oktgn_ITransformNode$DefaultImpls_dst2($$this, $position, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     oktgn_ITransformNode_$callClinit();
     return $$this.$getPosition4(oktgn_ITransformNode$Companion_access$getTmp$p(oktgn_ITransformNode_Companion), $isLocal).$dst22($position);
 }
@@ -74506,7 +74510,7 @@ $java.oktsg_SkyboxVertexNode_prepareToDrawScene = function($this, $scene) {
     var$2.$set40(var$3, oktm_Vec4_set1(var$4, oktgc_ActiveCamera_getPosition(oktgc_ActiveCamera_INSTANCE), oktgc_ActiveCamera_getFar(oktgc_ActiveCamera_INSTANCE)));
 };
 $java.oktsg_SkyboxVertexNode_declarationFrag = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$attributePosition.$isUsed0())
         $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarIn($this)).$append12(32).$append($this.$attributePosition.$getTypedRef0()).$append($rt_s(330)).$toString());
     if (!(!$this.$worldSpacePosition.$isUsed0() && !$this.$clipSpacePosition0.$isUsed0() && !$this.$velocity0.$isUsed0())) {
@@ -74521,7 +74525,7 @@ $java.oktsg_SkyboxVertexNode_declarationFrag = function($this, $out) {
     }
 };
 $java.oktsg_SkyboxVertexNode_declarationVert = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getAttribute($this)).$append($rt_s(1061)).$append($this.$aPositionName1).$append($rt_s(330)).$toString());
     $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append12(32).$append($this.$attributePosition.$getTypedRef0()).$append($rt_s(330)).$toString());
     $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append12(32).$append($this.$worldSpacePosition.$getTypedRef0()).$append($rt_s(330)).$toString());
@@ -74530,7 +74534,7 @@ $java.oktsg_SkyboxVertexNode_declarationVert = function($this, $out) {
     $out.$append(jl_StringBuilder__init_().$append($rt_s(1444)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(330)).$toString());
 };
 $java.oktsg_SkyboxVertexNode_executionFrag = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     oktsg_ShaderNode_executionFrag($this, $out);
     if ($this.$velocity0.$isUsed0()) {
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1152)).$append($this.$clipSpacePosition0.$asVec4()).$append($rt_s(330)).$toString());
@@ -74540,7 +74544,7 @@ $java.oktsg_SkyboxVertexNode_executionFrag = function($this, $out) {
     }
 };
 $java.oktsg_SkyboxVertexNode_executionVert = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$clipSpacePosition0.$isUsed0() && !$this.$worldSpacePosition.$isUsed0() && !$this.$velocity0.$isUsed0())) {
         $out.$append(jl_StringBuilder__init_().$append($this.$attributePosition.$getRef0()).$append($rt_s(331)).$append($this.$aPositionName1).$append($rt_s(1045)).$toString());
         $out.$append(jl_StringBuilder__init_().$append($this.$worldSpacePosition.$getRef0()).$append($rt_s(331)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(1445)).$append($this.$aPositionName1).$append($rt_s(1446)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(1058)).$toString());
@@ -75693,7 +75697,7 @@ function oktpo_OdeRigidBody_setShape($this, $value) {
 }
 $java.oktpo_OdeRigidBody_getWorldTransform = function($this, $out) {
     var var$2, $t, var$4, $r;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     var$2 = $this.$body1;
     kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1458));
     $t = var$2.$getPosition2();
@@ -77565,7 +77569,7 @@ $java.oktg_IObject3D$DefaultImpls_updateTransform = function($$this, $recursive)
     oktgn_IDelegateTransformNode$DefaultImpls_updateTransform($$this, $recursive);
 };
 $java.oktg_IObject3D$DefaultImpls_getWorldMatrix0 = function($$this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return oktgn_IDelegateTransformNode$DefaultImpls_getWorldMatrix0($$this, $out, $isLocal);
 };
 function kt_Charsets() {
@@ -77696,7 +77700,7 @@ function oktsg_GBufferOutputNode_setCullFaceMode($this, $_set___) {
     $this.$cullFaceMode1 = $_set___;
 }
 $java.oktsg_GBufferOutputNode_declarationFrag = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append($rt_s(1503));
     $out.$append($rt_s(1504));
     $out.$append($rt_s(1505));
@@ -77713,11 +77717,11 @@ $java.oktsg_GBufferOutputNode_prepareToDrawMesh = function($this, $mesh) {
         oktg_GL_setCullFaceMode(oktg_GL_INSTANCE, $this.$cullFaceMode1);
 };
 $java.oktsg_GBufferOutputNode_executionVert = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append(jl_StringBuilder__init_().$append($rt_s(864)).$append($java.oktsg_GBufferOutputNode_getVertPosition($this).$asVec4()).$append($rt_s(330)).$toString());
 };
 $java.oktsg_GBufferOutputNode_executionFrag = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     $out.$append(jl_StringBuilder__init_().$append($rt_s(1506)).$append($java.oktsg_GBufferOutputNode_getFragColor($this).$asVec4()).$append($rt_s(330)).$toString());
     $out.$append(jl_StringBuilder__init_().$append($rt_s(1507)).$append($java.oktsg_GBufferOutputNode_getFragNormal($this).$asVec4()).$append($rt_s(330)).$toString());
     $out.$append(jl_StringBuilder__init_().$append($rt_s(1508)).$append($java.oktsg_GBufferOutputNode_getFragPosition($this).$asVec4()).$append($rt_s(330)).$toString());
@@ -77862,7 +77866,7 @@ $java.oktg_Object3D_updateTransform = function($this, $recursive) {
     $java.oktg_IObject3D$DefaultImpls_updateTransform($this, $recursive);
 };
 $java.oktg_Object3D_getWorldMatrix0 = function($this, $out, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     return $java.oktg_IObject3D$DefaultImpls_getWorldMatrix0($this, $out, $isLocal);
 };
 function ju_LinkedList() {
@@ -79519,13 +79523,13 @@ function oktgc_ActiveCamera_update($this) {
     $java.oktgc_ActiveCamera_api.$update0();
 }
 $java.oktgc_ActiveCamera_lookAt = function($this, $from, $to, $up) {
-    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(53));
-    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(54));
-    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($from, $rt_s(55));
+    kji_Intrinsics_checkParameterIsNotNull($to, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($up, $rt_s(57));
     $java.oktgc_ActiveCamera_api.$lookAt0($from, $to, $up);
 };
 $java.oktgc_ActiveCamera_dst2 = function($this, $position, $isLocal) {
-    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(57));
+    kji_Intrinsics_checkParameterIsNotNull($position, $rt_s(53));
     return $java.oktgc_ActiveCamera_api.$dst23($position, $isLocal);
 };
 function oktgc_ActiveCamera__init_($this) {
@@ -79767,13 +79771,13 @@ $java.oktsg_PrincipledBSDF_prepareToDrawScene = function($this, $scene) {
     }
 };
 $java.oktsg_PrincipledBSDF_executionFrag = function($this, $out) {
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$result2.$isUsed0())
         $out.$append(jl_StringBuilder__init_().$append($this.$result2.$getRef0()).$append($rt_s(1569)).$append($java.oktsg_PrincipledBSDF_getWorldPosition($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getNormalizedViewVector($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getBaseColor($this).$asVec4()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getNormal($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getOcclusion($this).$asFloat()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getRoughness($this).$asFloat()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getMetallic($this).$asFloat()).$append($rt_s(1053)).$toString());
 };
 $java.oktsg_PrincipledBSDF_declarationFrag = function($this, $out) {
     var $num;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$result2.$isUsed0()) {
         if ($this.$receiveShadows0) {
             $num = $rt_imul($this.$maxNumDirectionLights, $java.oktsg_PrincipledBSDF_shadowCascadesNum);
@@ -79787,7 +79791,7 @@ $java.oktsg_PrincipledBSDF_declarationFrag = function($this, $out) {
 };
 $java.oktsg_PrincipledBSDF_declarationVert = function($this, $out) {
     var $num;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$result2.$isUsed0() && $this.$receiveShadows0) {
         $num = $rt_imul($this.$maxNumDirectionLights, $java.oktsg_PrincipledBSDF_shadowCascadesNum);
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1574)).$append1($num).$append($rt_s(1068)).$toString());
@@ -79796,7 +79800,7 @@ $java.oktsg_PrincipledBSDF_declarationVert = function($this, $out) {
 };
 $java.oktsg_PrincipledBSDF_executionVert = function($this, $out) {
     var $num;
-    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(56));
+    kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$result2.$isUsed0() && $this.$receiveShadows0) {
         $num = $rt_imul($this.$maxNumDirectionLights, $java.oktsg_PrincipledBSDF_shadowCascadesNum);
         $out.$append(jl_StringBuilder__init_().$append($rt_s(1575)).$append1($num).$append($rt_s(1576)).$toString());
@@ -83039,7 +83043,7 @@ oktu_IPath, 0, jl_Object, [], 3, 3, oktu_IPath_$callClinit, 0,
 oktgn_ITransformNode, 0, jl_Object, [oktu_IPath], 3, 3, oktgn_ITransformNode_$callClinit, 0,
 oktgc_ICamera, 0, jl_Object, [oktgn_ITransformNode], 3, 3, oktgc_ICamera_$callClinit, 0,
 oktgc_CameraAdapter, 0, jl_Object, [oktgc_ICamera], 1, 3, oktgc_CameraAdapter_$callClinit, ["$getPreviousViewProjectionMatrix0", function() { return oktgc_CameraAdapter_getPreviousViewProjectionMatrix(this); }, "$getInverseViewProjectionMatrix", function() { return oktgc_CameraAdapter_getInverseViewProjectionMatrix(this); }, "$getFrustum", function() { return oktgc_CameraAdapter_getFrustum(this); }, "$update0", function() { oktgc_CameraAdapter_update(this); }, "$getAspectRatio0", function() { return oktgc_CameraAdapter_getAspectRatio(this);
-}, "$lookAt0", function(var_1, var_2, var_3) { oktgc_CameraAdapter_lookAt(this, var_1, var_2, var_3); }, "$updatePreviousTransform0", function() { oktgc_CameraAdapter_updatePreviousTransform(this); }, "$updateTransform0", function(var_1) { oktgc_CameraAdapter_updateTransform(this, var_1); }, "$getPosition4", function(var_1, var_2) { return oktgc_CameraAdapter_getPosition(this, var_1, var_2); }, "$dst23", function(var_1, var_2) { return oktgc_CameraAdapter_dst2(this, var_1, var_2); }],
+}, "$dst23", function(var_1, var_2) { return oktgc_CameraAdapter_dst2(this, var_1, var_2); }, "$getPosition4", function(var_1, var_2) { return oktgc_CameraAdapter_getPosition(this, var_1, var_2); }, "$lookAt0", function(var_1, var_2, var_3) { oktgc_CameraAdapter_lookAt(this, var_1, var_2, var_3); }, "$updatePreviousTransform0", function() { oktgc_CameraAdapter_updatePreviousTransform(this); }, "$updateTransform0", function(var_1) { oktgc_CameraAdapter_updateTransform(this, var_1); }],
 oktgc_Camera, 0, oktgc_CameraAdapter, [], 4, 3, 0, ["$getViewMatrix", function() { return oktgc_Camera_getViewMatrix(this); }, "$getProjectionMatrix", function() { return oktgc_Camera_getProjectionMatrix(this); }, "$getViewProjectionMatrix", function() { return oktgc_Camera_getViewProjectionMatrix(this); }, "$getPosition0", function() { return oktgc_Camera_getPosition(this); }, "$getDirection", function() { return oktgc_Camera_getDirection(this); }, "$getUp", function() { return oktgc_Camera_getUp(this); },
 "$getNear", function() { return oktgc_Camera_getNear(this); }, "$setNear", function(var_1) { oktgc_Camera_setNear(this, var_1); }, "$getFar", function() { return oktgc_Camera_getFar(this); }, "$setFar", function(var_1) { oktgc_Camera_setFar(this, var_1); }, "$getFov", function() { return oktgc_Camera_getFov(this); }, "$getViewportWidth", function() { return oktgc_Camera_getViewportWidth(this); }, "$getViewportHeight", function() { return oktgc_Camera_getViewportHeight(this); }, "$isOrthographic0", function()
 { return oktgc_Camera_isOrthographic(this); }, "$setOrthographic", function(var_1) { oktgc_Camera_setOrthographic(this, var_1); }, "$getZoom", function() { return oktgc_Camera_getZoom(this); }, "$setName", function(var_1) { oktgc_Camera_setName(this, var_1); }, "$isCentered1", function() { return oktgc_Camera_isCentered(this); }],
@@ -83572,24 +83576,24 @@ oktgg_IGLTFMaterial$read$9, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1"
 oktgg_IGLTFMaterial$read$8, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_IGLTFMaterial$read$8_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_IGLTFMaterial$read$8_invoke0(this, var_1); }],
 oooi_CollideSpaceGeom, 0, jl_Object, [ooo_DColliderFn], 0, 3, 0, ["$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_CollideSpaceGeom_dColliderFn(this, var_1, var_2, var_3, var_4); }, "$dCollideSpaceGeom", function(var_1, var_2, var_3, var_4, var_5) { return oooi_CollideSpaceGeom_dCollideSpaceGeom(this, var_1, var_2, var_3, var_4, var_5); }],
 ks_Sequence, 0, jl_Object, [], 3, 3, 0, 0,
-oktg_GL, 0, jl_Object, [oktg_IGL], 4, 3, oktg_GL_$callClinit, ["$setApi2", function(var_1) { oktg_GL_setApi(this, var_1); }, "$getMainFrameBufferWidth0", function() { return oktg_GL_getMainFrameBufferWidth(this); }, "$getMainFrameBufferHeight0", function() { return oktg_GL_getMainFrameBufferHeight(this); }, "$getMainFrameBufferHandle0", function() { return oktg_GL_getMainFrameBufferHandle(this); }, "$getGlesMajVer", function() { return oktg_GL_getGlesMajVer(this); }, "$isGLES", function() { return oktg_GL_isGLES(this);
-}, "$getSingleCallRequests", function() { return oktg_GL_getSingleCallRequests(this); }, "$getRenderCallRequests", function() { return oktg_GL_getRenderCallRequests(this); }, "$getMaxAnisotropicFilterLevel", function() { return oktg_GL_getMaxAnisotropicFilterLevel(this); }, "$getShader1", function() { return oktg_GL_getShader(this); }, "$setShader0", function(var_1) { oktg_GL_setShader(this, var_1); }, "$setActiveTexture", function(var_1) { oktg_GL_setActiveTexture(this, var_1); }, "$getArrayBuffer", function()
-{ return oktg_GL_getArrayBuffer(this); }, "$setArrayBuffer", function(var_1) { oktg_GL_setArrayBuffer(this, var_1); }, "$setElementArrayBuffer", function(var_1) { oktg_GL_setElementArrayBuffer(this, var_1); }, "$getTextureUnits", function() { return oktg_GL_getTextureUnits(this); }, "$isCullFaceEnabled", function() { return oktg_GL_isCullFaceEnabled0(this); }, "$setCullFaceEnabled", function(var_1) { oktg_GL_setCullFaceEnabled(this, var_1); }, "$getCullFaceMode", function() { return oktg_GL_getCullFaceMode(this);
-}, "$setCullFaceMode", function(var_1) { oktg_GL_setCullFaceMode(this, var_1); }, "$isBlendEnabled", function() { return oktg_GL_isBlendEnabled0(this); }, "$setBlendEnabled", function(var_1) { oktg_GL_setBlendEnabled(this, var_1); }, "$setBlendFactorS", function(var_1) { oktg_GL_setBlendFactorS(this, var_1); }, "$setBlendFactorD", function(var_1) { oktg_GL_setBlendFactorD(this, var_1); }, "$setDepthTestEnabled", function(var_1) { oktg_GL_setDepthTestEnabled(this, var_1); }, "$grabTextureUnit", function() { return oktg_GL_grabTextureUnit(this);
-}, "$initTextureUnits", function() { oktg_GL_initTextureUnits(this); }, "$initGL0", function() { oktg_GL_initGL(this); }, "$setSimpleAlphaBlending", function() { oktg_GL_setSimpleAlphaBlending(this); }, "$call0", function(var_1, var_2) { oktg_GL_call(this, var_1, var_2); }, "$render1", function(var_1, var_2) { oktg_GL_render(this, var_1, var_2); }, "$doSingleCalls", function() { oktg_GL_doSingleCalls(this); }, "$doRenderCalls", function() { oktg_GL_doRenderCalls(this); }, "$isExtensionSupported0", function(var_1)
-{ return oktg_GL_isExtensionSupported(this, var_1); }, "$enableExtension", function(var_1) { return oktg_GL_enableExtension(this, var_1); }, "$glDrawBuffers0", function(var_1, var_2) { oktg_GL_glDrawBuffers(this, var_1, var_2); }, "$glDrawArraysInstanced0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawArraysInstanced(this, var_1, var_2, var_3, var_4); }, "$glDrawElementsInstanced0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glDrawElementsInstanced(this, var_1, var_2, var_3, var_4, var_5);
-}, "$glVertexAttribDivisor", function(var_1, var_2) { oktg_GL_glVertexAttribDivisor(this, var_1, var_2); }, "$glBindTexture", function(var_1, var_2) { oktg_GL_glBindTexture(this, var_1, var_2); }, "$glBlendFunc0", function(var_1, var_2) { oktg_GL_glBlendFunc(this, var_1, var_2); }, "$glClear", function(var_1) { oktg_GL_glClear(this, var_1); }, "$glClearColor", function(var_1, var_2, var_3, var_4) { oktg_GL_glClearColor(this, var_1, var_2, var_3, var_4); }, "$glDeleteTexture0", function(var_1) { oktg_GL_glDeleteTexture(this,
-var_1); }, "$glDrawArrays0", function(var_1, var_2, var_3) { oktg_GL_glDrawArrays(this, var_1, var_2, var_3); }, "$glGenTexture", function() { return oktg_GL_glGenTexture(this); }, "$glGetIntegerv0", function(var_1, var_2) { oktg_GL_glGetIntegerv(this, var_1, var_2); }, "$glTexImage2D0", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D0(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$glTexImage2D", function(var_1, var_2, var_3, var_4, var_5,
-var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$glTexParameterf", function(var_1, var_2, var_3) { oktg_GL_glTexParameterf(this, var_1, var_2, var_3); }, "$glViewport0", function(var_1, var_2, var_3, var_4) { oktg_GL_glViewport(this, var_1, var_2, var_3, var_4); }, "$glAttachShader0", function(var_1, var_2) { oktg_GL_glAttachShader(this, var_1, var_2); }, "$glBindBuffer", function(var_1, var_2) { oktg_GL_glBindBuffer(this, var_1, var_2);
-}, "$glBindFramebuffer0", function(var_1, var_2) { oktg_GL_glBindFramebuffer(this, var_1, var_2); }, "$glBindRenderbuffer0", function(var_1, var_2) { oktg_GL_glBindRenderbuffer(this, var_1, var_2); }, "$glBufferData", function(var_1, var_2, var_3, var_4) { oktg_GL_glBufferData(this, var_1, var_2, var_3, var_4); }, "$glCheckFramebufferStatus0", function(var_1) { return oktg_GL_glCheckFramebufferStatus(this, var_1); }, "$glCompileShader0", function(var_1) { oktg_GL_glCompileShader(this, var_1); }, "$glCreateProgram0",
-function() { return oktg_GL_glCreateProgram(this); }, "$glCreateShader0", function(var_1) { return oktg_GL_glCreateShader(this, var_1); }, "$glDeleteFramebuffer0", function(var_1) { oktg_GL_glDeleteFramebuffer(this, var_1); }, "$glDeleteProgram0", function(var_1) { oktg_GL_glDeleteProgram(this, var_1); }, "$glDeleteRenderbuffer0", function(var_1) { oktg_GL_glDeleteRenderbuffer(this, var_1); }, "$glDeleteShader0", function(var_1) { oktg_GL_glDeleteShader(this, var_1); }, "$glDetachShader0", function(var_1, var_2)
-{ oktg_GL_glDetachShader(this, var_1, var_2); }, "$glDrawElements0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawElements(this, var_1, var_2, var_3, var_4); }, "$glEnableVertexAttribArray", function(var_1) { oktg_GL_glEnableVertexAttribArray(this, var_1); }, "$glFramebufferRenderbuffer0", function(var_1, var_2, var_3, var_4) { oktg_GL_glFramebufferRenderbuffer(this, var_1, var_2, var_3, var_4); }, "$glFramebufferTexture2D0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glFramebufferTexture2D(this,
-var_1, var_2, var_3, var_4, var_5); }, "$glGenBuffer", function() { return oktg_GL_glGenBuffer(this); }, "$glGenerateMipmap0", function(var_1) { oktg_GL_glGenerateMipmap(this, var_1); }, "$glGenFramebuffer0", function() { return oktg_GL_glGenFramebuffer(this); }, "$glGenRenderbuffer0", function() { return oktg_GL_glGenRenderbuffer(this); }, "$glGetActiveAttrib0", function(var_1, var_2, var_3, var_4) { return oktg_GL_glGetActiveAttrib(this, var_1, var_2, var_3, var_4); }, "$glGetActiveUniform0", function(var_1,
-var_2, var_3, var_4) { return oktg_GL_glGetActiveUniform(this, var_1, var_2, var_3, var_4); }, "$glGetAttribLocation0", function(var_1, var_2) { return oktg_GL_glGetAttribLocation(this, var_1, var_2); }, "$glGetFloatv0", function(var_1, var_2) { oktg_GL_glGetFloatv(this, var_1, var_2); }, "$glGetProgramiv0", function(var_1, var_2, var_3) { oktg_GL_glGetProgramiv(this, var_1, var_2, var_3); }, "$glGetProgramInfoLog0", function(var_1) { return oktg_GL_glGetProgramInfoLog(this, var_1); }, "$glGetShaderiv0", function(var_1,
-var_2, var_3) { oktg_GL_glGetShaderiv(this, var_1, var_2, var_3); }, "$glGetShaderInfoLog0", function(var_1) { return oktg_GL_glGetShaderInfoLog(this, var_1); }, "$glGetUniformLocation0", function(var_1, var_2) { return oktg_GL_glGetUniformLocation(this, var_1, var_2); }, "$glLinkProgram0", function(var_1) { oktg_GL_glLinkProgram(this, var_1); }, "$glRenderbufferStorage0", function(var_1, var_2, var_3, var_4) { oktg_GL_glRenderbufferStorage(this, var_1, var_2, var_3, var_4); }, "$glShaderSource0", function(var_1,
-var_2) { oktg_GL_glShaderSource(this, var_1, var_2); }, "$glTexParameteri", function(var_1, var_2, var_3) { oktg_GL_glTexParameteri(this, var_1, var_2, var_3); }, "$glUniform1f0", function(var_1, var_2) { oktg_GL_glUniform1f(this, var_1, var_2); }, "$glUniform1i0", function(var_1, var_2) { oktg_GL_glUniform1i(this, var_1, var_2); }, "$glUniform2f0", function(var_1, var_2, var_3) { oktg_GL_glUniform2f(this, var_1, var_2, var_3); }, "$glUniform3f0", function(var_1, var_2, var_3, var_4) { oktg_GL_glUniform3f(this,
-var_1, var_2, var_3, var_4); }, "$glUniform3fv0", function(var_1, var_2, var_3, var_4) { oktg_GL_glUniform3fv(this, var_1, var_2, var_3, var_4); }, "$glUniform4f0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniform4f(this, var_1, var_2, var_3, var_4, var_5); }, "$glUniformMatrix4fv0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniformMatrix4fv(this, var_1, var_2, var_3, var_4, var_5); }, "$glUseProgram0", function(var_1) { oktg_GL_glUseProgram(this, var_1); }, "$glVertexAttribPointer",
-function(var_1, var_2, var_3, var_4, var_5, var_6) { oktg_GL_glVertexAttribPointer(this, var_1, var_2, var_3, var_4, var_5, var_6); }],
+oktg_GL, 0, jl_Object, [oktg_IGL], 4, 3, oktg_GL_$callClinit, ["$setApi2", function(var_1) { oktg_GL_setApi(this, var_1); }, "$getMainFrameBufferWidth0", function() { return oktg_GL_getMainFrameBufferWidth(this); }, "$getMainFrameBufferHeight0", function() { return oktg_GL_getMainFrameBufferHeight(this); }, "$getMainFrameBufferHandle0", function() { return oktg_GL_getMainFrameBufferHandle(this); }, "$getMajVer", function() { return oktg_GL_getMajVer(this); }, "$getGlesMajVer", function() { return oktg_GL_getGlesMajVer(this);
+}, "$isGLES", function() { return oktg_GL_isGLES(this); }, "$getSingleCallRequests", function() { return oktg_GL_getSingleCallRequests(this); }, "$getRenderCallRequests", function() { return oktg_GL_getRenderCallRequests(this); }, "$getMaxAnisotropicFilterLevel", function() { return oktg_GL_getMaxAnisotropicFilterLevel(this); }, "$getShader1", function() { return oktg_GL_getShader(this); }, "$setShader0", function(var_1) { oktg_GL_setShader(this, var_1); }, "$setActiveTexture", function(var_1) { oktg_GL_setActiveTexture(this,
+var_1); }, "$getArrayBuffer", function() { return oktg_GL_getArrayBuffer(this); }, "$setArrayBuffer", function(var_1) { oktg_GL_setArrayBuffer(this, var_1); }, "$setElementArrayBuffer", function(var_1) { oktg_GL_setElementArrayBuffer(this, var_1); }, "$getTextureUnits", function() { return oktg_GL_getTextureUnits(this); }, "$isCullFaceEnabled", function() { return oktg_GL_isCullFaceEnabled0(this); }, "$setCullFaceEnabled", function(var_1) { oktg_GL_setCullFaceEnabled(this, var_1); }, "$getCullFaceMode", function()
+{ return oktg_GL_getCullFaceMode(this); }, "$setCullFaceMode", function(var_1) { oktg_GL_setCullFaceMode(this, var_1); }, "$isBlendEnabled", function() { return oktg_GL_isBlendEnabled0(this); }, "$setBlendEnabled", function(var_1) { oktg_GL_setBlendEnabled(this, var_1); }, "$setBlendFactorS", function(var_1) { oktg_GL_setBlendFactorS(this, var_1); }, "$setBlendFactorD", function(var_1) { oktg_GL_setBlendFactorD(this, var_1); }, "$setDepthTestEnabled", function(var_1) { oktg_GL_setDepthTestEnabled(this, var_1);
+}, "$grabTextureUnit", function() { return oktg_GL_grabTextureUnit(this); }, "$initTextureUnits", function() { oktg_GL_initTextureUnits(this); }, "$initGL0", function() { oktg_GL_initGL(this); }, "$setSimpleAlphaBlending", function() { oktg_GL_setSimpleAlphaBlending(this); }, "$call0", function(var_1, var_2) { oktg_GL_call(this, var_1, var_2); }, "$render1", function(var_1, var_2) { oktg_GL_render(this, var_1, var_2); }, "$doSingleCalls", function() { oktg_GL_doSingleCalls(this); }, "$doRenderCalls", function()
+{ oktg_GL_doRenderCalls(this); }, "$isExtensionSupported0", function(var_1) { return oktg_GL_isExtensionSupported(this, var_1); }, "$enableExtension", function(var_1) { return oktg_GL_enableExtension(this, var_1); }, "$glDrawBuffers0", function(var_1, var_2) { oktg_GL_glDrawBuffers(this, var_1, var_2); }, "$glDrawArraysInstanced0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawArraysInstanced(this, var_1, var_2, var_3, var_4); }, "$glDrawElementsInstanced0", function(var_1, var_2, var_3, var_4, var_5)
+{ oktg_GL_glDrawElementsInstanced(this, var_1, var_2, var_3, var_4, var_5); }, "$glVertexAttribDivisor", function(var_1, var_2) { oktg_GL_glVertexAttribDivisor(this, var_1, var_2); }, "$glBindTexture", function(var_1, var_2) { oktg_GL_glBindTexture(this, var_1, var_2); }, "$glBlendFunc0", function(var_1, var_2) { oktg_GL_glBlendFunc(this, var_1, var_2); }, "$glClear", function(var_1) { oktg_GL_glClear(this, var_1); }, "$glClearColor", function(var_1, var_2, var_3, var_4) { oktg_GL_glClearColor(this, var_1, var_2,
+var_3, var_4); }, "$glDeleteTexture0", function(var_1) { oktg_GL_glDeleteTexture(this, var_1); }, "$glDrawArrays0", function(var_1, var_2, var_3) { oktg_GL_glDrawArrays(this, var_1, var_2, var_3); }, "$glGenTexture", function() { return oktg_GL_glGenTexture(this); }, "$glGetIntegerv0", function(var_1, var_2) { oktg_GL_glGetIntegerv(this, var_1, var_2); }, "$glTexImage2D0", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D0(this, var_1, var_2, var_3, var_4, var_5,
+var_6, var_7, var_8, var_9); }, "$glTexImage2D", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$glTexParameterf", function(var_1, var_2, var_3) { oktg_GL_glTexParameterf(this, var_1, var_2, var_3); }, "$glViewport0", function(var_1, var_2, var_3, var_4) { oktg_GL_glViewport(this, var_1, var_2, var_3, var_4); }, "$glAttachShader0", function(var_1, var_2) { oktg_GL_glAttachShader(this, var_1,
+var_2); }, "$glBindBuffer", function(var_1, var_2) { oktg_GL_glBindBuffer(this, var_1, var_2); }, "$glBindFramebuffer0", function(var_1, var_2) { oktg_GL_glBindFramebuffer(this, var_1, var_2); }, "$glBindRenderbuffer0", function(var_1, var_2) { oktg_GL_glBindRenderbuffer(this, var_1, var_2); }, "$glBufferData", function(var_1, var_2, var_3, var_4) { oktg_GL_glBufferData(this, var_1, var_2, var_3, var_4); }, "$glCheckFramebufferStatus0", function(var_1) { return oktg_GL_glCheckFramebufferStatus(this, var_1);
+}, "$glCompileShader0", function(var_1) { oktg_GL_glCompileShader(this, var_1); }, "$glCreateProgram0", function() { return oktg_GL_glCreateProgram(this); }, "$glCreateShader0", function(var_1) { return oktg_GL_glCreateShader(this, var_1); }, "$glDeleteFramebuffer0", function(var_1) { oktg_GL_glDeleteFramebuffer(this, var_1); }, "$glDeleteProgram0", function(var_1) { oktg_GL_glDeleteProgram(this, var_1); }, "$glDeleteRenderbuffer0", function(var_1) { oktg_GL_glDeleteRenderbuffer(this, var_1); }, "$glDeleteShader0",
+function(var_1) { oktg_GL_glDeleteShader(this, var_1); }, "$glDetachShader0", function(var_1, var_2) { oktg_GL_glDetachShader(this, var_1, var_2); }, "$glDrawElements0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawElements(this, var_1, var_2, var_3, var_4); }, "$glEnableVertexAttribArray", function(var_1) { oktg_GL_glEnableVertexAttribArray(this, var_1); }, "$glFramebufferRenderbuffer0", function(var_1, var_2, var_3, var_4) { oktg_GL_glFramebufferRenderbuffer(this, var_1, var_2, var_3, var_4); }, "$glFramebufferTexture2D0",
+function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glFramebufferTexture2D(this, var_1, var_2, var_3, var_4, var_5); }, "$glGenBuffer", function() { return oktg_GL_glGenBuffer(this); }, "$glGenerateMipmap0", function(var_1) { oktg_GL_glGenerateMipmap(this, var_1); }, "$glGenFramebuffer0", function() { return oktg_GL_glGenFramebuffer(this); }, "$glGenRenderbuffer0", function() { return oktg_GL_glGenRenderbuffer(this); }, "$glGetActiveAttrib0", function(var_1, var_2, var_3, var_4) { return oktg_GL_glGetActiveAttrib(this,
+var_1, var_2, var_3, var_4); }, "$glGetActiveUniform0", function(var_1, var_2, var_3, var_4) { return oktg_GL_glGetActiveUniform(this, var_1, var_2, var_3, var_4); }, "$glGetAttribLocation0", function(var_1, var_2) { return oktg_GL_glGetAttribLocation(this, var_1, var_2); }, "$glGetFloatv0", function(var_1, var_2) { oktg_GL_glGetFloatv(this, var_1, var_2); }, "$glGetProgramiv0", function(var_1, var_2, var_3) { oktg_GL_glGetProgramiv(this, var_1, var_2, var_3); }, "$glGetProgramInfoLog0", function(var_1) { return oktg_GL_glGetProgramInfoLog(this,
+var_1); }, "$glGetShaderiv0", function(var_1, var_2, var_3) { oktg_GL_glGetShaderiv(this, var_1, var_2, var_3); }, "$glGetShaderInfoLog0", function(var_1) { return oktg_GL_glGetShaderInfoLog(this, var_1); }, "$glGetUniformLocation0", function(var_1, var_2) { return oktg_GL_glGetUniformLocation(this, var_1, var_2); }, "$glLinkProgram0", function(var_1) { oktg_GL_glLinkProgram(this, var_1); }, "$glRenderbufferStorage0", function(var_1, var_2, var_3, var_4) { oktg_GL_glRenderbufferStorage(this, var_1, var_2, var_3,
+var_4); }, "$glShaderSource0", function(var_1, var_2) { oktg_GL_glShaderSource(this, var_1, var_2); }, "$glTexParameteri", function(var_1, var_2, var_3) { oktg_GL_glTexParameteri(this, var_1, var_2, var_3); }, "$glUniform1f0", function(var_1, var_2) { oktg_GL_glUniform1f(this, var_1, var_2); }, "$glUniform1i0", function(var_1, var_2) { oktg_GL_glUniform1i(this, var_1, var_2); }, "$glUniform2f0", function(var_1, var_2, var_3) { oktg_GL_glUniform2f(this, var_1, var_2, var_3); }, "$glUniform3f0", function(var_1,
+var_2, var_3, var_4) { oktg_GL_glUniform3f(this, var_1, var_2, var_3, var_4); }, "$glUniform3fv0", function(var_1, var_2, var_3, var_4) { oktg_GL_glUniform3fv(this, var_1, var_2, var_3, var_4); }, "$glUniform4f0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniform4f(this, var_1, var_2, var_3, var_4, var_5); }, "$glUniformMatrix4fv0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniformMatrix4fv(this, var_1, var_2, var_3, var_4, var_5); }, "$glUseProgram0", function(var_1) { oktg_GL_glUseProgram(this,
+var_1); }, "$glVertexAttribPointer", function(var_1, var_2, var_3, var_4, var_5, var_6) { oktg_GL_glVertexAttribPointer(this, var_1, var_2, var_3, var_4, var_5, var_6); }],
 oktts_CascadedShadowMappingBaseTest$testMain$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktts_CascadedShadowMappingBaseTest$testMain$1$1_invoke(this, var_1); }, "$invoke8", function(var_1) { oktts_CascadedShadowMappingBaseTest$testMain$1$1_invoke0(this, var_1); }],
 kjf_Function18, 0, jl_Object, [k_Function], 3, 3, 0, 0,
 kjf_Function19, 0, jl_Object, [k_Function], 3, 3, 0, 0,
@@ -83842,8 +83846,8 @@ jur_UCIDecomposedCharSet, 0, jur_DecomposedCharSet, [], 0, 0, 0, 0,
 oktf_IFile$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 oktt_IFrameBuffer, 0, jl_Object, [], 3, 3, 0, 0,
 oktt_SimpleFrameBuffer, 0, jl_Object, [oktt_IFrameBuffer, oktt_ITexture], 4, 3, 0, ["$getGlTarget", function() { return oktt_SimpleFrameBuffer_getGlTarget(this); }, "$getTextureHandle", function() { return oktt_SimpleFrameBuffer_getTextureHandle(this); }, "$getTexture1", function() { return oktt_SimpleFrameBuffer_getTexture0(this); }, "$getWidth", function() { return oktt_SimpleFrameBuffer_getWidth(this); }, "$getHeight", function() { return oktt_SimpleFrameBuffer_getHeight(this); }, "$isBound2", function()
-{ return oktt_SimpleFrameBuffer_isBound(this); }, "$setBound", function(var_1) { oktt_SimpleFrameBuffer_setBound(this, var_1); }, "$getFrameBufferHandle", function() { return oktt_SimpleFrameBuffer_getFrameBufferHandle(this); }, "$getAttachments", function() { return oktt_SimpleFrameBuffer_getAttachments(this); }, "$getAttachments0", function() { return oktt_SimpleFrameBuffer_getAttachments0(this); }, "$getTexture", function(var_1) { return oktt_SimpleFrameBuffer_getTexture(this, var_1); }, "$buildAttachments",
-function() { oktt_SimpleFrameBuffer_buildAttachments(this); }, "$initBuffersOrder0", function(var_1) { oktt_SimpleFrameBuffer_initBuffersOrder(this, var_1); }, "$bind8", function(var_1) { oktt_SimpleFrameBuffer_bind(this, var_1); }, "$bind4", function(var_1) { oktt_SimpleFrameBuffer_bind0(this, var_1); }, "$render", function(var_1) { oktt_SimpleFrameBuffer_render(this, var_1); }],
+{ return oktt_SimpleFrameBuffer_isBound(this); }, "$setBound", function(var_1) { oktt_SimpleFrameBuffer_setBound(this, var_1); }, "$getFrameBufferHandle", function() { return oktt_SimpleFrameBuffer_getFrameBufferHandle(this); }, "$getAttachments", function() { return oktt_SimpleFrameBuffer_getAttachments(this); }, "$getAttachments0", function() { return oktt_SimpleFrameBuffer_getAttachments0(this); }, "$bind8", function(var_1) { oktt_SimpleFrameBuffer_bind(this, var_1); }, "$bind4", function(var_1) { oktt_SimpleFrameBuffer_bind0(this,
+var_1); }, "$buildAttachments", function() { oktt_SimpleFrameBuffer_buildAttachments(this); }, "$getTexture", function(var_1) { return oktt_SimpleFrameBuffer_getTexture(this, var_1); }, "$initBuffersOrder0", function(var_1) { oktt_SimpleFrameBuffer_initBuffersOrder(this, var_1); }, "$render", function(var_1) { oktt_SimpleFrameBuffer_render(this, var_1); }],
 jl_IndexOutOfBoundsException, "IndexOutOfBoundsException", 10, jl_RuntimeException, [], 0, 3, 0, 0,
 ooott_TaskGroup, 0, ooott_Task, [], 0, 3, 0, ["$subgroup", function(var_1, var_2) { return ooott_TaskGroup_subgroup(this, var_1, var_2); }, "$subtask", function(var_1, var_2) { return ooott_TaskGroup_subtask(this, var_1, var_2); }, "$submit0", function() { ooott_TaskGroup_submit(this); }, "$subtaskCompleted", function() { ooott_TaskGroup_subtaskCompleted(this); }],
 oktts_SSAOBaseTest$testMain$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktts_SSAOBaseTest$testMain$1$1_invoke(this, var_1); }, "$invoke8", function(var_1) { oktts_SSAOBaseTest$testMain$1$1_invoke0(this, var_1); }],
@@ -83959,8 +83963,8 @@ var_1); }, "$executionVert", function(var_1) { oktsg_VertexNode_executionVert(th
 ju_RandomAccess, 0, jl_Object, [], 3, 3, 0, 0,
 ju_ArrayList, 0, ju_AbstractList, [jl_Cloneable, ji_Serializable, ju_RandomAccess], 0, 3, 0, ["$ensureCapacity", function(var_1) { ju_ArrayList_ensureCapacity(this, var_1); }, "$get1", function(var_1) { return ju_ArrayList_get(this, var_1); }, "$size", function() { return ju_ArrayList_size(this); }, "$set38", function(var_1, var_2) { return ju_ArrayList_set(this, var_1, var_2); }, "$add1", function(var_1) { return ju_ArrayList_add(this, var_1); }, "$add2", function(var_1, var_2) { ju_ArrayList_add0(this, var_1,
 var_2); }, "$remove", function(var_1) { return ju_ArrayList_remove(this, var_1); }, "$remove1", function(var_1) { return ju_ArrayList_remove0(this, var_1); }, "$clear", function() { ju_ArrayList_clear(this); }, "$checkIndex", function(var_1) { ju_ArrayList_checkIndex(this, var_1); }, "$checkIndexForAdd", function(var_1) { ju_ArrayList_checkIndexForAdd(this, var_1); }],
-oktgg_GLTFArray, 0, ju_ArrayList, [oktgg_IGLTFArray], 4, 3, 0, ["$getReady", function() { return oktgg_GLTFArray_getReady(this); }, "$getRequests", function() { return oktgg_GLTFArray_getRequests(this); }, "$getName", function() { return oktgg_GLTFArray_getName(this); }, "$getSize", function() { return oktgg_GLTFArray_getSize(this); }, "$size", function() { return oktgg_GLTFArray_size(this); }, "$ready", function(var_1) { oktgg_GLTFArray_ready(this, var_1); }, "$getOrWait0", function(var_1, var_2) { oktgg_GLTFArray_getOrWait(this,
-var_1, var_2); }],
+oktgg_GLTFArray, 0, ju_ArrayList, [oktgg_IGLTFArray], 4, 3, 0, ["$getReady", function() { return oktgg_GLTFArray_getReady(this); }, "$getRequests", function() { return oktgg_GLTFArray_getRequests(this); }, "$getName", function() { return oktgg_GLTFArray_getName(this); }, "$getSize", function() { return oktgg_GLTFArray_getSize(this); }, "$size", function() { return oktgg_GLTFArray_size(this); }, "$getOrWait0", function(var_1, var_2) { oktgg_GLTFArray_getOrWait(this, var_1, var_2); }, "$ready", function(var_1)
+{ oktgg_GLTFArray_ready(this, var_1); }],
 oktgg_GLTFAnimation$read$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFAnimation$read$1$1_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_GLTFAnimation$read$1$1_invoke0(this, var_1); }],
 ooo_DMassC, 0, jl_Object, [], 3, 3, 0, 0,
 oooi_DxCapsule$CollideCapsuleSphere, 0, jl_Object, [ooo_DColliderFn], 0, 0, 0, ["$dCollideCapsuleSphere", function(var_1, var_2, var_3, var_4, var_5) { return oooi_DxCapsule$CollideCapsuleSphere_dCollideCapsuleSphere(this, var_1, var_2, var_3, var_4, var_5); }, "$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_DxCapsule$CollideCapsuleSphere_dColliderFn(this, var_1, var_2, var_3, var_4); }],
@@ -84284,8 +84288,8 @@ oktm_IMesh$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 oooi_DxCapsule$CollideCapsulePlane, 0, jl_Object, [ooo_DColliderFn], 0, 0, 0, ["$dCollideCapsulePlane", function(var_1, var_2, var_3, var_4, var_5) { return oooi_DxCapsule$CollideCapsulePlane_dCollideCapsulePlane(this, var_1, var_2, var_3, var_4, var_5); }, "$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_DxCapsule$CollideCapsulePlane_dColliderFn(this, var_1, var_2, var_3, var_4); }],
 okti_MOUSE, 0, jl_Object, [okti_IMouse], 4, 3, okti_MOUSE_$callClinit, ["$setApi7", function(var_1) { okti_MOUSE_setApi(this, var_1); }, "$getX", function() { return okti_MOUSE_getX(this); }, "$getY", function() { return okti_MOUSE_getY(this); }, "$addListener0", function(var_1) { okti_MOUSE_addListener(this, var_1); }, "$reset1", function() { okti_MOUSE_reset(this); }],
 oktgn_AdapterTransformNode, 0, jl_Object, [oktgn_ITransformNode], 0, 3, oktgn_AdapterTransformNode_$callClinit, ["$getName", function() { return oktgn_AdapterTransformNode_getName(this); }, "$setName", function(var_1) { oktgn_AdapterTransformNode_setName(this, var_1); }, "$getPosition0", function() { return oktgn_AdapterTransformNode_getPosition(this); }, "$getRotation0", function() { return oktgn_AdapterTransformNode_getRotation(this); }, "$getScale0", function() { return oktgn_AdapterTransformNode_getScale(this);
-}, "$getWorldMatrix", function() { return oktgn_AdapterTransformNode_getWorldMatrix(this); }, "$getParentNode", function() { return oktgn_AdapterTransformNode_getParentNode(this); }, "$setParentNode", function(var_1) { oktgn_AdapterTransformNode_setParentNode(this, var_1); }, "$getChildNodes0", function() { return oktgn_AdapterTransformNode_getChildNodes(this); }, "$removeChildNode0", function(var_1) { oktgn_AdapterTransformNode_removeChildNode(this, var_1); }, "$updateTransform0", function(var_1) { oktgn_AdapterTransformNode_updateTransform(this,
-var_1); }, "$set74", function(var_1) { return oktgn_AdapterTransformNode_set(this, var_1); }, "$getPosition4", function(var_1, var_2) { return oktgn_AdapterTransformNode_getPosition0(this, var_1, var_2); }, "$getWorldMatrix0", function(var_1, var_2) { return oktgn_AdapterTransformNode_getWorldMatrix0(this, var_1, var_2); }, "$clear", function() { oktgn_AdapterTransformNode_clear(this); }],
+}, "$getWorldMatrix", function() { return oktgn_AdapterTransformNode_getWorldMatrix(this); }, "$getParentNode", function() { return oktgn_AdapterTransformNode_getParentNode(this); }, "$setParentNode", function(var_1) { oktgn_AdapterTransformNode_setParentNode(this, var_1); }, "$getChildNodes0", function() { return oktgn_AdapterTransformNode_getChildNodes(this); }, "$clear", function() { oktgn_AdapterTransformNode_clear(this); }, "$getPosition4", function(var_1, var_2) { return oktgn_AdapterTransformNode_getPosition0(this,
+var_1, var_2); }, "$getWorldMatrix0", function(var_1, var_2) { return oktgn_AdapterTransformNode_getWorldMatrix0(this, var_1, var_2); }, "$removeChildNode0", function(var_1) { oktgn_AdapterTransformNode_removeChildNode(this, var_1); }, "$set74", function(var_1) { return oktgn_AdapterTransformNode_set(this, var_1); }, "$updateTransform0", function(var_1) { oktgn_AdapterTransformNode_updateTransform(this, var_1); }],
 jnc_MalformedInputException, "MalformedInputException", 8, jnc_CharacterCodingException, [], 0, 3, 0, ["$getMessage", function() { return jnc_MalformedInputException_getMessage(this); }],
 oktsg_ShaderNodeLink, 0, jl_Object, [], 4, 3, 0, ["$getNode0", function() { return oktsg_ShaderNodeLink_getNode(this); }, "$getInputName", function() { return oktsg_ShaderNodeLink_getInputName(this); }],
 oooi_DxHeightfieldData, 0, jl_Object, [ooo_DHeightfieldData], 0, 3, 0, 0,
@@ -84951,7 +84955,7 @@ $rt_setCloneMethod($rt_array.prototype, function() {
 });
 $rt_stringPool(["Can\'t enter monitor from another thread synchronously", "@", "Frustum Mesh Builder", "\nattribute vec3 aPosition;\nuniform mat4 viewProj;\n\nvoid main () {\n    gl_Position = viewProj * vec4(aPosition, 1.0);\n}", "\nuniform vec4 color;\nvoid main () {\n    gl_FragColor = color;\n}", "model", "", "vertexInputs", "bytes", "String contains invalid digits: ", "String contains digits out of radix ", ": ", "The value is too big for int type: ", "String is null or empty", "Illegal radix: ", "<set-?>",
 "json", "name", "uri", "mimeType", "bufferView", "gltf.bufferViews[json.int(\"bufferView\")]", "gltf.buffers[bufferView.buffer]", "gltf", "image", "it", "<anonymous parameter 0>", "Uint8Array.create(byteAr…osition, size - position)", "Uint16Array.create(byteA…n, (size - position) / 2)", "Int32Array.create(byteAr…n, (size - position) / 4)", "Float32Array.create(byte…n, (size - position) / 4)", "byteArray", "array", "$receiver", "line.separator", "uDelta", "children", "matrix", "translation", "rotation", "scale",
-"weights", "camera", "mesh", "skin", "node", "Texture 2D", "thelema-logo.png", "Cause already set", "Circular causation relation", "    at ", "Caused by: ", "  at ", "from", "to", "up", "out", "position", "direction", "java.util.Collections.singletonList(element)", "elements", "$this$lastIndex", "$this$optimizeReadOnlyList", "$this$collectionSizeOrDefault", "$this$sortWith", "comparator", "$this$appendElement", "$this$appendln", "append(SystemProperties.LINE_SEPARATOR)", "call", "null", "Index out of bounds",
+"weights", "camera", "mesh", "skin", "node", "Texture 2D", "thelema-logo.png", "Cause already set", "Circular causation relation", "    at ", "Caused by: ", "  at ", "position", "out", "from", "to", "up", "direction", "java.util.Collections.singletonList(element)", "elements", "$this$lastIndex", "$this$optimizeReadOnlyList", "$this$collectionSizeOrDefault", "$this$sortWith", "comparator", "$this$appendElement", "$this$appendln", "append(SystemProperties.LINE_SEPARATOR)", "call", "null", "Index out of bounds",
 "Lower", "Upper", "ASCII", "Alpha", "Digit", "Alnum", "Punct", "Graph", "Print", "Blank", "Cntrl", "XDigit", "javaLowerCase", "javaUpperCase", "javaWhitespace", "javaMirrored", "javaDefined", "javaDigit", "javaIdentifierIgnorable", "javaISOControl", "javaJavaIdentifierPart", "javaJavaIdentifierStart", "javaLetter", "javaLetterOrDigit", "javaSpaceChar", "javaTitleCase", "javaUnicodeIdentifierPart", "javaUnicodeIdentifierStart", "Space", "w", "W", "s", "S", "d", "D", "BasicLatin", "Latin-1Supplement", "LatinExtended-A",
 "LatinExtended-B", "IPAExtensions", "SpacingModifierLetters", "CombiningDiacriticalMarks", "Greek", "Cyrillic", "CyrillicSupplement", "Armenian", "Hebrew", "Arabic", "Syriac", "ArabicSupplement", "Thaana", "Devanagari", "Bengali", "Gurmukhi", "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam", "Sinhala", "Thai", "Lao", "Tibetan", "Myanmar", "Georgian", "HangulJamo", "Ethiopic", "EthiopicSupplement", "Cherokee", "UnifiedCanadianAboriginalSyllabics", "Ogham", "Runic", "Tagalog", "Hanunoo", "Buhid",
 "Tagbanwa", "Khmer", "Mongolian", "Limbu", "TaiLe", "NewTaiLue", "KhmerSymbols", "Buginese", "PhoneticExtensions", "PhoneticExtensionsSupplement", "CombiningDiacriticalMarksSupplement", "LatinExtendedAdditional", "GreekExtended", "GeneralPunctuation", "SuperscriptsandSubscripts", "CurrencySymbols", "CombiningMarksforSymbols", "LetterlikeSymbols", "NumberForms", "Arrows", "MathematicalOperators", "MiscellaneousTechnical", "ControlPictures", "OpticalCharacterRecognition", "EnclosedAlphanumerics", "BoxDrawing",
