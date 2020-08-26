@@ -938,6 +938,7 @@ function okttm_FrustumMeshBuilderTest_testMain($this) {
     oktu_LOG_$callClinit();
     oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, oktgc_OrbitCameraControl_getHelp($control), null, 2, null);
     oktg_GL_$callClinit();
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, okttm_FrustumMeshBuilderTest$testMain$1__init_($control, $shader, $perspectiveFrustumMesh, $orthographicFrustumMesh), 1, null);
 }
 function okttm_FrustumMeshBuilderTest__init_0($this) {
@@ -1050,7 +1051,7 @@ function oktt_GLTFLoaderAnimTest$testMain$1_invoke0($this, $model) {
     }
     oktg_GL_$callClinit();
     oktg_GL_setDepthTestEnabled(oktg_GL_INSTANCE, 1);
-    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.5, 0.5, 0.5, 1.0);
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, oktt_GLTFLoaderAnimTest$testMain$1$2__init_($model), 1, null);
 }
 function oktt_GLTFLoaderAnimTest$testMain$1__init_0(var$0) {
@@ -1152,7 +1153,7 @@ function oktm_VertexBufferObject_bind($this, $shader) {
                 if ($location !== null) {
                     oktg_GL_glEnableVertexAttribArray(oktg_GL_INSTANCE, $location.$intValue());
                     oktg_GL_glVertexAttribPointer(oktg_GL_INSTANCE, $location.$intValue(), $input.$getSize(), $input.$getType(), $input.$getNormalized(), $bytesPerVertex, $input.$getByteOffset());
-                    if (!(!(oktg_GL_isGLES(oktg_GL_INSTANCE) && oktg_GL_getMajVer(oktg_GL_INSTANCE) >= 3) && oktg_GL_isGLES(oktg_GL_INSTANCE)))
+                    if (!(!(oktg_GL_isGLES(oktg_GL_INSTANCE) && oktg_GL_getGlesMajVer(oktg_GL_INSTANCE) >= 3) && oktg_GL_isGLES(oktg_GL_INSTANCE)))
                         oktg_GL_glVertexAttribDivisor(oktg_GL_INSTANCE, $location.$intValue(), oktm_VertexBufferObject_getInstancesToRender($this) <= 0 ? 0 : 1);
                 }
                 $i = $i + 1 | 0;
@@ -10684,7 +10685,7 @@ function oktt_Tests__init_0($this) {
     oktt_TestGroup__init_(var$4, $rt_s(310), var$2);
     $this.$shaders = var$4;
     var$4 = new oktt_TestGroup;
-    var$2 = $rt_createArray(oktt_Test, 8);
+    var$2 = $rt_createArray(oktt_Test, 6);
     var$3 = var$2.data;
     var$3[0] = okttsg_CascadedShadowMappingTest__init_();
     var$3[1] = okttsg_EmissionBloomTest__init_();
@@ -10692,8 +10693,6 @@ function oktt_Tests__init_0($this) {
     var$3[3] = okttsg_MotionBlurTest__init_();
     var$3[4] = okttsg_SkyboxVertexNodeTest__init_();
     var$3[5] = okttsg_SSAOTest__init_();
-    var$3[6] = okttsg_VelocityNodeTest__init_();
-    var$3[7] = okttsg_VertexNodeTest__init_();
     oktt_TestGroup__init_(var$4, $rt_s(311), var$2);
     $this.$glslNodes = var$4;
     var$4 = new oktt_TestGroup;
@@ -10917,33 +10916,33 @@ function okttm_InstancingTest_testMain($this) {
     $cubesY = 1.0;
     $plane = oktmb_MeshBuilder_build$default(oktmb_PlaneMeshBuilder__init_(1000.0, 1000.0, 0, 0, null, null, 60, null), null, 1, null);
     $cubes = oktmb_MeshBuilder_build$default(oktmb_BoxMeshBuilder__init_(0.0, 0.0, 0.0, 7, null), null, 1, null);
-    var$13 = new oktm_VertexBufferObject;
-    var$2 = new oktm_VertexInputs;
+    var$3 = new oktm_VertexBufferObject;
+    var$13 = new oktm_VertexInputs;
     var$14 = $rt_createArray(oktm_IVertexInput, 1);
     var$15 = var$14.data;
     var$15[0] = oktm_VertexInput__init_(3, $rt_s(319), 5126, 1);
-    oktm_VertexInputs__init_(var$2, var$14);
+    oktm_VertexInputs__init_(var$13, var$14);
     var$16 = null;
-    oktm_VertexBufferObject__init_6(var$13, 40000, var$2, 40000, 0, 0, 24, var$16);
-    var$16 = oktm_VertexBufferObject_getFloatBuffer(var$13);
+    oktm_VertexBufferObject__init_6(var$3, 40000, var$13, 40000, 0, 0, 24, var$16);
+    var$16 = oktm_VertexBufferObject_getFloatBuffer(var$3);
     var$16.$setPosition(0);
     $endX = $startX + 1000.0;
     var$18 = $startX;
     while (var$18 < $endX) {
         var$19 = $startX;
         while (var$19 < $endX) {
-            var$15 = $rt_createArray(jl_Float, 3);
-            var$14 = var$15.data;
-            var$14[0] = jl_Float_valueOf(var$18);
-            var$14[1] = jl_Float_valueOf($cubesY);
-            var$14[2] = jl_Float_valueOf(var$19);
-            var$16.$put4(var$15);
+            var$14 = $rt_createArray(jl_Float, 3);
+            var$15 = var$14.data;
+            var$15[0] = jl_Float_valueOf(var$18);
+            var$15[1] = jl_Float_valueOf($cubesY);
+            var$15[2] = jl_Float_valueOf(var$19);
+            var$16.$put4(var$14);
             var$19 = var$19 + $stepZ;
         }
         var$18 = var$18 + $stepX;
     }
-    oktm_VertexBufferObject_loadBufferToGpu(var$13);
-    $cubes.$setInstances(var$13);
+    oktm_VertexBufferObject_loadBufferToGpu(var$3);
+    $cubes.$setInstances(var$3);
     oktg_GL_$callClinit();
     oktg_GL_setDepthTestEnabled(oktg_GL_INSTANCE, 1);
     oktgc_ActiveCamera_$callClinit();
@@ -10952,6 +10951,7 @@ function okttm_InstancingTest_testMain($this) {
     oktgc_OrbitCameraControl_listenToMouse($control);
     oktu_LOG_$callClinit();
     oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, oktgc_OrbitCameraControl_getHelp($control), null, 2, null);
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, okttm_InstancingTest$testMain$2__init_($control, $simpleShader, $plane, $instancedShader, $cubes), 1, null);
 }
 function okttm_InstancingTest__init_0($this) {
@@ -20069,17 +20069,18 @@ function okttm_BoxMeshBuilderTest_testMain($this) {
     var$2 = null;
     $mesh = oktmb_MeshBuilder_build$default(var$6, var$7, 1, var$2);
     oktgc_ActiveCamera_$callClinit();
-    var$2 = oktgc_ActiveCamera_INSTANCE;
-    var$3 = oktgc_Camera__init_(null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4095, null);
+    var$7 = oktgc_ActiveCamera_INSTANCE;
+    var$2 = oktgc_Camera__init_(null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4095, null);
     var$6 = oktm_Vec3__init_0(0.0, 3.0, (-3.0));
     oktm_IVec3_$callClinit();
-    oktgc_ICamera$DefaultImpls_lookAt$default(var$3, var$6, oktm_IVec3$Companion_getZero(oktm_IVec3_Companion), null, 4, null);
-    oktgc_Camera_setNear(var$3, 0.10000000149011612);
-    oktgc_Camera_setFar(var$3, 100.0);
-    var$3.$update0();
-    oktgc_ActiveCamera_setApi(var$2, var$3);
+    oktgc_ICamera$DefaultImpls_lookAt$default(var$2, var$6, oktm_IVec3$Companion_getZero(oktm_IVec3_Companion), null, 4, null);
+    oktgc_Camera_setNear(var$2, 0.10000000149011612);
+    oktgc_Camera_setFar(var$2, 100.0);
+    var$2.$update0();
+    oktgc_ActiveCamera_setApi(var$7, var$2);
     $cubeMatrix4 = oktm_Mat4__init_();
     $temp = oktm_Mat4__init_();
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, okttm_BoxMeshBuilderTest$testMain$2__init_($cubeMatrix4, $shader, $temp, $mesh), 1, null);
 }
 function okttm_BoxMeshBuilderTest__init_0($this) {
@@ -22816,29 +22817,6 @@ function oktt_KeyboardTest_testMain($this) {
 function oktt_KeyboardTest__init_0($this) {
     jl_Object__init_0($this);
 }
-function okttsg_VertexNodeTest$testMain$3() {
-    kji_Lambda.call(this);
-    this.$$scene = null;
-}
-function okttsg_VertexNodeTest$testMain$3__init_(var_0) {
-    var var_1 = new okttsg_VertexNodeTest$testMain$3();
-    okttsg_VertexNodeTest$testMain$3__init_0(var_1, var_0);
-    return var_1;
-}
-function okttsg_VertexNodeTest$testMain$3_invoke(var$0) {
-    okttsg_VertexNodeTest$testMain$3_invoke0(var$0);
-    k_Unit_$callClinit();
-    return k_Unit_INSTANCE;
-}
-function okttsg_VertexNodeTest$testMain$3_invoke0($this) {
-    oktg_GL_$callClinit();
-    oktg_GL_glClear(oktg_GL_INSTANCE, 16640);
-    $this.$$scene.$render0();
-}
-function okttsg_VertexNodeTest$testMain$3__init_0(var$0, var$1) {
-    var$0.$$scene = var$1;
-    kji_Lambda__init_0(var$0, 0);
-}
 function oktg_IObject3D$Companion() {
     jl_Object.call(this);
 }
@@ -23892,9 +23870,6 @@ function oktg_GL_getMainFrameBufferHeight($this) {
 }
 function oktg_GL_getMainFrameBufferHandle($this) {
     return oktg_GL_api.$getMainFrameBufferHandle0();
-}
-function oktg_GL_getMajVer($this) {
-    return oktg_GL_api.$getMajVer();
 }
 function oktg_GL_getGlesMajVer($this) {
     return oktg_GL_api.$getGlesMajVer();
@@ -32318,7 +32293,7 @@ function oktgl_DirectionalLight$renderShadowMaps$1() {
     a.$$i1 = 0;
     a.$$camFarSubNear = 0.0;
     a.$$sceneCameraFrustumPoints = null;
-    a.$$scene0 = null;
+    a.$$scene = null;
 }
 function oktgl_DirectionalLight$renderShadowMaps$1__init_(var_0, var_1, var_2, var_3, var_4) {
     var var_5 = new oktgl_DirectionalLight$renderShadowMaps$1();
@@ -32388,14 +32363,14 @@ function oktgl_DirectionalLight$renderShadowMaps$1_invoke0($this, $$this$render)
     oktgc_Camera_setFar(oktgl_DirectionalLight$Companion_getTmpCam(oktgl_DirectionalLight_Companion), $far);
     oktgc_Camera_getPosition(oktgl_DirectionalLight$Companion_getTmpCam(oktgl_DirectionalLight_Companion)).$set11(oktgl_DirectionalLight$Companion_getLightPos(oktgl_DirectionalLight_Companion));
     oktgc_Camera_getViewProjectionMatrix(oktgl_DirectionalLight$Companion_getTmpCam(oktgl_DirectionalLight_Companion)).$set3($lightMat);
-    $this.$$scene0.$render0();
+    $this.$$scene.$render0();
 }
 function oktgl_DirectionalLight$renderShadowMaps$1__init_0(var$0, var$1, var$2, var$3, var$4, var$5) {
     var$0.$this$089 = var$1;
     var$0.$$i1 = var$2;
     var$0.$$camFarSubNear = var$3;
     var$0.$$sceneCameraFrustumPoints = var$4;
-    var$0.$$scene0 = var$5;
+    var$0.$$scene = var$5;
     kji_Lambda__init_0(var$0, 1);
 }
 function oktsp_Bloom$render$3() {
@@ -55552,6 +55527,7 @@ function oktt_CascadedShadowMatricesTest_testMain($this) {
     oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, oktgc_OrbitCameraControl_getHelp($control), null, 2, null);
     oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, $rt_s(1285), null, 2, null);
     oktg_GL_$callClinit();
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, oktt_CascadedShadowMatricesTest$testMain$1__init_($this, $control, $shader, $colors), 1, null);
 }
 function oktt_CascadedShadowMatricesTest__init_0($this) {
@@ -56858,6 +56834,7 @@ function okttm_MeshCubeTest_testMain($this) {
     $temp = oktm_Mat4__init_();
     oktg_GL_$callClinit();
     oktg_GL_setDepthTestEnabled(oktg_GL_INSTANCE, 1);
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, okttm_MeshCubeTest$testMain$4__init_($cubeMatrix4, $shader, $temp, $mesh), 1, null);
 }
 function okttm_MeshCubeTest__init_0($this) {
@@ -57725,70 +57702,6 @@ function oktsp_Bloom__init_(var$0, var$1, var$2, var$3, var$4, var$5, var$6, var
 function oktsp_Bloom__clinit_() {
     oktsp_Bloom_Companion = oktsp_Bloom$Companion__init_1(null);
 }
-function okttsg_VelocityNodeTest() {
-    jl_Object.call(this);
-}
-function okttsg_VelocityNodeTest__init_() {
-    var var_0 = new okttsg_VelocityNodeTest();
-    okttsg_VelocityNodeTest__init_0(var_0);
-    return var_0;
-}
-function okttsg_VelocityNodeTest_getName($this) {
-    return $rt_s(1300);
-}
-function okttsg_VelocityNodeTest_testMain($this) {
-    var var$1, var$2, var$3, $scene, var$5, var$6, var$7, $vertexNode, $cameraDataNode, var$10, var$11, var$12, var$13, var$14, var$15, $velocityNode;
-    oktgc_ActiveCamera_$callClinit();
-    var$1 = oktgc_ActiveCamera_INSTANCE;
-    var$2 = oktgc_Camera__init_(null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4095, null);
-    var$3 = oktm_Vec3__init_0(5.0, 5.0, 5.0);
-    oktm_IVec3_$callClinit();
-    oktgc_ICamera$DefaultImpls_lookAt$default(var$2, var$3, oktm_IVec3$Companion_getZero(oktm_IVec3_Companion), null, 4, null);
-    oktgc_Camera_setNear(var$2, 0.10000000149011612);
-    oktgc_Camera_setFar(var$2, 100.0);
-    var$2.$update0();
-    oktgc_ActiveCamera_setApi(var$1, var$2);
-    $scene = oktg_Scene__init_(null, null, 3, null);
-    var$1 = $scene.$getObjects();
-    var$2 = oktg_Object3D__init_(null, null, null, 0, null, null, null, 127, null);
-    var$2.$getPosition0().$set44(2.0, 0.0, 0.0);
-    oktgn_ITransformNode$DefaultImpls_updateTransform$default(var$2, 0, 1, null);
-    var$5 = var$2.$getMeshes0();
-    var$6 = oktmb_BoxMeshBuilder__init_(0.0, 0.0, 0.0, 7, null);
-    oktmb_MeshBuilder_setPositionName(var$6, $rt_s(543));
-    var$3 = oktmb_MeshBuilder_getMaterial(var$6);
-    var$7 = okts_Shader__init_2(null, null, null, 0, null, 0, null, 127, null);
-    $vertexNode = var$7.$addNode0(oktsg_VertexNode__init_(0, 0, 0, 7, null));
-    oktsg_VertexNode_setAPositionName($vertexNode, $rt_s(543));
-    $cameraDataNode = var$7.$addNode0(oktsg_CameraDataNode__init_0(oktsg_VertexNode_getPosition($vertexNode)));
-    var$10 = new oktsg_VelocityNode;
-    var$11 = oktsg_VertexNode_getPosition($vertexNode);
-    var$12 = oktsg_CameraDataNode_getClipSpacePosition($cameraDataNode);
-    var$13 = oktsg_CameraDataNode_getPreviousViewProjectionMatrix($cameraDataNode);
-    var$14 = oktsg_VertexNode_getNormal($vertexNode);
-    var$15 = null;
-    oktsg_VelocityNode__init_(var$10, var$11, var$12, var$13, var$14, 0, 0, 0, 112, var$15);
-    $velocityNode = var$7.$addNode0(var$10);
-    oktsg_VelocityNode_setAPositionName($velocityNode, $rt_s(543));
-    var$7.$addNode0(oktsg_OutputNode__init_(oktsg_VelocityNode_getStretchedClipSpacePosition($velocityNode), oktsg_VelocityNode_getVelocity($velocityNode)));
-    var$7.$build0();
-    oktu_LOG_$callClinit();
-    oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, okts_IShader$DefaultImpls_sourceCode$default(var$7, 0, 1, null), null, 2, null);
-    var$3.$setShader(var$7);
-    var$7 = null;
-    var$3 = null;
-    var$3 = oktmb_MeshBuilder_build$default(var$6, var$7, 1, var$3);
-    var$5.$add1(var$3);
-    var$1.$add1(var$2);
-    oktg_GL_$callClinit();
-    oktg_GL_setDepthTestEnabled(oktg_GL_INSTANCE, 1);
-    $scene.$updatePreviousTransform0();
-    oktgc_ActiveCamera_updatePreviousTransform(oktgc_ActiveCamera_INSTANCE);
-    oktg_GL_render$default(oktg_GL_INSTANCE, null, okttsg_VelocityNodeTest$testMain$3__init_($scene), 1, null);
-}
-function okttsg_VelocityNodeTest__init_0($this) {
-    jl_Object__init_0($this);
-}
 function oktgg_IGLTFMaterial() {
 }
 function oooip_DxStepWorkingMemory() {
@@ -57847,15 +57760,15 @@ function oktpo_OdePhysicsWorld$nearCallback$1__init_(var_0) {
 }
 function oktpo_OdePhysicsWorld$nearCallback$1_call($this, $$noName_0, $o1, $o2) {
     var var$4, $g1, $g2, $b1, $b2, $contacts, $bm1, $bm2, $i, var$13, $contact, $numContacts, $c, $influence1, $influence2, $geomPair, $geomAlivePair, $pair, $alivePair;
-    kji_Intrinsics_checkExpressionValueIsNotNull($o1, $rt_s(1301));
+    kji_Intrinsics_checkExpressionValueIsNotNull($o1, $rt_s(1300));
     var$4 = $o1.$getData();
     if (var$4 === null)
-        $rt_throw(k_TypeCastException__init_($rt_s(1302)));
+        $rt_throw(k_TypeCastException__init_($rt_s(1301)));
     $g1 = var$4;
-    kji_Intrinsics_checkExpressionValueIsNotNull($o2, $rt_s(1303));
+    kji_Intrinsics_checkExpressionValueIsNotNull($o2, $rt_s(1302));
     var$4 = $o2.$getData();
     if (var$4 === null)
-        $rt_throw(k_TypeCastException__init_($rt_s(1302)));
+        $rt_throw(k_TypeCastException__init_($rt_s(1301)));
     $g2 = var$4;
     $b1 = $o1.$getBody();
     $b2 = $o2.$getBody();
@@ -57885,7 +57798,7 @@ function oktpo_OdePhysicsWorld$nearCallback$1_call($this, $$noName_0, $o1, $o2) 
                     break a;
                 $contact = $contacts.$get18($i);
                 var$4 = ooo_OdeHelper_createContactJoint(oktpo_OdePhysicsWorld_getWorld($this.$this$0196), oktpo_OdePhysicsWorld_getContactGroup($this.$this$0196), $contact);
-                kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1304));
+                kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1303));
                 $c = var$4;
                 $influence1 = $bm1 === null ? $g1.$getInfluenceOtherBodies() : oktpo_OdeRigidBody_getInfluenceOtherBodies($bm1);
                 $influence2 = $bm2 === null ? $g2.$getInfluenceOtherBodies() : oktpo_OdeRigidBody_getInfluenceOtherBodies($bm2);
@@ -57900,7 +57813,7 @@ function oktpo_OdePhysicsWorld$nearCallback$1_call($this, $$noName_0, $o1, $o2) 
                 $geomPair = oktu_Pool_get(oktpo_OdePhysicsWorld$Companion_getGeomPairsPool(oktpo_OdePhysicsWorld_Companion));
                 oktpo_GeomContactPair_setA($geomPair, $g1);
                 oktpo_GeomContactPair_setB($geomPair, $g2);
-                kji_Intrinsics_checkExpressionValueIsNotNull($contact, $rt_s(1305));
+                kji_Intrinsics_checkExpressionValueIsNotNull($contact, $rt_s(1304));
                 oktpo_GeomContactPair_setDepth($geomPair, $contact.$getContactGeom().$depth);
                 oktpo_GeomContactPair_setLifeTime($geomPair, oktpo_OdePhysicsWorld_getContactMaxLifeTime($this.$this$0196));
                 $geomAlivePair = oktpo_OdePhysicsWorld_getGeomAliveContacts($this.$this$0196).$get0($geomPair);
@@ -58264,7 +58177,7 @@ function oktsg_OperationNode_setArgs($this, $args) {
     $i = 0;
     var$3 = $args.$size();
     while ($i < var$3) {
-        var$4 = jl_StringBuilder__init_().$append($rt_s(1306));
+        var$4 = jl_StringBuilder__init_().$append($rt_s(1305));
         $i_0 = $i + 1 | 0;
         $this.$setInput(var$4.$append1($i_0).$toString(), $args.$get1($i));
         $i = $i_0;
@@ -58302,10 +58215,10 @@ function oktsg_OperationNode__init_($this, $args, $function, $resultType) {
     var var$4;
     oktsg_OperationNode_$callClinit();
     kji_Intrinsics_checkParameterIsNotNull($args, $rt_s(848));
-    kji_Intrinsics_checkParameterIsNotNull($function, $rt_s(1307));
+    kji_Intrinsics_checkParameterIsNotNull($function, $rt_s(1306));
     oktsg_ShaderNode__init_0($this);
     $this.$function0 = $function;
-    var$4 = oktsg_GLSLValue__init_($rt_s(1308), $resultType);
+    var$4 = oktsg_GLSLValue__init_($rt_s(1307), $resultType);
     oktsg_ShaderNode_defOut($this, var$4);
     $this.$result0 = var$4;
     $this.$isFragment = 1;
@@ -58832,7 +58745,7 @@ function oktgg_GLTFSkin$read$2$1__init_0(var$0, var$1, var$2) {
 function okttsg_SkyboxVertexNodeTest$testMain$1() {
     var a = this; kji_Lambda.call(a);
     a.$$control9 = null;
-    a.$$scene1 = null;
+    a.$$scene0 = null;
 }
 function okttsg_SkyboxVertexNodeTest$testMain$1__init_(var_0, var_1) {
     var var_2 = new okttsg_SkyboxVertexNodeTest$testMain$1();
@@ -58854,12 +58767,12 @@ function okttsg_SkyboxVertexNodeTest$testMain$1_invoke0($this) {
     var$1.$update(okt_APP_getDeltaTime(okt_APP_INSTANCE));
     oktgc_ActiveCamera_$callClinit();
     oktgc_ActiveCamera_update(oktgc_ActiveCamera_INSTANCE);
-    oktg_IScene$DefaultImpls_update$default($this.$$scene1, 0.0, 1, null);
-    $this.$$scene1.$render0();
+    oktg_IScene$DefaultImpls_update$default($this.$$scene0, 0.0, 1, null);
+    $this.$$scene0.$render0();
 }
 function okttsg_SkyboxVertexNodeTest$testMain$1__init_0(var$0, var$1, var$2) {
     var$0.$$control9 = var$1;
-    var$0.$$scene1 = var$2;
+    var$0.$$scene0 = var$2;
     kji_Lambda__init_0(var$0, 0);
 }
 function oooi_DxGimpactCollision() {
@@ -58986,12 +58899,12 @@ function oktj_IJsonObject$DefaultImpls() {
     jl_Object.call(this);
 }
 function oktj_IJsonObject$DefaultImpls_objOrNull($$this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return !$$this.$contains($key) ? null : $$this.$obj0($key);
 }
 function oktj_IJsonObject$DefaultImpls_obj($$this, $key, $call) {
     var var$4;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     var$4 = $$this.$objOrNull($key);
     if (var$4 === null)
@@ -59001,12 +58914,12 @@ function oktj_IJsonObject$DefaultImpls_obj($$this, $key, $call) {
     return var$4;
 }
 function oktj_IJsonObject$DefaultImpls_arrayOrNull($$this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return !$$this.$contains($key) ? null : $$this.$array4($key);
 }
 function oktj_IJsonObject$DefaultImpls_array($$this, $key, $call) {
     var var$4;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     var$4 = $$this.$arrayOrNull($key);
     if (var$4 === null)
@@ -59016,60 +58929,60 @@ function oktj_IJsonObject$DefaultImpls_array($$this, $key, $call) {
     return var$4;
 }
 function oktj_IJsonObject$DefaultImpls_string($$this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return $$this.$get37($key);
 }
 function oktj_IJsonObject$DefaultImpls_float($$this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return $$this.$get37($key).$floatValue();
 }
 function oktj_IJsonObject$DefaultImpls_int($$this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return $$this.$get37($key).$intValue();
 }
 function oktj_IJsonObject$DefaultImpls_bool($$this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return $$this.$get37($key).$booleanValue();
 }
 function oktj_IJsonObject$DefaultImpls_string0($$this, $key, $default) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
-    kji_Intrinsics_checkParameterIsNotNull($default, $rt_s(1310));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
+    kji_Intrinsics_checkParameterIsNotNull($default, $rt_s(1309));
     if ($$this.$contains($key))
         $default = $$this.$string1($key);
     return $default;
 }
 function oktj_IJsonObject$DefaultImpls_float0($$this, $key, $default) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     if ($$this.$contains($key))
         $default = $$this.$float2($key);
     return $default;
 }
 function oktj_IJsonObject$DefaultImpls_int0($$this, $key, $default) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     if ($$this.$contains($key))
         $default = $$this.$int0($key);
     return $default;
 }
 function oktj_IJsonObject$DefaultImpls_string1($$this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     if ($$this.$contains($key))
         $call.$invoke1($$this.$string1($key));
 }
 function oktj_IJsonObject$DefaultImpls_float1($$this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     if ($$this.$contains($key))
         $call.$invoke1(jl_Float_valueOf($$this.$float2($key)));
 }
 function oktj_IJsonObject$DefaultImpls_int1($$this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     if ($$this.$contains($key))
         $call.$invoke1(jl_Integer_valueOf($$this.$int0($key)));
 }
 function oktj_IJsonObject$DefaultImpls_bool0($$this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     if ($$this.$contains($key))
         $call.$invoke1(jl_Boolean_valueOf($$this.$bool0($key)));
@@ -59080,7 +58993,7 @@ function oktj_IJsonObject$DefaultImpls_ints($$this, $call) {
 }
 function oktj_IJsonObject$DefaultImpls_ints0($$this, $key, $call) {
     var var$4;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     var$4 = $$this.$arrayOrNull($key);
     if (var$4 !== null)
@@ -59088,7 +59001,7 @@ function oktj_IJsonObject$DefaultImpls_ints0($$this, $key, $call) {
 }
 function oktj_IJsonObject$DefaultImpls_floats($$this, $key, $call) {
     var var$4;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     var$4 = $$this.$arrayOrNull($key);
     if (var$4 !== null)
@@ -59096,7 +59009,7 @@ function oktj_IJsonObject$DefaultImpls_floats($$this, $key, $call) {
 }
 function oktj_IJsonObject$DefaultImpls_get($$this, $key, $call) {
     var $json;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     $json = $$this.$objOrNull($key);
     if ($json !== null)
@@ -59170,12 +59083,12 @@ function cgcj_Jsoner$States__init_0($this, var$1, var$2) {
 }
 function cgcj_Jsoner$States__clinit_() {
     var var$1, var$2;
-    cgcj_Jsoner$States_DONE = cgcj_Jsoner$States__init_($rt_s(1311), 0);
-    cgcj_Jsoner$States_INITIAL = cgcj_Jsoner$States__init_($rt_s(1312), 1);
-    cgcj_Jsoner$States_PARSED_ERROR = cgcj_Jsoner$States__init_($rt_s(1313), 2);
-    cgcj_Jsoner$States_PARSING_ARRAY = cgcj_Jsoner$States__init_($rt_s(1314), 3);
-    cgcj_Jsoner$States_PARSING_ENTRY = cgcj_Jsoner$States__init_($rt_s(1315), 4);
-    cgcj_Jsoner$States_PARSING_OBJECT = cgcj_Jsoner$States__init_($rt_s(1316), 5);
+    cgcj_Jsoner$States_DONE = cgcj_Jsoner$States__init_($rt_s(1310), 0);
+    cgcj_Jsoner$States_INITIAL = cgcj_Jsoner$States__init_($rt_s(1311), 1);
+    cgcj_Jsoner$States_PARSED_ERROR = cgcj_Jsoner$States__init_($rt_s(1312), 2);
+    cgcj_Jsoner$States_PARSING_ARRAY = cgcj_Jsoner$States__init_($rt_s(1313), 3);
+    cgcj_Jsoner$States_PARSING_ENTRY = cgcj_Jsoner$States__init_($rt_s(1314), 4);
+    cgcj_Jsoner$States_PARSING_OBJECT = cgcj_Jsoner$States__init_($rt_s(1315), 5);
     var$1 = $rt_createArray(cgcj_Jsoner$States, 6);
     var$2 = var$1.data;
     var$2[0] = cgcj_Jsoner$States_DONE;
@@ -59508,7 +59421,7 @@ function oktm_Frustum_getPoints($this) {
 }
 function oktm_Frustum_update($this, $inverseViewProjection) {
     var $i, var$3, $point;
-    kji_Intrinsics_checkParameterIsNotNull($inverseViewProjection, $rt_s(1317));
+    kji_Intrinsics_checkParameterIsNotNull($inverseViewProjection, $rt_s(1316));
     $i = 0;
     var$3 = oktm_Frustum_clipSpacePlanePoints.data.length;
     while ($i < var$3) {
@@ -59808,7 +59721,7 @@ function oktm_IndexBufferObject_getType($this) {
 }
 function oktm_IndexBufferObject_setType($this, $value) {
     if ($value != 5121 && $value != 5123 && $value != 5125)
-        $rt_throw(jl_RuntimeException__init_($rt_s(1318)));
+        $rt_throw(jl_RuntimeException__init_($rt_s(1317)));
     $this.$type6 = $value;
 }
 function oktm_IndexBufferObject_initGpuObjects($this) {
@@ -59985,51 +59898,51 @@ function oktsg_IShaderData$DefaultImpls_getTypeStr($$this) {
                 case 0:
                     break;
                 case 1:
-                    var$2 = $rt_s(1319);
+                    var$2 = $rt_s(1318);
                     break a;
                 case 2:
                 case 10:
                     break b;
                 case 3:
-                    var$2 = $rt_s(1320);
+                    var$2 = $rt_s(1319);
                     break a;
                 case 4:
-                    var$2 = $rt_s(1321);
+                    var$2 = $rt_s(1320);
                     break a;
                 case 5:
-                    var$2 = $rt_s(1322);
+                    var$2 = $rt_s(1321);
                     break a;
                 case 6:
-                    var$2 = $rt_s(1323);
+                    var$2 = $rt_s(1322);
                     break a;
                 case 7:
-                    var$2 = $rt_s(1324);
+                    var$2 = $rt_s(1323);
                     break a;
                 case 8:
-                    var$2 = $rt_s(1325);
+                    var$2 = $rt_s(1324);
                     break a;
                 case 9:
-                    var$2 = $rt_s(1326);
+                    var$2 = $rt_s(1325);
                     break a;
                 case 11:
-                    var$2 = $rt_s(1327);
+                    var$2 = $rt_s(1326);
                     break a;
                 case 12:
-                    var$2 = $rt_s(1328);
+                    var$2 = $rt_s(1327);
                     break a;
                 case 13:
-                    var$2 = $rt_s(1329);
+                    var$2 = $rt_s(1328);
                     break a;
                 case 14:
-                    var$2 = $rt_s(1330);
+                    var$2 = $rt_s(1329);
                     break a;
                 case 15:
-                    var$2 = $rt_s(1331);
+                    var$2 = $rt_s(1330);
                     break a;
                 default:
                     break b;
             }
-            var$2 = $rt_s(1332);
+            var$2 = $rt_s(1331);
             break a;
         }
         var$2 = $rt_s(6);
@@ -60158,7 +60071,7 @@ function oktpo_OdeBoxShape__init_0($this, $world, $xSize, $ySize, $zSize) {
     $this.$friction2 = 1.0;
     $this.$userObject2 = $this;
     var$5 = oktpo_OdeBoxShape_getGeom($this);
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$5, $rt_s(1333));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$5, $rt_s(1332));
     var$5.$setData($this);
 }
 function jl_Thread() {
@@ -60227,7 +60140,7 @@ function jl_Thread_getStackTrace($this) {
     return $rt_createArray(jl_StackTraceElement, 0);
 }
 function jl_Thread__clinit_() {
-    jl_Thread_mainThread = jl_Thread__init_1($rt_s(1334));
+    jl_Thread_mainThread = jl_Thread__init_1($rt_s(1333));
     jl_Thread_currentThread0 = jl_Thread_mainThread;
     jl_Thread_nextId = Long_fromInt(1);
     jl_Thread_activeCount = 1;
@@ -60257,7 +60170,7 @@ function oktt_TeaVMApp$sam$org_teavm_jso_browser_AnimationFrameCallback$0__init_
     var$0.$function1 = var$1;
 }
 function oktt_TeaVMApp$sam$org_teavm_jso_browser_AnimationFrameCallback$0_onAnimationFrame($this, $p0) {
-    kji_Intrinsics_checkExpressionValueIsNotNull($this.$function1.$invoke1(jl_Double_valueOf($p0)), $rt_s(1335));
+    kji_Intrinsics_checkExpressionValueIsNotNull($this.$function1.$invoke1(jl_Double_valueOf($p0)), $rt_s(1334));
 }
 function oktt_TeaVMApp$sam$org_teavm_jso_browser_AnimationFrameCallback$0_onAnimationFrame$exported$0(var$0, var$1) {
     oktt_TeaVMApp$sam$org_teavm_jso_browser_AnimationFrameCallback$0_onAnimationFrame(var$0, var$1);
@@ -60271,7 +60184,7 @@ function okttp_TrimeshShapeTest__init_() {
     return var_0;
 }
 function okttp_TrimeshShapeTest_getName($this) {
-    return $rt_s(1336);
+    return $rt_s(1335);
 }
 function okttp_TrimeshShapeTest_testMain($this) {
     var $world, var$2, var$3, var$4, $mesh, var$6, $plane, $dynamic, $static, $shader, var$11, var$12, $control, $tmp_0;
@@ -60586,7 +60499,7 @@ function oktmb_PlaneMeshBuilder_getHeightProvider($this) {
 }
 function oktmb_PlaneMeshBuilder__init_2($this, $width, $height, $xDivisions, $yDivisions, $normal, $heightProvider) {
     kji_Intrinsics_checkParameterIsNotNull($normal, $rt_s(291));
-    kji_Intrinsics_checkParameterIsNotNull($heightProvider, $rt_s(1337));
+    kji_Intrinsics_checkParameterIsNotNull($heightProvider, $rt_s(1336));
     oktmb_MeshBuilder__init_0($this);
     $this.$width4 = $width;
     $this.$height4 = $height;
@@ -60765,9 +60678,9 @@ function oooip_DxWorldProcessIslandsInfo_BuildIslandsAndEstimateStepperMemoryReq
     while ($b !== null) {
         if ($b.$isEnabled1()) {
             if ($b.$tag <= 0)
-                oooi_ErrorHandler_dDebug(0, $rt_s(1338), $rt_createArray(jl_Object, 0));
+                oooi_ErrorHandler_dDebug(0, $rt_s(1337), $rt_createArray(jl_Object, 0));
         } else if ($b.$tag > 0)
-            oooi_ErrorHandler_dDebug(0, $rt_s(1339), $rt_createArray(jl_Object, 0));
+            oooi_ErrorHandler_dDebug(0, $rt_s(1338), $rt_createArray(jl_Object, 0));
         $b = $b.$getNext1();
     }
     $j = oooicj_Ref_get($world.$firstjoint0);
@@ -60787,11 +60700,11 @@ function oooip_DxWorldProcessIslandsInfo_BuildIslandsAndEstimateStepperMemoryReq
                 }
                 if ($j.$tag <= 0)
                     break a;
-                oooi_ErrorHandler_dDebug(0, $rt_s(1340), $rt_createArray(jl_Object, 0));
+                oooi_ErrorHandler_dDebug(0, $rt_s(1339), $rt_createArray(jl_Object, 0));
                 break a;
             }
             if ($j.$tag <= 0)
-                oooi_ErrorHandler_dDebug(0, $rt_s(1341), $rt_createArray(jl_Object, 0));
+                oooi_ErrorHandler_dDebug(0, $rt_s(1340), $rt_createArray(jl_Object, 0));
         }
         $j = $j.$getNext1();
     }
@@ -60885,9 +60798,9 @@ function oktm_VertexInputs_get($this, $name) {
 function oktm_VertexInputs_get0($this, $index) {
     var var$2, var$3;
     var$2 = $this.$map0.$values();
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1342));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1341));
     var$3 = kc_CollectionsKt___CollectionsKt_elementAt(var$2, $index);
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1343));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1342));
     return var$3;
 }
 function oktm_VertexInputs_iterator($this) {
@@ -60898,7 +60811,7 @@ function oktm_VertexInputs_updateVertexOffsets($this) {
     $byteCount = 0;
     $componentCount = 0;
     var$3 = $this.$map0.$values();
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1342));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1341));
     $$this$forEach$iv = var$3;
     var$5 = $$this$forEach$iv.$iterator();
     while (var$5.$hasNext()) {
@@ -60968,7 +60881,7 @@ function oktts_ShadowMappingBaseTest__init_() {
     return var_0;
 }
 function oktts_ShadowMappingBaseTest_getName($this) {
-    return $rt_s(1344);
+    return $rt_s(1343);
 }
 function oktts_ShadowMappingBaseTest_testMain($this) {
     var $sceneObjectShader, var$2, var$3, var$4, var$5, $depthRenderShader, $depthBuffer, var$8, $lightMatrix, $halfWidth, $halfHeight, var$12, $cube, $plane, $lightFrustumMesh, $cubeColor, $control, $screenQuad, $cubesStartX, $cubesEndX, $cubesStepX, $cubesStartZ, $cubesEndZ, $cubesStepZ, $cubesY;
@@ -60977,15 +60890,15 @@ function oktts_ShadowMappingBaseTest_testMain($this) {
     var$3 = null;
     var$4 = null;
     var$5 = null;
-    okts_Shader__init_($sceneObjectShader, $rt_s(1345), $rt_s(1346), var$2, 0, var$3, 0, var$4, 124, var$5);
+    okts_Shader__init_($sceneObjectShader, $rt_s(1344), $rt_s(1345), var$2, 0, var$3, 0, var$4, 124, var$5);
     $sceneObjectShader.$bind();
-    $sceneObjectShader.$set35($rt_s(1347), 0);
+    $sceneObjectShader.$set35($rt_s(1346), 0);
     $depthRenderShader = new okts_Shader;
     var$2 = null;
     var$3 = null;
     var$4 = null;
     var$5 = null;
-    okts_Shader__init_($depthRenderShader, $rt_s(1348), $rt_s(1349), var$2, 0, var$3, 0, var$4, 124, var$5);
+    okts_Shader__init_($depthRenderShader, $rt_s(1347), $rt_s(1348), var$2, 0, var$3, 0, var$4, 124, var$5);
     oktgc_ActiveCamera_$callClinit();
     oktgc_ActiveCamera_setApi(oktgc_ActiveCamera_INSTANCE, oktgc_Camera__init_(null, null, null, 0.10000000149011612, 500.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4071, null));
     $depthBuffer = oktt_FrameBuffer__init_0(1024, 1024);
@@ -61028,6 +60941,7 @@ function oktts_ShadowMappingBaseTest_testMain($this) {
     $cubesEndZ = 100.0;
     $cubesStepZ = 20.0;
     $cubesY = 1.0;
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, oktts_ShadowMappingBaseTest$testMain$2__init_($control, $depthBuffer, $depthRenderShader, $lightMatrix, $plane, $cubesStartX, $cubesEndX, $cubesStartZ, $cubesEndZ, $cubesY, $cube, $cubesStepZ, $cubesStepX, $sceneObjectShader, $cubeColor, $lightFrustumMesh, $screenQuad), 1, null);
 }
 function oktts_ShadowMappingBaseTest__init_0($this) {
@@ -61097,7 +61011,7 @@ function oktsg_NormalMapNode_setUv($this, $value) {
 }
 function oktsg_NormalMapNode_getNormalScale($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1350));
+    var$1 = $this.$getInput().$get0($rt_s(1349));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getOneFloat(oktsg_GLSL_INSTANCE);
@@ -61106,7 +61020,7 @@ function oktsg_NormalMapNode_getNormalScale($this) {
 }
 function oktsg_NormalMapNode_getNormalColor($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1351));
+    var$1 = $this.$getInput().$get0($rt_s(1350));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getDefaultNormal(oktsg_GLSL_INSTANCE);
@@ -61115,7 +61029,7 @@ function oktsg_NormalMapNode_getNormalColor($this) {
 }
 function oktsg_NormalMapNode_setNormalColor($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1351), $value);
+    $this.$setInput($rt_s(1350), $value);
 }
 function oktsg_NormalMapNode_getTbn($this) {
     var var$1;
@@ -61136,7 +61050,7 @@ function oktsg_NormalMapNode_getNormalResult($this) {
 function oktsg_NormalMapNode_executionFrag($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$normalResult.$isUsed0() && !$this.$tangentResult.$isUsed0() && !$this.$biNormalResult.$isUsed0()))
-        $out.$append(jl_StringBuilder__init_().$append($rt_s(1352)).$append(oktsg_NormalMapNode_getNormalizedViewVector($this).$asVec3()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getTbn($this).$getRef0()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getVertexPosition($this).$asVec3()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getUv($this).$asVec2()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getNormalScale($this).$asFloat()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getNormalColor($this).$asVec3()).$append($rt_s(1053)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append($rt_s(1351)).$append(oktsg_NormalMapNode_getNormalizedViewVector($this).$asVec3()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getTbn($this).$getRef0()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getVertexPosition($this).$asVec3()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getUv($this).$asVec2()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getNormalScale($this).$asFloat()).$append($rt_s(268)).$append(oktsg_NormalMapNode_getNormalColor($this).$asVec3()).$append($rt_s(1053)).$toString());
 }
 function oktsg_NormalMapNode_declarationFrag($this, $out) {
     var var$2;
@@ -61151,8 +61065,8 @@ function oktsg_NormalMapNode__init_0($this, $vertexPosition) {
     oktsg_NormalMapNode_$callClinit();
     kji_Intrinsics_checkParameterIsNotNull($vertexPosition, $rt_s(1115));
     oktsg_ShaderNode__init_0($this);
-    $this.$tangentResult = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(1353)));
-    $this.$biNormalResult = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(1354)));
+    $this.$tangentResult = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(1352)));
+    $this.$biNormalResult = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(1353)));
     $this.$normalResult = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(291)));
     $this.$setInput($rt_s(1115), $vertexPosition);
 }
@@ -61175,8 +61089,8 @@ function oktsg_NormalMapNode__clinit_() {
     var$1.$put3($rt_s(1126), jl_Integer_valueOf(5));
     var$1.$put3($rt_s(1115), jl_Integer_valueOf(5));
     var$1.$put3($rt_s(333), jl_Integer_valueOf(4));
-    var$1.$put3($rt_s(1350), jl_Integer_valueOf(3));
-    var$1.$put3($rt_s(1351), jl_Integer_valueOf(5));
+    var$1.$put3($rt_s(1349), jl_Integer_valueOf(3));
+    var$1.$put3($rt_s(1350), jl_Integer_valueOf(5));
     var$1.$put3($rt_s(1072), jl_Integer_valueOf(8));
     oktsg_NormalMapNode_InputForm = var$1;
 }
@@ -61229,8 +61143,8 @@ function oktt_ITexture$DefaultImpls_generateMipmapsGPU($$this) {
         oktg_GL_glGenerateMipmap(oktg_GL_INSTANCE, $$this.$getGlTarget());
     } else {
         oktg_GL_$callClinit();
-        if (!oktg_GL_isExtensionSupported(oktg_GL_INSTANCE, $rt_s(1355)) && !oktg_GL_isExtensionSupported(oktg_GL_INSTANCE, $rt_s(1356)))
-            $rt_throw(jl_RuntimeException__init_($rt_s(1357)));
+        if (!oktg_GL_isExtensionSupported(oktg_GL_INSTANCE, $rt_s(1354)) && !oktg_GL_isExtensionSupported(oktg_GL_INSTANCE, $rt_s(1355)))
+            $rt_throw(jl_RuntimeException__init_($rt_s(1356)));
         oktg_GL_glGenerateMipmap(oktg_GL_INSTANCE, $$this.$getGlTarget());
     }
 }
@@ -61292,8 +61206,8 @@ function oktt_TvmGL$ProgramWrap_getUniformLocationsMap($this) {
 }
 function oktt_TvmGL$ProgramWrap__init_0($this, $gl, $uniformLocations, $uniformLocationsMap) {
     kji_Intrinsics_checkParameterIsNotNull($gl, $rt_s(814));
-    kji_Intrinsics_checkParameterIsNotNull($uniformLocations, $rt_s(1358));
-    kji_Intrinsics_checkParameterIsNotNull($uniformLocationsMap, $rt_s(1359));
+    kji_Intrinsics_checkParameterIsNotNull($uniformLocations, $rt_s(1357));
+    kji_Intrinsics_checkParameterIsNotNull($uniformLocationsMap, $rt_s(1358));
     oktt_TvmGL$GLObject__init_0($this);
     $this.$gl7 = $gl;
     $this.$uniformLocations = $uniformLocations;
@@ -61416,7 +61330,7 @@ function oktgg_GLTFPrimitive_read($this, $json) {
         oktgg_GLTFPrimitive_setName($this, $json.$string5($rt_s(17), $rt_s(6)));
         $this.$mesh1.$setName(oktgg_GLTFPrimitive_getName($this));
         var$2 = $this.$mesh1;
-        switch ($json.$int1($rt_s(1360), 4)) {
+        switch ($json.$int1($rt_s(1359), 4)) {
             case 0:
                 break;
             case 1:
@@ -61453,7 +61367,7 @@ function oktgg_GLTFPrimitive_read($this, $json) {
     $hasNormals.$element1 = 0;
     $hasTangents = kji_Ref$BooleanRef__init_();
     $hasTangents.$element1 = 0;
-    $json.$get16($rt_s(1361), oktgg_GLTFPrimitive$read$2__init_($this, $vertexInputs, $hasNormals, $hasTangents));
+    $json.$get16($rt_s(1360), oktgg_GLTFPrimitive$read$2__init_($this, $vertexInputs, $hasNormals, $hasTangents));
     if (!$hasNormals.$element1)
         $vertexInputs.$add5(oktm_VertexInput__init_(3, $rt_s(854), 5126, 0));
     if ($vertexInputs.$contains($rt_s(332)) && !$hasTangents.$element1)
@@ -62001,9 +61915,9 @@ function oktg_Material_getShaderChannels($this) {
     return $this.$shaderChannels;
 }
 function oktg_Material__init_1($this, $shader, $baseColor, $metallic, $roughness, $alphaCutoff, $alphaMode, $cullFaceMode, $translucentPriority, $depthMask, $name, $shaderChannels) {
-    kji_Intrinsics_checkParameterIsNotNull($baseColor, $rt_s(1362));
+    kji_Intrinsics_checkParameterIsNotNull($baseColor, $rt_s(1361));
     kji_Intrinsics_checkParameterIsNotNull($name, $rt_s(17));
-    kji_Intrinsics_checkParameterIsNotNull($shaderChannels, $rt_s(1363));
+    kji_Intrinsics_checkParameterIsNotNull($shaderChannels, $rt_s(1362));
     jl_Object__init_0($this);
     $this.$shader1 = $shader;
     $this.$baseColor = $baseColor;
@@ -62449,7 +62363,7 @@ function oooi_CollideTrimeshBox_dCollideBTL($this, $g1, $BoxGeom, $Flags, $Conta
 function oooi_CollideTrimeshBox_GenerateContact($in_Flags, $in_Contacts, $in_Stride, $in_g1, $in_g2, $TriIndex, $in_ContactPos, $in_Normal, $in_Depth) {
     var $duplicate, $diff, var$12, $contact, var$14, $Contact;
     if ($in_Stride != 1)
-        $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1364)).$append1($in_Stride).$toString()));
+        $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1363)).$append1($in_Stride).$toString()));
     $duplicate = 0;
     $diff = oom_DVector3__init_();
     var$12 = $in_Contacts.$iterator();
@@ -62742,8 +62656,6 @@ function otp_Platform_prepareNewInstance() {
     okttsg_MotionBlurTest[c] = okttsg_MotionBlurTest__init_0;
     okttsg_SkyboxVertexNodeTest[c] = okttsg_SkyboxVertexNodeTest__init_0;
     okttsg_SSAOTest[c] = okttsg_SSAOTest__init_0;
-    okttsg_VelocityNodeTest[c] = okttsg_VelocityNodeTest__init_0;
-    okttsg_VertexNodeTest[c] = okttsg_VertexNodeTest__init_0;
     oktt_Texture2DTest[c] = oktt_Texture2DTest__init_0;
     oktt_FrameBufferTest[c] = oktt_FrameBufferTest__init_0;
     oktts_SoundWavTest[c] = oktts_SoundWavTest__init_0;
@@ -62905,86 +62817,78 @@ function otp_Platform_prepareNewInstance() {
     k_NotImplementedError[c] = k_NotImplementedError__init_1;
     ji_IOException[c] = ji_IOException__init_0;
     k_Unit[c] = k_Unit__init_0;
-    okts_Shader[c] = okts_Shader__init_4;
+    oktt_GLTFModel[c] = oktt_GLTFModel__init_4;
+    oktgg_GLTFConf[c] = oktgg_GLTFConf__init_4;
+    oktt_MouseTest$testMain$1[c] = oktt_MouseTest$testMain$1__init_0;
+    oktt_CubeModel[c] = oktt_CubeModel__init_0;
+    oktt_SimpleFrameBuffer[c] = oktt_SimpleFrameBuffer__init_4;
+    oktsp_Threshold[c] = oktsp_Threshold__init_4;
     oktm_ScreenQuad[c] = oktm_ScreenQuad__init_4;
+    okts_Shader[c] = okts_Shader__init_4;
     oktt_GBuffer[c] = oktt_GBuffer__init_4;
     oktmb_BoxMeshBuilder[c] = oktmb_BoxMeshBuilder__init_4;
     oktmb_MeshBuilder[c] = oktmb_MeshBuilder__init_0;
     oktmb_PlaneMeshBuilder[c] = oktmb_PlaneMeshBuilder__init_4;
-    oktu_Color[c] = oktu_Color__init_;
-    oktgc_OrbitCameraControl[c] = oktgc_OrbitCameraControl__init_4;
-    oktt_CubeModel[c] = oktt_CubeModel__init_0;
-    oktt_SimpleFrameBuffer[c] = oktt_SimpleFrameBuffer__init_4;
-    oktm_VertexInputs[c] = oktm_VertexInputs__init_1;
-    oktsp_FXAA[c] = oktsp_FXAA__init_0;
-    oktsp_Threshold[c] = oktsp_Threshold__init_4;
-    oktm_ScreenQuad$TextureRenderer[c] = oktm_ScreenQuad$TextureRenderer__init_0;
-    oktsp_MotionBlur[c] = oktsp_MotionBlur__init_4;
-    oktt_GLTFModel[c] = oktt_GLTFModel__init_4;
-    kji_Ref$BooleanRef[c] = kji_Ref$BooleanRef__init_0;
-    oktg_ShaderChannel[c] = oktg_ShaderChannel__init_0;
-    oktg_Scene[c] = oktg_Scene__init_4;
     oktg_Object3D[c] = oktg_Object3D__init_0;
-    oktsg_VertexNode[c] = oktsg_VertexNode__init_4;
-    oktsg_CameraDataNode[c] = oktsg_CameraDataNode__init_4;
-    oktsg_OutputNode[c] = oktsg_OutputNode__init_4;
-    kji_Ref$IntRef[c] = kji_Ref$IntRef__init_0;
-    oktm_Vec2[c] = oktm_Vec2__init_4;
-    oktt_MouseTest$testMain$1[c] = oktt_MouseTest$testMain$1__init_0;
-    oktt_FrameBuffer[c] = oktt_FrameBuffer__init_4;
-    oktgg_GLTFConf[c] = oktgg_GLTFConf__init_4;
-    oktt_KeyboardTest$testMain$1[c] = oktt_KeyboardTest$testMain$1__init_0;
     oktmb_BoxMeshBuilder$Companion[c] = oktmb_BoxMeshBuilder$Companion__init_0;
+    oktsg_CameraDataNode[c] = oktsg_CameraDataNode__init_4;
     oktsg_GLSL[c] = oktsg_GLSL__init_;
     oktsg_SkyboxVertexNode[c] = oktsg_SkyboxVertexNode__init_1;
     oktt_TextureCube[c] = oktt_TextureCube__init_4;
     oktsg_TextureNode[c] = oktsg_TextureNode__init_4;
+    oktsg_OutputNode[c] = oktsg_OutputNode__init_4;
+    oktg_Scene[c] = oktg_Scene__init_4;
+    oktgc_OrbitCameraControl[c] = oktgc_OrbitCameraControl__init_4;
+    oktsp_FXAA[c] = oktsp_FXAA__init_0;
+    oktm_ScreenQuad$TextureRenderer[c] = oktm_ScreenQuad$TextureRenderer__init_0;
+    oktsp_MotionBlur[c] = oktsp_MotionBlur__init_4;
     kji_Ref$FloatRef[c] = kji_Ref$FloatRef__init_0;
-    oktt_Texture2D[c] = oktt_Texture2D__init_4;
+    kji_Ref$BooleanRef[c] = kji_Ref$BooleanRef__init_0;
+    oktt_FrameBuffer[c] = oktt_FrameBuffer__init_4;
+    oktm_VertexInputs[c] = oktm_VertexInputs__init_1;
+    oktt_KeyboardTest$testMain$1[c] = oktt_KeyboardTest$testMain$1__init_0;
     oktmb_SphereMeshBuilder[c] = oktmb_SphereMeshBuilder__init_4;
-    oktsg_VelocityNode[c] = oktsg_VelocityNode__init_4;
-    oktm_IMesh$Companion[c] = oktm_IMesh$Companion__init_0;
+    oktt_Texture2D[c] = oktt_Texture2D__init_4;
+    kji_Ref$IntRef[c] = kji_Ref$IntRef__init_0;
+    oktm_Vec2[c] = oktm_Vec2__init_4;
+    oktu_Color[c] = oktu_Color__init_;
+    oktg_ShaderChannel[c] = oktg_ShaderChannel__init_0;
+    oktt_GLTFLoaderAnimTest$testMain$1[c] = oktt_GLTFLoaderAnimTest$testMain$1__init_0;
+    okttsg_SSAOTest$testMain$1[c] = okttsg_SSAOTest$testMain$1__init_0;
     oktt_CubeModel$Companion[c] = oktt_CubeModel$Companion__init_;
-    oktm_IVertexBuffer$Companion[c] = oktm_IVertexBuffer$Companion__init_;
+    oktm_IMesh$Companion[c] = oktm_IMesh$Companion__init_0;
     oktgn_Node[c] = oktgn_Node__init_0;
     oktgn_ITransformNode$Companion[c] = oktgn_ITransformNode$Companion__init_0;
     okttsg_CascadedShadowMappingTest$testMain$1[c] = okttsg_CascadedShadowMappingTest$testMain$1__init_0;
-    okttp_TrimeshShapeTest$testMain$plane$1[c] = okttp_TrimeshShapeTest$testMain$plane$1__init_0;
-    oktt_GLTFLoaderAnimTest$testMain$1[c] = oktt_GLTFLoaderAnimTest$testMain$1__init_0;
-    oktt_Attachments[c] = oktt_Attachments__init_0;
-    okttsg_SSAOTest$testMain$1[c] = okttsg_SSAOTest$testMain$1__init_0;
     okttsg_EmissionBloomTest$testMain$1[c] = okttsg_EmissionBloomTest$testMain$1__init_0;
+    oktt_Attachments[c] = oktt_Attachments__init_0;
+    oktm_IVertexBuffer$Companion[c] = oktm_IVertexBuffer$Companion__init_;
+    okttp_TrimeshShapeTest$testMain$plane$1[c] = okttp_TrimeshShapeTest$testMain$plane$1__init_0;
+    oktgl_DirectionalLight[c] = oktgl_DirectionalLight__init_4;
+    oktt_GLTFModel$1[c] = oktt_GLTFModel$1__init_0;
+    oktt_FrameBufferAttachment[c] = oktt_FrameBufferAttachment__init_0;
+    oktsp_Threshold$Companion[c] = oktsp_Threshold$Companion__init_0;
     okts_Shader$Companion[c] = okts_Shader$Companion__init_1;
     oktsp_SSAO$Companion[c] = oktsp_SSAO$Companion__init_1;
     kr_Random$Default[c] = kr_Random$Default__init_1;
     oktmb_PlaneMeshBuilder$1[c] = oktmb_PlaneMeshBuilder$1__init_;
-    oktm_IVec4$Companion[c] = oktm_IVec4$Companion__init_0;
-    oktmb_FrustumMeshBuilder$Companion[c] = oktmb_FrustumMeshBuilder$Companion__init_0;
-    oktt_FrameBufferAttachment[c] = oktt_FrameBufferAttachment__init_0;
-    oktsp_Bloom$Companion[c] = oktsp_Bloom$Companion__init_0;
-    ju_LinkedHashMap[c] = ju_LinkedHashMap__init_0;
-    oktm_IndexBufferObject$Companion[c] = oktm_IndexBufferObject$Companion__init_0;
-    oktsp_FXAA$Companion[c] = oktsp_FXAA$Companion__init_0;
-    oktsp_Threshold$Companion[c] = oktsp_Threshold$Companion__init_0;
-    oktsp_MotionBlur$Companion[c] = oktsp_MotionBlur$Companion__init_0;
-    oktgl_DirectionalLight[c] = oktgl_DirectionalLight__init_4;
-    oktt_GLTFModel$1[c] = oktt_GLTFModel$1__init_0;
-    oktg_IWorld$Companion[c] = oktg_IWorld$Companion__init_0;
-    oktg_Scene$Companion[c] = oktg_Scene$Companion__init_1;
-    oktsg_VertexNode$Companion[c] = oktsg_VertexNode$Companion__init_0;
-    oktsg_CameraDataNode$Companion[c] = oktsg_CameraDataNode$Companion__init_1;
-    oktsg_OutputNode$Companion[c] = oktsg_OutputNode$Companion__init_1;
-    oktm_Vec2$Companion[c] = oktm_Vec2$Companion__init_0;
     oktsg_GLSLFloatInline[c] = oktsg_GLSLFloatInline__init_4;
     oktsg_GLSLVec3Inline[c] = oktsg_GLSLVec3Inline__init_4;
+    ju_LinkedHashMap[c] = ju_LinkedHashMap__init_0;
+    oktsg_CameraDataNode$Companion[c] = oktsg_CameraDataNode$Companion__init_1;
     oktsg_SkyboxVertexNode$Companion[c] = oktsg_SkyboxVertexNode$Companion__init_0;
     oktsg_TextureNode$Companion[c] = oktsg_TextureNode$Companion__init_1;
+    oktsg_OutputNode$Companion[c] = oktsg_OutputNode$Companion__init_1;
+    oktg_IWorld$Companion[c] = oktg_IWorld$Companion__init_0;
+    oktg_Scene$Companion[c] = oktg_Scene$Companion__init_1;
+    oktsp_FXAA$Companion[c] = oktsp_FXAA$Companion__init_0;
+    oktsp_MotionBlur$Companion[c] = oktsp_MotionBlur$Companion__init_0;
+    oktmb_FrustumMeshBuilder$Companion[c] = oktmb_FrustumMeshBuilder$Companion__init_0;
+    oktm_IndexBufferObject$Companion[c] = oktm_IndexBufferObject$Companion__init_0;
     oktt_Texture2D$Companion[c] = oktt_Texture2D$Companion__init_1;
-    oktsg_VelocityNode$Companion[c] = oktsg_VelocityNode$Companion__init_1;
-    oktm_IVertexBuffer$Companion$Build$1[c] = oktm_IVertexBuffer$Companion$Build$1__init_0;
-    oktgg_GLTF$Companion[c] = oktgg_GLTF$Companion__init_0;
-    oktg_Scene$objectSorter$1[c] = oktg_Scene$objectSorter$1__init_0;
-    oktsg_ShaderNode$Companion[c] = oktsg_ShaderNode$Companion__init_1;
+    oktm_Vec2$Companion[c] = oktm_Vec2$Companion__init_0;
+    oktm_IVec4$Companion[c] = oktm_IVec4$Companion__init_0;
+    oktsp_Bloom$Companion[c] = oktsp_Bloom$Companion__init_0;
     oktsg_GLSL$1[c] = oktsg_GLSL$1__init_;
     oktsg_GLSL$2[c] = oktsg_GLSL$2__init_;
     oktsg_GLSL$3[c] = oktsg_GLSL$3__init_;
@@ -63000,18 +62904,22 @@ function otp_Platform_prepareNewInstance() {
     oktsg_GLSL$13[c] = oktsg_GLSL$13__init_0;
     oktsg_GLSL$14[c] = oktsg_GLSL$14__init_0;
     oktsg_GLSL$15[c] = oktsg_GLSL$15__init_0;
-    ki_PlatformImplementations[c] = ki_PlatformImplementations__init_0;
+    oktsg_ShaderNode$Companion[c] = oktsg_ShaderNode$Companion__init_1;
+    oktg_Scene$objectSorter$1[c] = oktg_Scene$objectSorter$1__init_0;
+    oktm_IVertexBuffer$Companion$Build$1[c] = oktm_IVertexBuffer$Companion$Build$1__init_0;
+    oktgg_GLTF$Companion[c] = oktgg_GLTF$Companion__init_0;
     oktgl_DirectionalLight$Companion[c] = oktgl_DirectionalLight$Companion__init_0;
+    ki_PlatformImplementations[c] = ki_PlatformImplementations__init_0;
     oktgn_AdapterTransformNode[c] = oktgn_AdapterTransformNode__init_0;
+    oktu_AsyncArrayList[c] = oktu_AsyncArrayList__init_0;
     kr_Random$Companion[c] = kr_Random$Companion__init_0;
     oktm_IMesh$Companion$Build$1[c] = oktm_IMesh$Companion$Build$1__init_0;
-    oktu_AsyncArrayList[c] = oktu_AsyncArrayList__init_0;
-    oktg_World[c] = oktg_World__init_0;
     oktgn_ITransformNode$Companion$Build$1[c] = oktgn_ITransformNode$Companion$Build$1__init_0;
+    oktg_World[c] = oktg_World__init_0;
     oktgn_AdapterTransformNode$Companion[c] = oktgn_AdapterTransformNode$Companion__init_0;
+    oktu_AsyncArrayList$Companion[c] = oktu_AsyncArrayList$Companion__init_0;
     jl_ClassNotFoundException[c] = jl_ClassNotFoundException__init_0;
     jl_ReflectiveOperationException[c] = jl_ReflectiveOperationException__init_0;
-    oktu_AsyncArrayList$Companion[c] = oktu_AsyncArrayList$Companion__init_0;
     ju_Properties[c] = ju_Properties__init_0;
     ju_Hashtable[c] = ju_Hashtable__init_0;
     kt_StringsKt[c] = kt_StringsKt__init_0;
@@ -63051,8 +62959,8 @@ function otp_Platform_prepareNewInstance() {
     oktu_IPath$Companion[c] = oktu_IPath$Companion__init_0;
     oktm_IIndexBufferObject$Companion[c] = oktm_IIndexBufferObject$Companion__init_0;
     oktg_IMaterial$Companion[c] = oktg_IMaterial$Companion__init_0;
-    oktg_IScene$Companion[c] = oktg_IScene$Companion__init_0;
     oktg_IObject3D$Companion[c] = oktg_IObject3D$Companion__init_0;
+    oktg_IScene$Companion[c] = oktg_IScene$Companion__init_0;
     oktm_IVec2$Companion[c] = oktm_IVec2$Companion__init_0;
     jl_IllegalMonitorStateException[c] = jl_IllegalMonitorStateException__init_0;
     oktt_IFrameBuffer$buildAttachments$1[c] = oktt_IFrameBuffer$buildAttachments$1__init_0;
@@ -63060,8 +62968,8 @@ function otp_Platform_prepareNewInstance() {
     jl_SystemClassLoader[c] = jl_SystemClassLoader__init_;
     jl_Object$Monitor[c] = jl_Object$Monitor__init_0;
     oktm_IIndexBufferObject$Companion$Build$1[c] = oktm_IIndexBufferObject$Companion$Build$1__init_0;
-    oktg_IScene$Companion$Build$1[c] = oktg_IScene$Companion$Build$1__init_0;
     oktg_IObject3D$Companion$Build$1[c] = oktg_IObject3D$Companion$Build$1__init_0;
+    oktg_IScene$Companion$Build$1[c] = oktg_IScene$Companion$Build$1__init_0;
     oktm_IVec2$Companion$Pool$1[c] = oktm_IVec2$Companion$Pool$1__init_;
     oktm_IVec2$Companion$Pool$2[c] = oktm_IVec2$Companion$Pool$2__init_;
     jl_ArrayIndexOutOfBoundsException[c] = jl_ArrayIndexOutOfBoundsException__init_0;
@@ -63142,11 +63050,12 @@ function otp_Platform_prepareNewInstance() {
     kji_TypeIntrinsics[c] = kji_TypeIntrinsics__init_0;
     jl_StringBuffer[c] = jl_StringBuffer__init_2;
     kc_EmptyList[c] = kc_EmptyList__init_0;
-    oktsg_PrincipledBSDF[c] = oktsg_PrincipledBSDF__init_0;
+    oktsg_VertexNode[c] = oktsg_VertexNode__init_4;
     oktsg_GBufferOutputNode[c] = oktsg_GBufferOutputNode__init_0;
+    oktsg_PrincipledBSDF[c] = oktsg_PrincipledBSDF__init_0;
+    oktga_ActionTrack[c] = oktga_ActionTrack__init_0;
     oooi_DxHashSpace$dxAABB[c] = oooi_DxHashSpace$dxAABB__init_0;
     oooi_DxHashSpace$Node[c] = oooi_DxHashSpace$Node__init_0;
-    oktga_ActionTrack[c] = oktga_ActionTrack__init_0;
     ju_LinkedList$Entry[c] = ju_LinkedList$Entry__init_0;
     ju_Objects[c] = ju_Objects__init_0;
     oooicj_RefInt[c] = oooicj_RefInt__init_1;
@@ -63159,8 +63068,9 @@ function otp_Platform_prepareNewInstance() {
     oooic_Cstring[c] = oooic_Cstring__init_0;
     oooic_Ctime[c] = oooic_Ctime__init_0;
     oooic_Ctype[c] = oooic_Ctype__init_0;
-    oktsg_PrincipledBSDF$Companion[c] = oktsg_PrincipledBSDF$Companion__init_0;
+    oktsg_VertexNode$Companion[c] = oktsg_VertexNode$Companion__init_0;
     oktsg_GBufferOutputNode$Companion[c] = oktsg_GBufferOutputNode$Companion__init_0;
+    oktsg_PrincipledBSDF$Companion[c] = oktsg_PrincipledBSDF$Companion__init_0;
     oktga_Vec3Track[c] = oktga_Vec3Track__init_4;
     oktga_Vec4Track[c] = oktga_Vec4Track__init_4;
     jl_AbstractStringBuilder$Constants[c] = jl_AbstractStringBuilder$Constants__init_0;
@@ -63278,10 +63188,12 @@ function otp_Platform_prepareNewInstance() {
     oktga_Anim[c] = oktga_Anim__init_0;
     oktg_IArmature$Companion[c] = oktg_IArmature$Companion__init_0;
     oktsg_ToneMapNode[c] = oktsg_ToneMapNode__init_4;
+    oktsg_VelocityNode[c] = oktsg_VelocityNode__init_4;
     oktsg_OperationNode[c] = oktsg_OperationNode__init_4;
     jur_Pattern[c] = jur_Pattern__init_;
     kt_Regex$Companion[c] = kt_Regex$Companion__init_1;
     oktsg_ToneMapNode$Companion[c] = oktsg_ToneMapNode$Companion__init_1;
+    oktsg_VelocityNode$Companion[c] = oktsg_VelocityNode$Companion__init_1;
     oktsg_OperationNode$Companion[c] = oktsg_OperationNode$Companion__init_0;
     jur_AheadFSet[c] = jur_AheadFSet__init_0;
     jur_FinalSet[c] = jur_FinalSet__init_0;
@@ -63726,7 +63638,6 @@ function otp_Platform_lookupClass(var$1) {
         case "org.ode4j.ode.internal.cpp4j.java.RefDouble": oooicj_RefDouble.$clinit(); return oooicj_RefDouble;
         case "org.ksdfv.thelema.teavm.TvmFloat32Array": oktt_TvmFloat32Array.$clinit(); return oktt_TvmFloat32Array;
         case "org.ksdfv.thelema.test.KeyboardTest": oktt_KeyboardTest.$clinit(); return oktt_KeyboardTest;
-        case "org.ksdfv.thelema.test.shaders.glsl.VertexNodeTest$testMain$3": okttsg_VertexNodeTest$testMain$3.$clinit(); return okttsg_VertexNodeTest$testMain$3;
         case "kotlin.random.Random": kr_Random.$clinit(); return kr_Random;
         case "org.ksdfv.thelema.g3d.IObject3D$Companion": oktg_IObject3D$Companion.$clinit(); return oktg_IObject3D$Companion;
         case "java.util.AbstractList": ju_AbstractList.$clinit(); return ju_AbstractList;
@@ -64484,7 +64395,6 @@ function otp_Platform_lookupClass(var$1) {
         case "org.ksdfv.thelema.shader.post.Bloom": oktsp_Bloom.$clinit(); return oktsp_Bloom;
         case "kotlin.jvm.internal.markers.KMutableCollection": kjim_KMutableCollection.$clinit(); return kjim_KMutableCollection;
         case "java.util.Map$Entry": ju_Map$Entry.$clinit(); return ju_Map$Entry;
-        case "org.ksdfv.thelema.test.shaders.glsl.VelocityNodeTest": okttsg_VelocityNodeTest.$clinit(); return okttsg_VelocityNodeTest;
         case "org.ksdfv.thelema.g3d.gltf.IGLTFMaterial": oktgg_IGLTFMaterial.$clinit(); return oktgg_IGLTFMaterial;
         case "org.ode4j.ode.internal.processmem.DxStepWorkingMemory": oooip_DxStepWorkingMemory.$clinit(); return oooip_DxStepWorkingMemory;
         case "org.ksdfv.thelema.phys.ode4j.OdePhysicsWorld$nearCallback$1": oktpo_OdePhysicsWorld$nearCallback$1.$clinit(); return oktpo_OdePhysicsWorld$nearCallback$1;
@@ -64643,7 +64553,6 @@ function otp_Platform_lookupClass(var$1) {
         case "org.ksdfv.thelema.mesh.IVertexInput$DefaultImpls": oktm_IVertexInput$DefaultImpls.$clinit(); return oktm_IVertexInput$DefaultImpls;
         case "org.ode4j.ode.DBody": ooo_DBody.$clinit(); return ooo_DBody;
         case "org.ode4j.ode.threading.task.SameThreadTaskExecutor": ooott_SameThreadTaskExecutor.$clinit(); return ooott_SameThreadTaskExecutor;
-        case "org.ksdfv.thelema.test.shaders.glsl.VelocityNodeTest$testMain$3": okttsg_VelocityNodeTest$testMain$3.$clinit(); return okttsg_VelocityNodeTest$testMain$3;
         case "org.ksdfv.thelema.texture.IFrameBuffer": oktt_IFrameBuffer.$clinit(); return oktt_IFrameBuffer;
         case "org.ode4j.ode.internal.joints.Info2DescrQuickStep": oooij_Info2DescrQuickStep.$clinit(); return oooij_Info2DescrQuickStep;
         case "org.ksdfv.thelema.phys.ode4j.IOdeGeom$Companion": oktpo_IOdeGeom$Companion.$clinit(); return oktpo_IOdeGeom$Companion;
@@ -64794,7 +64703,6 @@ function otp_Platform_lookupClass(var$1) {
         case "org.ksdfv.thelema.test.shaders.glsl.MotionBlurTest$testMain$3": okttsg_MotionBlurTest$testMain$3.$clinit(); return okttsg_MotionBlurTest$testMain$3;
         case "org.ksdfv.thelema.test.shaders.glsl.MotionBlurTest$testMain$2": okttsg_MotionBlurTest$testMain$2.$clinit(); return okttsg_MotionBlurTest$testMain$2;
         case "org.ksdfv.thelema.g3d.gltf.GLTF$read$9$1": oktgg_GLTF$read$9$1.$clinit(); return oktgg_GLTF$read$9$1;
-        case "org.ksdfv.thelema.test.shaders.glsl.VertexNodeTest": okttsg_VertexNodeTest.$clinit(); return okttsg_VertexNodeTest;
         case "org.teavm.jso.browser.Performance": otjb_Performance.$clinit(); return otjb_Performance;
         case "java.util.Queue": ju_Queue.$clinit(); return ju_Queue;
         case "org.ksdfv.thelema.test.shaders.glsl.SSAOTest$testMain$1$3$1": okttsg_SSAOTest$testMain$1$3$1.$clinit(); return okttsg_SSAOTest$testMain$1$3$1;
@@ -65096,9 +65004,9 @@ function jnc_CodingErrorAction__init_0($this, $name) {
     $this.$name44 = $name;
 }
 function jnc_CodingErrorAction__clinit_() {
-    jnc_CodingErrorAction_IGNORE = jnc_CodingErrorAction__init_($rt_s(1365));
-    jnc_CodingErrorAction_REPLACE = jnc_CodingErrorAction__init_($rt_s(1366));
-    jnc_CodingErrorAction_REPORT = jnc_CodingErrorAction__init_($rt_s(1367));
+    jnc_CodingErrorAction_IGNORE = jnc_CodingErrorAction__init_($rt_s(1364));
+    jnc_CodingErrorAction_REPLACE = jnc_CodingErrorAction__init_($rt_s(1365));
+    jnc_CodingErrorAction_REPORT = jnc_CodingErrorAction__init_($rt_s(1366));
 }
 function oktt_ITexture2D$DefaultImpls() {
     jl_Object.call(this);
@@ -65303,7 +65211,7 @@ function oktgg_IGLTFMaterial$read$10_invoke0($this, $$this$array) {
         var$11 = var$10.data;
         var$11[0] = $this.$$emissiveValue0.$element0;
         var$11[1] = $factor;
-        oktsg_OperationNode__init_($op, kc_CollectionsKt__CollectionsKt_listOf(var$10), $rt_s(1368), 5);
+        oktsg_OperationNode__init_($op, kc_CollectionsKt__CollectionsKt_listOf(var$10), $rt_s(1367), 5);
         oktsg_OperationNode_setFragment($op, 1);
         oktsg_OperationNode_setVarying($op, 0);
         $node = $this.$$shader13.$addNode0($op);
@@ -65374,7 +65282,7 @@ var oktga_AnimPlayer_vec4Pool = null;
 var oktga_AnimPlayer_Companion = null;
 function oktga_AnimPlayer_$callClinit() {
     oktga_AnimPlayer_$callClinit = $rt_eraseClinit(oktga_AnimPlayer);
-    $java.oktga_AnimPlayer__clinit_();
+    oktga_AnimPlayer__clinit_();
 }
 function oktga_AnimPlayer__init_() {
     var var_0 = new oktga_AnimPlayer();
@@ -65385,20 +65293,20 @@ function oktga_AnimPlayer_setNodes($this, $_set___) {
     kji_Intrinsics_checkParameterIsNotNull($_set___, $rt_s(15));
     $this.$nodes2 = $_set___;
 }
-$java.oktga_AnimPlayer_obtain = function($this, $anim, $offset, $duration, $loopCount, $speed, $listener) {
+function oktga_AnimPlayer_obtain($this, $anim, $offset, $duration, $loopCount, $speed, $listener) {
     var $result;
     if ($anim === null)
         return null;
     $result = oktu_Pool_get(oktga_AnimPlayer_animationPool);
-    $java.oktga_AnimPlayer$AnimationDesc_setAnimation($result, $anim);
-    $java.oktga_AnimPlayer$AnimationDesc_setListener($result, $listener);
-    $java.oktga_AnimPlayer$AnimationDesc_setLoopCount($result, $loopCount);
-    $java.oktga_AnimPlayer$AnimationDesc_setSpeed($result, $speed);
-    $java.oktga_AnimPlayer$AnimationDesc_setOffset($result, $offset);
-    $java.oktga_AnimPlayer$AnimationDesc_setDuration($result, $duration);
-    $java.oktga_AnimPlayer$AnimationDesc_setTime($result, $speed >= 0.0 ? 0.0 : $java.oktga_AnimPlayer$AnimationDesc_getDuration($result));
+    oktga_AnimPlayer$AnimationDesc_setAnimation($result, $anim);
+    oktga_AnimPlayer$AnimationDesc_setListener($result, $listener);
+    oktga_AnimPlayer$AnimationDesc_setLoopCount($result, $loopCount);
+    oktga_AnimPlayer$AnimationDesc_setSpeed($result, $speed);
+    oktga_AnimPlayer$AnimationDesc_setOffset($result, $offset);
+    oktga_AnimPlayer$AnimationDesc_setDuration($result, $duration);
+    oktga_AnimPlayer$AnimationDesc_setTime($result, $speed >= 0.0 ? 0.0 : oktga_AnimPlayer$AnimationDesc_getDuration($result));
     return $result;
-};
+}
 function oktga_AnimPlayer_update($this, $delta) {
     var $previous, $current, var$4, $remain, var$6, var$7, var$8, var$9, $actionTrack, $times, $actions, $i, var$14, $time, $action;
     if ($this.$paused)
@@ -65407,39 +65315,39 @@ function oktga_AnimPlayer_update($this, $delta) {
     $previous = $this.$previous0;
     $current = $this.$current0;
     if ($previous !== null && $this.$transitionCurrentTime >= $this.$transitionTargetTime) {
-        var$4 = $java.oktga_AnimPlayer$AnimationDesc_getAnimation($previous);
+        var$4 = oktga_AnimPlayer$AnimationDesc_getAnimation($previous);
         if (var$4 === null)
             kji_Intrinsics_throwNpe();
-        $java.oktga_AnimPlayer_removeAnimation($this, var$4);
+        oktga_AnimPlayer_removeAnimation($this, var$4);
         $this.$justChangedAnimation = 1;
         oktu_Pool_free(oktga_AnimPlayer_animationPool, $previous);
         $this.$previous0 = null;
     }
     if ($this.$justChangedAnimation)
         $this.$justChangedAnimation = 0;
-    if ($current !== null && $java.oktga_AnimPlayer$AnimationDesc_getLoopCount($current) && $java.oktga_AnimPlayer$AnimationDesc_getAnimation($current) !== null) {
-        $remain = $java.oktga_AnimPlayer$AnimationDesc_update($current, $delta);
+    if ($current !== null && oktga_AnimPlayer$AnimationDesc_getLoopCount($current) && oktga_AnimPlayer$AnimationDesc_getAnimation($current) !== null) {
+        $remain = oktga_AnimPlayer$AnimationDesc_update($current, $delta);
         if ($remain !== 0.0 && $this.$queued !== null) {
             $this.$inAction = 0;
-            $java.oktga_AnimPlayer_animate($this, $this.$queued, $this.$queuedTransitionTime);
+            oktga_AnimPlayer_animate($this, $this.$queued, $this.$queuedTransitionTime);
             $this.$queued = null;
             oktga_AnimPlayer_update($this, $remain);
             return;
         }
         if ($previous !== null) {
-            var$4 = $java.oktga_AnimPlayer$AnimationDesc_getAnimation($previous);
-            var$6 = $java.oktga_AnimPlayer$AnimationDesc_getOffset($previous) + $java.oktga_AnimPlayer$AnimationDesc_getTime($previous);
-            var$7 = $java.oktga_AnimPlayer$AnimationDesc_getAnimation($current);
-            var$8 = $java.oktga_AnimPlayer$AnimationDesc_getOffset($current) + $java.oktga_AnimPlayer$AnimationDesc_getTime($current);
+            var$4 = oktga_AnimPlayer$AnimationDesc_getAnimation($previous);
+            var$6 = oktga_AnimPlayer$AnimationDesc_getOffset($previous) + $java.oktga_AnimPlayer$AnimationDesc_getTime($previous);
+            var$7 = oktga_AnimPlayer$AnimationDesc_getAnimation($current);
+            var$8 = oktga_AnimPlayer$AnimationDesc_getOffset($current) + $java.oktga_AnimPlayer$AnimationDesc_getTime($current);
             var$9 = $this.$transitionCurrentTime / $this.$transitionTargetTime;
             $java.oktga_AnimPlayer_applyAnimations($this, var$4, var$6, var$7, var$8, var$9);
         } else {
-            var$4 = $java.oktga_AnimPlayer$AnimationDesc_getAnimation($current);
+            var$4 = oktga_AnimPlayer$AnimationDesc_getAnimation($current);
             if (var$4 === null)
                 kji_Intrinsics_throwNpe();
-            $java.oktga_AnimPlayer_applyAnimation($this, var$4, $java.oktga_AnimPlayer$AnimationDesc_getOffset($current) + $java.oktga_AnimPlayer$AnimationDesc_getTime($current));
+            $java.oktga_AnimPlayer_applyAnimation($this, var$4, oktga_AnimPlayer$AnimationDesc_getOffset($current) + $java.oktga_AnimPlayer$AnimationDesc_getTime($current));
         }
-        var$4 = $java.oktga_AnimPlayer$AnimationDesc_getAnimation($current);
+        var$4 = oktga_AnimPlayer$AnimationDesc_getAnimation($current);
         $actionTrack = var$4 === null ? null : var$4.$getActionTrack();
         a: {
             if ($actionTrack !== null && oktga_ActionTrack_getActions($actionTrack).$size() > 0) {
@@ -65453,7 +65361,7 @@ function oktga_AnimPlayer_update($this, $delta) {
                     $time = $times.$get1($i).$floatValue();
                     if ($time >= $java.oktga_AnimPlayer$AnimationDesc_getPreviousTime($current) && $time <= $java.oktga_AnimPlayer$AnimationDesc_getTime($current)) {
                         var$4 = $actions.$get1($i);
-                        kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1369));
+                        kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1368));
                         $action = var$4;
                         $java.oktga_AnimPlayer$AnimationDesc_getExecutedActions($current).$add1($action);
                         $action.$invoke6();
@@ -65466,8 +65374,8 @@ function oktga_AnimPlayer_update($this, $delta) {
     }
 }
 $java.oktga_AnimPlayer_setAnimation = function($this, $animation, $loopCount, $speed, $duration, $offset, $listener) {
-    kji_Intrinsics_checkParameterIsNotNull($animation, $rt_s(1370));
-    return $java.oktga_AnimPlayer_setAnimation0($this, $java.oktga_AnimPlayer_obtain($this, $animation, $offset, $duration, $loopCount, $speed, $listener));
+    kji_Intrinsics_checkParameterIsNotNull($animation, $rt_s(1369));
+    return $java.oktga_AnimPlayer_setAnimation0($this, oktga_AnimPlayer_obtain($this, $animation, $offset, $duration, $loopCount, $speed, $listener));
 };
 function oktga_AnimPlayer_setAnimation$default(var$1, var$2, var$3, var$4, var$5, var$6, var$7, var$8, var$9) {
     oktga_AnimPlayer_$callClinit();
@@ -65493,21 +65401,21 @@ $java.oktga_AnimPlayer_setAnimation0 = function($this, $anim) {
                 var$2 = $this.$current0;
                 if (var$2 === null)
                     kji_Intrinsics_throwNpe();
-                if ($java.oktga_AnimPlayer$AnimationDesc_getAnimation(var$2) === $java.oktga_AnimPlayer$AnimationDesc_getAnimation($anim)) {
+                if (oktga_AnimPlayer$AnimationDesc_getAnimation(var$2) === oktga_AnimPlayer$AnimationDesc_getAnimation($anim)) {
                     var$2 = $this.$current0;
                     if (var$2 === null)
                         kji_Intrinsics_throwNpe();
-                    $java.oktga_AnimPlayer$AnimationDesc_setTime($anim, $java.oktga_AnimPlayer$AnimationDesc_getTime(var$2));
+                    oktga_AnimPlayer$AnimationDesc_setTime($anim, $java.oktga_AnimPlayer$AnimationDesc_getTime(var$2));
                     break a;
                 }
             }
             var$2 = $this.$current0;
             if (var$2 === null)
                 kji_Intrinsics_throwNpe();
-            var$2 = $java.oktga_AnimPlayer$AnimationDesc_getAnimation(var$2);
+            var$2 = oktga_AnimPlayer$AnimationDesc_getAnimation(var$2);
             if (var$2 === null)
                 kji_Intrinsics_throwNpe();
-            $java.oktga_AnimPlayer_removeAnimation($this, var$2);
+            oktga_AnimPlayer_removeAnimation($this, var$2);
         }
         var$2 = oktga_AnimPlayer_animationPool;
         var$3 = $this.$current0;
@@ -65519,7 +65427,7 @@ $java.oktga_AnimPlayer_setAnimation0 = function($this, $anim) {
     $this.$justChangedAnimation = 1;
     return $anim;
 };
-$java.oktga_AnimPlayer_animate = function($this, $anim, $transitionTime) {
+function oktga_AnimPlayer_animate($this, $anim, $transitionTime) {
     var var$3, var$4;
     a: {
         if ($this.$current0 === null)
@@ -65531,11 +65439,11 @@ $java.oktga_AnimPlayer_animate = function($this, $anim, $transitionTime) {
                 var$3 = $this.$current0;
                 if (var$3 === null)
                     kji_Intrinsics_throwNpe();
-                if ($java.oktga_AnimPlayer$AnimationDesc_getAnimation(var$3) === $java.oktga_AnimPlayer$AnimationDesc_getAnimation($anim)) {
+                if (oktga_AnimPlayer$AnimationDesc_getAnimation(var$3) === oktga_AnimPlayer$AnimationDesc_getAnimation($anim)) {
                     var$3 = $this.$current0;
                     if (var$3 === null)
                         kji_Intrinsics_throwNpe();
-                    $java.oktga_AnimPlayer$AnimationDesc_setTime($anim, $java.oktga_AnimPlayer$AnimationDesc_getTime(var$3));
+                    oktga_AnimPlayer$AnimationDesc_setTime($anim, $java.oktga_AnimPlayer$AnimationDesc_getTime(var$3));
                     var$3 = oktga_AnimPlayer_animationPool;
                     var$4 = $this.$current0;
                     if (var$4 === null)
@@ -65549,10 +65457,10 @@ $java.oktga_AnimPlayer_animate = function($this, $anim, $transitionTime) {
                 var$3 = $this.$previous0;
                 if (var$3 === null)
                     kji_Intrinsics_throwNpe();
-                var$3 = $java.oktga_AnimPlayer$AnimationDesc_getAnimation(var$3);
+                var$3 = oktga_AnimPlayer$AnimationDesc_getAnimation(var$3);
                 if (var$3 === null)
                     kji_Intrinsics_throwNpe();
-                $java.oktga_AnimPlayer_removeAnimation($this, var$3);
+                oktga_AnimPlayer_removeAnimation($this, var$3);
                 var$3 = oktga_AnimPlayer_animationPool;
                 var$4 = $this.$previous0;
                 if (var$4 === null)
@@ -65566,7 +65474,7 @@ $java.oktga_AnimPlayer_animate = function($this, $anim, $transitionTime) {
         }
     }
     return $anim;
-};
+}
 $java.oktga_AnimPlayer_queue = function($this, $anim, $transitionTime) {
     var var$3, var$4;
     a: {
@@ -65574,7 +65482,7 @@ $java.oktga_AnimPlayer_queue = function($this, $anim, $transitionTime) {
             var$3 = $this.$current0;
             if (var$3 === null)
                 kji_Intrinsics_throwNpe();
-            if ($java.oktga_AnimPlayer$AnimationDesc_getLoopCount(var$3)) {
+            if (oktga_AnimPlayer$AnimationDesc_getLoopCount(var$3)) {
                 if ($this.$queued !== null) {
                     var$3 = oktga_AnimPlayer_animationPool;
                     var$4 = $this.$queued;
@@ -65587,16 +65495,16 @@ $java.oktga_AnimPlayer_queue = function($this, $anim, $transitionTime) {
                 var$3 = $this.$current0;
                 if (var$3 === null)
                     kji_Intrinsics_throwNpe();
-                if ($java.oktga_AnimPlayer$AnimationDesc_getLoopCount(var$3) >= 0)
+                if (oktga_AnimPlayer$AnimationDesc_getLoopCount(var$3) >= 0)
                     break a;
                 var$3 = $this.$current0;
                 if (var$3 === null)
                     kji_Intrinsics_throwNpe();
-                $java.oktga_AnimPlayer$AnimationDesc_setLoopCount(var$3, 1);
+                oktga_AnimPlayer$AnimationDesc_setLoopCount(var$3, 1);
                 break a;
             }
         }
-        $java.oktga_AnimPlayer_animate($this, $anim, $transitionTime);
+        oktga_AnimPlayer_animate($this, $anim, $transitionTime);
     }
     return $anim;
 };
@@ -65605,21 +65513,21 @@ $java.oktga_AnimPlayer_begin = function($this) {
         $this.$applying = 1;
         return;
     }
-    $rt_throw(jl_RuntimeException__init_($rt_s(1371)));
+    $rt_throw(jl_RuntimeException__init_($rt_s(1370)));
 };
 $java.oktga_AnimPlayer_apply = function($this, $animation, $time, $weight) {
     if ($this.$applying) {
         $java.oktga_AnimPlayer_applyAnimation0($this, 1, $weight, $animation, $time);
         return;
     }
-    $rt_throw(jl_RuntimeException__init_($rt_s(1372)));
+    $rt_throw(jl_RuntimeException__init_($rt_s(1371)));
 };
 $java.oktga_AnimPlayer_end = function($this) {
     var var$1, $$this$forEach$iv, var$3, $element$iv, $it, var$6, var$7;
     if (!$this.$applying)
-        $rt_throw(jl_RuntimeException__init_($rt_s(1373)));
+        $rt_throw(jl_RuntimeException__init_($rt_s(1372)));
     var$1 = $this.$blendingPosition.$entrySet();
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$1, $rt_s(1374));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$1, $rt_s(1373));
     $$this$forEach$iv = var$1;
     var$3 = $$this$forEach$iv.$iterator();
     while (var$3.$hasNext()) {
@@ -65627,16 +65535,16 @@ $java.oktga_AnimPlayer_end = function($this) {
         $it = $element$iv;
         var$1 = $it.$getKey().$getPosition0();
         var$6 = $it.$getValue();
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1375));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1374));
         var$1.$set11(var$6);
         var$1 = oktga_AnimPlayer_vec3Pool;
         var$6 = $it.$getValue();
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1375));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1374));
         oktu_Pool_free(var$1, var$6);
     }
     $this.$blendingPosition.$clear();
     var$3 = $this.$blendingRotation.$entrySet();
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1376));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1375));
     $$this$forEach$iv = var$3;
     var$3 = $$this$forEach$iv.$iterator();
     while (var$3.$hasNext()) {
@@ -65644,16 +65552,16 @@ $java.oktga_AnimPlayer_end = function($this) {
         $it = $element$iv;
         var$1 = $it.$getKey().$getRotation0();
         var$6 = $it.$getValue();
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1375));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1374));
         var$1.$set71(var$6);
         var$1 = oktga_AnimPlayer_vec4Pool;
         var$6 = $it.$getValue();
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1375));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1374));
         oktu_Pool_free(var$1, var$6);
     }
     $this.$blendingRotation.$clear();
     var$3 = $this.$blendingScale.$entrySet();
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1377));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$3, $rt_s(1376));
     $$this$forEach$iv = var$3;
     var$1 = $$this$forEach$iv.$iterator();
     while (var$1.$hasNext()) {
@@ -65661,11 +65569,11 @@ $java.oktga_AnimPlayer_end = function($this) {
         $it = $element$iv;
         var$6 = $it.$getKey().$getScale0();
         var$7 = $it.$getValue();
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$7, $rt_s(1375));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$7, $rt_s(1374));
         var$6.$set11(var$7);
         var$3 = oktga_AnimPlayer_vec3Pool;
         var$6 = $it.$getValue();
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1375));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1374));
         oktu_Pool_free(var$3, var$6);
     }
     $this.$blendingScale.$clear();
@@ -65676,13 +65584,13 @@ $java.oktga_AnimPlayer_applyAnimation = function($this, $animation, $time) {
         $java.oktga_AnimPlayer_applyAnimation0($this, 0, 1.0, $animation, $time);
         return;
     }
-    $rt_throw(jl_RuntimeException__init_($rt_s(1378)));
+    $rt_throw(jl_RuntimeException__init_($rt_s(1377)));
 };
 $java.oktga_AnimPlayer_applyAnimations = function($this, $anim1, $time1, $anim2, $time2, $weight) {
     if ($anim2 !== null && $weight !== 0.0) {
         if ($anim1 !== null && $weight !== 1.0) {
             if ($this.$applying)
-                $rt_throw(jl_RuntimeException__init_($rt_s(1378)));
+                $rt_throw(jl_RuntimeException__init_($rt_s(1377)));
             $java.oktga_AnimPlayer_begin($this);
             $java.oktga_AnimPlayer_apply($this, $anim1, $time1, 1.0);
             $java.oktga_AnimPlayer_apply($this, $anim2, $time2, $weight);
@@ -65884,9 +65792,9 @@ $java.oktga_AnimPlayer_getScalingAtTime = function($this, $track, $time, $out) {
     }
     return $out;
 };
-$java.oktga_AnimPlayer_removeAnimation = function($this, $animation) {
+function oktga_AnimPlayer_removeAnimation($this, $animation) {
     return;
-};
+}
 function oktga_AnimPlayer__init_0($this) {
     oktga_AnimPlayer_$callClinit();
     jl_Object__init_0($this);
@@ -65898,7 +65806,7 @@ function oktga_AnimPlayer__init_0($this) {
     $this.$tmpRotation = oktm_Vec4__init_(0.0, 0.0, 0.0, 0.0, 15, null);
     $this.$tmpScale = oktm_Vec3__init_(0.0, 0.0, 0.0, 7, null);
 }
-$java.oktga_AnimPlayer__clinit_ = function() {
+function oktga_AnimPlayer__clinit_() {
     var var$1;
     oktga_AnimPlayer_Companion = oktga_AnimPlayer$Companion__init_1(null);
     var$1 = new oktu_Pool;
@@ -65913,7 +65821,7 @@ $java.oktga_AnimPlayer__clinit_ = function() {
     $java.oktga_AnimPlayer$Companion$vec4Pool$1_$callClinit();
     oktu_Pool__init_2(var$1, $java.oktga_AnimPlayer$Companion$vec4Pool$1_INSTANCE);
     oktga_AnimPlayer_vec4Pool = var$1;
-};
+}
 function jur_DotQuantifierSet() {
     jur_QuantifierSet.call(this);
     this.$lt1 = null;
@@ -66213,7 +66121,7 @@ function oktts_FXAATest__init_() {
     return var_0;
 }
 $java.oktts_FXAATest_getName = function($this) {
-    return $rt_s(1379);
+    return $rt_s(1378);
 };
 $java.oktts_FXAATest_testMain = function($this) {
     var $model, $frameBuffer, var$3, var$4, var$5, $fxaa, $screenQuad;
@@ -66604,7 +66512,7 @@ $java.jm_BigDecimal__init_2 = function($this, $in, $offset, $len) {
             $newScale = Long_sub(Long_fromInt($this.$scale6), Long_fromInt(jl_Integer_parseInt0(var$14)));
             $this.$scale6 = $newScale.lo;
             if (Long_ne($newScale, Long_fromInt($this.$scale6)))
-                $rt_throw(jl_NumberFormatException__init_0($rt_s(1380)));
+                $rt_throw(jl_NumberFormatException__init_0($rt_s(1379)));
         }
         if (var$12 >= 19)
             $java.jm_BigDecimal_setUnscaledValue($this, jm_BigInteger__init_3($unscaledBuffer.$toString()));
@@ -67508,29 +67416,6 @@ $java.ooott_SameThreadTaskExecutor_flush = function($this) {
         $task = $this.$queue0.$poll();
     }
 };
-function okttsg_VelocityNodeTest$testMain$3() {
-    kji_Lambda.call(this);
-    this.$$scene2 = null;
-}
-function okttsg_VelocityNodeTest$testMain$3__init_(var_0) {
-    var var_1 = new okttsg_VelocityNodeTest$testMain$3();
-    $java.okttsg_VelocityNodeTest$testMain$3__init_(var_1, var_0);
-    return var_1;
-}
-$java.okttsg_VelocityNodeTest$testMain$3_invoke = function(var$0) {
-    $java.okttsg_VelocityNodeTest$testMain$3_invoke0(var$0);
-    k_Unit_$callClinit();
-    return k_Unit_INSTANCE;
-};
-$java.okttsg_VelocityNodeTest$testMain$3_invoke0 = function($this) {
-    oktg_GL_$callClinit();
-    oktg_GL_glClear(oktg_GL_INSTANCE, 16640);
-    $this.$$scene2.$render0();
-};
-$java.okttsg_VelocityNodeTest$testMain$3__init_ = function(var$0, var$1) {
-    var$0.$$scene2 = var$1;
-    kji_Lambda__init_0(var$0, 0);
-};
 function oooij_Info2DescrQuickStep() {
     var a = this; jl_Object.call(a);
     a.$_findexA = null;
@@ -67839,53 +67724,53 @@ function oktsg_GLSLType_getTypeName($this, $type) {
                 case 0:
                     break;
                 case 1:
-                    var$2 = $rt_s(1319);
+                    var$2 = $rt_s(1318);
                     break a;
                 case 2:
                     break b;
                 case 3:
-                    var$2 = $rt_s(1320);
+                    var$2 = $rt_s(1319);
                     break a;
                 case 4:
-                    var$2 = $rt_s(1321);
+                    var$2 = $rt_s(1320);
                     break a;
                 case 5:
-                    var$2 = $rt_s(1322);
+                    var$2 = $rt_s(1321);
                     break a;
                 case 6:
-                    var$2 = $rt_s(1323);
+                    var$2 = $rt_s(1322);
                     break a;
                 case 7:
-                    var$2 = $rt_s(1324);
+                    var$2 = $rt_s(1323);
                     break a;
                 case 8:
-                    var$2 = $rt_s(1325);
+                    var$2 = $rt_s(1324);
                     break a;
                 case 9:
-                    var$2 = $rt_s(1326);
+                    var$2 = $rt_s(1325);
                     break a;
                 case 10:
-                    var$2 = $rt_s(1381);
+                    var$2 = $rt_s(1380);
                     break a;
                 case 11:
-                    var$2 = $rt_s(1327);
+                    var$2 = $rt_s(1326);
                     break a;
                 case 12:
-                    var$2 = $rt_s(1328);
+                    var$2 = $rt_s(1327);
                     break a;
                 case 13:
-                    var$2 = $rt_s(1329);
+                    var$2 = $rt_s(1328);
                     break a;
                 case 14:
-                    var$2 = $rt_s(1330);
+                    var$2 = $rt_s(1329);
                     break a;
                 case 15:
-                    var$2 = $rt_s(1331);
+                    var$2 = $rt_s(1330);
                     break a;
                 default:
                     break b;
             }
-            var$2 = $rt_s(1332);
+            var$2 = $rt_s(1331);
             break a;
         }
         var$2 = $rt_s(6);
@@ -67941,7 +67826,7 @@ function oktgg_GLTFAnimation_read($this, $json) {
     $java.oktgg_GLTFAnimation_setName($this, $json.$string5($rt_s(17), $rt_s(6)));
     $this.$anim0.$setName($java.oktgg_GLTFAnimation_getName($this));
     $json.$array($rt_s(1006), oktgg_GLTFAnimation$read$1__init_($animationSamplers));
-    $json.$array($rt_s(1382), oktgg_GLTFAnimation$read$2__init_($this, $animationSamplers));
+    $json.$array($rt_s(1381), oktgg_GLTFAnimation$read$2__init_($this, $animationSamplers));
     oktgg_GLTFAnimation_getGltf($this).$getAnimations0().$ready($java.oktgg_GLTFAnimation_getElementIndex($this));
 }
 function oktgg_GLTFAnimation_getGltf($this) {
@@ -67956,7 +67841,7 @@ function oktgg_GLTFAnimation_getAnim($this) {
 $java.oktgg_GLTFAnimation__init_0 = function($this, $gltf, $elementIndex, $anim) {
     $java.oktgg_GLTFAnimation_$callClinit();
     kji_Intrinsics_checkParameterIsNotNull($gltf, $rt_s(23));
-    kji_Intrinsics_checkParameterIsNotNull($anim, $rt_s(1383));
+    kji_Intrinsics_checkParameterIsNotNull($anim, $rt_s(1382));
     jl_Object__init_0($this);
     $this.$gltf11 = $gltf;
     $this.$elementIndex10 = $elementIndex;
@@ -68030,9 +67915,9 @@ function oktt_IFrameBuffer$DefaultImpls_initBuffersOrder($$this, $indices) {
     var var$3, var$4, $indicesBuffer, $i, $indices2, $count, var$9, $attachment;
     kji_Intrinsics_checkParameterIsNotNull($indices, $rt_s(566));
     if (!$$this.$getFrameBufferHandle())
-        $rt_throw(jl_RuntimeException__init_($rt_s(1384)));
+        $rt_throw(jl_RuntimeException__init_($rt_s(1383)));
     if (!$$this.$isBound2())
-        $rt_throw(jl_RuntimeException__init_($rt_s(1385)));
+        $rt_throw(jl_RuntimeException__init_($rt_s(1384)));
     var$3 = $indices.data;
     var$4 = var$3.length;
     if (!(var$4 ? 0 : 1)) {
@@ -68071,12 +67956,12 @@ function oktt_IFrameBuffer$DefaultImpls_checkErrors($$this) {
         a: {
             b: {
                 $java.oktt_IFrameBuffer$DefaultImpls_destroy$default($$this, 0, 1, null);
-                var$3 = jl_StringBuilder__init_().$append($rt_s(1386));
+                var$3 = jl_StringBuilder__init_().$append($rt_s(1385));
                 switch ($result) {
                     case 36054:
                         break;
                     case 36055:
-                        var$4 = $rt_s(1387);
+                        var$4 = $rt_s(1386);
                         break a;
                     case 36056:
                     case 36058:
@@ -68084,18 +67969,18 @@ function oktt_IFrameBuffer$DefaultImpls_checkErrors($$this) {
                     case 36060:
                         break b;
                     case 36057:
-                        var$4 = $rt_s(1388);
+                        var$4 = $rt_s(1387);
                         break a;
                     case 36061:
-                        var$4 = $rt_s(1389);
+                        var$4 = $rt_s(1388);
                         break a;
                     default:
                         break b;
                 }
-                var$4 = $rt_s(1390);
+                var$4 = $rt_s(1389);
                 break a;
             }
-            var$4 = jl_StringBuilder__init_().$append($rt_s(1391)).$append1($result).$toString();
+            var$4 = jl_StringBuilder__init_().$append($rt_s(1390)).$append1($result).$toString();
         }
         $errorText = var$3.$append(var$4).$toString();
         oktu_LOG_$callClinit();
@@ -68124,7 +68009,7 @@ function oktt_IFrameBuffer$DefaultImpls_destroy($$this, $destroyTextures) {
 }
 $java.oktt_IFrameBuffer$DefaultImpls_destroy$default = function(var$1, var$2, var$3, var$4) {
     if (var$4 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1392)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1391)));
     if (var$3 & 1)
         var$2 = 1;
     var$1.$destroy4(var$2);
@@ -68169,7 +68054,7 @@ $java.oktt_CubeModel$Companion_defaultShader = function($this) {
     var$3 = null;
     var$4 = null;
     var$5 = null;
-    okts_Shader__init_(var$1, $rt_s(1393), $rt_s(1394), var$2, 0, var$3, 0, var$4, 124, var$5);
+    okts_Shader__init_(var$1, $rt_s(1392), $rt_s(1393), var$2, 0, var$3, 0, var$4, 124, var$5);
     return var$1;
 };
 function oktt_CubeModel$Companion__init_($this) {
@@ -68582,14 +68467,14 @@ $java.cgcj_Yytoken$Types__init_0 = function($this, var$1, var$2) {
 };
 $java.cgcj_Yytoken$Types__clinit_ = function() {
     var var$1, var$2;
-    cgcj_Yytoken$Types_COLON = $java.cgcj_Yytoken$Types__init_($rt_s(1395), 0);
-    cgcj_Yytoken$Types_COMMA = $java.cgcj_Yytoken$Types__init_($rt_s(1396), 1);
-    cgcj_Yytoken$Types_DATUM = $java.cgcj_Yytoken$Types__init_($rt_s(1397), 2);
-    cgcj_Yytoken$Types_END = $java.cgcj_Yytoken$Types__init_($rt_s(1398), 3);
-    cgcj_Yytoken$Types_LEFT_BRACE = $java.cgcj_Yytoken$Types__init_($rt_s(1399), 4);
-    cgcj_Yytoken$Types_LEFT_SQUARE = $java.cgcj_Yytoken$Types__init_($rt_s(1400), 5);
-    cgcj_Yytoken$Types_RIGHT_BRACE = $java.cgcj_Yytoken$Types__init_($rt_s(1401), 6);
-    cgcj_Yytoken$Types_RIGHT_SQUARE = $java.cgcj_Yytoken$Types__init_($rt_s(1402), 7);
+    cgcj_Yytoken$Types_COLON = $java.cgcj_Yytoken$Types__init_($rt_s(1394), 0);
+    cgcj_Yytoken$Types_COMMA = $java.cgcj_Yytoken$Types__init_($rt_s(1395), 1);
+    cgcj_Yytoken$Types_DATUM = $java.cgcj_Yytoken$Types__init_($rt_s(1396), 2);
+    cgcj_Yytoken$Types_END = $java.cgcj_Yytoken$Types__init_($rt_s(1397), 3);
+    cgcj_Yytoken$Types_LEFT_BRACE = $java.cgcj_Yytoken$Types__init_($rt_s(1398), 4);
+    cgcj_Yytoken$Types_LEFT_SQUARE = $java.cgcj_Yytoken$Types__init_($rt_s(1399), 5);
+    cgcj_Yytoken$Types_RIGHT_BRACE = $java.cgcj_Yytoken$Types__init_($rt_s(1400), 6);
+    cgcj_Yytoken$Types_RIGHT_SQUARE = $java.cgcj_Yytoken$Types__init_($rt_s(1401), 7);
     var$1 = $rt_createArray(cgcj_Yytoken$Types, 8);
     var$2 = var$1.data;
     var$2[0] = cgcj_Yytoken$Types_COLON;
@@ -68706,7 +68591,7 @@ $java.oktts_MotionBlurBaseTest$testMain$2$1_invoke0 = function($this, $$this$ren
     var$2 = $this.$this$0218.$$velocityShader;
     oktgc_ActiveCamera_$callClinit();
     var$2.$set12($rt_s(607), oktgc_ActiveCamera_getViewProjectionMatrix(oktgc_ActiveCamera_INSTANCE));
-    $this.$this$0218.$$velocityShader.$set12($rt_s(1403), oktgc_ActiveCamera_getPreviousViewProjectionMatrix(oktgc_ActiveCamera_INSTANCE));
+    $this.$this$0218.$$velocityShader.$set12($rt_s(1402), oktgc_ActiveCamera_getPreviousViewProjectionMatrix(oktgc_ActiveCamera_INSTANCE));
     $this.$this$0218.$$velocityShader.$set54($rt_s(608), $this.$this$0218.$$cubePos);
     $this.$this$0218.$$velocityShader.$set54($rt_s(1145), $this.$this$0218.$$cubePrevPos);
     oktm_IMesh$DefaultImpls_render$default($this.$this$0218.$$cube3, $this.$this$0218.$$velocityShader, 0, 0, 0, 0, 30, null);
@@ -68953,7 +68838,7 @@ $java.oktt_TestGroup__init_0 = function($this, $name) {
 };
 function oktt_TestGroup__init_($this, $name, $tests) {
     kji_Intrinsics_checkParameterIsNotNull($name, $rt_s(17));
-    kji_Intrinsics_checkParameterIsNotNull($tests, $rt_s(1404));
+    kji_Intrinsics_checkParameterIsNotNull($tests, $rt_s(1403));
     $java.oktt_TestGroup__init_0($this, $name);
     kc_CollectionsKt__MutableCollectionsKt_addAll($this, $tests);
 }
@@ -69109,7 +68994,7 @@ function oktgn_ITransformNode$DefaultImpls_updateTransform($$this, $recursive) {
 }
 function oktgn_ITransformNode$DefaultImpls_updateTransform$default(var$1, var$2, var$3, var$4) {
     if (var$4 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1405)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1404)));
     if (var$3 & 1)
         var$2 = 1;
     var$1.$updateTransform0(var$2);
@@ -69129,7 +69014,7 @@ function oktgn_ITransformNode$DefaultImpls_getWorldMatrix($$this, $out, $isLocal
 }
 function oktgn_ITransformNode$DefaultImpls_getWorldMatrix$default(var$1, var$2, var$3, var$4, var$5) {
     if (var$5 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1406)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1405)));
     if (var$4 & 1) {
         oktgn_ITransformNode_$callClinit();
         var$2 = oktgn_ITransformNode$Companion_access$getTmpM$p(oktgn_ITransformNode_Companion);
@@ -69145,7 +69030,7 @@ function oktgn_ITransformNode$DefaultImpls_dst2($$this, $position, $isLocal) {
 }
 function oktgn_ITransformNode$DefaultImpls_dst2$default(var$1, var$2, var$3, var$4, var$5) {
     if (var$5 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1407)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1406)));
     if (var$4 & 2)
         var$3 = 0;
     return var$1.$dst23(var$2, var$3);
@@ -69370,7 +69255,7 @@ $java.cgcj_Yylex_zzUnpackAction = function() {
     $java.cgcj_Yylex_$callClinit();
     $result = $rt_createIntArray(45);
     $offset = 0;
-    $java.cgcj_Yylex_zzUnpackAction0($rt_s(1408), $offset, $result);
+    $java.cgcj_Yylex_zzUnpackAction0($rt_s(1407), $offset, $result);
     return $result;
 };
 $java.cgcj_Yylex_zzUnpackAction0 = function($packed, $offset, $result) {
@@ -69401,7 +69286,7 @@ $java.cgcj_Yylex_zzUnpackRowMap = function() {
     $java.cgcj_Yylex_$callClinit();
     $result = $rt_createIntArray(45);
     $offset = 0;
-    $java.cgcj_Yylex_zzUnpackRowMap0($rt_s(1409), $offset, $result);
+    $java.cgcj_Yylex_zzUnpackRowMap0($rt_s(1408), $offset, $result);
     return $result;
 };
 $java.cgcj_Yylex_zzUnpackRowMap0 = function($packed, $offset, $result) {
@@ -69425,7 +69310,7 @@ $java.cgcj_Yylex_zzUnpackAttribute = function() {
     $java.cgcj_Yylex_$callClinit();
     $result = $rt_createIntArray(45);
     $offset = 0;
-    $java.cgcj_Yylex_zzUnpackAttribute0($rt_s(1410), $offset, $result);
+    $java.cgcj_Yylex_zzUnpackAttribute0($rt_s(1409), $offset, $result);
     return $result;
 };
 $java.cgcj_Yylex_zzUnpackAttribute0 = function($packed, $offset, $result) {
@@ -69819,7 +69704,7 @@ $java.cgcj_Yylex__clinit_ = function() {
     var$2[2] = 1;
     var$2[3] = 1;
     $java.cgcj_Yylex_ZZ_LEXSTATE = var$1;
-    $java.cgcj_Yylex_ZZ_CMAP = $java.cgcj_Yylex_zzUnpackCMap($rt_s(1411));
+    $java.cgcj_Yylex_ZZ_CMAP = $java.cgcj_Yylex_zzUnpackCMap($rt_s(1410));
     $java.cgcj_Yylex_ZZ_ACTION = $java.cgcj_Yylex_zzUnpackAction();
     $java.cgcj_Yylex_ZZ_ROWMAP = $java.cgcj_Yylex_zzUnpackRowMap();
     var$1 = $rt_createIntArray(675);
@@ -70502,9 +70387,9 @@ $java.cgcj_Yylex__clinit_ = function() {
     $java.cgcj_Yylex_ZZ_TRANS = var$1;
     var$1 = $rt_createArray(jl_String, 3);
     var$2 = var$1.data;
-    var$2[0] = $rt_s(1412);
-    var$2[1] = $rt_s(1413);
-    var$2[2] = $rt_s(1414);
+    var$2[0] = $rt_s(1411);
+    var$2[1] = $rt_s(1412);
+    var$2[2] = $rt_s(1413);
     $java.cgcj_Yylex_ZZ_ERROR_MSG = var$1;
     $java.cgcj_Yylex_ZZ_ATTRIBUTE = $java.cgcj_Yylex_zzUnpackAttribute();
 };
@@ -70591,16 +70476,16 @@ $java.oktsg_GLSL__clinit_ = function() {
     $java.oktsg_GLSL_defaultNormal = oktsg_GLSLVec3Inline__init_1(0.5, 0.5, 1.0, null, 8, null);
     var$1 = $java.oktsg_GLSL_nodes;
     $java.oktsg_GLSL$1_$callClinit();
-    var$1.$put3($rt_s(1415), $java.oktsg_GLSL$1_INSTANCE);
+    var$1.$put3($rt_s(1414), $java.oktsg_GLSL$1_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     $java.oktsg_GLSL$2_$callClinit();
-    var$1.$put3($rt_s(1416), $java.oktsg_GLSL$2_INSTANCE);
+    var$1.$put3($rt_s(1415), $java.oktsg_GLSL$2_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     $java.oktsg_GLSL$3_$callClinit();
     var$1.$put3($rt_s(333), $java.oktsg_GLSL$3_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     $java.oktsg_GLSL$4_$callClinit();
-    var$1.$put3($rt_s(1417), $java.oktsg_GLSL$4_INSTANCE);
+    var$1.$put3($rt_s(1416), $java.oktsg_GLSL$4_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     $java.oktsg_GLSL$5_$callClinit();
     var$1.$put3($rt_s(983), $java.oktsg_GLSL$5_INSTANCE);
@@ -70612,25 +70497,25 @@ $java.oktsg_GLSL__clinit_ = function() {
     var$1.$put3($rt_s(525), $java.oktsg_GLSL$7_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     $java.oktsg_GLSL$8_$callClinit();
-    var$1.$put3($rt_s(1418), $java.oktsg_GLSL$8_INSTANCE);
+    var$1.$put3($rt_s(1417), $java.oktsg_GLSL$8_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     $java.oktsg_GLSL$9_$callClinit();
-    var$1.$put3($rt_s(1419), $java.oktsg_GLSL$9_INSTANCE);
+    var$1.$put3($rt_s(1418), $java.oktsg_GLSL$9_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     oktsg_GLSL$10_$callClinit();
-    var$1.$put3($rt_s(1420), oktsg_GLSL$10_INSTANCE);
+    var$1.$put3($rt_s(1419), oktsg_GLSL$10_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     oktsg_GLSL$11_$callClinit();
-    var$1.$put3($rt_s(1421), oktsg_GLSL$11_INSTANCE);
+    var$1.$put3($rt_s(1420), oktsg_GLSL$11_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     oktsg_GLSL$12_$callClinit();
-    var$1.$put3($rt_s(1422), oktsg_GLSL$12_INSTANCE);
+    var$1.$put3($rt_s(1421), oktsg_GLSL$12_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     oktsg_GLSL$13_$callClinit();
     var$1.$put3($rt_s(324), oktsg_GLSL$13_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     oktsg_GLSL$14_$callClinit();
-    var$1.$put3($rt_s(1423), oktsg_GLSL$14_INSTANCE);
+    var$1.$put3($rt_s(1422), oktsg_GLSL$14_INSTANCE);
     var$1 = $java.oktsg_GLSL_nodes;
     oktsg_GLSL$15_$callClinit();
     var$1.$put3($rt_s(1160), oktsg_GLSL$15_INSTANCE);
@@ -70741,7 +70626,7 @@ $java.jur_Pattern_pattern = function($this) {
 };
 $java.jur_Pattern_compile = function($pattern, $flags) {
     if ($pattern === null)
-        $rt_throw(jl_NullPointerException__init_0($rt_s(1424)));
+        $rt_throw(jl_NullPointerException__init_0($rt_s(1423)));
     if ($flags && ($flags | 255) != 255)
         $rt_throw(jl_IllegalArgumentException__init_($rt_s(6)));
     jur_AbstractSet_$callClinit();
@@ -71525,17 +71410,17 @@ $java.jur_Pattern_finalizeCompile = function($this) {
 };
 function jur_Pattern_quote($s) {
     var $sb, $apos, var$4, $apos_0;
-    $sb = jl_StringBuilder__init_().$append($rt_s(1425));
+    $sb = jl_StringBuilder__init_().$append($rt_s(1424));
     $apos = 0;
     while (true) {
-        var$4 = $s.$indexOf1($rt_s(1426), $apos);
+        var$4 = $s.$indexOf1($rt_s(1425), $apos);
         if (var$4 < 0)
             break;
         $apos_0 = var$4 + 2 | 0;
-        $sb.$append($s.$substring($apos, $apos_0)).$append($rt_s(1427));
+        $sb.$append($s.$substring($apos, $apos_0)).$append($rt_s(1426));
         $apos = $apos_0;
     }
-    return $sb.$append($s.$substring1($apos)).$append($rt_s(1426)).$toString();
+    return $sb.$append($s.$substring1($apos)).$append($rt_s(1425)).$toString();
 }
 $java.jur_Pattern_groupCount = function($this) {
     return $this.$globalGroupIndex;
@@ -71643,7 +71528,7 @@ $java.oktgg_GLTFTexture$read$2_invoke0 = function($this, $sourceIndex) {
     oktgg_GLTFTexture_getGltf($this.$this$077).$getImages0().$getOrWait0(oktgg_GLTFTexture_getSource($this.$this$077), oktgg_GLTFTexture$read$2$1__init_($this));
     var$2 = $this.$$json1;
     oktgg_GLTFTexture$read$2$2_$callClinit();
-    var$2.$get16($rt_s(1428), oktgg_GLTFTexture$read$2$2_INSTANCE);
+    var$2.$get16($rt_s(1427), oktgg_GLTFTexture$read$2$2_INSTANCE);
 };
 $java.oktgg_GLTFTexture$read$2__init_ = function(var$0, var$1, var$2, var$3, var$4, var$5, var$6, var$7) {
     var$0.$this$077 = var$1;
@@ -72603,31 +72488,31 @@ function oktga_AnimPlayer$AnimationDesc__init_() {
     oktga_AnimPlayer$AnimationDesc__init_0(var_0);
     return var_0;
 }
-$java.oktga_AnimPlayer$AnimationDesc_setListener = function($this, $_set___) {
+function oktga_AnimPlayer$AnimationDesc_setListener($this, $_set___) {
     $this.$listener = $_set___;
-};
-$java.oktga_AnimPlayer$AnimationDesc_getAnimation = function($this) {
+}
+function oktga_AnimPlayer$AnimationDesc_getAnimation($this) {
     return $this.$animation;
-};
-$java.oktga_AnimPlayer$AnimationDesc_setAnimation = function($this, $_set___) {
+}
+function oktga_AnimPlayer$AnimationDesc_setAnimation($this, $_set___) {
     $this.$animation = $_set___;
-};
-$java.oktga_AnimPlayer$AnimationDesc_setSpeed = function($this, $_set___) {
+}
+function oktga_AnimPlayer$AnimationDesc_setSpeed($this, $_set___) {
     $this.$speed = $_set___;
-};
+}
 $java.oktga_AnimPlayer$AnimationDesc_getTime = function($this) {
     return $this.$time;
 };
-$java.oktga_AnimPlayer$AnimationDesc_setTime = function($this, $_set___) {
+function oktga_AnimPlayer$AnimationDesc_setTime($this, $_set___) {
     $this.$time = $_set___;
-};
-$java.oktga_AnimPlayer$AnimationDesc_getOffset = function($this) {
+}
+function oktga_AnimPlayer$AnimationDesc_getOffset($this) {
     return $this.$offset;
-};
-$java.oktga_AnimPlayer$AnimationDesc_setOffset = function($this, $_set___) {
+}
+function oktga_AnimPlayer$AnimationDesc_setOffset($this, $_set___) {
     $this.$offset = $_set___;
-};
-$java.oktga_AnimPlayer$AnimationDesc_getDuration = function($this) {
+}
+function oktga_AnimPlayer$AnimationDesc_getDuration($this) {
     var var$1, $anim;
     if ($this.$duration3 >= 0.0)
         var$1 = $this.$duration3;
@@ -72636,28 +72521,28 @@ $java.oktga_AnimPlayer$AnimationDesc_getDuration = function($this) {
         var$1 = $anim === null ? 0.0 : $anim.$getDuration() - $this.$offset;
     }
     return var$1;
-};
-$java.oktga_AnimPlayer$AnimationDesc_setDuration = function($this, $_set___) {
+}
+function oktga_AnimPlayer$AnimationDesc_setDuration($this, $_set___) {
     $this.$duration3 = $_set___;
-};
-$java.oktga_AnimPlayer$AnimationDesc_getLoopCount = function($this) {
+}
+function oktga_AnimPlayer$AnimationDesc_getLoopCount($this) {
     return $this.$loopCount;
-};
-$java.oktga_AnimPlayer$AnimationDesc_setLoopCount = function($this, $_set___) {
+}
+function oktga_AnimPlayer$AnimationDesc_setLoopCount($this, $_set___) {
     $this.$loopCount = $_set___;
-};
+}
 $java.oktga_AnimPlayer$AnimationDesc_getPreviousTime = function($this) {
     return $this.$previousTime;
 };
 $java.oktga_AnimPlayer$AnimationDesc_getExecutedActions = function($this) {
     return $this.$executedActions;
 };
-$java.oktga_AnimPlayer$AnimationDesc_update = function($this, $delta) {
+function oktga_AnimPlayer$AnimationDesc_update($this, $delta) {
     var $diff, $duration, var$4, $i, $listener, var$7, var$8, $result;
     $this.$previousTime = $this.$time;
     if ($this.$loopCount && $this.$animation !== null) {
         $diff = $this.$speed * $delta;
-        $duration = $java.oktga_AnimPlayer$AnimationDesc_getDuration($this);
+        $duration = oktga_AnimPlayer$AnimationDesc_getDuration($this);
         oktm_MATH_$callClinit();
         if (!oktm_MATH_isNotZero(oktm_MATH_INSTANCE, $duration))
             var$4 = 1;
@@ -72695,7 +72580,7 @@ $java.oktga_AnimPlayer$AnimationDesc_update = function($this, $delta) {
         return 0.0;
     }
     return $delta;
-};
+}
 function oktga_AnimPlayer$AnimationDesc__init_0($this) {
     jl_Object__init_0($this);
     $this.$executedActions = ju_HashSet__init_();
@@ -73637,7 +73522,7 @@ $java.oom_DMatrix3_dotRow = function($this, $row, $v3) {
     if ($row == 1)
         return oom_DMatrix3_get10($this) * $v3.$get01() + oom_DMatrix3_get11($this) * $v3.$get10() + oom_DMatrix3_get12($this) * $v3.$get20();
     if ($row != 2)
-        $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1429)).$append1($row).$toString()));
+        $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1428)).$append1($row).$toString()));
     return oom_DMatrix3_get20($this) * $v3.$get01() + oom_DMatrix3_get21($this) * $v3.$get10() + oom_DMatrix3_get22($this) * $v3.$get20();
 };
 $java.oom_DMatrix3_dotColCol = function($this, $col, $m2, $col2) {
@@ -73669,7 +73554,7 @@ $java.oom_DMatrix3_dotColCol = function($this, $col, $m2, $col2) {
                 return oom_DMatrix3_get02($this) * $m2.$get02() + oom_DMatrix3_get12($this) * $m2.$get12() + oom_DMatrix3_get22($this) * $m2.$get22();
         }
     }
-    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(449)).$append1($col).$append($rt_s(1430)).$append1($col2).$toString()));
+    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(449)).$append1($col).$append($rt_s(1429)).$append1($col2).$toString()));
 };
 $java.oom_DMatrix3_dotRowCol = function($this, $row, $m2, $col2) {
     a: {
@@ -73700,7 +73585,7 @@ $java.oom_DMatrix3_dotRowCol = function($this, $row, $m2, $col2) {
                 return oom_DMatrix3_get20($this) * $m2.$get02() + oom_DMatrix3_get21($this) * $m2.$get12() + oom_DMatrix3_get22($this) * $m2.$get22();
         }
     }
-    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1429)).$append1($row).$append($rt_s(1430)).$append1($col2).$toString()));
+    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1428)).$append1($row).$append($rt_s(1429)).$append1($col2).$toString()));
 };
 $java.oom_DMatrix3_dotRowRow = function($this, $row, $m2, $row2) {
     a: {
@@ -73731,7 +73616,7 @@ $java.oom_DMatrix3_dotRowRow = function($this, $row, $m2, $row2) {
                 return oom_DMatrix3_get20($this) * $m2.$get200() + oom_DMatrix3_get21($this) * $m2.$get21() + oom_DMatrix3_get22($this) * $m2.$get22();
         }
     }
-    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1429)).$append1($row).$append($rt_s(1431)).$append1($row2).$toString()));
+    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1428)).$append1($row).$append($rt_s(1430)).$append1($row2).$toString()));
 };
 function oom_DMatrix3_get($this, $i, $j) {
     return $this.$v5.data[($i * 4 | 0) + $j | 0];
@@ -73905,10 +73790,10 @@ function okttm_PlaneMeshBuilderTest__init_() {
     return var_0;
 }
 $java.okttm_PlaneMeshBuilderTest_getName = function($this) {
-    return $rt_s(1432);
+    return $rt_s(1431);
 };
 $java.okttm_PlaneMeshBuilderTest_testMain = function($this) {
-    var $shader, var$2, var$3, var$4, var$5, $mesh, var$7, $cubeMatrix4, $temp;
+    var $shader, var$2, var$3, var$4, var$5, $mesh, var$7, var$8, $cubeMatrix4, $temp;
     $shader = new okts_Shader;
     var$2 = null;
     var$3 = null;
@@ -73921,17 +73806,18 @@ $java.okttm_PlaneMeshBuilderTest_testMain = function($this) {
     oktg_GL_setDepthTestEnabled(oktg_GL_INSTANCE, 1);
     $mesh = oktmb_MeshBuilder_build$default(oktmb_PlaneMeshBuilder__init_(4.0, 4.0, 5, 5, null, null, 48, null), null, 1, null);
     oktgc_ActiveCamera_$callClinit();
-    var$2 = oktgc_ActiveCamera_INSTANCE;
-    var$3 = oktgc_Camera__init_(null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4095, null);
-    var$7 = oktm_Vec3__init_0(1.0, 3.0, 1.0);
+    var$7 = oktgc_ActiveCamera_INSTANCE;
+    var$2 = oktgc_Camera__init_(null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4095, null);
+    var$8 = oktm_Vec3__init_0(1.0, 3.0, 1.0);
     oktm_IVec3_$callClinit();
-    oktgc_ICamera$DefaultImpls_lookAt$default(var$3, var$7, oktm_IVec3$Companion_getZero(oktm_IVec3_Companion), null, 4, null);
-    oktgc_Camera_setNear(var$3, 0.10000000149011612);
-    oktgc_Camera_setFar(var$3, 100.0);
-    var$3.$update0();
-    oktgc_ActiveCamera_setApi(var$2, var$3);
+    oktgc_ICamera$DefaultImpls_lookAt$default(var$2, var$8, oktm_IVec3$Companion_getZero(oktm_IVec3_Companion), null, 4, null);
+    oktgc_Camera_setNear(var$2, 0.10000000149011612);
+    oktgc_Camera_setFar(var$2, 100.0);
+    var$2.$update0();
+    oktgc_ActiveCamera_setApi(var$7, var$2);
     $cubeMatrix4 = oktm_Mat4__init_();
     $temp = oktm_Mat4__init_();
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, $java.okttm_PlaneMeshBuilderTest$testMain$2__init_($cubeMatrix4, $shader, $temp, $mesh), 1, null);
 };
 function okttm_PlaneMeshBuilderTest__init_0($this) {
@@ -74242,7 +74128,7 @@ function oktts_CascadedShadowMappingBaseTest__init_() {
     return var_0;
 }
 $java.oktts_CascadedShadowMappingBaseTest_getName = function($this) {
-    return $rt_s(1433);
+    return $rt_s(1432);
 };
 function oktts_CascadedShadowMappingBaseTest_getNumCascades($this) {
     return $this.$numCascades0;
@@ -74321,15 +74207,15 @@ function oktts_CascadedShadowMappingBaseTest_updateFrustums($this) {
 $java.oktts_CascadedShadowMappingBaseTest_testMain = function($this) {
     var $sceneObjectShader, var$2, var$3, var$4, var$5, var$6, var$7, $i, var$9, $depthRenderShader, var$11, var$12, var$13, $buffer, $cube, $plane, $cubeColor, $control, $screenQuad, $cubesStartX, $cubesEndX, $cubesStepX, $cubesStartZ, $cubesEndZ, $cubesStepZ, $cubesY;
     $sceneObjectShader = new okts_Shader;
-    var$2 = jl_StringBuilder__init_().$append($rt_s(1434));
+    var$2 = jl_StringBuilder__init_().$append($rt_s(1433));
+    var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1434));
     var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1435));
-    var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1436));
-    var$3 = var$2.$append1($this.$numCascades0).$append($rt_s(1437)).$toString();
-    var$2 = jl_StringBuilder__init_().$append($rt_s(1438));
+    var$3 = var$2.$append1($this.$numCascades0).$append($rt_s(1436)).$toString();
+    var$2 = jl_StringBuilder__init_().$append($rt_s(1437));
+    var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1438));
+    var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1434));
     var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1439));
-    var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1435));
-    var$2 = var$2.$append1($this.$numCascades0).$append($rt_s(1440));
-    var$4 = var$2.$append1($this.$numCascades0).$append($rt_s(1441)).$toString();
+    var$4 = var$2.$append1($this.$numCascades0).$append($rt_s(1440)).$toString();
     var$5 = null;
     var$2 = null;
     var$6 = null;
@@ -74339,7 +74225,7 @@ $java.oktts_CascadedShadowMappingBaseTest_testMain = function($this) {
     $i = 0;
     var$9 = $this.$numCascades0;
     while ($i < var$9) {
-        $sceneObjectShader.$set35(jl_StringBuilder__init_().$append($rt_s(1442)).$append1($i).$append12(93).$toString(), $i);
+        $sceneObjectShader.$set35(jl_StringBuilder__init_().$append($rt_s(1441)).$append1($i).$append12(93).$toString(), $i);
         $i = $i + 1 | 0;
     }
     $depthRenderShader = new okts_Shader;
@@ -74347,7 +74233,7 @@ $java.oktts_CascadedShadowMappingBaseTest_testMain = function($this) {
     var$5 = null;
     var$6 = null;
     var$7 = null;
-    okts_Shader__init_($depthRenderShader, $rt_s(1348), $rt_s(1349), var$4, 0, var$5, 0, var$6, 124, var$7);
+    okts_Shader__init_($depthRenderShader, $rt_s(1347), $rt_s(1348), var$4, 0, var$5, 0, var$6, 124, var$7);
     oktgc_ActiveCamera_$callClinit();
     oktgc_ActiveCamera_setApi(oktgc_ActiveCamera_INSTANCE, oktgc_Camera__init_(null, null, null, 0.10000000149011612, 200.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4071, null));
     oktts_CascadedShadowMappingBaseTest_updateFrustums($this);
@@ -74389,6 +74275,7 @@ $java.oktts_CascadedShadowMappingBaseTest_testMain = function($this) {
     $cubesEndZ = 100.0;
     $cubesStepZ = 20.0;
     $cubesY = 1.0;
+    oktg_GL_glClearColor(oktg_GL_INSTANCE, 0.0, 0.0, 0.0, 1.0);
     oktg_GL_render$default(oktg_GL_INSTANCE, null, oktts_CascadedShadowMappingBaseTest$testMain$1__init_($this, $control, var$11, $depthRenderShader, $plane, $cubesStartX, $cubesEndX, $cubesStartZ, $cubesEndZ, $cubesY, $cube, $cubesStepZ, $cubesStepX, $sceneObjectShader, $cubeColor, $screenQuad), 1, null);
 };
 function oktts_CascadedShadowMappingBaseTest__init_0($this) {
@@ -74497,7 +74384,7 @@ function oktsg_SkyboxVertexNode_getClipSpacePosition($this) {
     return $this.$clipSpacePosition0;
 }
 $java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName = function($this) {
-    return $rt_s(1443);
+    return $rt_s(1442);
 };
 $java.oktsg_SkyboxVertexNode_prepareToDrawScene = function($this, $scene) {
     var var$2, var$3, var$4;
@@ -74531,7 +74418,7 @@ $java.oktsg_SkyboxVertexNode_declarationVert = function($this, $out) {
     $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append12(32).$append($this.$worldSpacePosition.$getTypedRef0()).$append($rt_s(330)).$toString());
     $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append12(32).$append($this.$clipSpacePosition0.$getTypedRef0()).$append($rt_s(330)).$toString());
     $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append($rt_s(1156)).$toString());
-    $out.$append(jl_StringBuilder__init_().$append($rt_s(1444)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(330)).$toString());
+    $out.$append(jl_StringBuilder__init_().$append($rt_s(1443)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(330)).$toString());
 };
 $java.oktsg_SkyboxVertexNode_executionFrag = function($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
@@ -74547,7 +74434,7 @@ $java.oktsg_SkyboxVertexNode_executionVert = function($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if (!(!$this.$clipSpacePosition0.$isUsed0() && !$this.$worldSpacePosition.$isUsed0() && !$this.$velocity0.$isUsed0())) {
         $out.$append(jl_StringBuilder__init_().$append($this.$attributePosition.$getRef0()).$append($rt_s(331)).$append($this.$aPositionName1).$append($rt_s(1045)).$toString());
-        $out.$append(jl_StringBuilder__init_().$append($this.$worldSpacePosition.$getRef0()).$append($rt_s(331)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(1445)).$append($this.$aPositionName1).$append($rt_s(1446)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(1058)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append($this.$worldSpacePosition.$getRef0()).$append($rt_s(331)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(1444)).$append($this.$aPositionName1).$append($rt_s(1445)).$append($java.oktsg_SkyboxVertexNode_getUSkyboxVertexTransformName($this)).$append($rt_s(1058)).$toString());
         if (!(!$this.$clipSpacePosition0.$isUsed0() && !$this.$velocity0.$isUsed0())) {
             $out.$append(jl_StringBuilder__init_().$append($this.$clipSpacePosition0.$getRef0()).$append($rt_s(331)).$append($java.oktsg_SkyboxVertexNode_getViewProjectionMatrix($this).$getRef0()).$append($rt_s(1032)).$append($this.$worldSpacePosition.$asVec4()).$append($rt_s(330)).$toString());
             if ($this.$velocity0.$isUsed0())
@@ -74560,7 +74447,7 @@ $java.oktsg_SkyboxVertexNode__init_ = function($this, $viewProjectionMatrix) {
     kji_Intrinsics_checkParameterIsNotNull($viewProjectionMatrix, $rt_s(1121));
     oktsg_ShaderNode__init_0($this);
     $this.$aPositionName1 = $rt_s(543);
-    $this.$attributePosition = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(1447)));
+    $this.$attributePosition = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(1446)));
     $this.$worldSpacePosition = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec3__init_($rt_s(1141)));
     $this.$clipSpacePosition0 = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec4__init_($rt_s(1128)));
     $this.$velocity0 = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec2__init_($rt_s(1160)));
@@ -74705,7 +74592,7 @@ $java.oktsg_MergeVec4__init_0 = function($this, $x, $y, $z, $w) {
     kji_Intrinsics_checkParameterIsNotNull($z, $rt_s(351));
     kji_Intrinsics_checkParameterIsNotNull($w, $rt_s(101));
     oktsg_ShaderNode__init_0($this);
-    var$5 = oktsg_GLSLValue__init_($rt_s(1448), 6);
+    var$5 = oktsg_GLSLValue__init_($rt_s(1447), 6);
     var$5.$setInlineCode(jl_StringBuilder__init_().$append($rt_s(270)).$append($x.$asFloat()).$append($rt_s(268)).$append($y.$asFloat()).$append($rt_s(268)).$append($z.$asFloat()).$append($rt_s(268)).$append($w.$asFloat()).$append12(41).$toString());
     var$5.$setScope(0);
     $this.$result1 = oktsg_ShaderNode_defOut($this, var$5);
@@ -74772,7 +74659,7 @@ function oktt_SkyboxTest__init_() {
     return var_0;
 }
 $java.oktt_SkyboxTest_getName = function($this) {
-    return $rt_s(1449);
+    return $rt_s(1448);
 };
 $java.oktt_SkyboxTest_testMain = function($this) {
     var $shader, var$2, var$3, var$4, var$5, $textureCube, var$7, var$8, $mesh, $control;
@@ -74781,7 +74668,7 @@ $java.oktt_SkyboxTest_testMain = function($this) {
     var$3 = null;
     var$4 = null;
     var$5 = null;
-    okts_Shader__init_($shader, $rt_s(1450), $rt_s(1451), var$2, 0, var$3, 0, var$4, 124, var$5);
+    okts_Shader__init_($shader, $rt_s(1449), $rt_s(1450), var$2, 0, var$3, 0, var$4, 124, var$5);
     $shader.$set35($rt_s(861), 0);
     $textureCube = oktt_TextureCube__init_(0, 1, null);
     var$7 = null;
@@ -74942,7 +74829,7 @@ function jn_URLDecoder_decode($s, $enc) {
     var var$3, $e, $toThrow, $str, $i, var$8, $$je;
     ju_Objects_requireNonNull($enc);
     if ($enc.$isEmpty())
-        $rt_throw($java.ji_UnsupportedEncodingException__init_0($rt_s(1452)));
+        $rt_throw($java.ji_UnsupportedEncodingException__init_0($rt_s(1451)));
     if ($s.$indexOf6(37) != (-1)) {
         a: {
             try {
@@ -74996,7 +74883,7 @@ $java.jn_URLDecoder_decode = function($s, $charset) {
                     while (true) {
                         var$9 = $i + 2 | 0;
                         if (var$9 >= $s.$length())
-                            $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1453)).$append1($i).$toString()));
+                            $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1452)).$append1($i).$toString()));
                         $d1 = jl_Character_digit($s.$charAt($i + 1 | 0), 16);
                         $d2 = jl_Character_digit($s.$charAt(var$9), 16);
                         if ($d1 == (-1))
@@ -75026,7 +74913,7 @@ $java.jn_URLDecoder_decode = function($s, $charset) {
         }
         return jl_String__init_0($strBuf, 0, $bufLen);
     }
-    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1454)).$append($s.$substring($i, $i + 3 | 0)).$append($rt_s(1455)).$append1($i).$toString()));
+    $rt_throw(jl_IllegalArgumentException__init_(jl_StringBuilder__init_().$append($rt_s(1453)).$append($s.$substring($i, $i + 3 | 0)).$append($rt_s(1454)).$append1($i).$toString()));
 };
 function oktmb_PlaneMeshBuilder$1() {
     kji_Lambda.call(this);
@@ -75311,7 +75198,7 @@ function oktt_TvmGL$GLObjectArray_delete($this, $id) {
     return $program;
 }
 function oktt_TvmGL$GLObjectArray__init_($this, $buildWrap) {
-    kji_Intrinsics_checkParameterIsNotNull($buildWrap, $rt_s(1456));
+    kji_Intrinsics_checkParameterIsNotNull($buildWrap, $rt_s(1455));
     ju_ArrayList__init_2($this);
     $this.$buildWrap = $buildWrap;
 }
@@ -75447,59 +75334,6 @@ $java.oktgg_GLTF$read$9$1__init_ = function(var$0, var$1) {
     var$0.$this$0247 = var$1;
     kji_Lambda__init_0(var$0, 1);
 };
-function okttsg_VertexNodeTest() {
-    jl_Object.call(this);
-}
-function okttsg_VertexNodeTest__init_() {
-    var var_0 = new okttsg_VertexNodeTest();
-    okttsg_VertexNodeTest__init_0(var_0);
-    return var_0;
-}
-$java.okttsg_VertexNodeTest_getName = function($this) {
-    return $rt_s(1457);
-};
-$java.okttsg_VertexNodeTest_testMain = function($this) {
-    var var$1, var$2, var$3, $scene, var$5, var$6, var$7, $vertexNode, $cameraDataNode;
-    oktgc_ActiveCamera_$callClinit();
-    var$1 = oktgc_ActiveCamera_INSTANCE;
-    var$2 = oktgc_Camera__init_(null, null, null, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0.0, null, 0, 4095, null);
-    var$3 = oktm_Vec3__init_0(5.0, 5.0, 5.0);
-    oktm_IVec3_$callClinit();
-    oktgc_ICamera$DefaultImpls_lookAt$default(var$2, var$3, oktm_IVec3$Companion_getZero(oktm_IVec3_Companion), null, 4, null);
-    oktgc_Camera_setNear(var$2, 0.10000000149011612);
-    oktgc_Camera_setFar(var$2, 100.0);
-    var$2.$update0();
-    oktgc_ActiveCamera_setApi(var$1, var$2);
-    $scene = oktg_Scene__init_(null, null, 3, null);
-    var$1 = $scene.$getObjects();
-    var$2 = oktg_Object3D__init_(null, null, null, 0, null, null, null, 127, null);
-    var$2.$getPosition0().$set44(2.0, 0.0, 0.0);
-    oktgn_ITransformNode$DefaultImpls_updateTransform$default(var$2, 0, 1, null);
-    var$3 = var$2.$getMeshes0();
-    var$5 = oktmb_BoxMeshBuilder__init_(0.0, 0.0, 0.0, 7, null);
-    oktmb_MeshBuilder_setPositionName(var$5, $rt_s(543));
-    var$6 = oktmb_MeshBuilder_getMaterial(var$5);
-    var$7 = okts_Shader__init_2(null, null, null, 0, null, 0, null, 127, null);
-    $vertexNode = var$7.$addNode0(oktsg_VertexNode__init_(0, 0, 0, 7, null));
-    oktsg_VertexNode_setAPositionName($vertexNode, $rt_s(543));
-    $cameraDataNode = var$7.$addNode0(oktsg_CameraDataNode__init_0(oktsg_VertexNode_getPosition($vertexNode)));
-    var$7.$addNode0(oktsg_OutputNode__init_(oktsg_CameraDataNode_getClipSpacePosition($cameraDataNode), oktsg_VertexNode_getPosition($vertexNode)));
-    var$7.$build0();
-    oktu_LOG_$callClinit();
-    oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, okts_IShader$DefaultImpls_sourceCode$default(var$7, 0, 1, null), null, 2, null);
-    var$6.$setShader(var$7);
-    var$6 = null;
-    var$7 = null;
-    var$5 = oktmb_MeshBuilder_build$default(var$5, var$6, 1, var$7);
-    var$3.$add1(var$5);
-    var$1.$add1(var$2);
-    oktg_GL_$callClinit();
-    oktg_GL_setDepthTestEnabled(oktg_GL_INSTANCE, 1);
-    oktg_GL_render$default(oktg_GL_INSTANCE, null, okttsg_VertexNodeTest$testMain$3__init_($scene), 1, null);
-};
-function okttsg_VertexNodeTest__init_0($this) {
-    jl_Object__init_0($this);
-}
 function otjb_Performance() {
     jl_Object.call(this);
 }
@@ -75607,7 +75441,7 @@ function oktpo_OdeRigidBody_getInfluenceOtherBodies($this) {
 $java.oktpo_OdeRigidBody_setGravityEnabled = function($this, $value) {
     var var$2;
     var$2 = $this.$body1;
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1458));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1456));
     var$2.$setGravityMode($value);
 };
 $java.oktpo_OdeRigidBody_isStatic = function($this) {
@@ -75634,7 +75468,7 @@ function oktpo_OdeRigidBody_setShape($this, $value) {
         if ($value !== null) {
             var$2 = $value.$getSourceObject0();
             if (var$2 === null)
-                $rt_throw(k_TypeCastException__init_($rt_s(1459)));
+                $rt_throw(k_TypeCastException__init_($rt_s(1457)));
             $geom = var$2;
             $dMass = ooo_OdeHelper_createMass();
             if (!$java.oktpo_OdeRigidBody_isStatic($this)) {
@@ -75648,7 +75482,7 @@ function oktpo_OdeRigidBody_setShape($this, $value) {
                             var$2 = $value;
                             var$5 = $java.oktpo_OdeRigidBody_getMass($this);
                             var$2 = oktpo_OdeBoxShape_getGeom(var$2);
-                            kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1460));
+                            kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1458));
                             $dMass.$setBox(var$5, var$2.$getLengths0());
                             break b;
                         case 2:
@@ -75674,13 +75508,13 @@ function oktpo_OdeRigidBody_setShape($this, $value) {
                 }
                 $geom.$setBody($this.$body1);
                 var$2 = $this.$body1;
-                kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1458));
+                kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1456));
                 var$2.$setMass($dMass);
             }
             switch ($geom.$getClassID()) {
                 case 2:
                     if ($java.oktpo_OdeRigidBody_getShape($this) === null)
-                        $rt_throw(k_TypeCastException__init_($rt_s(1461)));
+                        $rt_throw(k_TypeCastException__init_($rt_s(1459)));
                     $mat = oom_DMatrix3__init_1();
                     ooo_DRotation_dRFromAxisAndAngle($mat, 1.0, 0.0, 0.0, 1.5707963705062866);
                     $geom.$setOffsetWorldRotation($mat);
@@ -75691,7 +75525,7 @@ function oktpo_OdeRigidBody_setShape($this, $value) {
                     break a;
             }
             if ($java.oktpo_OdeRigidBody_getShape($this) === null)
-                $rt_throw(k_TypeCastException__init_($rt_s(1462)));
+                $rt_throw(k_TypeCastException__init_($rt_s(1460)));
         }
     }
 }
@@ -75699,10 +75533,10 @@ $java.oktpo_OdeRigidBody_getWorldTransform = function($this, $out) {
     var var$2, $t, var$4, $r;
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     var$2 = $this.$body1;
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1458));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1456));
     $t = var$2.$getPosition2();
     var$4 = $this.$body1;
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1458));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1456));
     $r = var$4.$getRotation2();
     $out.$setM00($r.$get00());
     $out.$setM010($r.$get010());
@@ -75749,15 +75583,15 @@ $java.oktpo_OdeRigidBody__init_0 = function($this, $world, $mass, $friction) {
     $this.$influenceOtherBodies0 = 1;
     var$4 = oktpo_OdePhysicsWorld_getSourceObject($this.$world2);
     if (var$4 === null)
-        $rt_throw(k_TypeCastException__init_($rt_s(1463)));
+        $rt_throw(k_TypeCastException__init_($rt_s(1461)));
     $this.$body1 = ooo_OdeHelper_createBody(var$4);
     $this.$isStatic = $java.oktpo_OdeRigidBody_getMass($this) !== 0.0 ? 0 : 1;
     var$4 = $this.$body1;
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1458));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1456));
     var$4.$setData($this);
     if ($java.oktpo_OdeRigidBody_getMass($this) === 0.0) {
         var$4 = $this.$body1;
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1458));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$4, $rt_s(1456));
         var$4.$setGravityMode(0);
     }
 };
@@ -75986,12 +75820,12 @@ $java.oooi_DxQuickStep_dxQuickStepIsland = function($this, $callContext) {
         $java.oooi_DxQuickStep_dxQuickStepIsland_Stage0_Joints($stage0JointsCallContext);
         $java.oooi_DxQuickStep_dxQuickStepIsland_Stage1($stage1CallContext);
     } else {
-        $stage1 = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1464), $java.oooi_DxQuickStep$1__init_($this, $stage1CallContext));
-        $joints = $stage1.$subtask($rt_s(1465), $java.oooi_DxQuickStep$2__init_($this, $stage0JointsCallContext));
+        $stage1 = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1462), $java.oooi_DxQuickStep$1__init_($this, $stage1CallContext));
+        $joints = $stage1.$subtask($rt_s(1463), $java.oooi_DxQuickStep$2__init_($this, $stage0JointsCallContext));
         $joints.$submit0();
         $i = 1;
         while ($i < $allowedThreads) {
-            $bodies = $stage1.$subtask($rt_s(1466), $java.oooi_DxQuickStep$3__init_($this, $stage0BodiesCallContext));
+            $bodies = $stage1.$subtask($rt_s(1464), $java.oooi_DxQuickStep$3__init_($this, $stage0BodiesCallContext));
             $bodies.$submit0();
             $i = $i + 1 | 0;
         }
@@ -76199,13 +76033,13 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage1 = function($stage1CallContext) {
             $java.oooi_DxQuickStep_dxQuickStepIsland_Stage2c($stage2CallContext);
             $java.oooi_DxQuickStep_dxQuickStepIsland_Stage3($stage3CallContext);
         } else {
-            $stage3 = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1467), $java.oooi_DxQuickStep$4__init_($stage3CallContext));
-            $stage2bSync = $stage3.$subgroup($rt_s(1468), $java.oooi_DxQuickStep$5__init_($stage2CallContext, $stage3));
-            $stage2aSync = $stage2bSync.$subgroup($rt_s(1469), $java.oooi_DxQuickStep$6__init_($stage2CallContext, $stage2bSync));
+            $stage3 = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1465), $java.oooi_DxQuickStep$4__init_($stage3CallContext));
+            $stage2bSync = $stage3.$subgroup($rt_s(1466), $java.oooi_DxQuickStep$5__init_($stage2CallContext, $stage3));
+            $stage2aSync = $stage2bSync.$subgroup($rt_s(1467), $java.oooi_DxQuickStep$6__init_($stage2CallContext, $stage2bSync));
             $stage2a_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($nj, $allowedThreads, 1);
             $i = 1;
             while ($i < $stage2a_allowedThreads) {
-                $bodies = $stage2aSync.$subtask($rt_s(1470), $java.oooi_DxQuickStep$7__init_($stage2CallContext));
+                $bodies = $stage2aSync.$subtask($rt_s(1468), $java.oooi_DxQuickStep$7__init_($stage2CallContext));
                 $bodies.$submit0();
                 $i = $i + 1 | 0;
             }
@@ -76225,7 +76059,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage2aSync = function($stage2CallConte
     $stage2b_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($nb, $allowedThreads, 16);
     $i = 1;
     while ($i < $stage2b_allowedThreads) {
-        $task = $group.$subtask($rt_s(1471), $java.oooi_DxQuickStep$8__init_($stage2CallContext));
+        $task = $group.$subtask($rt_s(1469), $java.oooi_DxQuickStep$8__init_($stage2CallContext));
         $task.$submit0();
         $i = $i + 1 | 0;
     }
@@ -76241,7 +76075,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage2bSync = function($stage2CallConte
     $stage2c_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($m, $allowedThreads, 32);
     $i = 1;
     while ($i < $stage2c_allowedThreads) {
-        $task = $group.$subtask($rt_s(1472), $java.oooi_DxQuickStep$9__init_($stage2CallContext));
+        $task = $group.$subtask($rt_s(1470), $java.oooi_DxQuickStep$9__init_($stage2CallContext));
         $task.$submit0();
         $i = $i + 1 | 0;
     }
@@ -76468,20 +76302,20 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage3 = function($stage3CallContext) {
             $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4b($stage4CallContext);
             $java.oooi_DxQuickStep_dxQuickStepIsland_Stage5($stage5CallContext);
         } else {
-            $stage5 = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1473), $java.oooi_DxQuickStep$10__init_($stage5CallContext));
-            $stage4LCP_IterationSync = $stage5.$subgroup($rt_s(1474), $java.oooi_DxQuickStep$11__init_($stage4CallContext, $stage5));
+            $stage5 = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1471), $java.oooi_DxQuickStep$10__init_($stage5CallContext));
+            $stage4LCP_IterationSync = $stage5.$subgroup($rt_s(1472), $java.oooi_DxQuickStep$11__init_($stage4CallContext, $stage5));
             $stage4LCP_Iteration_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($m, $allowedThreads, 1);
             $stage4CallContext.$AssignLCP_IterationData($stage4LCP_IterationSync, $stage4LCP_Iteration_allowedThreads);
-            $stage4LCP_IterationStart = $stage4LCP_IterationSync.$subgroup($rt_s(1475), $java.oooi_DxQuickStep$12__init_($stage4CallContext));
-            $stage4LCP_fcStart = $stage4LCP_IterationStart.$subgroup($rt_s(1476), $java.oooi_DxQuickStep$13__init_($stage4CallContext, $stage4LCP_IterationStart));
-            $stage4LCP_iMJSync = $stage4LCP_IterationStart.$subgroup($rt_s(1477), $java.oooi_DxQuickStep$14__init_($stage4CallContext, $stage4LCP_IterationStart));
-            $stage4LCP_ReorderPrep = $stage4LCP_IterationStart.$subtask($rt_s(1478), $java.oooi_DxQuickStep$15__init_($stage4CallContext));
+            $stage4LCP_IterationStart = $stage4LCP_IterationSync.$subgroup($rt_s(1473), $java.oooi_DxQuickStep$12__init_($stage4CallContext));
+            $stage4LCP_fcStart = $stage4LCP_IterationStart.$subgroup($rt_s(1474), $java.oooi_DxQuickStep$13__init_($stage4CallContext, $stage4LCP_IterationStart));
+            $stage4LCP_iMJSync = $stage4LCP_IterationStart.$subgroup($rt_s(1475), $java.oooi_DxQuickStep$14__init_($stage4CallContext, $stage4LCP_IterationStart));
+            $stage4LCP_ReorderPrep = $stage4LCP_IterationStart.$subtask($rt_s(1476), $java.oooi_DxQuickStep$15__init_($stage4CallContext));
             $stage4LCP_ReorderPrep.$submit0();
             $nj = $localContext.$m_nj;
             $stage4a_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($nj, $allowedThreads, 512);
             $i = 0;
             while ($i < $stage4a_allowedThreads) {
-                $stage4a = $stage4LCP_fcStart.$subtask($rt_s(1479), $java.oooi_DxQuickStep$16__init_($stage4CallContext));
+                $stage4a = $stage4LCP_fcStart.$subtask($rt_s(1477), $java.oooi_DxQuickStep$16__init_($stage4CallContext));
                 $stage4a.$submit0();
                 $i = $i + 1 | 0;
             }
@@ -76489,7 +76323,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage3 = function($stage3CallContext) {
             $stage4LCP_iMJ_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($m, $allowedThreads, 8);
             $i = 1;
             while ($i < $stage4LCP_iMJ_allowedThreads) {
-                $stage4LCP_iMJComputation = $stage4LCP_iMJSync.$subtask($rt_s(1480), $java.oooi_DxQuickStep$17__init_($stage4CallContext));
+                $stage4LCP_iMJComputation = $stage4LCP_iMJSync.$subtask($rt_s(1478), $java.oooi_DxQuickStep$17__init_($stage4CallContext));
                 $stage4LCP_iMJComputation.$submit0();
                 $i = $i + 1 | 0;
             }
@@ -76533,7 +76367,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4LCP_IterationSync = function($sta
     }
     $i = 1;
     while ($i < $stage4b_allowedThreads) {
-        $task = $group.$subtask($rt_s(1481), $java.oooi_DxQuickStep$18__init_($stage4CallContext));
+        $task = $group.$subtask($rt_s(1479), $java.oooi_DxQuickStep$18__init_($stage4CallContext));
         $task.$submit0();
         $i = $i + 1 | 0;
     }
@@ -76564,7 +76398,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4LCP_iMJSync = function($stage4Cal
     $stage4LCP_Ad_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($m, $allowedThreads, 8);
     $i = 1;
     while ($i < $stage4LCP_Ad_allowedThreads) {
-        $task = $group.$subtask($rt_s(1482), $java.oooi_DxQuickStep$19__init_($stage4CallContext));
+        $task = $group.$subtask($rt_s(1480), $java.oooi_DxQuickStep$19__init_($stage4CallContext));
         $task.$submit0();
         $i = $i + 1 | 0;
     }
@@ -76583,7 +76417,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4LCP_fcStart = function($stage4Cal
     $stage4CallContext.$AssignLCP_fcAllowedThreads($stage4LCP_fcPrepare_allowedThreads, $stage4LCP_fcComplete_allowedThreads);
     $i = 1;
     while ($i < $stage4LCP_fcPrepare_allowedThreads) {
-        $task = $group.$subtask($rt_s(1483), $java.oooi_DxQuickStep$20__init_($stage4CallContext));
+        $task = $group.$subtask($rt_s(1481), $java.oooi_DxQuickStep$20__init_($stage4CallContext));
         $task.$submit0();
         $i = $i + 1 | 0;
     }
@@ -76749,7 +76583,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4LCP_IterationStart = function($st
         $finalGroup = $stage4CallContext.$m_LCP_IterationSyncReleasee;
         $stage4LCP_IterationStart = null;
         if (var$9 != $num_iterations)
-            $stage4LCP_IterationStart = $finalGroup.$subgroup($rt_s(1475), $java.oooi_DxQuickStep$21__init_($stage4CallContext));
+            $stage4LCP_IterationStart = $finalGroup.$subgroup($rt_s(1473), $java.oooi_DxQuickStep$21__init_($stage4CallContext));
         if ($stage4LCP_IterationStart !== null)
             $finalGroup = $stage4LCP_IterationStart;
         if (!$reorderRequired) {
@@ -76757,7 +76591,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4LCP_IterationStart = function($st
             $stage4CallContext.$RecordLCP_IterationStart($stage4LCP_Iteration_allowedThreads, $finalGroup);
             $i = 1;
             while ($i < $stage4LCP_Iteration_allowedThreads) {
-                $task = $finalGroup.$subtask($rt_s(1484), $java.oooi_DxQuickStep$24__init_($stage4CallContext));
+                $task = $finalGroup.$subtask($rt_s(1482), $java.oooi_DxQuickStep$24__init_($stage4CallContext));
                 $task.$submit0();
                 $i = $i + 1 | 0;
             }
@@ -76765,10 +76599,10 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4LCP_IterationStart = function($st
         } else {
             $reorderThreads = 2;
             $stage4CallContext.$ResetSOR_ConstraintsReorderVariables($reorderThreads);
-            $stage4LCP_ConstraintsReorderingSync = $finalGroup.$subgroup($rt_s(1485), $java.oooi_DxQuickStep$22__init_($stage4CallContext, $finalGroup));
+            $stage4LCP_ConstraintsReorderingSync = $finalGroup.$subgroup($rt_s(1483), $java.oooi_DxQuickStep$22__init_($stage4CallContext, $finalGroup));
             $i = 1;
             while ($i < $reorderThreads) {
-                $stage4LCP_ConstraintsReordering = $stage4LCP_ConstraintsReorderingSync.$subtask($rt_s(1486), $java.oooi_DxQuickStep$23__init_($stage4CallContext));
+                $stage4LCP_ConstraintsReordering = $stage4LCP_ConstraintsReorderingSync.$subtask($rt_s(1484), $java.oooi_DxQuickStep$23__init_($stage4CallContext));
                 $stage4LCP_ConstraintsReordering.$submit0();
                 $i = $i + 1 | 0;
             }
@@ -76975,7 +76809,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage4LCP_ConstraintsReorderingSync = f
     $stage4CallContext.$RecordLCP_IterationStart($stage4LCP_Iteration_allowedThreads, $group);
     $i = 1;
     while ($i < $stage4LCP_Iteration_allowedThreads) {
-        $task = $group.$subtask($rt_s(1484), $java.oooi_DxQuickStep$25__init_($stage4CallContext));
+        $task = $group.$subtask($rt_s(1482), $java.oooi_DxQuickStep$25__init_($stage4CallContext));
         $task.$submit0();
         $i = $i + 1 | 0;
     }
@@ -77215,10 +77049,10 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage5 = function($stage5CallContext) {
     } else {
         $nb = oooip_DxStepperProcessingCallContext_m_islandBodiesCount($callContext);
         $stage6a_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($nb, $allowedThreads, 16);
-        $stage6aSync = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1487), $java.oooi_DxQuickStep$26__init_($stage6CallContext, $callContext));
+        $stage6aSync = oooip_DxStepperProcessingCallContext_m_taskGroup($callContext).$subgroup($rt_s(1485), $java.oooi_DxQuickStep$26__init_($stage6CallContext, $callContext));
         $i = 1;
         while ($i < $stage6a_allowedThreads) {
-            $stage6a = $stage6aSync.$subtask($rt_s(1488), $java.oooi_DxQuickStep$27__init_($stage6CallContext));
+            $stage6a = $stage6aSync.$subtask($rt_s(1486), $java.oooi_DxQuickStep$27__init_($stage6CallContext));
             $stage6a.$submit0();
             $i = $i + 1 | 0;
         }
@@ -77269,7 +77103,7 @@ $java.oooi_DxQuickStep_dxQuickStepIsland_Stage6aSync = function($stage6CallConte
     $stage6b_allowedThreads = $java.oooi_DxQuickStep_CalculateOptimalThreadsCount($nb, $allowedThreads, 1);
     $i = 1;
     while ($i < $stage6b_allowedThreads) {
-        $stage6b = $group.$subtask($rt_s(1489), $java.oooi_DxQuickStep$28__init_($stage6CallContext));
+        $stage6b = $group.$subtask($rt_s(1487), $java.oooi_DxQuickStep$28__init_($stage6CallContext));
         $stage6b.$submit0();
         $i = $i + 1 | 0;
     }
@@ -77599,22 +77433,22 @@ $java.kt_Charsets__clinit_ = function() {
     var var$1, var$2;
     $java.kt_Charsets_INSTANCE = $java.kt_Charsets__init_();
     var$1 = jnc_Charset_forName($rt_s(355));
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$1, $rt_s(1490));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$1, $rt_s(1488));
     kt_Charsets_UTF_8 = var$1;
+    var$2 = jnc_Charset_forName($rt_s(1489));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1490));
+    $java.kt_Charsets_UTF_16 = var$2;
     var$2 = jnc_Charset_forName($rt_s(1491));
     kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1492));
-    $java.kt_Charsets_UTF_16 = var$2;
+    $java.kt_Charsets_UTF_16BE = var$2;
     var$2 = jnc_Charset_forName($rt_s(1493));
     kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1494));
-    $java.kt_Charsets_UTF_16BE = var$2;
+    $java.kt_Charsets_UTF_16LE = var$2;
     var$2 = jnc_Charset_forName($rt_s(1495));
     kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1496));
-    $java.kt_Charsets_UTF_16LE = var$2;
+    $java.kt_Charsets_US_ASCII = var$2;
     var$2 = jnc_Charset_forName($rt_s(1497));
     kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1498));
-    $java.kt_Charsets_US_ASCII = var$2;
-    var$2 = jnc_Charset_forName($rt_s(1499));
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1500));
     $java.kt_Charsets_ISO_8859_1 = var$2;
 };
 function oktsg_GBufferOutputNode() {
@@ -77663,7 +77497,7 @@ function oktsg_GBufferOutputNode_setFragColor($this, $value) {
 }
 $java.oktsg_GBufferOutputNode_getFragNormal = function($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1501));
+    var$1 = $this.$getInput().$get0($rt_s(1499));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getDefaultNormal(oktsg_GLSL_INSTANCE);
@@ -77672,11 +77506,11 @@ $java.oktsg_GBufferOutputNode_getFragNormal = function($this) {
 };
 function oktsg_GBufferOutputNode_setFragNormal($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1501), $value);
+    $this.$setInput($rt_s(1499), $value);
 }
 $java.oktsg_GBufferOutputNode_getFragPosition = function($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1502));
+    var$1 = $this.$getInput().$get0($rt_s(1500));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getZeroFloat(oktsg_GLSL_INSTANCE);
@@ -77685,7 +77519,7 @@ $java.oktsg_GBufferOutputNode_getFragPosition = function($this) {
 };
 function oktsg_GBufferOutputNode_setFragPosition($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1502), $value);
+    $this.$setInput($rt_s(1500), $value);
 }
 $java.oktsg_GBufferOutputNode_getOutput = function($this) {
     return $this.$output0;
@@ -77701,9 +77535,9 @@ function oktsg_GBufferOutputNode_setCullFaceMode($this, $_set___) {
 }
 $java.oktsg_GBufferOutputNode_declarationFrag = function($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
+    $out.$append($rt_s(1501));
+    $out.$append($rt_s(1502));
     $out.$append($rt_s(1503));
-    $out.$append($rt_s(1504));
-    $out.$append($rt_s(1505));
 };
 $java.oktsg_GBufferOutputNode_prepareToDrawMesh = function($this, $mesh) {
     kji_Intrinsics_checkParameterIsNotNull($mesh, $rt_s(43));
@@ -77722,12 +77556,12 @@ $java.oktsg_GBufferOutputNode_executionVert = function($this, $out) {
 };
 $java.oktsg_GBufferOutputNode_executionFrag = function($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
-    $out.$append(jl_StringBuilder__init_().$append($rt_s(1506)).$append($java.oktsg_GBufferOutputNode_getFragColor($this).$asVec4()).$append($rt_s(330)).$toString());
-    $out.$append(jl_StringBuilder__init_().$append($rt_s(1507)).$append($java.oktsg_GBufferOutputNode_getFragNormal($this).$asVec4()).$append($rt_s(330)).$toString());
-    $out.$append(jl_StringBuilder__init_().$append($rt_s(1508)).$append($java.oktsg_GBufferOutputNode_getFragPosition($this).$asVec4()).$append($rt_s(330)).$toString());
+    $out.$append(jl_StringBuilder__init_().$append($rt_s(1504)).$append($java.oktsg_GBufferOutputNode_getFragColor($this).$asVec4()).$append($rt_s(330)).$toString());
+    $out.$append(jl_StringBuilder__init_().$append($rt_s(1505)).$append($java.oktsg_GBufferOutputNode_getFragNormal($this).$asVec4()).$append($rt_s(330)).$toString());
+    $out.$append(jl_StringBuilder__init_().$append($rt_s(1506)).$append($java.oktsg_GBufferOutputNode_getFragPosition($this).$asVec4()).$append($rt_s(330)).$toString());
     if ($this.$alphaMode2 == 1) {
-        $out.$append(jl_StringBuilder__init_().$append($rt_s(1509)).$append11($this.$alphaCutoff2).$append($rt_s(867)).$toString());
-        $out.$append($rt_s(1510));
+        $out.$append(jl_StringBuilder__init_().$append($rt_s(1507)).$append11($this.$alphaCutoff2).$append($rt_s(867)).$toString());
+        $out.$append($rt_s(1508));
     }
 };
 function oktsg_GBufferOutputNode__init_0($this) {
@@ -77743,8 +77577,8 @@ $java.oktsg_GBufferOutputNode__clinit_ = function() {
     var$1 = ju_LinkedHashMap__init_();
     var$1.$put3($rt_s(862), jl_Integer_valueOf(6));
     var$1.$put3($rt_s(863), jl_Integer_valueOf(6));
-    var$1.$put3($rt_s(1501), jl_Integer_valueOf(6));
-    var$1.$put3($rt_s(1502), jl_Integer_valueOf(6));
+    var$1.$put3($rt_s(1499), jl_Integer_valueOf(6));
+    var$1.$put3($rt_s(1500), jl_Integer_valueOf(6));
     $java.oktsg_GBufferOutputNode_InputForm = var$1;
 };
 function oktg_Object3D() {
@@ -77801,7 +77635,7 @@ $java.oktg_Object3D_setArmature = function($this, $_set___) {
 };
 $java.oktg_Object3D__init_0 = function($this, $node, $previousTransform, $name, $isVisible, $meshes, $armature, $boundingBox) {
     kji_Intrinsics_checkParameterIsNotNull($node, $rt_s(45));
-    kji_Intrinsics_checkParameterIsNotNull($previousTransform, $rt_s(1511));
+    kji_Intrinsics_checkParameterIsNotNull($previousTransform, $rt_s(1509));
     kji_Intrinsics_checkParameterIsNotNull($name, $rt_s(17));
     kji_Intrinsics_checkParameterIsNotNull($meshes, $rt_s(1010));
     jl_Object__init_0($this);
@@ -78020,7 +77854,7 @@ $java.oktts_ShadowMappingBaseTest$testMain$2_invoke0 = function($this) {
     $shader = $this.$$sceneObjectShader0;
     $shader.$bind();
     $shader.$set12($rt_s(607), oktgc_ActiveCamera_getViewProjectionMatrix(oktgc_ActiveCamera_INSTANCE));
-    $shader.$set12($rt_s(1512), $this.$$lightMatrix);
+    $shader.$set12($rt_s(1510), $this.$$lightMatrix);
     oktt_FrameBuffer_getTexture($this.$$depthBuffer, 0).$bind4(0);
     $shader.$set39($rt_s(608), 0.0, 0.0, 0.0);
     $shader.$set64($rt_s(623), 1.0, 1.0, 1.0, 1.0);
@@ -78135,23 +77969,23 @@ function okts_IShader$DefaultImpls_numerateLines($$this, $title, $text, $pad) {
         $i = $i_0;
     }
     var$12 = $str.$toString();
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$12, $rt_s(1513));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$12, $rt_s(1511));
     return var$12;
 }
 $java.okts_IShader$DefaultImpls_vertSourceCode$default = function(var$1, var$2, var$3, var$4, var$5) {
     if (var$5 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1514)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1512)));
     if (var$4 & 1)
-        var$2 = $rt_s(1515);
+        var$2 = $rt_s(1513);
     if (var$4 & 2)
         var$3 = 5;
     return var$1.$vertSourceCode(var$2, var$3);
 };
 $java.okts_IShader$DefaultImpls_fragSourceCode$default = function(var$1, var$2, var$3, var$4, var$5) {
     if (var$5 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1516)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1514)));
     if (var$4 & 1)
-        var$2 = $rt_s(1517);
+        var$2 = $rt_s(1515);
     if (var$4 & 2)
         var$3 = 5;
     return var$1.$fragSourceCode(var$2, var$3);
@@ -78161,7 +77995,7 @@ function okts_IShader$DefaultImpls_sourceCode($$this, $pad) {
 }
 function okts_IShader$DefaultImpls_sourceCode$default(var$1, var$2, var$3, var$4) {
     if (var$4 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1518)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1516)));
     if (var$3 & 1)
         var$2 = 5;
     return var$1.$sourceCode0(var$2);
@@ -78197,7 +78031,7 @@ function okts_IShader$DefaultImpls_getUniformLocation($$this, $name, $pedantic) 
         oktg_GL_$callClinit();
         $location = jl_Integer_valueOf(oktg_GL_glGetUniformLocation(oktg_GL_INSTANCE, $$this.$getHandle(), $name));
         if (!($location.$intValue() == (-1) && $pedantic ? 0 : 1)) {
-            var$5 = jl_StringBuilder__init_().$append($rt_s(1519)).$append($name).$append($rt_s(1520)).$toString();
+            var$5 = jl_StringBuilder__init_().$append($rt_s(1517)).$append($name).$append($rt_s(1518)).$toString();
             $rt_throw(jl_IllegalArgumentException__init_(var$5.$toString()));
         }
         $$this.$getUniforms0().$put3($name, $location);
@@ -78206,7 +78040,7 @@ function okts_IShader$DefaultImpls_getUniformLocation($$this, $name, $pedantic) 
 }
 $java.okts_IShader$DefaultImpls_getUniformLocation$default = function(var$1, var$2, var$3, var$4, var$5) {
     if (var$5 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1521)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1519)));
     if (var$4 & 2)
         var$3 = 0;
     return var$1.$getUniformLocation0(var$2, var$3);
@@ -78241,7 +78075,7 @@ function okts_IShader$DefaultImpls_set30($$this, $name, $values, $offset, $lengt
 }
 function okts_IShader$DefaultImpls_set3$default(var$1, var$2, var$3, var$4, var$5, var$6, var$7) {
     if (var$7 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1522)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1520)));
     if (var$6 & 4)
         var$4 = 0;
     if (var$6 & 8)
@@ -78261,7 +78095,7 @@ function okts_IShader$DefaultImpls_setMatrix40($$this, $name, $values, $offset, 
 }
 function okts_IShader$DefaultImpls_setMatrix4$default(var$1, var$2, var$3, var$4, var$5, var$6, var$7) {
     if (var$7 !== null)
-        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1523)));
+        $rt_throw(jl_UnsupportedOperationException__init_($rt_s(1521)));
     if (var$6 & 4)
         var$4 = 0;
     if (var$6 & 8)
@@ -78411,16 +78245,16 @@ $java.oktm_ScreenQuad$TextureRenderer__init_0 = function($this, $x, $y, $width, 
     kji_Intrinsics_checkParameterIsNotNull($aUVName, $rt_s(1280));
     oktm_ScreenQuad__init_1($this, $x, $y, $width, $height, $aPositionName, $aUVName);
     var$7 = new okts_Shader;
-    var$8 = jl_StringBuilder__init_().$append($rt_s(1524));
-    var$8 = var$8.$append($aPositionName).$append($rt_s(1525));
-    var$8 = var$8.$append($aUVName).$append($rt_s(1526));
-    var$8 = var$8.$append($aUVName).$append($rt_s(1527));
-    var$9 = var$8.$append($aPositionName).$append($rt_s(1528)).$append($aPositionName).$append($rt_s(1529)).$toString();
+    var$8 = jl_StringBuilder__init_().$append($rt_s(1522));
+    var$8 = var$8.$append($aPositionName).$append($rt_s(1523));
+    var$8 = var$8.$append($aUVName).$append($rt_s(1524));
+    var$8 = var$8.$append($aUVName).$append($rt_s(1525));
+    var$9 = var$8.$append($aPositionName).$append($rt_s(1526)).$append($aPositionName).$append($rt_s(1527)).$toString();
     var$10 = null;
     var$8 = null;
     var$11 = null;
     var$12 = null;
-    okts_Shader__init_(var$7, var$9, $rt_s(1530), var$10, 0, var$8, 0, var$11, 124, var$12);
+    okts_Shader__init_(var$7, var$9, $rt_s(1528), var$10, 0, var$8, 0, var$11, 124, var$12);
     $this.$shader3 = var$7;
     oktg_GL_$callClinit();
     $this.$textureUnit = oktg_GL_grabTextureUnit(oktg_GL_INSTANCE);
@@ -78559,7 +78393,7 @@ function jl_System_arraycopy($src, $srcPos, $dest, $destPos, $length) {
         }
         $rt_throw(jl_IndexOutOfBoundsException__init_());
     }
-    $rt_throw(jl_NullPointerException__init_0($rt_s(1531)));
+    $rt_throw(jl_NullPointerException__init_0($rt_s(1529)));
 }
 $java.jl_System_doArrayCopy = function(var$1, var$2, var$3, var$4, var$5) {
     if (var$1 !== var$3 || var$4 < var$2) {
@@ -78581,19 +78415,19 @@ $java.jl_System_initPropertiesIfNeeded = function() {
     var $defaults;
     if ($java.jl_System_properties === null) {
         $defaults = ju_Properties__init_();
+        $defaults.$put3($rt_s(1530), $rt_s(1531));
         $defaults.$put3($rt_s(1532), $rt_s(1533));
-        $defaults.$put3($rt_s(1534), $rt_s(1535));
-        $defaults.$put3($rt_s(1536), $rt_s(735));
-        $defaults.$put3($rt_s(1537), $rt_s(395));
+        $defaults.$put3($rt_s(1534), $rt_s(735));
+        $defaults.$put3($rt_s(1535), $rt_s(395));
         $defaults.$put3($rt_s(34), $java.jl_System_lineSeparator());
-        $defaults.$put3($rt_s(1538), $java.jl_System_getTempDir());
-        $defaults.$put3($rt_s(1539), $rt_s(1533));
-        $defaults.$put3($rt_s(1540), $java.jl_System_getHomeDir());
+        $defaults.$put3($rt_s(1536), $java.jl_System_getTempDir());
+        $defaults.$put3($rt_s(1537), $rt_s(1531));
+        $defaults.$put3($rt_s(1538), $java.jl_System_getHomeDir());
         $java.jl_System_properties = ju_Properties__init_1($defaults);
     }
 };
 $java.jl_System_getTempDir = function() {
-    return $rt_s(1541);
+    return $rt_s(1539);
 };
 $java.jl_System_getHomeDir = function() {
     return $rt_s(735);
@@ -78939,7 +78773,7 @@ $java.oktt_TvmUInt16Array_put0 = function(var$0, var$1) {
     $java.oktt_TvmUInt16Array_put(var$0, var$1.$shortValue());
 };
 function oktt_TvmUInt16Array__init_($this, $shortArray) {
-    kji_Intrinsics_checkParameterIsNotNull($shortArray, $rt_s(1542));
+    kji_Intrinsics_checkParameterIsNotNull($shortArray, $rt_s(1540));
     oktt_TvmArrayBufferView__init_0($this);
     $this.$shortArray = $shortArray;
     $this.$size8 = $this.$shortArray.length;
@@ -79290,7 +79124,7 @@ $java.okttm_MeshTest_testMain = function($this) {
     var$9 = null;
     var$10 = null;
     var$11 = null;
-    okts_Shader__init_($shader, $rt_s(1543), $rt_s(1544), var$6, 0, var$9, 0, var$10, 124, var$11);
+    okts_Shader__init_($shader, $rt_s(1541), $rt_s(1542), var$6, 0, var$9, 0, var$10, 124, var$11);
     oktu_LOG_$callClinit();
     oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, okts_IShader$DefaultImpls_sourceCode$default($shader, 0, 1, null), null, 2, null);
     oktg_GL_$callClinit();
@@ -79325,7 +79159,7 @@ function oktts_ThresholdTest__init_() {
     return var_0;
 }
 $java.oktts_ThresholdTest_getName = function($this) {
-    return $rt_s(1545);
+    return $rt_s(1543);
 };
 $java.oktts_ThresholdTest_testMain = function($this) {
     var $model, $frameBuffer, var$3, var$4, var$5, $threshold, $screenQuad;
@@ -79444,8 +79278,8 @@ $java.oktm_IVertexBuffer$Companion__init_ = function() {
     return var_0;
 };
 $java.oktm_IVertexBuffer$Companion_build = function($this, $byteBuffer, $attributes, $usage, $initGpuObjects) {
-    kji_Intrinsics_checkParameterIsNotNull($byteBuffer, $rt_s(1546));
-    kji_Intrinsics_checkParameterIsNotNull($attributes, $rt_s(1361));
+    kji_Intrinsics_checkParameterIsNotNull($byteBuffer, $rt_s(1544));
+    kji_Intrinsics_checkParameterIsNotNull($attributes, $rt_s(1360));
     return $java.oktm_IVertexBuffer$Companion_Build.$invoke38($byteBuffer, $attributes, jl_Integer_valueOf($usage), jl_Boolean_valueOf($initGpuObjects));
 };
 function oktm_IVertexBuffer$Companion_build$default(var$1, var$2, var$3, var$4, var$5, var$6, var$7) {
@@ -79565,7 +79399,7 @@ function oktsg_PrincipledBSDF__init_() {
 }
 $java.oktsg_PrincipledBSDF_getWorldPosition = function($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1547));
+    var$1 = $this.$getInput().$get0($rt_s(1545));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getZeroFloat(oktsg_GLSL_INSTANCE);
@@ -79574,7 +79408,7 @@ $java.oktsg_PrincipledBSDF_getWorldPosition = function($this) {
 };
 function oktsg_PrincipledBSDF_setWorldPosition($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1547), $value);
+    $this.$setInput($rt_s(1545), $value);
 }
 $java.oktsg_PrincipledBSDF_getNormalizedViewVector = function($this) {
     var var$1;
@@ -79591,7 +79425,7 @@ function oktsg_PrincipledBSDF_setNormalizedViewVector($this, $value) {
 }
 $java.oktsg_PrincipledBSDF_getBaseColor = function($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1362));
+    var$1 = $this.$getInput().$get0($rt_s(1361));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getOneFloat(oktsg_GLSL_INSTANCE);
@@ -79600,7 +79434,7 @@ $java.oktsg_PrincipledBSDF_getBaseColor = function($this) {
 };
 function oktsg_PrincipledBSDF_setBaseColor($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1362), $value);
+    $this.$setInput($rt_s(1361), $value);
 }
 $java.oktsg_PrincipledBSDF_getNormal = function($this) {
     var var$1;
@@ -79617,7 +79451,7 @@ function oktsg_PrincipledBSDF_setNormal($this, $value) {
 }
 $java.oktsg_PrincipledBSDF_getOcclusion = function($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1548));
+    var$1 = $this.$getInput().$get0($rt_s(1546));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getOneFloat(oktsg_GLSL_INSTANCE);
@@ -79626,11 +79460,11 @@ $java.oktsg_PrincipledBSDF_getOcclusion = function($this) {
 };
 function oktsg_PrincipledBSDF_setOcclusion($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1548), $value);
+    $this.$setInput($rt_s(1546), $value);
 }
 $java.oktsg_PrincipledBSDF_getRoughness = function($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1549));
+    var$1 = $this.$getInput().$get0($rt_s(1547));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getOneFloat(oktsg_GLSL_INSTANCE);
@@ -79639,11 +79473,11 @@ $java.oktsg_PrincipledBSDF_getRoughness = function($this) {
 };
 function oktsg_PrincipledBSDF_setRoughness($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1549), $value);
+    $this.$setInput($rt_s(1547), $value);
 }
 $java.oktsg_PrincipledBSDF_getMetallic = function($this) {
     var var$1;
-    var$1 = $this.$getInput().$get0($rt_s(1550));
+    var$1 = $this.$getInput().$get0($rt_s(1548));
     if (var$1 === null) {
         oktsg_GLSL_$callClinit();
         var$1 = oktsg_GLSL_getZeroFloat(oktsg_GLSL_INSTANCE);
@@ -79652,7 +79486,7 @@ $java.oktsg_PrincipledBSDF_getMetallic = function($this) {
 };
 function oktsg_PrincipledBSDF_setMetallic($this, $value) {
     kji_Intrinsics_checkParameterIsNotNull($value, $rt_s(373));
-    $this.$setInput($rt_s(1550), $value);
+    $this.$setInput($rt_s(1548), $value);
 }
 $java.oktsg_PrincipledBSDF_getClipSpacePosition = function($this) {
     var var$1;
@@ -79679,7 +79513,7 @@ $java.oktsg_PrincipledBSDF_prepareToBuild = function($this) {
     var$1 = $java.oktsg_PrincipledBSDF_getClipSpacePosition($this);
     oktsg_GLSL_$callClinit();
     if (var$1 === oktsg_GLSL_getZeroFloat(oktsg_GLSL_INSTANCE) && $this.$receiveShadows0)
-        $rt_throw(jl_IllegalStateException__init_($rt_s(1551)));
+        $rt_throw(jl_IllegalStateException__init_($rt_s(1549)));
     $textureUnitsNum = $rt_imul($this.$maxNumDirectionLights, $java.oktsg_PrincipledBSDF_shadowCascadesNum);
     $this.$dirLightTexUnits.$clear();
     $i = 0;
@@ -79704,10 +79538,10 @@ $java.oktsg_PrincipledBSDF_prepareToDrawScene = function($this, $scene) {
             var$7 = $lights.$size();
             b: while (true) {
                 if ($i >= var$7) {
-                    $this.$getShader().$set35($rt_s(1552), $dirLightIndex);
-                    $this.$getShader().$set35($rt_s(1553), $pointLightIndex);
-                    $this.$getShader().$set35($rt_s(1554), $spotLightIndex);
-                    $this.$getShader().$set54($rt_s(1555), $scene.$getWorld().$getAmbientColor());
+                    $this.$getShader().$set35($rt_s(1550), $dirLightIndex);
+                    $this.$getShader().$set35($rt_s(1551), $pointLightIndex);
+                    $this.$getShader().$set35($rt_s(1552), $spotLightIndex);
+                    $this.$getShader().$set54($rt_s(1553), $scene.$getWorld().$getAmbientColor());
                     break a;
                 }
                 c: {
@@ -79719,12 +79553,12 @@ $java.oktsg_PrincipledBSDF_prepareToDrawScene = function($this, $scene) {
                                     break d;
                                 case 2:
                                     if ($light === null)
-                                        $rt_throw(k_TypeCastException__init_($rt_s(1556)));
+                                        $rt_throw(k_TypeCastException__init_($rt_s(1554)));
                                     var$9 = $light;
-                                    $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1557)).$append1($pointLightIndex).$append12(93).$toString(), $java.oktgl_PointLight_getPosition(var$9));
-                                    $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1558)).$append1($pointLightIndex).$append12(93).$toString(), $light.$getColor0());
-                                    $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1559)).$append1($pointLightIndex).$append12(93).$toString(), $light.$getLightIntensity());
-                                    $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1560)).$append1($pointLightIndex).$append12(93).$toString(), $java.oktgl_PointLight_getRange(var$9));
+                                    $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1555)).$append1($pointLightIndex).$append12(93).$toString(), $java.oktgl_PointLight_getPosition(var$9));
+                                    $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1556)).$append1($pointLightIndex).$append12(93).$toString(), $light.$getColor0());
+                                    $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1557)).$append1($pointLightIndex).$append12(93).$toString(), $light.$getLightIntensity());
+                                    $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1558)).$append1($pointLightIndex).$append12(93).$toString(), $java.oktgl_PointLight_getRange(var$9));
                                     $pointLightIndex = $pointLightIndex + 1 | 0;
                                     break c;
                                 default:
@@ -79735,9 +79569,9 @@ $java.oktsg_PrincipledBSDF_prepareToDrawScene = function($this, $scene) {
                             break b;
                         e: {
                             var$10 = $light;
-                            $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1561)).$append1($dirLightIndex).$append12(93).$toString(), oktgl_DirectionalLight_getDirection(var$10));
-                            $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1562)).$append1($dirLightIndex).$append12(93).$toString(), $light.$getColor0());
-                            $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1563)).$append1($dirLightIndex).$append12(93).$toString(), $light.$getLightIntensity());
+                            $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1559)).$append1($dirLightIndex).$append12(93).$toString(), oktgl_DirectionalLight_getDirection(var$10));
+                            $this.$getShader().$set54(jl_StringBuilder__init_().$append($rt_s(1560)).$append1($dirLightIndex).$append12(93).$toString(), $light.$getColor0());
+                            $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1561)).$append1($dirLightIndex).$append12(93).$toString(), $light.$getLightIntensity());
                             if ($light.$isShadowEnabled0()) {
                                 $lightCascadesStartIndex = $rt_imul($dirLightIndex, oktgl_DirectionalLight_getShadowCascadesNum(var$10));
                                 $shadowMaps = oktgl_DirectionalLight_getShadowMaps(var$10);
@@ -79747,14 +79581,14 @@ $java.oktsg_PrincipledBSDF_prepareToDrawScene = function($this, $scene) {
                                     if ($j >= var$14)
                                         break e;
                                     $cascadeIndex = $lightCascadesStartIndex + $j | 0;
-                                    $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1564)).$append1($cascadeIndex).$append12(93).$toString(), oktgl_DirectionalLight_getShadowCascadeEnd(var$10).data[$j].$floatValue());
-                                    $this.$getShader().$set12(jl_StringBuilder__init_().$append($rt_s(1565)).$append1($cascadeIndex).$append12(93).$toString(), oktgl_DirectionalLight_getViewProjectionMatrices(var$10).data[$j]);
+                                    $this.$getShader().$set1(jl_StringBuilder__init_().$append($rt_s(1562)).$append1($cascadeIndex).$append12(93).$toString(), oktgl_DirectionalLight_getShadowCascadeEnd(var$10).data[$j].$floatValue());
+                                    $this.$getShader().$set12(jl_StringBuilder__init_().$append($rt_s(1563)).$append1($cascadeIndex).$append12(93).$toString(), oktgl_DirectionalLight_getViewProjectionMatrices(var$10).data[$j]);
                                     if ($this.$dirLightTexUnits.$size() > 0) {
                                         var$16 = $shadowMaps.data;
                                         var$9 = $this.$dirLightTexUnits.$get1($cascadeIndex);
-                                        kji_Intrinsics_checkExpressionValueIsNotNull(var$9, $rt_s(1566));
+                                        kji_Intrinsics_checkExpressionValueIsNotNull(var$9, $rt_s(1564));
                                         $unit = var$9.$intValue();
-                                        $this.$getShader().$set35(jl_StringBuilder__init_().$append($rt_s(1567)).$append1($cascadeIndex).$append12(93).$toString(), $unit);
+                                        $this.$getShader().$set35(jl_StringBuilder__init_().$append($rt_s(1565)).$append1($cascadeIndex).$append12(93).$toString(), $unit);
                                         var$16[$j].$bind4($unit);
                                     }
                                     $j = $j + 1 | 0;
@@ -79766,14 +79600,14 @@ $java.oktsg_PrincipledBSDF_prepareToDrawScene = function($this, $scene) {
                 }
                 $i = $i + 1 | 0;
             }
-            $rt_throw(k_TypeCastException__init_($rt_s(1568)));
+            $rt_throw(k_TypeCastException__init_($rt_s(1566)));
         }
     }
 };
 $java.oktsg_PrincipledBSDF_executionFrag = function($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$result2.$isUsed0())
-        $out.$append(jl_StringBuilder__init_().$append($this.$result2.$getRef0()).$append($rt_s(1569)).$append($java.oktsg_PrincipledBSDF_getWorldPosition($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getNormalizedViewVector($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getBaseColor($this).$asVec4()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getNormal($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getOcclusion($this).$asFloat()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getRoughness($this).$asFloat()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getMetallic($this).$asFloat()).$append($rt_s(1053)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append($this.$result2.$getRef0()).$append($rt_s(1567)).$append($java.oktsg_PrincipledBSDF_getWorldPosition($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getNormalizedViewVector($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getBaseColor($this).$asVec4()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getNormal($this).$asVec3()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getOcclusion($this).$asFloat()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getRoughness($this).$asFloat()).$append($rt_s(268)).$append($java.oktsg_PrincipledBSDF_getMetallic($this).$asFloat()).$append($rt_s(1053)).$toString());
 };
 $java.oktsg_PrincipledBSDF_declarationFrag = function($this, $out) {
     var $num;
@@ -79781,11 +79615,11 @@ $java.oktsg_PrincipledBSDF_declarationFrag = function($this, $out) {
     if ($this.$result2.$isUsed0()) {
         if ($this.$receiveShadows0) {
             $num = $rt_imul($this.$maxNumDirectionLights, $java.oktsg_PrincipledBSDF_shadowCascadesNum);
-            $out.$append(jl_StringBuilder__init_().$append($rt_s(1570)).$append1($num).$append($rt_s(1068)).$toString());
-            $out.$append(jl_StringBuilder__init_().$append($rt_s(1571)).$append1($num).$append($rt_s(1068)).$toString());
-            $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarIn($this)).$append($rt_s(1572)).$append1($num).$append($rt_s(1068)).$toString());
+            $out.$append(jl_StringBuilder__init_().$append($rt_s(1568)).$append1($num).$append($rt_s(1068)).$toString());
+            $out.$append(jl_StringBuilder__init_().$append($rt_s(1569)).$append1($num).$append($rt_s(1068)).$toString());
+            $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarIn($this)).$append($rt_s(1570)).$append1($num).$append($rt_s(1068)).$toString());
         }
-        $out.$append(jl_StringBuilder__init_().$append($this.$result2.$getTypedRef0()).$append($rt_s(331)).$append($this.$result2.$getTypeStr0()).$append($rt_s(1573)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append($this.$result2.$getTypedRef0()).$append($rt_s(331)).$append($this.$result2.$getTypeStr0()).$append($rt_s(1571)).$toString());
         $out.$append(oktsg_PrincipledBSDF$Companion_pbrCode($java.oktsg_PrincipledBSDF_Companion, $this.$maxNumDirectionLights, $this.$maxNumPointLights, $this.$maxNumSpotLights, $java.oktsg_PrincipledBSDF_getClipSpacePosition($this).$getRef0(), $this.$receiveShadows0));
     }
 };
@@ -79794,8 +79628,8 @@ $java.oktsg_PrincipledBSDF_declarationVert = function($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$result2.$isUsed0() && $this.$receiveShadows0) {
         $num = $rt_imul($this.$maxNumDirectionLights, $java.oktsg_PrincipledBSDF_shadowCascadesNum);
-        $out.$append(jl_StringBuilder__init_().$append($rt_s(1574)).$append1($num).$append($rt_s(1068)).$toString());
-        $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append($rt_s(1572)).$append1($num).$append($rt_s(1068)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append($rt_s(1572)).$append1($num).$append($rt_s(1068)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append(oktsg_ShaderNode_getVarOut($this)).$append($rt_s(1570)).$append1($num).$append($rt_s(1068)).$toString());
     }
 };
 $java.oktsg_PrincipledBSDF_executionVert = function($this, $out) {
@@ -79803,15 +79637,15 @@ $java.oktsg_PrincipledBSDF_executionVert = function($this, $out) {
     kji_Intrinsics_checkParameterIsNotNull($out, $rt_s(54));
     if ($this.$result2.$isUsed0() && $this.$receiveShadows0) {
         $num = $rt_imul($this.$maxNumDirectionLights, $java.oktsg_PrincipledBSDF_shadowCascadesNum);
-        $out.$append(jl_StringBuilder__init_().$append($rt_s(1575)).$append1($num).$append($rt_s(1576)).$toString());
-        $out.$append(jl_StringBuilder__init_().$append($rt_s(1577)).$append($java.oktsg_PrincipledBSDF_getWorldPosition($this).$asVec4()).$append($rt_s(330)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append($rt_s(1573)).$append1($num).$append($rt_s(1574)).$toString());
+        $out.$append(jl_StringBuilder__init_().$append($rt_s(1575)).$append($java.oktsg_PrincipledBSDF_getWorldPosition($this).$asVec4()).$append($rt_s(330)).$toString());
         $out.$append($rt_s(599));
     }
 };
 function oktsg_PrincipledBSDF__init_0($this) {
     $java.oktsg_PrincipledBSDF_$callClinit();
     oktsg_ShaderNode__init_0($this);
-    $this.$result2 = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec4__init_($rt_s(1448)));
+    $this.$result2 = oktsg_ShaderNode_defOut($this, oktsg_GLSLVec4__init_($rt_s(1447)));
     $this.$maxNumDirectionLights = 2;
     $this.$maxNumPointLights = 20;
     $this.$maxNumSpotLights = 2;
@@ -79822,13 +79656,13 @@ $java.oktsg_PrincipledBSDF__clinit_ = function() {
     $java.oktsg_PrincipledBSDF_Companion = oktsg_PrincipledBSDF$Companion__init_1(null);
     $java.oktsg_PrincipledBSDF_shadowCascadesNum = 4;
     var$1 = ju_LinkedHashMap__init_();
-    var$1.$put3($rt_s(1547), jl_Integer_valueOf(5));
+    var$1.$put3($rt_s(1545), jl_Integer_valueOf(5));
     var$1.$put3($rt_s(1126), jl_Integer_valueOf(5));
-    var$1.$put3($rt_s(1362), jl_Integer_valueOf(6));
+    var$1.$put3($rt_s(1361), jl_Integer_valueOf(6));
     var$1.$put3($rt_s(291), jl_Integer_valueOf(5));
+    var$1.$put3($rt_s(1546), jl_Integer_valueOf(3));
+    var$1.$put3($rt_s(1547), jl_Integer_valueOf(3));
     var$1.$put3($rt_s(1548), jl_Integer_valueOf(3));
-    var$1.$put3($rt_s(1549), jl_Integer_valueOf(3));
-    var$1.$put3($rt_s(1550), jl_Integer_valueOf(3));
     var$1.$put3($rt_s(1128), jl_Integer_valueOf(6));
     $java.oktsg_PrincipledBSDF_InputForm = var$1;
 };
@@ -79865,7 +79699,7 @@ function okttsg_EmissionBloomTest__init_() {
     return var_0;
 }
 $java.okttsg_EmissionBloomTest_getName = function($this) {
-    return $rt_s(1578);
+    return $rt_s(1576);
 };
 $java.okttsg_EmissionBloomTest_testMain = function($this) {
     var var$1, var$2;
@@ -80377,7 +80211,7 @@ $java.oktgg_GLTFBuffer$read$3_invoke0 = function($this, $status, $bytes) {
         oktgg_GLTFBuffer_getBytes($this.$this$0250).$put21($bytes);
     else {
         oktu_LOG_$callClinit();
-        oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, jl_StringBuilder__init_().$append($rt_s(364)).$append(oktgg_GLTFBuffer_getUri($this.$this$0250)).$append($rt_s(1579)).$append1($status).$toString(), null, 2, null);
+        oktu_ILog$DefaultImpls_info$default(oktu_LOG_INSTANCE, jl_StringBuilder__init_().$append($rt_s(364)).$append(oktgg_GLTFBuffer_getUri($this.$this$0250)).$append($rt_s(1577)).$append1($status).$toString(), null, 2, null);
     }
     oktgg_GLTFBuffer_getGltf($this.$this$0250).$getBuffers0().$ready(oktgg_GLTFBuffer_getElementIndex($this.$this$0250));
 };
@@ -80503,12 +80337,12 @@ $java.oktgg_GLTFAnimation$read$2$1$1$1$1_invoke0 = function($this, $$this$get) {
                     $interpolation = 1;
                     break a;
                 }
-                if (!var$4.$equals0($rt_s(1580)))
+                if (!var$4.$equals0($rt_s(1578)))
                     break b;
                 $interpolation = 2;
                 break a;
             }
-            if (var$4.$equals0($rt_s(1581))) {
+            if (var$4.$equals0($rt_s(1579))) {
                 $interpolation = 3;
                 break a;
             }
@@ -81254,7 +81088,7 @@ $java.k_NotImplementedError__init_ = function($this, $message) {
 };
 $java.k_NotImplementedError__init_0 = function(var$0, var$1, var$2, var$3) {
     if (var$2 & 1)
-        var$1 = $rt_s(1582);
+        var$1 = $rt_s(1580);
     $java.k_NotImplementedError__init_(var$0, var$1);
 };
 function k_NotImplementedError__init_1(var$0) {
@@ -81470,7 +81304,7 @@ $java.oktgg_GLTFNode$read$2$1_invoke = function(var$0, var$1) {
     return k_Unit_INSTANCE;
 };
 $java.oktgg_GLTFNode$read$2$1_invoke0 = function($this, $childNode) {
-    kji_Intrinsics_checkParameterIsNotNull($childNode, $rt_s(1583));
+    kji_Intrinsics_checkParameterIsNotNull($childNode, $rt_s(1581));
     oktgg_GLTFNode_getNode($this.$this$0258.$this$0128).$addChildNode(oktgg_GLTFNode_getNode($childNode));
 };
 $java.oktgg_GLTFNode$read$2$1__init_ = function(var$0, var$1) {
@@ -81490,7 +81324,7 @@ $java.kc_CollectionsKt___CollectionsKt$elementAt$1_invoke = function(var$0, var$
     return $java.kc_CollectionsKt___CollectionsKt$elementAt$1_invoke0(var$0, var$1.$intValue());
 };
 $java.kc_CollectionsKt___CollectionsKt$elementAt$1_invoke0 = function($this, $it) {
-    $rt_throw(jl_IndexOutOfBoundsException__init_0(jl_StringBuilder__init_().$append($rt_s(1584)).$append1($this.$$index0).$append12(46).$toString()));
+    $rt_throw(jl_IndexOutOfBoundsException__init_0(jl_StringBuilder__init_().$append($rt_s(1582)).$append1($this.$$index0).$append12(46).$toString()));
 };
 $java.kc_CollectionsKt___CollectionsKt$elementAt$1__init_ = function(var$0, var$1) {
     var$0.$$index0 = var$1;
@@ -81902,7 +81736,7 @@ $java.oktgg_GLTFPrimitive$read$$inlined$forEach$lambda$1_invoke0 = function($thi
                         break b;
                     default:
                 }
-                $rt_throw(jl_IllegalStateException__init_($rt_s(1585)));
+                $rt_throw(jl_IllegalStateException__init_($rt_s(1583)));
             }
             $maxIndices = $indicesView.$getSize();
             while (true) {
@@ -81956,7 +81790,7 @@ $java.oktgg_GLTFPrimitive$read$$inlined$forEach$lambda$1_invoke0 = function($thi
                         break d;
                     default:
                 }
-                $rt_throw(jl_IllegalStateException__init_($rt_s(1585)));
+                $rt_throw(jl_IllegalStateException__init_($rt_s(1583)));
             }
             $maxIndices = $indicesView.$getSize();
             while (true) {
@@ -82194,13 +82028,13 @@ $java.oktd_DataByteOrder__clinit_ = function() {
     var var$1, var$2, var$3;
     var$1 = $rt_createArray(oktd_DataByteOrder, 3);
     var$2 = var$1.data;
-    var$3 = $java.oktd_DataByteOrder__init_($rt_s(1586), 0);
+    var$3 = $java.oktd_DataByteOrder__init_($rt_s(1584), 0);
     $java.oktd_DataByteOrder_Native = var$3;
     var$2[0] = var$3;
-    var$3 = $java.oktd_DataByteOrder__init_($rt_s(1587), 1);
+    var$3 = $java.oktd_DataByteOrder__init_($rt_s(1585), 1);
     oktd_DataByteOrder_LittleEndian = var$3;
     var$2[1] = var$3;
-    var$3 = $java.oktd_DataByteOrder__init_($rt_s(1588), 2);
+    var$3 = $java.oktd_DataByteOrder__init_($rt_s(1586), 2);
     $java.oktd_DataByteOrder_BigEndian = var$3;
     var$2[2] = var$3;
     $java.oktd_DataByteOrder_$VALUES = var$1;
@@ -82394,18 +82228,18 @@ $java.oktsp_MotionBlur$Companion_velocity = function($this, $visualizeVelocity) 
     var $str, var$3;
     $str = $rt_s(6);
     if ($visualizeVelocity > 0.0) {
-        var$3 = jl_StringBuilder__init_().$append($str).$append($rt_s(1589)).$toString();
-        $str = jl_StringBuilder__init_().$append(var$3).$append($rt_s(1590)).$toString();
+        var$3 = jl_StringBuilder__init_().$append($str).$append($rt_s(1587)).$toString();
+        $str = jl_StringBuilder__init_().$append(var$3).$append($rt_s(1588)).$toString();
     }
     return $str;
 };
 function oktsp_MotionBlur$Companion_motionBlurCode($this, $numSamples, $visualizeVelocity) {
     var var$3;
-    var$3 = jl_StringBuilder__init_().$append($rt_s(1591));
+    var$3 = jl_StringBuilder__init_().$append($rt_s(1589));
+    var$3 = var$3.$append1($numSamples).$append($rt_s(1590));
+    var$3 = var$3.$append1($numSamples).$append($rt_s(1591));
     var$3 = var$3.$append1($numSamples).$append($rt_s(1592));
-    var$3 = var$3.$append1($numSamples).$append($rt_s(1593));
-    var$3 = var$3.$append1($numSamples).$append($rt_s(1594));
-    return var$3.$append($java.oktsp_MotionBlur$Companion_velocity($this, $visualizeVelocity)).$append($rt_s(1595)).$toString();
+    return var$3.$append($java.oktsp_MotionBlur$Companion_velocity($this, $visualizeVelocity)).$append($rt_s(1593)).$toString();
 }
 function oktsp_MotionBlur$Companion__init_0($this) {
     jl_Object__init_0($this);
@@ -82475,7 +82309,7 @@ $java.oktjj_JsonSimple3Object__init_ = function(var_0) {
 };
 $java.oktjj_JsonSimple3Object_obj = function($this, $key) {
     var var$2, var$3;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     var$2 = new oktjj_JsonSimple3Object;
     var$3 = $this.$source3.$get0($key);
     if (var$3 !== null) {
@@ -82489,21 +82323,21 @@ $java.oktjj_JsonSimple3Object_obj0 = function(var$0, var$1) {
 };
 $java.oktjj_JsonSimple3Object_array = function($this, $key) {
     var var$2, var$3;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     var$2 = new oktjj_JsonSimple3Array;
     var$3 = $this.$source3.$get0($key);
     if (var$3 !== null) {
         oktjj_JsonSimple3Array__init_0(var$2, var$3);
         return var$2;
     }
-    $rt_throw(k_TypeCastException__init_($rt_s(1596)));
+    $rt_throw(k_TypeCastException__init_($rt_s(1594)));
 };
 $java.oktjj_JsonSimple3Object_array0 = function(var$0, var$1) {
     return $java.oktjj_JsonSimple3Object_array(var$0, var$1);
 };
 $java.oktjj_JsonSimple3Object_get = function($this, $key) {
     var var$2;
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     var$2 = $this.$source3.$get0($key);
     if (var$2 !== null)
         return var$2;
@@ -82513,14 +82347,14 @@ $java.oktjj_JsonSimple3Object_values = function($this, $call) {
     var var$2, $$this$forEach$iv, $element$iv, $it, var$6, var$7;
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     var$2 = $this.$source3.$entrySet();
-    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1597));
+    kji_Intrinsics_checkExpressionValueIsNotNull(var$2, $rt_s(1595));
     $$this$forEach$iv = var$2;
     var$2 = $$this$forEach$iv.$iterator();
     while (var$2.$hasNext()) {
         $element$iv = var$2.$next();
         $it = $element$iv;
         var$6 = $it.$getKey();
-        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1598));
+        kji_Intrinsics_checkExpressionValueIsNotNull(var$6, $rt_s(1596));
         var$7 = $it.$getValue();
         if (var$7 === null)
             $rt_throw(k_TypeCastException__init_($rt_s(1165)));
@@ -82528,7 +82362,7 @@ $java.oktjj_JsonSimple3Object_values = function($this, $call) {
     }
 };
 $java.oktjj_JsonSimple3Object_contains = function($this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return $this.$source3.$get0($key) === null ? 0 : 1;
 };
 function oktjj_JsonSimple3Object__init_($this, $source) {
@@ -82541,74 +82375,74 @@ $java.oktjj_JsonSimple3Object__clinit_ = function() {
     oktjj_JsonSimple3Object_Companion = oktjj_JsonSimple3Object$Companion__init_1(null);
 };
 $java.oktjj_JsonSimple3Object_obj1 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     return oktj_IJsonObject$DefaultImpls_obj($this, $key, $call);
 };
 $java.oktjj_JsonSimple3Object_array1 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     return oktj_IJsonObject$DefaultImpls_array($this, $key, $call);
 };
 $java.oktjj_JsonSimple3Object_get0 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     return oktj_IJsonObject$DefaultImpls_get($this, $key, $call);
 };
 $java.oktjj_JsonSimple3Object_objOrNull = function($this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_objOrNull($this, $key);
 };
 $java.oktjj_JsonSimple3Object_arrayOrNull = function($this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_arrayOrNull($this, $key);
 };
 $java.oktjj_JsonSimple3Object_string = function($this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_string($this, $key);
 };
 $java.oktjj_JsonSimple3Object_string0 = function($this, $key, $default) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
-    kji_Intrinsics_checkParameterIsNotNull($default, $rt_s(1310));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
+    kji_Intrinsics_checkParameterIsNotNull($default, $rt_s(1309));
     return oktj_IJsonObject$DefaultImpls_string0($this, $key, $default);
 };
 $java.oktjj_JsonSimple3Object_string1 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     oktj_IJsonObject$DefaultImpls_string1($this, $key, $call);
 };
 $java.oktjj_JsonSimple3Object_float = function($this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_float($this, $key);
 };
 $java.oktjj_JsonSimple3Object_float0 = function($this, $key, $default) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_float0($this, $key, $default);
 };
 $java.oktjj_JsonSimple3Object_float1 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     oktj_IJsonObject$DefaultImpls_float1($this, $key, $call);
 };
 $java.oktjj_JsonSimple3Object_int = function($this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_int($this, $key);
 };
 $java.oktjj_JsonSimple3Object_int0 = function($this, $key, $default) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_int0($this, $key, $default);
 };
 $java.oktjj_JsonSimple3Object_int1 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     oktj_IJsonObject$DefaultImpls_int1($this, $key, $call);
 };
 $java.oktjj_JsonSimple3Object_bool = function($this, $key) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     return oktj_IJsonObject$DefaultImpls_bool($this, $key);
 };
 $java.oktjj_JsonSimple3Object_bool0 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     oktj_IJsonObject$DefaultImpls_bool0($this, $key, $call);
 };
@@ -82617,12 +82451,12 @@ $java.oktjj_JsonSimple3Object_ints = function($this, $call) {
     oktj_IJsonObject$DefaultImpls_ints($this, $call);
 };
 $java.oktjj_JsonSimple3Object_ints0 = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     oktj_IJsonObject$DefaultImpls_ints0($this, $key, $call);
 };
 $java.oktjj_JsonSimple3Object_floats = function($this, $key, $call) {
-    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1309));
+    kji_Intrinsics_checkParameterIsNotNull($key, $rt_s(1308));
     kji_Intrinsics_checkParameterIsNotNull($call, $rt_s(69));
     oktj_IJsonObject$DefaultImpls_floats($this, $key, $call);
 };
@@ -82700,14 +82534,14 @@ function oooi_ErrorHdl_dDebug($num, $msg, $ap) {
     $java.oooi_ErrorHdl_$callClinit();
     if ($java.oooi_ErrorHdl_debug_function !== null)
         $java.oooi_ErrorHdl_debug_function.$call3($num, $msg, $ap);
-    jl_System_out().$println1(jl_StringBuilder__init_().$append($rt_s(1599)).$append1($num).$append($rt_s(11)).$append($msg).$toString());
+    jl_System_out().$println1(jl_StringBuilder__init_().$append($rt_s(1597)).$append1($num).$append($rt_s(11)).$append($msg).$toString());
 }
 function oooi_ErrorHdl_dMessage($num, $msg, $ap) {
     $java.oooi_ErrorHdl_$callClinit();
     if ($java.oooi_ErrorHdl_message_function !== null)
         $java.oooi_ErrorHdl_message_function.$call3($num, $msg, $ap);
     else
-        jl_System_out().$println1(jl_StringBuilder__init_().$append($rt_s(1600)).$append1($num).$append($rt_s(11)).$append($msg).$toString());
+        jl_System_out().$println1(jl_StringBuilder__init_().$append($rt_s(1598)).$append1($num).$append($rt_s(11)).$append($msg).$toString());
 }
 $java.oooi_ErrorHdl__clinit_ = function() {
     $java.oooi_ErrorHdl_error_function = null;
@@ -82730,7 +82564,7 @@ $java.ki_ProgressionUtilKt_differenceModulo = function($a, $b, $c) {
 function ki_ProgressionUtilKt_getProgressionLastElement($start, $end, $step) {
     if ($step <= 0) {
         if ($step >= 0)
-            $rt_throw(jl_IllegalArgumentException__init_($rt_s(1601)));
+            $rt_throw(jl_IllegalArgumentException__init_($rt_s(1599)));
         if ($start > $end)
             $end = $end + $java.ki_ProgressionUtilKt_differenceModulo($start, $end,  -$step) | 0;
     } else if ($start < $end)
@@ -83551,7 +83385,6 @@ oktd_IFloatData, 0, jl_Object, [oktd_IDataArray], 3, 3, 0, 0,
 oktt_TvmFloat32Array, 0, oktt_TvmArrayBufferView, [oktd_IFloatData], 4, 3, 0, ["$getSize", function() { return oktt_TvmFloat32Array_getSize(this); }, "$setSize", function(var_1) { oktt_TvmFloat32Array_setSize(this, var_1); }, "$set37", function(var_1, var_2) { oktt_TvmFloat32Array_set(this, var_1, var_2); }, "$set53", function(var_1, var_2) { oktt_TvmFloat32Array_set0(this, var_1, var_2); }, "$get25", function(var_1) { return oktt_TvmFloat32Array_get(this, var_1); }, "$get1", function(var_1) { return oktt_TvmFloat32Array_get0(this,
 var_1); }, "$get26", function() { return oktt_TvmFloat32Array_get1(this); }, "$get15", function() { return oktt_TvmFloat32Array_get2(this); }, "$put11", function(var_1) { oktt_TvmFloat32Array_put(this, var_1); }, "$put8", function(var_1) { oktt_TvmFloat32Array_put0(this, var_1); }, "$get32", function(var_1) { oktt_TvmFloat32Array_get3(this, var_1); }, "$put13", function(var_1) { oktt_TvmFloat32Array_put1(this, var_1); }, "$put4", function(var_1) { oktt_TvmFloat32Array_put2(this, var_1); }],
 oktt_KeyboardTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return oktt_KeyboardTest_getName(this); }, "$testMain", function() { oktt_KeyboardTest_testMain(this); }],
-okttsg_VertexNodeTest$testMain$3, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return okttsg_VertexNodeTest$testMain$3_invoke(this); }, "$invoke2", function() { okttsg_VertexNodeTest$testMain$3_invoke0(this); }],
 oktg_IObject3D$Companion, 0, jl_Object, [], 4, 3, oktg_IObject3D$Companion_$callClinit, 0,
 ju_AbstractList, 0, ju_AbstractCollection, [ju_List], 1, 3, 0, ["$add1", function(var_1) { return ju_AbstractList_add(this, var_1); }, "$iterator", function() { return ju_AbstractList_iterator(this); }, "$indexOf5", function(var_1) { return ju_AbstractList_indexOf(this, var_1); }, "$hashCode", function() { return ju_AbstractList_hashCode(this); }, "$equals0", function(var_1) { return ju_AbstractList_equals(this, var_1); }],
 jur_ReluctantCompositeQuantifierSet, 0, jur_CompositeQuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_ReluctantCompositeQuantifierSet_matches(this, var_1, var_2, var_3); }],
@@ -83576,24 +83409,24 @@ oktgg_IGLTFMaterial$read$9, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1"
 oktgg_IGLTFMaterial$read$8, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_IGLTFMaterial$read$8_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_IGLTFMaterial$read$8_invoke0(this, var_1); }],
 oooi_CollideSpaceGeom, 0, jl_Object, [ooo_DColliderFn], 0, 3, 0, ["$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_CollideSpaceGeom_dColliderFn(this, var_1, var_2, var_3, var_4); }, "$dCollideSpaceGeom", function(var_1, var_2, var_3, var_4, var_5) { return oooi_CollideSpaceGeom_dCollideSpaceGeom(this, var_1, var_2, var_3, var_4, var_5); }],
 ks_Sequence, 0, jl_Object, [], 3, 3, 0, 0,
-oktg_GL, 0, jl_Object, [oktg_IGL], 4, 3, oktg_GL_$callClinit, ["$setApi2", function(var_1) { oktg_GL_setApi(this, var_1); }, "$getMainFrameBufferWidth0", function() { return oktg_GL_getMainFrameBufferWidth(this); }, "$getMainFrameBufferHeight0", function() { return oktg_GL_getMainFrameBufferHeight(this); }, "$getMainFrameBufferHandle0", function() { return oktg_GL_getMainFrameBufferHandle(this); }, "$getMajVer", function() { return oktg_GL_getMajVer(this); }, "$getGlesMajVer", function() { return oktg_GL_getGlesMajVer(this);
-}, "$isGLES", function() { return oktg_GL_isGLES(this); }, "$getSingleCallRequests", function() { return oktg_GL_getSingleCallRequests(this); }, "$getRenderCallRequests", function() { return oktg_GL_getRenderCallRequests(this); }, "$getMaxAnisotropicFilterLevel", function() { return oktg_GL_getMaxAnisotropicFilterLevel(this); }, "$getShader1", function() { return oktg_GL_getShader(this); }, "$setShader0", function(var_1) { oktg_GL_setShader(this, var_1); }, "$setActiveTexture", function(var_1) { oktg_GL_setActiveTexture(this,
-var_1); }, "$getArrayBuffer", function() { return oktg_GL_getArrayBuffer(this); }, "$setArrayBuffer", function(var_1) { oktg_GL_setArrayBuffer(this, var_1); }, "$setElementArrayBuffer", function(var_1) { oktg_GL_setElementArrayBuffer(this, var_1); }, "$getTextureUnits", function() { return oktg_GL_getTextureUnits(this); }, "$isCullFaceEnabled", function() { return oktg_GL_isCullFaceEnabled0(this); }, "$setCullFaceEnabled", function(var_1) { oktg_GL_setCullFaceEnabled(this, var_1); }, "$getCullFaceMode", function()
-{ return oktg_GL_getCullFaceMode(this); }, "$setCullFaceMode", function(var_1) { oktg_GL_setCullFaceMode(this, var_1); }, "$isBlendEnabled", function() { return oktg_GL_isBlendEnabled0(this); }, "$setBlendEnabled", function(var_1) { oktg_GL_setBlendEnabled(this, var_1); }, "$setBlendFactorS", function(var_1) { oktg_GL_setBlendFactorS(this, var_1); }, "$setBlendFactorD", function(var_1) { oktg_GL_setBlendFactorD(this, var_1); }, "$setDepthTestEnabled", function(var_1) { oktg_GL_setDepthTestEnabled(this, var_1);
-}, "$grabTextureUnit", function() { return oktg_GL_grabTextureUnit(this); }, "$initTextureUnits", function() { oktg_GL_initTextureUnits(this); }, "$initGL0", function() { oktg_GL_initGL(this); }, "$setSimpleAlphaBlending", function() { oktg_GL_setSimpleAlphaBlending(this); }, "$call0", function(var_1, var_2) { oktg_GL_call(this, var_1, var_2); }, "$render1", function(var_1, var_2) { oktg_GL_render(this, var_1, var_2); }, "$doSingleCalls", function() { oktg_GL_doSingleCalls(this); }, "$doRenderCalls", function()
-{ oktg_GL_doRenderCalls(this); }, "$isExtensionSupported0", function(var_1) { return oktg_GL_isExtensionSupported(this, var_1); }, "$enableExtension", function(var_1) { return oktg_GL_enableExtension(this, var_1); }, "$glDrawBuffers0", function(var_1, var_2) { oktg_GL_glDrawBuffers(this, var_1, var_2); }, "$glDrawArraysInstanced0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawArraysInstanced(this, var_1, var_2, var_3, var_4); }, "$glDrawElementsInstanced0", function(var_1, var_2, var_3, var_4, var_5)
-{ oktg_GL_glDrawElementsInstanced(this, var_1, var_2, var_3, var_4, var_5); }, "$glVertexAttribDivisor", function(var_1, var_2) { oktg_GL_glVertexAttribDivisor(this, var_1, var_2); }, "$glBindTexture", function(var_1, var_2) { oktg_GL_glBindTexture(this, var_1, var_2); }, "$glBlendFunc0", function(var_1, var_2) { oktg_GL_glBlendFunc(this, var_1, var_2); }, "$glClear", function(var_1) { oktg_GL_glClear(this, var_1); }, "$glClearColor", function(var_1, var_2, var_3, var_4) { oktg_GL_glClearColor(this, var_1, var_2,
-var_3, var_4); }, "$glDeleteTexture0", function(var_1) { oktg_GL_glDeleteTexture(this, var_1); }, "$glDrawArrays0", function(var_1, var_2, var_3) { oktg_GL_glDrawArrays(this, var_1, var_2, var_3); }, "$glGenTexture", function() { return oktg_GL_glGenTexture(this); }, "$glGetIntegerv0", function(var_1, var_2) { oktg_GL_glGetIntegerv(this, var_1, var_2); }, "$glTexImage2D0", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D0(this, var_1, var_2, var_3, var_4, var_5,
-var_6, var_7, var_8, var_9); }, "$glTexImage2D", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$glTexParameterf", function(var_1, var_2, var_3) { oktg_GL_glTexParameterf(this, var_1, var_2, var_3); }, "$glViewport0", function(var_1, var_2, var_3, var_4) { oktg_GL_glViewport(this, var_1, var_2, var_3, var_4); }, "$glAttachShader0", function(var_1, var_2) { oktg_GL_glAttachShader(this, var_1,
-var_2); }, "$glBindBuffer", function(var_1, var_2) { oktg_GL_glBindBuffer(this, var_1, var_2); }, "$glBindFramebuffer0", function(var_1, var_2) { oktg_GL_glBindFramebuffer(this, var_1, var_2); }, "$glBindRenderbuffer0", function(var_1, var_2) { oktg_GL_glBindRenderbuffer(this, var_1, var_2); }, "$glBufferData", function(var_1, var_2, var_3, var_4) { oktg_GL_glBufferData(this, var_1, var_2, var_3, var_4); }, "$glCheckFramebufferStatus0", function(var_1) { return oktg_GL_glCheckFramebufferStatus(this, var_1);
-}, "$glCompileShader0", function(var_1) { oktg_GL_glCompileShader(this, var_1); }, "$glCreateProgram0", function() { return oktg_GL_glCreateProgram(this); }, "$glCreateShader0", function(var_1) { return oktg_GL_glCreateShader(this, var_1); }, "$glDeleteFramebuffer0", function(var_1) { oktg_GL_glDeleteFramebuffer(this, var_1); }, "$glDeleteProgram0", function(var_1) { oktg_GL_glDeleteProgram(this, var_1); }, "$glDeleteRenderbuffer0", function(var_1) { oktg_GL_glDeleteRenderbuffer(this, var_1); }, "$glDeleteShader0",
-function(var_1) { oktg_GL_glDeleteShader(this, var_1); }, "$glDetachShader0", function(var_1, var_2) { oktg_GL_glDetachShader(this, var_1, var_2); }, "$glDrawElements0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawElements(this, var_1, var_2, var_3, var_4); }, "$glEnableVertexAttribArray", function(var_1) { oktg_GL_glEnableVertexAttribArray(this, var_1); }, "$glFramebufferRenderbuffer0", function(var_1, var_2, var_3, var_4) { oktg_GL_glFramebufferRenderbuffer(this, var_1, var_2, var_3, var_4); }, "$glFramebufferTexture2D0",
-function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glFramebufferTexture2D(this, var_1, var_2, var_3, var_4, var_5); }, "$glGenBuffer", function() { return oktg_GL_glGenBuffer(this); }, "$glGenerateMipmap0", function(var_1) { oktg_GL_glGenerateMipmap(this, var_1); }, "$glGenFramebuffer0", function() { return oktg_GL_glGenFramebuffer(this); }, "$glGenRenderbuffer0", function() { return oktg_GL_glGenRenderbuffer(this); }, "$glGetActiveAttrib0", function(var_1, var_2, var_3, var_4) { return oktg_GL_glGetActiveAttrib(this,
-var_1, var_2, var_3, var_4); }, "$glGetActiveUniform0", function(var_1, var_2, var_3, var_4) { return oktg_GL_glGetActiveUniform(this, var_1, var_2, var_3, var_4); }, "$glGetAttribLocation0", function(var_1, var_2) { return oktg_GL_glGetAttribLocation(this, var_1, var_2); }, "$glGetFloatv0", function(var_1, var_2) { oktg_GL_glGetFloatv(this, var_1, var_2); }, "$glGetProgramiv0", function(var_1, var_2, var_3) { oktg_GL_glGetProgramiv(this, var_1, var_2, var_3); }, "$glGetProgramInfoLog0", function(var_1) { return oktg_GL_glGetProgramInfoLog(this,
-var_1); }, "$glGetShaderiv0", function(var_1, var_2, var_3) { oktg_GL_glGetShaderiv(this, var_1, var_2, var_3); }, "$glGetShaderInfoLog0", function(var_1) { return oktg_GL_glGetShaderInfoLog(this, var_1); }, "$glGetUniformLocation0", function(var_1, var_2) { return oktg_GL_glGetUniformLocation(this, var_1, var_2); }, "$glLinkProgram0", function(var_1) { oktg_GL_glLinkProgram(this, var_1); }, "$glRenderbufferStorage0", function(var_1, var_2, var_3, var_4) { oktg_GL_glRenderbufferStorage(this, var_1, var_2, var_3,
-var_4); }, "$glShaderSource0", function(var_1, var_2) { oktg_GL_glShaderSource(this, var_1, var_2); }, "$glTexParameteri", function(var_1, var_2, var_3) { oktg_GL_glTexParameteri(this, var_1, var_2, var_3); }, "$glUniform1f0", function(var_1, var_2) { oktg_GL_glUniform1f(this, var_1, var_2); }, "$glUniform1i0", function(var_1, var_2) { oktg_GL_glUniform1i(this, var_1, var_2); }, "$glUniform2f0", function(var_1, var_2, var_3) { oktg_GL_glUniform2f(this, var_1, var_2, var_3); }, "$glUniform3f0", function(var_1,
-var_2, var_3, var_4) { oktg_GL_glUniform3f(this, var_1, var_2, var_3, var_4); }, "$glUniform3fv0", function(var_1, var_2, var_3, var_4) { oktg_GL_glUniform3fv(this, var_1, var_2, var_3, var_4); }, "$glUniform4f0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniform4f(this, var_1, var_2, var_3, var_4, var_5); }, "$glUniformMatrix4fv0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniformMatrix4fv(this, var_1, var_2, var_3, var_4, var_5); }, "$glUseProgram0", function(var_1) { oktg_GL_glUseProgram(this,
-var_1); }, "$glVertexAttribPointer", function(var_1, var_2, var_3, var_4, var_5, var_6) { oktg_GL_glVertexAttribPointer(this, var_1, var_2, var_3, var_4, var_5, var_6); }],
+oktg_GL, 0, jl_Object, [oktg_IGL], 4, 3, oktg_GL_$callClinit, ["$setApi2", function(var_1) { oktg_GL_setApi(this, var_1); }, "$getMainFrameBufferWidth0", function() { return oktg_GL_getMainFrameBufferWidth(this); }, "$getMainFrameBufferHeight0", function() { return oktg_GL_getMainFrameBufferHeight(this); }, "$getMainFrameBufferHandle0", function() { return oktg_GL_getMainFrameBufferHandle(this); }, "$getGlesMajVer", function() { return oktg_GL_getGlesMajVer(this); }, "$isGLES", function() { return oktg_GL_isGLES(this);
+}, "$getSingleCallRequests", function() { return oktg_GL_getSingleCallRequests(this); }, "$getRenderCallRequests", function() { return oktg_GL_getRenderCallRequests(this); }, "$getMaxAnisotropicFilterLevel", function() { return oktg_GL_getMaxAnisotropicFilterLevel(this); }, "$getShader1", function() { return oktg_GL_getShader(this); }, "$setShader0", function(var_1) { oktg_GL_setShader(this, var_1); }, "$setActiveTexture", function(var_1) { oktg_GL_setActiveTexture(this, var_1); }, "$getArrayBuffer", function()
+{ return oktg_GL_getArrayBuffer(this); }, "$setArrayBuffer", function(var_1) { oktg_GL_setArrayBuffer(this, var_1); }, "$setElementArrayBuffer", function(var_1) { oktg_GL_setElementArrayBuffer(this, var_1); }, "$getTextureUnits", function() { return oktg_GL_getTextureUnits(this); }, "$isCullFaceEnabled", function() { return oktg_GL_isCullFaceEnabled0(this); }, "$setCullFaceEnabled", function(var_1) { oktg_GL_setCullFaceEnabled(this, var_1); }, "$getCullFaceMode", function() { return oktg_GL_getCullFaceMode(this);
+}, "$setCullFaceMode", function(var_1) { oktg_GL_setCullFaceMode(this, var_1); }, "$isBlendEnabled", function() { return oktg_GL_isBlendEnabled0(this); }, "$setBlendEnabled", function(var_1) { oktg_GL_setBlendEnabled(this, var_1); }, "$setBlendFactorS", function(var_1) { oktg_GL_setBlendFactorS(this, var_1); }, "$setBlendFactorD", function(var_1) { oktg_GL_setBlendFactorD(this, var_1); }, "$setDepthTestEnabled", function(var_1) { oktg_GL_setDepthTestEnabled(this, var_1); }, "$grabTextureUnit", function() { return oktg_GL_grabTextureUnit(this);
+}, "$initTextureUnits", function() { oktg_GL_initTextureUnits(this); }, "$initGL0", function() { oktg_GL_initGL(this); }, "$setSimpleAlphaBlending", function() { oktg_GL_setSimpleAlphaBlending(this); }, "$call0", function(var_1, var_2) { oktg_GL_call(this, var_1, var_2); }, "$render1", function(var_1, var_2) { oktg_GL_render(this, var_1, var_2); }, "$doSingleCalls", function() { oktg_GL_doSingleCalls(this); }, "$doRenderCalls", function() { oktg_GL_doRenderCalls(this); }, "$isExtensionSupported0", function(var_1)
+{ return oktg_GL_isExtensionSupported(this, var_1); }, "$enableExtension", function(var_1) { return oktg_GL_enableExtension(this, var_1); }, "$glDrawBuffers0", function(var_1, var_2) { oktg_GL_glDrawBuffers(this, var_1, var_2); }, "$glDrawArraysInstanced0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawArraysInstanced(this, var_1, var_2, var_3, var_4); }, "$glDrawElementsInstanced0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glDrawElementsInstanced(this, var_1, var_2, var_3, var_4, var_5);
+}, "$glVertexAttribDivisor", function(var_1, var_2) { oktg_GL_glVertexAttribDivisor(this, var_1, var_2); }, "$glBindTexture", function(var_1, var_2) { oktg_GL_glBindTexture(this, var_1, var_2); }, "$glBlendFunc0", function(var_1, var_2) { oktg_GL_glBlendFunc(this, var_1, var_2); }, "$glClear", function(var_1) { oktg_GL_glClear(this, var_1); }, "$glClearColor", function(var_1, var_2, var_3, var_4) { oktg_GL_glClearColor(this, var_1, var_2, var_3, var_4); }, "$glDeleteTexture0", function(var_1) { oktg_GL_glDeleteTexture(this,
+var_1); }, "$glDrawArrays0", function(var_1, var_2, var_3) { oktg_GL_glDrawArrays(this, var_1, var_2, var_3); }, "$glGenTexture", function() { return oktg_GL_glGenTexture(this); }, "$glGetIntegerv0", function(var_1, var_2) { oktg_GL_glGetIntegerv(this, var_1, var_2); }, "$glTexImage2D0", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D0(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$glTexImage2D", function(var_1, var_2, var_3, var_4, var_5,
+var_6, var_7, var_8, var_9) { oktg_GL_glTexImage2D(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$glTexParameterf", function(var_1, var_2, var_3) { oktg_GL_glTexParameterf(this, var_1, var_2, var_3); }, "$glViewport0", function(var_1, var_2, var_3, var_4) { oktg_GL_glViewport(this, var_1, var_2, var_3, var_4); }, "$glAttachShader0", function(var_1, var_2) { oktg_GL_glAttachShader(this, var_1, var_2); }, "$glBindBuffer", function(var_1, var_2) { oktg_GL_glBindBuffer(this, var_1, var_2);
+}, "$glBindFramebuffer0", function(var_1, var_2) { oktg_GL_glBindFramebuffer(this, var_1, var_2); }, "$glBindRenderbuffer0", function(var_1, var_2) { oktg_GL_glBindRenderbuffer(this, var_1, var_2); }, "$glBufferData", function(var_1, var_2, var_3, var_4) { oktg_GL_glBufferData(this, var_1, var_2, var_3, var_4); }, "$glCheckFramebufferStatus0", function(var_1) { return oktg_GL_glCheckFramebufferStatus(this, var_1); }, "$glCompileShader0", function(var_1) { oktg_GL_glCompileShader(this, var_1); }, "$glCreateProgram0",
+function() { return oktg_GL_glCreateProgram(this); }, "$glCreateShader0", function(var_1) { return oktg_GL_glCreateShader(this, var_1); }, "$glDeleteFramebuffer0", function(var_1) { oktg_GL_glDeleteFramebuffer(this, var_1); }, "$glDeleteProgram0", function(var_1) { oktg_GL_glDeleteProgram(this, var_1); }, "$glDeleteRenderbuffer0", function(var_1) { oktg_GL_glDeleteRenderbuffer(this, var_1); }, "$glDeleteShader0", function(var_1) { oktg_GL_glDeleteShader(this, var_1); }, "$glDetachShader0", function(var_1, var_2)
+{ oktg_GL_glDetachShader(this, var_1, var_2); }, "$glDrawElements0", function(var_1, var_2, var_3, var_4) { oktg_GL_glDrawElements(this, var_1, var_2, var_3, var_4); }, "$glEnableVertexAttribArray", function(var_1) { oktg_GL_glEnableVertexAttribArray(this, var_1); }, "$glFramebufferRenderbuffer0", function(var_1, var_2, var_3, var_4) { oktg_GL_glFramebufferRenderbuffer(this, var_1, var_2, var_3, var_4); }, "$glFramebufferTexture2D0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glFramebufferTexture2D(this,
+var_1, var_2, var_3, var_4, var_5); }, "$glGenBuffer", function() { return oktg_GL_glGenBuffer(this); }, "$glGenerateMipmap0", function(var_1) { oktg_GL_glGenerateMipmap(this, var_1); }, "$glGenFramebuffer0", function() { return oktg_GL_glGenFramebuffer(this); }, "$glGenRenderbuffer0", function() { return oktg_GL_glGenRenderbuffer(this); }, "$glGetActiveAttrib0", function(var_1, var_2, var_3, var_4) { return oktg_GL_glGetActiveAttrib(this, var_1, var_2, var_3, var_4); }, "$glGetActiveUniform0", function(var_1,
+var_2, var_3, var_4) { return oktg_GL_glGetActiveUniform(this, var_1, var_2, var_3, var_4); }, "$glGetAttribLocation0", function(var_1, var_2) { return oktg_GL_glGetAttribLocation(this, var_1, var_2); }, "$glGetFloatv0", function(var_1, var_2) { oktg_GL_glGetFloatv(this, var_1, var_2); }, "$glGetProgramiv0", function(var_1, var_2, var_3) { oktg_GL_glGetProgramiv(this, var_1, var_2, var_3); }, "$glGetProgramInfoLog0", function(var_1) { return oktg_GL_glGetProgramInfoLog(this, var_1); }, "$glGetShaderiv0", function(var_1,
+var_2, var_3) { oktg_GL_glGetShaderiv(this, var_1, var_2, var_3); }, "$glGetShaderInfoLog0", function(var_1) { return oktg_GL_glGetShaderInfoLog(this, var_1); }, "$glGetUniformLocation0", function(var_1, var_2) { return oktg_GL_glGetUniformLocation(this, var_1, var_2); }, "$glLinkProgram0", function(var_1) { oktg_GL_glLinkProgram(this, var_1); }, "$glRenderbufferStorage0", function(var_1, var_2, var_3, var_4) { oktg_GL_glRenderbufferStorage(this, var_1, var_2, var_3, var_4); }, "$glShaderSource0", function(var_1,
+var_2) { oktg_GL_glShaderSource(this, var_1, var_2); }, "$glTexParameteri", function(var_1, var_2, var_3) { oktg_GL_glTexParameteri(this, var_1, var_2, var_3); }, "$glUniform1f0", function(var_1, var_2) { oktg_GL_glUniform1f(this, var_1, var_2); }, "$glUniform1i0", function(var_1, var_2) { oktg_GL_glUniform1i(this, var_1, var_2); }, "$glUniform2f0", function(var_1, var_2, var_3) { oktg_GL_glUniform2f(this, var_1, var_2, var_3); }, "$glUniform3f0", function(var_1, var_2, var_3, var_4) { oktg_GL_glUniform3f(this,
+var_1, var_2, var_3, var_4); }, "$glUniform3fv0", function(var_1, var_2, var_3, var_4) { oktg_GL_glUniform3fv(this, var_1, var_2, var_3, var_4); }, "$glUniform4f0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniform4f(this, var_1, var_2, var_3, var_4, var_5); }, "$glUniformMatrix4fv0", function(var_1, var_2, var_3, var_4, var_5) { oktg_GL_glUniformMatrix4fv(this, var_1, var_2, var_3, var_4, var_5); }, "$glUseProgram0", function(var_1) { oktg_GL_glUseProgram(this, var_1); }, "$glVertexAttribPointer",
+function(var_1, var_2, var_3, var_4, var_5, var_6) { oktg_GL_glVertexAttribPointer(this, var_1, var_2, var_3, var_4, var_5, var_6); }],
 oktts_CascadedShadowMappingBaseTest$testMain$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktts_CascadedShadowMappingBaseTest$testMain$1$1_invoke(this, var_1); }, "$invoke8", function(var_1) { oktts_CascadedShadowMappingBaseTest$testMain$1$1_invoke0(this, var_1); }],
 kjf_Function18, 0, jl_Object, [k_Function], 3, 3, 0, 0,
 kjf_Function19, 0, jl_Object, [k_Function], 3, 3, 0, 0,
@@ -83607,9 +83440,9 @@ oktj_IJsonArrayIO, 0, jl_Object, [], 3, 3, 0, 0,
 kjf_Function16, 0, jl_Object, [k_Function], 3, 3, 0, 0,
 oktgg_GLTFNode$read$3$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$3$1_invoke(this, var_1); }, "$invoke15", function(var_1) { oktgg_GLTFNode$read$3$1_invoke0(this, var_1); }],
 kjf_Function17, 0, jl_Object, [k_Function], 3, 3, 0, 0,
-kc_ArraysKt___ArraysKt, 0, kc_ArraysKt___ArraysJvmKt, [], 0, 0, 0, 0]);
-$rt_metadata([kc_ArraysKt, 0, kc_ArraysKt___ArraysKt, [], 4, 3, 0, 0,
-kjf_Function10, 0, jl_Object, [k_Function], 3, 3, 0, 0,
+kc_ArraysKt___ArraysKt, 0, kc_ArraysKt___ArraysJvmKt, [], 0, 0, 0, 0,
+kc_ArraysKt, 0, kc_ArraysKt___ArraysKt, [], 4, 3, 0, 0]);
+$rt_metadata([kjf_Function10, 0, jl_Object, [k_Function], 3, 3, 0, 0,
 kjf_Function11, 0, jl_Object, [k_Function], 3, 3, 0, 0,
 kjf_Function12, 0, jl_Object, [k_Function], 3, 3, 0, 0,
 kjf_Function13, 0, jl_Object, [k_Function], 3, 3, 0, 0,
@@ -83665,9 +83498,9 @@ oktt_GLTFModel, 0, jl_Object, [], 4, 3, 0, ["$getRoot", function() { return oktt
 }, "$update", function(var_1) { oktt_GLTFModel_update(this, var_1); }, "$render0", function() { oktt_GLTFModel_render(this); }, "$setRotate", function(var_1) { oktt_GLTFModel_setRotate(this, var_1); }, "$getConf", function() { return oktt_GLTFModel_getConf(this); }, "$getResponse", function() { return oktt_GLTFModel_getResponse(this); }],
 oooi_DxSpace, 0, oooi_DxGeom, [ooo_DSpace], 1, 3, oooi_DxSpace_$callClinit, ["$dSpaceAdd", function(var_1) { oooi_DxSpace_dSpaceAdd(this, var_1); }, "$computeAABB", function() { oooi_DxSpace_computeAABB(this); }, "$getSublevel", function() { return oooi_DxSpace_getSublevel(this); }, "$getNumGeoms", function() { return oooi_DxSpace_getNumGeoms(this); }, "$add9", function(var_1) { oooi_DxSpace_add(this, var_1); }, "$dirty", function(var_1) { oooi_DxSpace_dirty(this, var_1); }, "$CHECK_NOT_LOCKED0", function()
 { oooi_DxSpace_CHECK_NOT_LOCKED0(this); }, "$setFirst", function(var_1) { oooi_DxSpace_setFirst(this, var_1); }, "$getGeoms", function() { return oooi_DxSpace_getGeoms(this); }],
-oooi_DxHashSpace, 0, oooi_DxSpace, [ooo_DHashSpace], 0, 3, oooi_DxHashSpace_$callClinit, ["$cleanGeoms", function() { oooi_DxHashSpace_cleanGeoms(this); }, "$collide", function(var_1, var_2) { oooi_DxHashSpace_collide(this, var_1, var_2); }, "$collide2", function(var_1, var_2, var_3) { oooi_DxHashSpace_collide2(this, var_1, var_2, var_3); }]]);
-$rt_metadata([jur_ReluctantGroupQuantifierSet, 0, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_ReluctantGroupQuantifierSet_matches(this, var_1, var_2, var_3); }],
-oktgg_GLTF$read$2$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTF$read$2$1_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_GLTF$read$2$1_invoke0(this, var_1); }],
+oooi_DxHashSpace, 0, oooi_DxSpace, [ooo_DHashSpace], 0, 3, oooi_DxHashSpace_$callClinit, ["$cleanGeoms", function() { oooi_DxHashSpace_cleanGeoms(this); }, "$collide", function(var_1, var_2) { oooi_DxHashSpace_collide(this, var_1, var_2); }, "$collide2", function(var_1, var_2, var_3) { oooi_DxHashSpace_collide2(this, var_1, var_2, var_3); }],
+jur_ReluctantGroupQuantifierSet, 0, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_ReluctantGroupQuantifierSet_matches(this, var_1, var_2, var_3); }]]);
+$rt_metadata([oktgg_GLTF$read$2$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTF$read$2$1_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_GLTF$read$2$1_invoke0(this, var_1); }],
 oktt_IFrameBufferAttachment$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 oktt_TvmGL$buffers$1, 0, kji_Lambda, [kjf_Function1], 4, 0, oktt_TvmGL$buffers$1_$callClinit, ["$invoke1", function(var_1) { return oktt_TvmGL$buffers$1_invoke(this, var_1); }, "$invoke20", function(var_1) { return oktt_TvmGL$buffers$1_invoke0(this, var_1); }],
 oktgg_GLTFPrimitive$read$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFPrimitive$read$2_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_GLTFPrimitive$read$2_invoke0(this, var_1); }],
@@ -83719,9 +83552,9 @@ oooig_GimGeometry$aabb3f, 0, jl_Object, [], 0, 3, 0, 0,
 jur_UCIRangeSet, 0, jur_LeafSet, [], 0, 0, 0, ["$accepts", function(var_1, var_2) { return jur_UCIRangeSet_accepts(this, var_1, var_2); }],
 oooi_DxCapsule$CollideCapsuleBox, 0, jl_Object, [ooo_DColliderFn], 0, 0, 0, ["$dCollideCapsuleBox", function(var_1, var_2, var_3, var_4, var_5) { return oooi_DxCapsule$CollideCapsuleBox_dCollideCapsuleBox(this, var_1, var_2, var_3, var_4, var_5); }, "$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_DxCapsule$CollideCapsuleBox_dColliderFn(this, var_1, var_2, var_3, var_4); }],
 oktt_TvmFile$readText$1, 0, jl_Object, [jl_Runnable], 4, 0, 0, ["$run", function() { oktt_TvmFile$readText$1_run(this); }],
-oktgg_GLTFSourceType, 0, jl_Enum, [], 12, 3, oktgg_GLTFSourceType_$callClinit, 0]);
-$rt_metadata([oktf_IFile, 0, jl_Object, [], 3, 3, 0, 0,
-oktt_TvmFile, 0, jl_Object, [oktf_IFile], 4, 3, 0, ["$child", function(var_1) { return oktt_TvmFile_child(this, var_1); }, "$parent0", function() { return oktt_TvmFile_parent(this); }, "$read2", function() { return oktt_TvmFile_read(this); }, "$readText", function(var_1, var_2) { oktt_TvmFile_readText(this, var_1, var_2); }, "$readBytes", function(var_1) { oktt_TvmFile_readBytes(this, var_1); }, "$getPath", function() { return oktt_TvmFile_getPath(this); }, "$getExtension0", function() { return oktt_TvmFile_getExtension(this);
+oktgg_GLTFSourceType, 0, jl_Enum, [], 12, 3, oktgg_GLTFSourceType_$callClinit, 0,
+oktf_IFile, 0, jl_Object, [], 3, 3, 0, 0]);
+$rt_metadata([oktt_TvmFile, 0, jl_Object, [oktf_IFile], 4, 3, 0, ["$child", function(var_1) { return oktt_TvmFile_child(this, var_1); }, "$parent0", function() { return oktt_TvmFile_parent(this); }, "$read2", function() { return oktt_TvmFile_read(this); }, "$readText", function(var_1, var_2) { oktt_TvmFile_readText(this, var_1, var_2); }, "$readBytes", function(var_1) { oktt_TvmFile_readBytes(this, var_1); }, "$getPath", function() { return oktt_TvmFile_getPath(this); }, "$getExtension0", function() { return oktt_TvmFile_getExtension(this);
 }, "$getName", function() { return oktt_TvmFile_getName(this); }],
 jl_Boolean, 0, jl_Object, [ji_Serializable, jl_Comparable], 0, 3, jl_Boolean_$callClinit, ["$compareTo5", function(var_1) { return jl_Boolean_compareTo(this, var_1); }, "$booleanValue", function() { return jl_Boolean_booleanValue(this); }, "$hashCode", function() { return jl_Boolean_hashCode(this); }, "$equals0", function(var_1) { return jl_Boolean_equals(this, var_1); }, "$compareTo6", function(var_1) { return jl_Boolean_compareTo0(this, var_1); }],
 ju_NoSuchElementException, 0, jl_RuntimeException, [], 0, 3, 0, 0,
@@ -83778,9 +83611,9 @@ otjt_Uint16Array, 0, otjt_ArrayBufferView, [], 1, 3, 0, 0,
 okta_IAL, 0, jl_Object, [], 3, 3, 0, 0,
 otjde_FocusEventTarget, 0, jl_Object, [otjde_EventTarget], 3, 3, 0, 0,
 jur_FSet$PossessiveFSet, 0, jur_AbstractSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_FSet$PossessiveFSet_matches(this, var_1, var_2, var_3); }, "$hasConsumed", function(var_1) { return jur_FSet$PossessiveFSet_hasConsumed(this, var_1); }],
-jur_CompositeGroupQuantifierSet, 0, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_CompositeGroupQuantifierSet_matches(this, var_1, var_2, var_3); }]]);
-$rt_metadata([jur_PosCompositeGroupQuantifierSet, 0, jur_CompositeGroupQuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_PosCompositeGroupQuantifierSet_matches(this, var_1, var_2, var_3); }],
-oktts_MotionBlurBaseTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return oktts_MotionBlurBaseTest_getName(this); }, "$testMain", function() { oktts_MotionBlurBaseTest_testMain(this); }],
+jur_CompositeGroupQuantifierSet, 0, jur_GroupQuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_CompositeGroupQuantifierSet_matches(this, var_1, var_2, var_3); }],
+jur_PosCompositeGroupQuantifierSet, 0, jur_CompositeGroupQuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_PosCompositeGroupQuantifierSet_matches(this, var_1, var_2, var_3); }]]);
+$rt_metadata([oktts_MotionBlurBaseTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return oktts_MotionBlurBaseTest_getName(this); }, "$testMain", function() { oktts_MotionBlurBaseTest_testMain(this); }],
 oktgl_DirectionalLight$renderShadowMaps$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgl_DirectionalLight$renderShadowMaps$1_invoke(this, var_1); }, "$invoke8", function(var_1) { oktgl_DirectionalLight$renderShadowMaps$1_invoke0(this, var_1); }],
 oktsp_Bloom$render$3, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktsp_Bloom$render$3_invoke(this, var_1); }, "$invoke12", function(var_1) { oktsp_Bloom$render$3_invoke0(this, var_1); }],
 oooig_GimTriCollision$GIM_TRIANGLE_CONTACT_DATA, 0, jl_Object, [], 0, 0, 0, 0,
@@ -83840,9 +83673,9 @@ jnc_CharacterCodingException, 0, ji_IOException, [], 0, 3, 0, 0,
 jnc_UnmappableCharacterException, "UnmappableCharacterException", 8, jnc_CharacterCodingException, [], 0, 3, 0, ["$getMessage", function() { return jnc_UnmappableCharacterException_getMessage(this); }],
 oooig_GimDynArrayInt, 0, jl_Object, [], 0, 3, 0, ["$GIM_DYNARRAY_PUSH_ITEM", function(var_1) { oooig_GimDynArrayInt_GIM_DYNARRAY_PUSH_ITEM(this, var_1); }, "$GIM_DYNARRAY_RESERVE_SIZE", function(var_1, var_2) { oooig_GimDynArrayInt_GIM_DYNARRAY_RESERVE_SIZE(this, var_1, var_2); }, "$GIM_DYNARRAY_DESTROY", function() { oooig_GimDynArrayInt_GIM_DYNARRAY_DESTROY(this); }, "$GIM_DYNARRAY_POINTER0", function() { return oooig_GimDynArrayInt_GIM_DYNARRAY_POINTER(this); }, "$size", function() { return oooig_GimDynArrayInt_size(this);
 }],
-oooi_DxWorld$DWorldStepMemoryFunctionsInfo, 0, jl_Object, [], 128, 3, oooi_DxWorld$DWorldStepMemoryFunctionsInfo_$callClinit, 0]);
-$rt_metadata([oktgg_GLTFAnimationSampler$read$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFAnimationSampler$read$1_invoke(this, var_1); }, "$invoke5", function(var_1) { oktgg_GLTFAnimationSampler$read$1_invoke0(this, var_1); }],
-jur_UCIDecomposedCharSet, 0, jur_DecomposedCharSet, [], 0, 0, 0, 0,
+oooi_DxWorld$DWorldStepMemoryFunctionsInfo, 0, jl_Object, [], 128, 3, oooi_DxWorld$DWorldStepMemoryFunctionsInfo_$callClinit, 0,
+oktgg_GLTFAnimationSampler$read$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFAnimationSampler$read$1_invoke(this, var_1); }, "$invoke5", function(var_1) { oktgg_GLTFAnimationSampler$read$1_invoke0(this, var_1); }]]);
+$rt_metadata([jur_UCIDecomposedCharSet, 0, jur_DecomposedCharSet, [], 0, 0, 0, 0,
 oktf_IFile$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 oktt_IFrameBuffer, 0, jl_Object, [], 3, 3, 0, 0,
 oktt_SimpleFrameBuffer, 0, jl_Object, [oktt_IFrameBuffer, oktt_ITexture], 4, 3, 0, ["$getGlTarget", function() { return oktt_SimpleFrameBuffer_getGlTarget(this); }, "$getTextureHandle", function() { return oktt_SimpleFrameBuffer_getTextureHandle(this); }, "$getTexture1", function() { return oktt_SimpleFrameBuffer_getTexture0(this); }, "$getWidth", function() { return oktt_SimpleFrameBuffer_getWidth(this); }, "$getHeight", function() { return oktt_SimpleFrameBuffer_getHeight(this); }, "$isBound2", function()
@@ -83902,9 +83735,10 @@ oktgg_GLTFSampler, 0, jl_Object, [oktj_IJsonObjectIO, oktgg_IGLTFArrayElement], 
 oooic_Ctime, 0, oooic_Ctype, [], 0, 3, 0, 0,
 oooic_Cstring, 0, oooic_Ctime, [], 0, 3, 0, 0,
 oooic_Cstdlib, 0, oooic_Cstring, [], 0, 3, oooic_Cstdlib_$callClinit, 0,
-oooic_Cstdio, 0, oooic_Cstdlib, [], 0, 3, oooic_Cstdio_$callClinit, 0]);
-$rt_metadata([oooic_Cstdarg, 0, oooic_Cstdio, [], 0, 3, 0, 0,
-oktgg_GLTFAnimationSampler, 0, jl_Object, [oktj_IJsonObjectIO], 4, 3, 0, ["$read", function(var_1) { oktgg_GLTFAnimationSampler_read(this, var_1); }, "$getInput0", function() { return oktgg_GLTFAnimationSampler_getInput(this); }, "$getInterpolation", function() { return oktgg_GLTFAnimationSampler_getInterpolation(this); }, "$setInterpolation", function(var_1) { oktgg_GLTFAnimationSampler_setInterpolation(this, var_1); }, "$getOutput0", function() { return oktgg_GLTFAnimationSampler_getOutput(this); }],
+oooic_Cstdio, 0, oooic_Cstdlib, [], 0, 3, oooic_Cstdio_$callClinit, 0,
+oooic_Cstdarg, 0, oooic_Cstdio, [], 0, 3, 0, 0]);
+$rt_metadata([oktgg_GLTFAnimationSampler, 0, jl_Object, [oktj_IJsonObjectIO], 4, 3, 0, ["$read", function(var_1) { oktgg_GLTFAnimationSampler_read(this, var_1); }, "$getInput0", function() { return oktgg_GLTFAnimationSampler_getInput(this); }, "$getInterpolation", function() { return oktgg_GLTFAnimationSampler_getInterpolation(this); }, "$setInterpolation", function(var_1) { oktgg_GLTFAnimationSampler_setInterpolation(this, var_1); }, "$getOutput0", function() { return oktgg_GLTFAnimationSampler_getOutput(this);
+}],
 oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData, 0, jl_Object, [], 0, 0, 0, ["$_OptimizeLocalContacts", function() { oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData__OptimizeLocalContacts(this); }, "$_ProcessLocalContacts", function(var_1, var_2, var_3) { return oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData__ProcessLocalContacts(this, var_1, var_2, var_3); }, "$_cldTestAxis", function(var_1, var_2, var_3, var_4, var_5, var_6) { return oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData__cldTestAxis(this,
 var_1, var_2, var_3, var_4, var_5, var_6); }, "$_cldTestCircleToEdgeAxis", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) { return oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData__cldTestCircleToEdgeAxis(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8); }, "$_cldTestSeparatingAxes", function(var_1, var_2, var_3) { return oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData__cldTestSeparatingAxes(this, var_1, var_2, var_3); }, "$_cldClipCylinderEdgeToTriangle", function(var_1,
 var_2, var_3) { return oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData__cldClipCylinderEdgeToTriangle(this, var_1, var_2, var_3); }, "$_cldClipCylinderToTriangle", function(var_1, var_2, var_3) { oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData__cldClipCylinderToTriangle(this, var_1, var_2, var_3); }, "$TestOneTriangleVsCylinder", function(var_1, var_2, var_3, var_4) { oooi_CollideCylinderTrimesh$sCylinderTrimeshColliderData_TestOneTriangleVsCylinder(this, var_1, var_2, var_3, var_4); }, "$_InitCylinderTrimeshData",
@@ -83982,9 +83816,9 @@ oktgg_GLTFNode$read$7, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", fun
 jur_HangulDecomposedCharSet, 0, jur_JointSet, [], 0, 0, 0, ["$setNext", function(var_1) { jur_HangulDecomposedCharSet_setNext(this, var_1); }, "$getDecomposedChar", function() { return jur_HangulDecomposedCharSet_getDecomposedChar(this); }, "$matches", function(var_1, var_2, var_3) { return jur_HangulDecomposedCharSet_matches(this, var_1, var_2, var_3); }, "$first", function(var_1) { return jur_HangulDecomposedCharSet_first(this, var_1); }, "$hasConsumed", function(var_1) { return jur_HangulDecomposedCharSet_hasConsumed(this,
 var_1); }],
 oktu_AsyncArrayList$Companion, 0, jl_Object, [], 4, 3, 0, 0,
-oktgg_GLTFNode$read$4, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$4_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_GLTFNode$read$4_invoke0(this, var_1); }]]);
-$rt_metadata([oktgg_GLTFNode$read$5, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$5_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_GLTFNode$read$5_invoke0(this, var_1); }],
-oktgg_GLTFNode$read$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$2_invoke(this, var_1); }, "$invoke0", function(var_1) { oktgg_GLTFNode$read$2_invoke0(this, var_1); }],
+oktgg_GLTFNode$read$4, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$4_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_GLTFNode$read$4_invoke0(this, var_1); }],
+oktgg_GLTFNode$read$5, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$5_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_GLTFNode$read$5_invoke0(this, var_1); }]]);
+$rt_metadata([oktgg_GLTFNode$read$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$2_invoke(this, var_1); }, "$invoke0", function(var_1) { oktgg_GLTFNode$read$2_invoke0(this, var_1); }],
 oktgg_GLTFNode$read$3, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFNode$read$3_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_GLTFNode$read$3_invoke0(this, var_1); }],
 oktp_IPhys, 0, jl_Object, [], 3, 3, 0, 0,
 oktpo_OdePhys, 0, jl_Object, [oktp_IPhys], 4, 3, 0, ["$createWorld0", function() { return oktpo_OdePhys_createWorld(this); }],
@@ -84038,9 +83872,9 @@ kr_IntProgression, 0, jl_Object, [jl_Iterable, kjim_KMappedMarker], 0, 3, kr_Int
 kr_IntRange, 0, kr_IntProgression, [kr_ClosedRange], 4, 3, kr_IntRange_$callClinit, ["$getStart0", function() { return kr_IntRange_getStart(this); }, "$getEndInclusive", function() { return kr_IntRange_getEndInclusive(this); }],
 oooicj_IntArray, 0, jl_Object, [], 0, 3, 0, ["$at2", function(var_1) { return oooicj_IntArray_at(this, var_1); }, "$inc", function(var_1) { oooicj_IntArray_inc(this, var_1); }],
 oooic_Csetjmp, 0, oooic_Cstdarg, [], 0, 3, 0, 0,
-oooic_Cmath, 0, oooic_Csetjmp, [], 0, 3, 0, 0]);
-$rt_metadata([oooic_C_All, 0, oooic_Cmath, [], 0, 3, 0, 0,
-ooo_DHeightfieldData, 0, jl_Object, [], 3, 3, 0, 0,
+oooic_Cmath, 0, oooic_Csetjmp, [], 0, 3, 0, 0,
+oooic_C_All, 0, oooic_Cmath, [], 0, 3, 0, 0]);
+$rt_metadata([ooo_DHeightfieldData, 0, jl_Object, [], 3, 3, 0, 0,
 oktg_World, 0, jl_Object, [oktg_IWorld], 4, 3, 0, ["$getAmbientColor", function() { return oktg_World_getAmbientColor(this); }, "$getExposure", function() { return oktg_World_getExposure(this); }],
 okttp_BoxShapeTest$testMain$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return okttp_BoxShapeTest$testMain$1_invoke(this); }, "$invoke2", function() { okttp_BoxShapeTest$testMain$1_invoke0(this); }],
 oooi_DxSphere$CollideSphereSphere, 0, jl_Object, [ooo_DColliderFn], 0, 0, 0, ["$dCollideSphereSphere", function(var_1, var_2, var_3, var_4, var_5) { return oooi_DxSphere$CollideSphereSphere_dCollideSphereSphere(this, var_1, var_2, var_3, var_4, var_5); }, "$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_DxSphere$CollideSphereSphere_dColliderFn(this, var_1, var_2, var_3, var_4); }],
@@ -84092,9 +83926,9 @@ var_1); }, "$declarationFrag", function(var_1) { oktsg_CameraDataNode_declaratio
 oktt_TvmGL$frameBuffers$1, 0, kji_Lambda, [kjf_Function1], 4, 0, oktt_TvmGL$frameBuffers$1_$callClinit, ["$invoke1", function(var_1) { return oktt_TvmGL$frameBuffers$1_invoke(this, var_1); }, "$invoke31", function(var_1) { return oktt_TvmGL$frameBuffers$1_invoke0(this, var_1); }],
 oktgc_ICamera$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 oktd_IShortData$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
-oooil_CCDVec3, 0, jl_Object, [], 0, 3, oooil_CCDVec3_$callClinit, 0]);
-$rt_metadata([oktgg_GLTFMesh, 0, jl_Object, [oktj_IJsonObjectIO, oktgg_IGLTFArrayElement], 4, 3, 0, ["$setName", function(var_1) { oktgg_GLTFMesh_setName(this, var_1); }, "$getPrimitives", function() { return oktgg_GLTFMesh_getPrimitives(this); }, "$read", function(var_1) { oktgg_GLTFMesh_read(this, var_1); }, "$getGltf0", function() { return oktgg_GLTFMesh_getGltf(this); }, "$getElementIndex", function() { return oktgg_GLTFMesh_getElementIndex(this); }],
-jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1, "AbstractCharClass$LazyJavaUnicodeIdentifierPart$1", 6, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1_contains(this, var_1); }],
+oooil_CCDVec3, 0, jl_Object, [], 0, 3, oooil_CCDVec3_$callClinit, 0,
+oktgg_GLTFMesh, 0, jl_Object, [oktj_IJsonObjectIO, oktgg_IGLTFArrayElement], 4, 3, 0, ["$setName", function(var_1) { oktgg_GLTFMesh_setName(this, var_1); }, "$getPrimitives", function() { return oktgg_GLTFMesh_getPrimitives(this); }, "$read", function(var_1) { oktgg_GLTFMesh_read(this, var_1); }, "$getGltf0", function() { return oktgg_GLTFMesh_getGltf(this); }, "$getElementIndex", function() { return oktgg_GLTFMesh_getElementIndex(this); }]]);
+$rt_metadata([jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1, "AbstractCharClass$LazyJavaUnicodeIdentifierPart$1", 6, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return jur_AbstractCharClass$LazyJavaUnicodeIdentifierPart$1_contains(this, var_1); }],
 jur_AbstractCharClass$LazyDigit, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", function() { return jur_AbstractCharClass$LazyDigit_computeValue(this); }],
 jur_AbstractCharClass$LazyJavaLetter, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", function() { return jur_AbstractCharClass$LazyJavaLetter_computeValue(this); }],
 jur_AheadFSet, 0, jur_FSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return jur_AheadFSet_matches(this, var_1, var_2, var_3); }],
@@ -84156,9 +83990,9 @@ oktg_IScene, 0, jl_Object, [oktgn_IDelegateTransformNode], 3, 3, oktg_IScene_$ca
 oktg_Scene, 0, jl_Object, [oktg_IScene], 0, 3, oktg_Scene_$callClinit, ["$getLights", function() { return oktg_Scene_getLights(this); }, "$getObjects", function() { return oktg_Scene_getObjects(this); }, "$getArmatures", function() { return oktg_Scene_getArmatures(this); }, "$getNodes0", function() { return oktg_Scene_getNodes(this); }, "$getScenes0", function() { return oktg_Scene_getScenes(this); }, "$getWorld", function() { return oktg_Scene_getWorld(this); }, "$getShaderChannel", function() { return oktg_Scene_getShaderChannel(this);
 }, "$setShaderChannel", function(var_1) { oktg_Scene_setShaderChannel(this, var_1); }, "$updatePreviousTransform0", function() { oktg_Scene_updatePreviousTransform(this); }, "$update", function(var_1) { oktg_Scene_update(this, var_1); }, "$prepareShaders", function(var_1) { oktg_Scene_prepareShaders(this, var_1); }, "$render0", function() { oktg_Scene_render(this); }, "$getNode", function() { return oktg_Scene_getNode(this); }, "$getAllObjects", function(var_1, var_2) { oktg_Scene_getAllObjects(this, var_1,
 var_2); }],
-k_UninitializedPropertyAccessException, 0, jl_RuntimeException, [], 4, 3, 0, 0]);
-$rt_metadata([oktg_Scene$Companion, 0, jl_Object, [], 4, 3, 0, ["$getTmpV1", function() { return oktg_Scene$Companion_getTmpV1(this); }, "$getTmpV2", function() { return oktg_Scene$Companion_getTmpV2(this); }],
-kt_StringsKt__StringsKt$splitToSequence$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return kt_StringsKt__StringsKt$splitToSequence$1_invoke(this, var_1); }, "$invoke33", function(var_1) { return kt_StringsKt__StringsKt$splitToSequence$1_invoke0(this, var_1); }],
+k_UninitializedPropertyAccessException, 0, jl_RuntimeException, [], 4, 3, 0, 0,
+oktg_Scene$Companion, 0, jl_Object, [], 4, 3, 0, ["$getTmpV1", function() { return oktg_Scene$Companion_getTmpV1(this); }, "$getTmpV2", function() { return oktg_Scene$Companion_getTmpV2(this); }]]);
+$rt_metadata([kt_StringsKt__StringsKt$splitToSequence$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return kt_StringsKt__StringsKt$splitToSequence$1_invoke(this, var_1); }, "$invoke33", function(var_1) { return kt_StringsKt__StringsKt$splitToSequence$1_invoke0(this, var_1); }],
 oktt_FrameBuffer, 0, jl_Object, [oktt_IFrameBuffer], 4, 3, 0, ["$getWidth", function() { return oktt_FrameBuffer_getWidth(this); }, "$getHeight", function() { return oktt_FrameBuffer_getHeight(this); }, "$isBound2", function() { return oktt_FrameBuffer_isBound(this); }, "$setBound", function(var_1) { oktt_FrameBuffer_setBound(this, var_1); }, "$getFrameBufferHandle", function() { return oktt_FrameBuffer_getFrameBufferHandle(this); }, "$getAttachments", function() { return oktt_FrameBuffer_getAttachments(this);
 }, "$getAttachments0", function() { return oktt_FrameBuffer_getAttachments0(this); }, "$getTexture", function(var_1) { return oktt_FrameBuffer_getTexture(this, var_1); }, "$buildAttachments", function() { oktt_FrameBuffer_buildAttachments(this); }, "$initBuffersOrder0", function(var_1) { oktt_FrameBuffer_initBuffersOrder(this, var_1); }, "$checkErrors", function() { oktt_FrameBuffer_checkErrors(this); }, "$destroy4", function(var_1) { oktt_FrameBuffer_destroy(this, var_1); }, "$bind8", function(var_1) { oktt_FrameBuffer_bind(this,
 var_1); }, "$render", function(var_1) { oktt_FrameBuffer_render(this, var_1); }],
@@ -84232,9 +84066,9 @@ var_1, var_2, var_3, var_4); }, "$setQuaternion4", function(var_1, var_2) { retu
 var_2); }],
 oktgg_GLTFSparse, 0, jl_Object, [oktj_IJsonObjectIO], 4, 3, 0, ["$getIndices0", function() { return oktgg_GLTFSparse_getIndices(this); }, "$getValues0", function() { return oktgg_GLTFSparse_getValues(this); }, "$read", function(var_1) { oktgg_GLTFSparse_read(this, var_1); }],
 oktt_TextureCube, 0, oktt_Texture, [], 4, 3, 0, ["$setWidth", function(var_1) { oktt_TextureCube_setWidth(this, var_1); }, "$setHeight", function(var_1) { oktt_TextureCube_setHeight(this, var_1); }, "$load4", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) { oktt_TextureCube_load(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11); }, "$loadSide", function(var_1, var_2) { oktt_TextureCube_loadSide(this, var_1, var_2); }, "$getTextureHandle",
-function() { return oktt_TextureCube_getTextureHandle(this); }]]);
-$rt_metadata([oktg_IObject3D$Companion$Build$1, 0, kji_Lambda, [kjf_Function0], 4, 0, oktg_IObject3D$Companion$Build$1_$callClinit, 0,
-oom_DVector4C, 0, jl_Object, [], 3, 3, 0, 0,
+function() { return oktt_TextureCube_getTextureHandle(this); }],
+oktg_IObject3D$Companion$Build$1, 0, kji_Lambda, [kjf_Function0], 4, 0, oktg_IObject3D$Companion$Build$1_$callClinit, 0]);
+$rt_metadata([oom_DVector4C, 0, jl_Object, [], 3, 3, 0, 0,
 oom_DVector4, 0, jl_Object, [oom_DVector4C], 0, 3, 0, ["$set16", function(var_1, var_2, var_3, var_4) { oom_DVector4_set(this, var_1, var_2, var_3, var_4); }, "$get01", function() { return oom_DVector4_get0(this); }, "$get10", function() { return oom_DVector4_get1(this); }, "$get20", function() { return oom_DVector4_get2(this); }, "$get30", function() { return oom_DVector4_get3(this); }],
 oom_DVector3C, 0, jl_Object, [], 3, 3, 0, 0,
 oom_DVector3, "DVector3", 19, jl_Object, [oom_DVector3I, oom_DVector3C], 0, 3, oom_DVector3_$callClinit, ["$set14", function(var_1) { oom_DVector3_set3(this, var_1); }, "$set5", function(var_1, var_2, var_3) { return oom_DVector3_set0(this, var_1, var_2, var_3); }, "$set2", function(var_1) { return oom_DVector3_set(this, var_1); }, "$set7", function(var_1) { return oom_DVector3_set1(this, var_1); }, "$toString", function() { return oom_DVector3_toString(this); }, "$set00", function(var_1) { oom_DVector3_set00(this,
@@ -84294,9 +84128,9 @@ jnc_MalformedInputException, "MalformedInputException", 8, jnc_CharacterCodingEx
 oktsg_ShaderNodeLink, 0, jl_Object, [], 4, 3, 0, ["$getNode0", function() { return oktsg_ShaderNodeLink_getNode(this); }, "$getInputName", function() { return oktsg_ShaderNodeLink_getInputName(this); }],
 oooi_DxHeightfieldData, 0, jl_Object, [ooo_DHeightfieldData], 0, 3, 0, 0,
 oktgg_GLTFAnimation$read$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFAnimation$read$1_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_GLTFAnimation$read$1_invoke0(this, var_1); }],
-okttsg_SSAOTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return okttsg_SSAOTest_getName(this); }, "$testMain", function() { okttsg_SSAOTest_testMain(this); }]]);
-$rt_metadata([oktp_IRigidBody$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
-oktt_SoundInstance, 0, jl_Object, [], 4, 3, 0, ["$getElement", function() { return oktt_SoundInstance_getElement(this); }, "$getGain", function() { return oktt_SoundInstance_getGain(this); }, "$getPanner", function() { return oktt_SoundInstance_getPanner(this); }],
+okttsg_SSAOTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return okttsg_SSAOTest_getName(this); }, "$testMain", function() { okttsg_SSAOTest_testMain(this); }],
+oktp_IRigidBody$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0]);
+$rt_metadata([oktt_SoundInstance, 0, jl_Object, [], 4, 3, 0, ["$getElement", function() { return oktt_SoundInstance_getElement(this); }, "$getGain", function() { return oktt_SoundInstance_getGain(this); }, "$getPanner", function() { return oktt_SoundInstance_getPanner(this); }],
 jm_BigInteger, 0, jl_Number, [jl_Comparable, ji_Serializable], 0, 3, jm_BigInteger_$callClinit, ["$abs2", function() { return jm_BigInteger_abs(this); }, "$negate", function() { return jm_BigInteger_negate(this); }, "$add11", function(var_1) { return jm_BigInteger_add(this, var_1); }, "$subtract1", function(var_1) { return jm_BigInteger_subtract(this, var_1); }, "$signum0", function() { return jm_BigInteger_signum(this); }, "$shiftRight0", function(var_1) { return jm_BigInteger_shiftRight(this, var_1); }, "$shiftLeft0",
 function(var_1) { return jm_BigInteger_shiftLeft(this, var_1); }, "$shiftLeftOneBit1", function() { return jm_BigInteger_shiftLeftOneBit(this); }, "$bitLength3", function() { return jm_BigInteger_bitLength(this); }, "$testBit", function(var_1) { return jm_BigInteger_testBit(this, var_1); }, "$getLowestSetBit", function() { return jm_BigInteger_getLowestSetBit(this); }, "$intValue", function() { return jm_BigInteger_intValue(this); }, "$longValue", function() { return jm_BigInteger_longValue(this); }, "$compareTo7",
 function(var_1) { return jm_BigInteger_compareTo(this, var_1); }, "$hashCode", function() { return jm_BigInteger_hashCode(this); }, "$equals0", function(var_1) { return jm_BigInteger_equals(this, var_1); }, "$equalsArrays", function(var_1) { return jm_BigInteger_equalsArrays(this, var_1); }, "$multiply", function(var_1) { return jm_BigInteger_multiply(this, var_1); }, "$pow0", function(var_1) { return jm_BigInteger_pow(this, var_1); }, "$divideAndRemainder", function(var_1) { return jm_BigInteger_divideAndRemainder(this,
@@ -84351,9 +84185,9 @@ oktgg_GLTF$read$4, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", functio
 oktgg_GLTF$read$5, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTF$read$5_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_GLTF$read$5_invoke0(this, var_1); }],
 jl_NoSuchMethodError, 0, jl_IncompatibleClassChangeError, [], 0, 3, 0, 0,
 oktgg_GLTF$read$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTF$read$1_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_GLTF$read$1_invoke0(this, var_1); }],
-oktp_IBoxShape, 0, jl_Object, [oktp_IShape], 3, 3, 0, 0]);
-$rt_metadata([jl_ArrayIndexOutOfBoundsException, 0, jl_IndexOutOfBoundsException, [], 0, 3, 0, 0,
-oktts_CascadedShadowMappingBaseTest$testMain$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return oktts_CascadedShadowMappingBaseTest$testMain$1_invoke(this); }, "$invoke2", function() { oktts_CascadedShadowMappingBaseTest$testMain$1_invoke0(this); }],
+oktp_IBoxShape, 0, jl_Object, [oktp_IShape], 3, 3, 0, 0,
+jl_ArrayIndexOutOfBoundsException, 0, jl_IndexOutOfBoundsException, [], 0, 3, 0, 0]);
+$rt_metadata([oktts_CascadedShadowMappingBaseTest$testMain$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return oktts_CascadedShadowMappingBaseTest$testMain$1_invoke(this); }, "$invoke2", function() { oktts_CascadedShadowMappingBaseTest$testMain$1_invoke0(this); }],
 okttm_MeshTest$testMain$2, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return okttm_MeshTest$testMain$2_invoke(this); }, "$invoke2", function() { okttm_MeshTest$testMain$2_invoke0(this); }],
 juca_AtomicLong, 0, jl_Number, [ji_Serializable], 0, 3, 0, ["$get9", function() { return juca_AtomicLong_get(this); }, "$compareAndSet", function(var_1, var_2) { return juca_AtomicLong_compareAndSet(this, var_1, var_2); }],
 oooig_GimBitSet, 0, jl_Object, [], 0, 3, 0, ["$GIM_BITSET_CLEAR_ALL", function() { oooig_GimBitSet_GIM_BITSET_CLEAR_ALL(this); }, "$GIM_BITSET_SET", function(var_1) { oooig_GimBitSet_GIM_BITSET_SET(this, var_1); }, "$GIM_BITSET_GET", function(var_1) { return oooig_GimBitSet_GIM_BITSET_GET(this, var_1); }],
@@ -84406,9 +84240,9 @@ oooig_GimAABBSet, 0, jl_Object, [], 0, 3, oooig_GimAABBSet_$callClinit, ["$getGl
 }, "$gim_aabbset_sort", function(var_1) { oooig_GimAABBSet_gim_aabbset_sort(this, var_1); }, "$gim_aabbset_update", function() { oooig_GimAABBSet_gim_aabbset_update(this); }, "$gim_aabbset_box_collision", function(var_1, var_2) { oooig_GimAABBSet_gim_aabbset_box_collision(this, var_1, var_2); }, "$gim_aabbset_ray_collision", function(var_1, var_2, var_3, var_4) { oooig_GimAABBSet_gim_aabbset_ray_collision(this, var_1, var_2, var_3, var_4); }, "$at1", function(var_1) { return oooig_GimAABBSet_at(this, var_1);
 }],
 ooot_Atomics, 0, jl_Object, [], 0, 3, 0, 0,
-jur_AbstractCharClass$LazyLower, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", function() { return jur_AbstractCharClass$LazyLower_computeValue(this); }]]);
-$rt_metadata([oktgg_GLTFPrimitive$loadIndices$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFPrimitive$loadIndices$1_invoke(this, var_1); }, "$invoke17", function(var_1) { oktgg_GLTFPrimitive$loadIndices$1_invoke0(this, var_1); }],
-ju_HashMap$HashMapEntrySet, 0, ju_AbstractSet, [], 0, 0, 0, ["$hashMap", function() { return ju_HashMap$HashMapEntrySet_hashMap(this); }, "$iterator", function() { return ju_HashMap$HashMapEntrySet_iterator(this); }],
+jur_AbstractCharClass$LazyLower, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", function() { return jur_AbstractCharClass$LazyLower_computeValue(this); }],
+oktgg_GLTFPrimitive$loadIndices$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFPrimitive$loadIndices$1_invoke(this, var_1); }, "$invoke17", function(var_1) { oktgg_GLTFPrimitive$loadIndices$1_invoke0(this, var_1); }]]);
+$rt_metadata([ju_HashMap$HashMapEntrySet, 0, ju_AbstractSet, [], 0, 0, 0, ["$hashMap", function() { return ju_HashMap$HashMapEntrySet_hashMap(this); }, "$iterator", function() { return ju_HashMap$HashMapEntrySet_iterator(this); }],
 ju_LinkedHashMap$LinkedHashMapEntrySet, 0, ju_HashMap$HashMapEntrySet, [], 4, 0, 0, ["$iterator", function() { return ju_LinkedHashMap$LinkedHashMapEntrySet_iterator(this); }],
 kc_EmptyList, 0, jl_Object, [ju_List, ji_Serializable, ju_RandomAccess, kjim_KMappedMarker], 4, 3, kc_EmptyList_$callClinit, ["$getSize", function() { return kc_EmptyList_getSize(this); }, "$size", function() { return kc_EmptyList_size(this); }, "$get35", function(var_1) { return kc_EmptyList_get(this, var_1); }, "$get1", function(var_1) { return kc_EmptyList_get0(this, var_1); }],
 oooi_Objects_H$dxAutoDisable, 0, jl_Object, [jl_Cloneable], 0, 3, 0, ["$clone2", function() { return oooi_Objects_H$dxAutoDisable_clone(this); }],
@@ -84457,7 +84291,6 @@ oooi_CollisionLibccd$6, 0, jl_Object, [oooil_CCD$ccd_center_fn], 4, 0, 0, ["$run
 oktd_IIntData$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 jl_NegativeArraySizeException, 0, jl_RuntimeException, [], 0, 3, 0, 0,
 oktsp_Bloom, 0, jl_Object, [], 4, 3, oktsp_Bloom_$callClinit, ["$getBlurDown", function() { return oktsp_Bloom_getBlurDown(this); }, "$getBlurUp", function() { return oktsp_Bloom_getBlurUp(this); }, "$render2", function(var_1, var_2, var_3, var_4) { oktsp_Bloom_render(this, var_1, var_2, var_3, var_4); }],
-okttsg_VelocityNodeTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return okttsg_VelocityNodeTest_getName(this); }, "$testMain", function() { okttsg_VelocityNodeTest_testMain(this); }],
 oktgg_IGLTFMaterial, 0, jl_Object, [oktgg_IGLTFArrayElement], 3, 3, 0, 0,
 oooip_DxStepWorkingMemory, 0, jl_Object, [], 0, 3, 0, ["$SureGetWorldProcessingContext", function() { return oooip_DxStepWorkingMemory_SureGetWorldProcessingContext(this); }, "$GetWorldProcessingContext", function() { return oooip_DxStepWorkingMemory_GetWorldProcessingContext(this); }, "$SureGetMemoryReserveInfo", function() { return oooip_DxStepWorkingMemory_SureGetMemoryReserveInfo(this); }, "$SureGetMemoryManager", function() { return oooip_DxStepWorkingMemory_SureGetMemoryManager(this); }],
 oktpo_OdePhysicsWorld$nearCallback$1, 0, jl_Object, [ooo_DGeom$DNearCallback], 4, 0, 0, ["$call", function(var_1, var_2, var_3) { oktpo_OdePhysicsWorld$nearCallback$1_call(this, var_1, var_2, var_3); }],
@@ -84466,11 +84299,11 @@ oktt_GBuffer, 0, jl_Object, [oktt_IFrameBuffer], 4, 3, 0, ["$getWidth", function
 { return oktt_GBuffer_getColorMap(this); }, "$getNormalMap", function() { return oktt_GBuffer_getNormalMap(this); }, "$getPositionMap", function() { return oktt_GBuffer_getPositionMap(this); }, "$getDepthMap", function() { return oktt_GBuffer_getDepthMap(this); }, "$buildAttachments", function() { oktt_GBuffer_buildAttachments(this); }, "$initBuffersOrder0", function(var_1) { oktt_GBuffer_initBuffersOrder(this, var_1); }, "$bind8", function(var_1) { oktt_GBuffer_bind(this, var_1); }, "$render", function(var_1)
 { oktt_GBuffer_render(this, var_1); }],
 jl_IllegalStateException, 0, jl_Exception, [], 0, 3, 0, 0,
-oktsg_GBufferOutputNode$Companion, 0, jl_Object, [], 4, 3, 0, 0]);
-$rt_metadata([oktsg_OperationNode, 0, oktsg_ShaderNode, [], 4, 3, oktsg_OperationNode_$callClinit, ["$getResult0", function() { return oktsg_OperationNode_getResult(this); }, "$setFragment", function(var_1) { oktsg_OperationNode_setFragment(this, var_1); }, "$setVarying", function(var_1) { oktsg_OperationNode_setVarying(this, var_1); }, "$setArgs", function(var_1) { oktsg_OperationNode_setArgs(this, var_1); }, "$executionVert", function(var_1) { oktsg_OperationNode_executionVert(this, var_1); }, "$executionFrag",
-function(var_1) { oktsg_OperationNode_executionFrag(this, var_1); }],
-oktm_IMat4$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
-oktgg_GLTFSkin$read$2$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFSkin$read$2$1_invoke(this, var_1); }, "$invoke0", function(var_1) { oktgg_GLTFSkin$read$2$1_invoke0(this, var_1); }],
+oktsg_GBufferOutputNode$Companion, 0, jl_Object, [], 4, 3, 0, 0,
+oktsg_OperationNode, 0, oktsg_ShaderNode, [], 4, 3, oktsg_OperationNode_$callClinit, ["$getResult0", function() { return oktsg_OperationNode_getResult(this); }, "$setFragment", function(var_1) { oktsg_OperationNode_setFragment(this, var_1); }, "$setVarying", function(var_1) { oktsg_OperationNode_setVarying(this, var_1); }, "$setArgs", function(var_1) { oktsg_OperationNode_setArgs(this, var_1); }, "$executionVert", function(var_1) { oktsg_OperationNode_executionVert(this, var_1); }, "$executionFrag", function(var_1)
+{ oktsg_OperationNode_executionFrag(this, var_1); }],
+oktm_IMat4$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0]);
+$rt_metadata([oktgg_GLTFSkin$read$2$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTFSkin$read$2$1_invoke(this, var_1); }, "$invoke0", function(var_1) { oktgg_GLTFSkin$read$2$1_invoke0(this, var_1); }],
 okttsg_SkyboxVertexNodeTest$testMain$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return okttsg_SkyboxVertexNodeTest$testMain$1_invoke(this); }, "$invoke2", function() { okttsg_SkyboxVertexNodeTest$testMain$1_invoke0(this); }],
 oooi_DxGimpactCollision, 0, jl_Object, [], 0, 3, 0, 0,
 jl_Byte, 0, jl_Number, [jl_Comparable], 0, 3, jl_Byte_$callClinit, ["$byteValue", function() { return jl_Byte_byteValue(this); }],
@@ -84522,11 +84355,11 @@ oktmb_PlaneMeshBuilder, 0, oktmb_MeshBuilder, [], 4, 3, 0, ["$build", function(v
 jnc_CoderMalfunctionError, 0, jl_Error, [], 0, 3, 0, 0,
 oooip_DxWorldProcessIslandsInfo, 0, jl_Object, [], 0, 3, 0, ["$AssignInfo", function(var_1, var_2, var_3, var_4) { oooip_DxWorldProcessIslandsInfo_AssignInfo(this, var_1, var_2, var_3, var_4); }, "$GetIslandsCount", function() { return oooip_DxWorldProcessIslandsInfo_GetIslandsCount(this); }, "$GetIslandSizes", function() { return oooip_DxWorldProcessIslandsInfo_GetIslandSizes(this); }, "$GetBodiesArray", function() { return oooip_DxWorldProcessIslandsInfo_GetBodiesArray(this); }, "$GetJointsArray", function()
 { return oooip_DxWorldProcessIslandsInfo_GetJointsArray(this); }],
-oktgg_GLTF$read$10$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTF$read$10$1_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_GLTF$read$10$1_invoke0(this, var_1); }]]);
-$rt_metadata([jur_CIDecomposedCharSet, 0, jur_DecomposedCharSet, [], 0, 0, 0, 0,
+oktgg_GLTF$read$10$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_GLTF$read$10$1_invoke(this, var_1); }, "$invoke10", function(var_1) { oktgg_GLTF$read$10$1_invoke0(this, var_1); }],
+jur_CIDecomposedCharSet, 0, jur_DecomposedCharSet, [], 0, 0, 0, 0,
 oktm_VertexInputs, 0, jl_Object, [oktm_IVertexInputs], 0, 3, 0, ["$getBytesPerVertex", function() { return oktm_VertexInputs_getBytesPerVertex(this); }, "$setBytesPerVertex", function(var_1) { oktm_VertexInputs_setBytesPerVertex(this, var_1); }, "$getSize", function() { return oktm_VertexInputs_getSize(this); }, "$size", function() { return oktm_VertexInputs_size(this); }, "$contains", function(var_1) { return oktm_VertexInputs_contains(this, var_1); }, "$add5", function(var_1) { return oktm_VertexInputs_add(this,
-var_1); }, "$get19", function(var_1) { return oktm_VertexInputs_get(this, var_1); }, "$get", function(var_1) { return oktm_VertexInputs_get0(this, var_1); }, "$iterator", function() { return oktm_VertexInputs_iterator(this); }, "$updateVertexOffsets", function() { oktm_VertexInputs_updateVertexOffsets(this); }, "$getFloatsPerVertex0", function() { return oktm_VertexInputs_getFloatsPerVertex(this); }, "$floatOffsetOf0", function(var_1) { return oktm_VertexInputs_floatOffsetOf(this, var_1); }],
-oooi_CollisionLibccd$CollideConvexCylinderCCD, 0, jl_Object, [ooo_DColliderFn], 0, 3, 0, ["$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_CollisionLibccd$CollideConvexCylinderCCD_dColliderFn(this, var_1, var_2, var_3, var_4); }],
+var_1); }, "$get19", function(var_1) { return oktm_VertexInputs_get(this, var_1); }, "$get", function(var_1) { return oktm_VertexInputs_get0(this, var_1); }, "$iterator", function() { return oktm_VertexInputs_iterator(this); }, "$updateVertexOffsets", function() { oktm_VertexInputs_updateVertexOffsets(this); }, "$getFloatsPerVertex0", function() { return oktm_VertexInputs_getFloatsPerVertex(this); }, "$floatOffsetOf0", function(var_1) { return oktm_VertexInputs_floatOffsetOf(this, var_1); }]]);
+$rt_metadata([oooi_CollisionLibccd$CollideConvexCylinderCCD, 0, jl_Object, [ooo_DColliderFn], 0, 3, 0, ["$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_CollisionLibccd$CollideConvexCylinderCCD_dColliderFn(this, var_1, var_2, var_3, var_4); }],
 oktts_ShadowMappingBaseTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return oktts_ShadowMappingBaseTest_getName(this); }, "$testMain", function() { oktts_ShadowMappingBaseTest_testMain(this); }],
 oktsg_NormalMapNode, 0, oktsg_ShaderNode, [], 4, 3, oktsg_NormalMapNode_$callClinit, ["$getNormalizedViewVector", function() { return oktsg_NormalMapNode_getNormalizedViewVector(this); }, "$setNormalizedViewVector", function(var_1) { oktsg_NormalMapNode_setNormalizedViewVector(this, var_1); }, "$getVertexPosition", function() { return oktsg_NormalMapNode_getVertexPosition(this); }, "$getUv0", function() { return oktsg_NormalMapNode_getUv(this); }, "$setUv", function(var_1) { oktsg_NormalMapNode_setUv(this, var_1);
 }, "$getNormalScale", function() { return oktsg_NormalMapNode_getNormalScale(this); }, "$getNormalColor", function() { return oktsg_NormalMapNode_getNormalColor(this); }, "$setNormalColor", function(var_1) { oktsg_NormalMapNode_setNormalColor(this, var_1); }, "$getTbn", function() { return oktsg_NormalMapNode_getTbn(this); }, "$setTbn", function(var_1) { oktsg_NormalMapNode_setTbn(this, var_1); }, "$getNormalResult", function() { return oktsg_NormalMapNode_getNormalResult(this); }, "$executionFrag", function(var_1)
@@ -84575,10 +84408,10 @@ oktt_ITexture2D$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 oooi_DxCapsule$CollideCapsuleCapsule, 0, jl_Object, [ooo_DColliderFn], 0, 0, 0, ["$dCollideCapsuleCapsule", function(var_1, var_2, var_3, var_4, var_5) { return oooi_DxCapsule$CollideCapsuleCapsule_dCollideCapsuleCapsule(this, var_1, var_2, var_3, var_4, var_5); }, "$dColliderFn", function(var_1, var_2, var_3, var_4) { return oooi_DxCapsule$CollideCapsuleCapsule_dColliderFn(this, var_1, var_2, var_3, var_4); }],
 oktgg_IGLTFMaterial$read$10, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return oktgg_IGLTFMaterial$read$10_invoke(this, var_1); }, "$invoke26", function(var_1) { oktgg_IGLTFMaterial$read$10_invoke0(this, var_1); }],
 oktu_LOG, 0, jl_Object, [oktu_ILog], 4, 3, oktu_LOG_$callClinit, ["$setCollectLogs", function(var_1) { oktu_LOG_setCollectLogs(this, var_1); }, "$info0", function(var_1, var_2) { oktu_LOG_info(this, var_1, var_2); }],
-oktga_AnimPlayer, 0, jl_Object, [], 4, 3, oktga_AnimPlayer_$callClinit, ["$setNodes", function(var_1) { oktga_AnimPlayer_setNodes(this, var_1); }, "$obtain", function(var_1, var_2, var_3, var_4, var_5, var_6) { return $java.oktga_AnimPlayer_obtain(this, var_1, var_2, var_3, var_4, var_5, var_6); }, "$update", function(var_1) { oktga_AnimPlayer_update(this, var_1); }, "$setAnimation1", function(var_1, var_2, var_3, var_4, var_5, var_6) { return $java.oktga_AnimPlayer_setAnimation(this, var_1, var_2, var_3, var_4,
-var_5, var_6); }, "$setAnimation0", function(var_1) { return $java.oktga_AnimPlayer_setAnimation0(this, var_1); }, "$animate", function(var_1, var_2) { return $java.oktga_AnimPlayer_animate(this, var_1, var_2); }, "$queue", function(var_1, var_2) { return $java.oktga_AnimPlayer_queue(this, var_1, var_2); }, "$begin", function() { $java.oktga_AnimPlayer_begin(this); }, "$apply", function(var_1, var_2, var_3) { $java.oktga_AnimPlayer_apply(this, var_1, var_2, var_3); }, "$end3", function() { $java.oktga_AnimPlayer_end(this);
+oktga_AnimPlayer, 0, jl_Object, [], 4, 3, oktga_AnimPlayer_$callClinit, ["$setNodes", function(var_1) { oktga_AnimPlayer_setNodes(this, var_1); }, "$obtain", function(var_1, var_2, var_3, var_4, var_5, var_6) { return oktga_AnimPlayer_obtain(this, var_1, var_2, var_3, var_4, var_5, var_6); }, "$update", function(var_1) { oktga_AnimPlayer_update(this, var_1); }, "$setAnimation1", function(var_1, var_2, var_3, var_4, var_5, var_6) { return $java.oktga_AnimPlayer_setAnimation(this, var_1, var_2, var_3, var_4, var_5,
+var_6); }, "$setAnimation0", function(var_1) { return $java.oktga_AnimPlayer_setAnimation0(this, var_1); }, "$animate", function(var_1, var_2) { return oktga_AnimPlayer_animate(this, var_1, var_2); }, "$queue", function(var_1, var_2) { return $java.oktga_AnimPlayer_queue(this, var_1, var_2); }, "$begin", function() { $java.oktga_AnimPlayer_begin(this); }, "$apply", function(var_1, var_2, var_3) { $java.oktga_AnimPlayer_apply(this, var_1, var_2, var_3); }, "$end3", function() { $java.oktga_AnimPlayer_end(this);
 }, "$applyAnimation", function(var_1, var_2) { $java.oktga_AnimPlayer_applyAnimation(this, var_1, var_2); }, "$applyAnimations", function(var_1, var_2, var_3, var_4, var_5) { $java.oktga_AnimPlayer_applyAnimations(this, var_1, var_2, var_3, var_4, var_5); }, "$applyAnimation0", function(var_1, var_2, var_3, var_4) { $java.oktga_AnimPlayer_applyAnimation0(this, var_1, var_2, var_3, var_4); }, "$getFirstKeyframeIndexAtTime", function(var_1, var_2) { return $java.oktga_AnimPlayer_getFirstKeyframeIndexAtTime(this,
-var_1, var_2); }, "$getTranslationAtTime", function(var_1, var_2, var_3) { return $java.oktga_AnimPlayer_getTranslationAtTime(this, var_1, var_2, var_3); }, "$getRotationAtTime", function(var_1, var_2, var_3) { return $java.oktga_AnimPlayer_getRotationAtTime(this, var_1, var_2, var_3); }, "$getScalingAtTime", function(var_1, var_2, var_3) { return $java.oktga_AnimPlayer_getScalingAtTime(this, var_1, var_2, var_3); }, "$removeAnimation", function(var_1) { $java.oktga_AnimPlayer_removeAnimation(this, var_1); }],
+var_1, var_2); }, "$getTranslationAtTime", function(var_1, var_2, var_3) { return $java.oktga_AnimPlayer_getTranslationAtTime(this, var_1, var_2, var_3); }, "$getRotationAtTime", function(var_1, var_2, var_3) { return $java.oktga_AnimPlayer_getRotationAtTime(this, var_1, var_2, var_3); }, "$getScalingAtTime", function(var_1, var_2, var_3) { return $java.oktga_AnimPlayer_getScalingAtTime(this, var_1, var_2, var_3); }, "$removeAnimation", function(var_1) { oktga_AnimPlayer_removeAnimation(this, var_1); }],
 jur_DotQuantifierSet, 0, jur_QuantifierSet, [], 0, 0, 0, ["$matches", function(var_1, var_2, var_3) { return $java.jur_DotQuantifierSet_matches(this, var_1, var_2, var_3); }, "$find", function(var_1, var_2, var_3) { return $java.jur_DotQuantifierSet_find(this, var_1, var_2, var_3); }, "$findLineTerminator", function(var_1, var_2, var_3) { return $java.jur_DotQuantifierSet_findLineTerminator(this, var_1, var_2, var_3); }, "$findBackLineTerminator", function(var_1, var_2, var_3) { return $java.jur_DotQuantifierSet_findBackLineTerminator(this,
 var_1, var_2, var_3); }],
 otcit_FloatAnalyzer, 0, jl_Object, [], 4, 3, $java.otcit_FloatAnalyzer_$callClinit, 0,
@@ -84589,10 +84422,10 @@ oktgg_IGLTFMaterial$read$4$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke
 jur_AbstractCharClass$LazyJavaJavaIdentifierStart$1, "AbstractCharClass$LazyJavaJavaIdentifierStart$1", 6, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_AbstractCharClass$LazyJavaJavaIdentifierStart$1_contains(this, var_1); }],
 oktts_FXAATest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return $java.oktts_FXAATest_getName(this); }, "$testMain", function() { $java.oktts_FXAATest_testMain(this); }],
 jl_ConsoleOutputStreamStdout, 0, ji_OutputStream, [], 0, 0, 0, ["$write", function(var_1) { $java.jl_ConsoleOutputStreamStdout_write(this, var_1); }],
-jur_CharClass$3, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$3_contains(this, var_1); }]]);
-$rt_metadata([jur_CharClass$4, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$4_contains(this, var_1); }],
-jur_CharClass$1, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$1_contains(this, var_1); }],
-jur_CharClass$2, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$2_contains(this, var_1); }],
+jur_CharClass$3, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$3_contains(this, var_1); }],
+jur_CharClass$4, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$4_contains(this, var_1); }],
+jur_CharClass$1, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$1_contains(this, var_1); }]]);
+$rt_metadata([jur_CharClass$2, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$2_contains(this, var_1); }],
 oooi_CollideCylinderTrimesh, 0, jl_Object, [ooo_DColliderFn], 0, 3, 0, ["$dColliderFn", function(var_1, var_2, var_3, var_4) { return $java.oooi_CollideCylinderTrimesh_dColliderFn(this, var_1, var_2, var_3, var_4); }, "$dCollideCylinderTrimesh", function(var_1, var_2, var_3, var_4, var_5) { return $java.oooi_CollideCylinderTrimesh_dCollideCylinderTrimesh(this, var_1, var_2, var_3, var_4, var_5); }],
 jur_CharClass$7, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$7_contains(this, var_1); }],
 jur_CharClass$8, 0, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_CharClass$8_contains(this, var_1); }],
@@ -84606,7 +84439,6 @@ jl_Character, 0, jl_Object, [jl_Comparable], 0, 3, $java.jl_Character_$callClini
 oktm_IndexBufferObject$Companion, 0, jl_Object, [], 4, 3, 0, 0,
 oktm_IVertexInput$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 ooott_SameThreadTaskExecutor, 0, ooott_AbstractTaskExecutor, [], 0, 3, 0, ["$submit", function(var_1) { $java.ooott_SameThreadTaskExecutor_submit(this, var_1); }, "$getThreadCount", function() { return $java.ooott_SameThreadTaskExecutor_getThreadCount(this); }, "$flush0", function() { $java.ooott_SameThreadTaskExecutor_flush(this); }],
-okttsg_VelocityNodeTest$testMain$3, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.okttsg_VelocityNodeTest$testMain$3_invoke(this); }, "$invoke2", function() { $java.okttsg_VelocityNodeTest$testMain$3_invoke0(this); }],
 oooij_Info2DescrQuickStep, 0, jl_Object, [oooij_Info2Descr], 0, 3, 0, ["$setFindex", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setFindex(this, var_1, var_2); }, "$setAllP", function(var_1, var_2, var_3, var_4, var_5) { $java.oooij_Info2DescrQuickStep_setAllP(this, var_1, var_2, var_3, var_4, var_5); }, "$setArrays", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setArrays(this, var_1, var_2); }, "$setC", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setC(this, var_1, var_2);
 }, "$getC0", function(var_1) { return $java.oooij_Info2DescrQuickStep_getC(this, var_1); }, "$setCfm", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setCfm(this, var_1, var_2); }, "$setLo", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setLo(this, var_1, var_2); }, "$setHi", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setHi(this, var_1, var_2); }, "$setRowskip", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setRowskip(this, var_1, var_2); }, "$setJ1l", function(var_1,
 var_2) { $java.oooij_Info2DescrQuickStep_setJ1l(this, var_1, var_2); }, "$setJ1a", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setJ1a(this, var_1, var_2); }, "$setJ2l", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setJ2l(this, var_1, var_2); }, "$setJ2a", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setJ2a(this, var_1, var_2); }, "$setJ2lNegated", function(var_1, var_2) { $java.oooij_Info2DescrQuickStep_setJ2lNegated(this, var_1, var_2); }, "$setJ2aNegated", function(var_1,
@@ -84647,11 +84479,11 @@ oktts_GBufferBaseTest$testMain$1$3, "GBufferBaseTest$testMain$1$3", 15, kji_Lamb
 oktts_GBufferBaseTest$testMain$1$2, "GBufferBaseTest$testMain$1$2", 15, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktts_GBufferBaseTest$testMain$1$2_invoke(this, var_1); }, "$invoke3", function(var_1) { $java.oktts_GBufferBaseTest$testMain$1$2_invoke0(this, var_1); }],
 oktts_GBufferBaseTest$testMain$1$5, "GBufferBaseTest$testMain$1$5", 15, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktts_GBufferBaseTest$testMain$1$5_invoke(this, var_1); }, "$invoke3", function(var_1) { $java.oktts_GBufferBaseTest$testMain$1$5_invoke0(this, var_1); }],
 oktts_GBufferBaseTest$testMain$1$4, "GBufferBaseTest$testMain$1$4", 15, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktts_GBufferBaseTest$testMain$1$4_invoke(this, var_1); }, "$invoke3", function(var_1) { $java.oktts_GBufferBaseTest$testMain$1$4_invoke0(this, var_1); }],
-oktgn_ITransformNode$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0]);
-$rt_metadata([oktg_IObject3D, 0, jl_Object, [oktgn_IDelegateTransformNode], 3, 3, $java.oktg_IObject3D_$callClinit, 0,
+oktgn_ITransformNode$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
+oktg_IObject3D, 0, jl_Object, [oktgn_IDelegateTransformNode], 3, 3, $java.oktg_IObject3D_$callClinit, 0,
 oktt_TvmGL$programs$1, 0, kji_Lambda, [kjf_Function1], 4, 0, oktt_TvmGL$programs$1_$callClinit, ["$invoke1", function(var_1) { return $java.oktt_TvmGL$programs$1_invoke(this, var_1); }, "$invoke50", function(var_1) { return $java.oktt_TvmGL$programs$1_invoke0(this, var_1); }],
-oktu_AsyncArrayList, 0, ju_ArrayList, [oktu_IAsyncList], 0, 3, $java.oktu_AsyncArrayList_$callClinit, ["$getReady0", function() { return $java.oktu_AsyncArrayList_getReady(this); }, "$getRequests0", function() { return $java.oktu_AsyncArrayList_getRequests(this); }, "$clear", function() { $java.oktu_AsyncArrayList_clear(this); }, "$getSize", function() { return $java.oktu_AsyncArrayList_getSize(this); }, "$size", function() { return $java.oktu_AsyncArrayList_size(this); }],
-oktt_TvmSound$pool$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.oktt_TvmSound$pool$1_invoke(this); }, "$invoke21", function() { return $java.oktt_TvmSound$pool$1_invoke0(this); }],
+oktu_AsyncArrayList, 0, ju_ArrayList, [oktu_IAsyncList], 0, 3, $java.oktu_AsyncArrayList_$callClinit, ["$getReady0", function() { return $java.oktu_AsyncArrayList_getReady(this); }, "$getRequests0", function() { return $java.oktu_AsyncArrayList_getRequests(this); }, "$clear", function() { $java.oktu_AsyncArrayList_clear(this); }, "$getSize", function() { return $java.oktu_AsyncArrayList_getSize(this); }, "$size", function() { return $java.oktu_AsyncArrayList_size(this); }]]);
+$rt_metadata([oktt_TvmSound$pool$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.oktt_TvmSound$pool$1_invoke(this); }, "$invoke21", function() { return $java.oktt_TvmSound$pool$1_invoke0(this); }],
 oooil_CCD$ccd_first_dir_fn, 0, jl_Object, [], 3, 0, 0, 0,
 oooil_CCD$1, 0, jl_Object, [oooil_CCD$ccd_first_dir_fn], 4, 0, 0, 0,
 oktt_TvmGL$BufferWrap, 0, oktt_TvmGL$GLObject, [], 4, 3, 0, ["$getGl6", function() { return $java.oktt_TvmGL$BufferWrap_getGl(this); }, "$getGl7", function() { return $java.oktt_TvmGL$BufferWrap_getGl0(this); }],
@@ -84677,9 +84509,9 @@ oooi_DxSphere$CollideSphereBox, 0, jl_Object, [ooo_DColliderFn], 0, 0, 0, ["$dCo
 jur_UnicodeCategory, "UnicodeCategory", 6, jur_AbstractCharClass, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_UnicodeCategory_contains(this, var_1); }],
 jur_UnicodeCategoryScope, "UnicodeCategoryScope", 6, jur_UnicodeCategory, [], 0, 0, 0, ["$contains0", function(var_1) { return $java.jur_UnicodeCategoryScope_contains(this, var_1); }],
 oktt_TeaVMApp$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktt_TeaVMApp$2_invoke(this, var_1); }, "$invoke40", function(var_1) { $java.oktt_TeaVMApp$2_invoke0(this, var_1); }],
-oktga_AnimPlayer$AnimationDesc, 0, jl_Object, [], 4, 3, 0, ["$setListener", function(var_1) { $java.oktga_AnimPlayer$AnimationDesc_setListener(this, var_1); }, "$getAnimation", function() { return $java.oktga_AnimPlayer$AnimationDesc_getAnimation(this); }, "$setAnimation", function(var_1) { $java.oktga_AnimPlayer$AnimationDesc_setAnimation(this, var_1); }, "$setSpeed", function(var_1) { $java.oktga_AnimPlayer$AnimationDesc_setSpeed(this, var_1); }, "$getTime", function() { return $java.oktga_AnimPlayer$AnimationDesc_getTime(this);
-}, "$setTime", function(var_1) { $java.oktga_AnimPlayer$AnimationDesc_setTime(this, var_1); }, "$getOffset", function() { return $java.oktga_AnimPlayer$AnimationDesc_getOffset(this); }, "$setOffset", function(var_1) { $java.oktga_AnimPlayer$AnimationDesc_setOffset(this, var_1); }, "$getDuration", function() { return $java.oktga_AnimPlayer$AnimationDesc_getDuration(this); }, "$setDuration", function(var_1) { $java.oktga_AnimPlayer$AnimationDesc_setDuration(this, var_1); }, "$getLoopCount", function() { return $java.oktga_AnimPlayer$AnimationDesc_getLoopCount(this);
-}, "$setLoopCount", function(var_1) { $java.oktga_AnimPlayer$AnimationDesc_setLoopCount(this, var_1); }, "$getPreviousTime", function() { return $java.oktga_AnimPlayer$AnimationDesc_getPreviousTime(this); }, "$getExecutedActions", function() { return $java.oktga_AnimPlayer$AnimationDesc_getExecutedActions(this); }, "$update4", function(var_1) { return $java.oktga_AnimPlayer$AnimationDesc_update(this, var_1); }],
+oktga_AnimPlayer$AnimationDesc, 0, jl_Object, [], 4, 3, 0, ["$setListener", function(var_1) { oktga_AnimPlayer$AnimationDesc_setListener(this, var_1); }, "$getAnimation", function() { return oktga_AnimPlayer$AnimationDesc_getAnimation(this); }, "$setAnimation", function(var_1) { oktga_AnimPlayer$AnimationDesc_setAnimation(this, var_1); }, "$setSpeed", function(var_1) { oktga_AnimPlayer$AnimationDesc_setSpeed(this, var_1); }, "$getTime", function() { return $java.oktga_AnimPlayer$AnimationDesc_getTime(this);
+}, "$setTime", function(var_1) { oktga_AnimPlayer$AnimationDesc_setTime(this, var_1); }, "$getOffset", function() { return oktga_AnimPlayer$AnimationDesc_getOffset(this); }, "$setOffset", function(var_1) { oktga_AnimPlayer$AnimationDesc_setOffset(this, var_1); }, "$getDuration", function() { return oktga_AnimPlayer$AnimationDesc_getDuration(this); }, "$setDuration", function(var_1) { oktga_AnimPlayer$AnimationDesc_setDuration(this, var_1); }, "$getLoopCount", function() { return oktga_AnimPlayer$AnimationDesc_getLoopCount(this);
+}, "$setLoopCount", function(var_1) { oktga_AnimPlayer$AnimationDesc_setLoopCount(this, var_1); }, "$getPreviousTime", function() { return $java.oktga_AnimPlayer$AnimationDesc_getPreviousTime(this); }, "$getExecutedActions", function() { return $java.oktga_AnimPlayer$AnimationDesc_getExecutedActions(this); }, "$update4", function(var_1) { return oktga_AnimPlayer$AnimationDesc_update(this, var_1); }],
 oktt_TeaVMApp$1, 0, jl_Object, [otjde_EventListener], 4, 0, 0, ["$handleEvent", function(var_1) { $java.oktt_TeaVMApp$1_handleEvent(this, var_1); }, "$handleEvent$exported$0", function(var_1) { return $java.oktt_TeaVMApp$1_handleEvent$exported$0(this, var_1); }],
 oooi_DxSpace$DataCallback, 0, jl_Object, [], 0, 0, 0, 0,
 otcit_FloatAnalyzer$Result, 0, jl_Object, [], 0, 3, 0, 0,
@@ -84703,14 +84535,14 @@ oktgg_GLTF$read$12, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", functi
 oktgg_GLTF$read$11, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTF$read$11_invoke(this, var_1); }, "$invoke26", function(var_1) { $java.oktgg_GLTF$read$11_invoke0(this, var_1); }],
 jur_AbstractCharClass$LazyJavaLowerCase, 0, jur_AbstractCharClass$LazyCharClass, [], 0, 0, 0, ["$computeValue", function() { return $java.jur_AbstractCharClass$LazyJavaLowerCase_computeValue(this); }],
 oktmb_MeshBuilder$createVerticesFloat$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktmb_MeshBuilder$createVerticesFloat$1_invoke(this, var_1); }, "$invoke7", function(var_1) { $java.oktmb_MeshBuilder$createVerticesFloat$1_invoke0(this, var_1); }],
-oktgg_GLTF$read$10, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTF$read$10_invoke(this, var_1); }, "$invoke26", function(var_1) { $java.oktgg_GLTF$read$10_invoke0(this, var_1); }]]);
-$rt_metadata([oktu_Color, 0, jl_Object, [], 4, 3, oktu_Color_$callClinit, ["$int3", function(var_1) { return $java.oktu_Color_int(this, var_1); }, "$int2", function(var_1, var_2, var_3, var_4) { return $java.oktu_Color_int0(this, var_1, var_2, var_3, var_4); }, "$float6", function(var_1, var_2, var_3, var_4) { return $java.oktu_Color_float(this, var_1, var_2, var_3, var_4); }, "$getCYAN", function() { return oktu_Color_getCYAN(this); }, "$getGREEN", function() { return oktu_Color_getGREEN(this); }, "$getOLIVE",
-function() { return oktu_Color_getOLIVE(this); }, "$getORANGE", function() { return oktu_Color_getORANGE(this); }, "$getPINK", function() { return oktu_Color_getPINK(this); }, "$toFloatBits", function(var_1) { return $java.oktu_Color_toFloatBits(this, var_1); }, "$intToFloatColor", function(var_1) { return $java.oktu_Color_intToFloatColor(this, var_1); }],
+oktgg_GLTF$read$10, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTF$read$10_invoke(this, var_1); }, "$invoke26", function(var_1) { $java.oktgg_GLTF$read$10_invoke0(this, var_1); }],
+oktu_Color, 0, jl_Object, [], 4, 3, oktu_Color_$callClinit, ["$int3", function(var_1) { return $java.oktu_Color_int(this, var_1); }, "$int2", function(var_1, var_2, var_3, var_4) { return $java.oktu_Color_int0(this, var_1, var_2, var_3, var_4); }, "$float6", function(var_1, var_2, var_3, var_4) { return $java.oktu_Color_float(this, var_1, var_2, var_3, var_4); }, "$getCYAN", function() { return oktu_Color_getCYAN(this); }, "$getGREEN", function() { return oktu_Color_getGREEN(this); }, "$getOLIVE", function()
+{ return oktu_Color_getOLIVE(this); }, "$getORANGE", function() { return oktu_Color_getORANGE(this); }, "$getPINK", function() { return oktu_Color_getPINK(this); }, "$toFloatBits", function(var_1) { return $java.oktu_Color_toFloatBits(this, var_1); }, "$intToFloatColor", function(var_1) { return $java.oktu_Color_intToFloatColor(this, var_1); }],
 oktgg_GLTF$read$17, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.oktgg_GLTF$read$17_invoke(this); }, "$invoke2", function() { $java.oktgg_GLTF$read$17_invoke0(this); }],
-oktts_FXAATest$testMain$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktts_FXAATest$testMain$1$1_invoke(this, var_1); }, "$invoke8", function(var_1) { $java.oktts_FXAATest$testMain$1$1_invoke0(this, var_1); }],
-oom_DMatrix3, 0, jl_Object, [oom_DMatrix3C], 4, 3, $java.oom_DMatrix3_$callClinit, ["$set4", function(var_1) { return oom_DMatrix3_set(this, var_1); }, "$clone1", function() { return $java.oom_DMatrix3_clone(this); }, "$setCol", function(var_1, var_2) { oom_DMatrix3_setCol(this, var_1, var_2); }, "$set56", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oom_DMatrix3_set0(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$columnAsNewVector", function(var_1) {
-return $java.oom_DMatrix3_columnAsNewVector(this, var_1); }, "$add12", function(var_1) { return oom_DMatrix3_add(this, var_1); }, "$scale2", function(var_1) { oom_DMatrix3_scale(this, var_1); }, "$viewCol", function(var_1) { return $java.oom_DMatrix3_viewCol(this, var_1); }, "$get00", function() { return oom_DMatrix3_get00(this); }, "$get010", function() { return oom_DMatrix3_get01(this); }, "$get02", function() { return oom_DMatrix3_get02(this); }, "$get100", function() { return oom_DMatrix3_get10(this); },
-"$get11", function() { return oom_DMatrix3_get11(this); }, "$get12", function() { return oom_DMatrix3_get12(this); }, "$get200", function() { return oom_DMatrix3_get20(this); }, "$get21", function() { return oom_DMatrix3_get21(this); }, "$get22", function() { return oom_DMatrix3_get22(this); }, "$set000", function(var_1) { oom_DMatrix3_set00(this, var_1); }, "$set01", function(var_1) { oom_DMatrix3_set01(this, var_1); }, "$set02", function(var_1) { oom_DMatrix3_set02(this, var_1); }, "$set100", function(var_1)
+oktts_FXAATest$testMain$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktts_FXAATest$testMain$1$1_invoke(this, var_1); }, "$invoke8", function(var_1) { $java.oktts_FXAATest$testMain$1$1_invoke0(this, var_1); }]]);
+$rt_metadata([oom_DMatrix3, 0, jl_Object, [oom_DMatrix3C], 4, 3, $java.oom_DMatrix3_$callClinit, ["$set4", function(var_1) { return oom_DMatrix3_set(this, var_1); }, "$clone1", function() { return $java.oom_DMatrix3_clone(this); }, "$setCol", function(var_1, var_2) { oom_DMatrix3_setCol(this, var_1, var_2); }, "$set56", function(var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) { oom_DMatrix3_set0(this, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9); }, "$columnAsNewVector", function(var_1)
+{ return $java.oom_DMatrix3_columnAsNewVector(this, var_1); }, "$add12", function(var_1) { return oom_DMatrix3_add(this, var_1); }, "$scale2", function(var_1) { oom_DMatrix3_scale(this, var_1); }, "$viewCol", function(var_1) { return $java.oom_DMatrix3_viewCol(this, var_1); }, "$get00", function() { return oom_DMatrix3_get00(this); }, "$get010", function() { return oom_DMatrix3_get01(this); }, "$get02", function() { return oom_DMatrix3_get02(this); }, "$get100", function() { return oom_DMatrix3_get10(this);
+}, "$get11", function() { return oom_DMatrix3_get11(this); }, "$get12", function() { return oom_DMatrix3_get12(this); }, "$get200", function() { return oom_DMatrix3_get20(this); }, "$get21", function() { return oom_DMatrix3_get21(this); }, "$get22", function() { return oom_DMatrix3_get22(this); }, "$set000", function(var_1) { oom_DMatrix3_set00(this, var_1); }, "$set01", function(var_1) { oom_DMatrix3_set01(this, var_1); }, "$set02", function(var_1) { oom_DMatrix3_set02(this, var_1); }, "$set100", function(var_1)
 { oom_DMatrix3_set10(this, var_1); }, "$set110", function(var_1) { oom_DMatrix3_set11(this, var_1); }, "$set120", function(var_1) { oom_DMatrix3_set12(this, var_1); }, "$set200", function(var_1) { oom_DMatrix3_set20(this, var_1); }, "$set21", function(var_1) { oom_DMatrix3_set21(this, var_1); }, "$set22", function(var_1) { oom_DMatrix3_set22(this, var_1); }, "$eqIdentity", function() { $java.oom_DMatrix3_eqIdentity(this); }, "$setIdentity", function() { return oom_DMatrix3_setIdentity(this); }, "$eqZero", function()
 { $java.oom_DMatrix3_eqZero(this); }, "$setZero", function() { oom_DMatrix3_setZero(this); }, "$reTranspose", function() { return oom_DMatrix3_reTranspose(this); }, "$dotCol0", function(var_1, var_2) { return $java.oom_DMatrix3_dotCol(this, var_1, var_2); }, "$dotRow", function(var_1, var_2) { return $java.oom_DMatrix3_dotRow(this, var_1, var_2); }, "$dotColCol", function(var_1, var_2, var_3) { return $java.oom_DMatrix3_dotColCol(this, var_1, var_2, var_3); }, "$dotRowCol", function(var_1, var_2, var_3) { return $java.oom_DMatrix3_dotRowCol(this,
 var_1, var_2, var_3); }, "$dotRowRow", function(var_1, var_2, var_3) { return $java.oom_DMatrix3_dotRowRow(this, var_1, var_2, var_3); }, "$get6", function(var_1, var_2) { return oom_DMatrix3_get(this, var_1, var_2); }, "$set57", function(var_1, var_2, var_3) { oom_DMatrix3_set1(this, var_1, var_2, var_3); }, "$add13", function(var_1, var_2, var_3) { oom_DMatrix3_add0(this, var_1, var_2, var_3); }, "$sub4", function(var_1, var_2, var_3) { $java.oom_DMatrix3_sub(this, var_1, var_2, var_3); }],
@@ -84763,7 +84595,6 @@ okttsg_MotionBlurTest$testMain$3, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$in
 okttsg_MotionBlurTest$testMain$2, 0, jl_Object, [okti_IMouseListener], 4, 3, 0, ["$buttonUp", function(var_1, var_2, var_3, var_4) { $java.okttsg_MotionBlurTest$testMain$2_buttonUp(this, var_1, var_2, var_3, var_4); }, "$buttonDown0", function(var_1, var_2, var_3, var_4) { $java.okttsg_MotionBlurTest$testMain$2_buttonDown(this, var_1, var_2, var_3, var_4); }, "$dragged0", function(var_1, var_2, var_3) { $java.okttsg_MotionBlurTest$testMain$2_dragged(this, var_1, var_2, var_3); }, "$moved0", function(var_1, var_2)
 { $java.okttsg_MotionBlurTest$testMain$2_moved(this, var_1, var_2); }, "$scrolled0", function(var_1) { $java.okttsg_MotionBlurTest$testMain$2_scrolled(this, var_1); }],
 oktgg_GLTF$read$9$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTF$read$9$1_invoke(this, var_1); }, "$invoke10", function(var_1) { $java.oktgg_GLTF$read$9$1_invoke0(this, var_1); }],
-okttsg_VertexNodeTest, 0, jl_Object, [oktt_Test], 4, 3, 0, ["$getName", function() { return $java.okttsg_VertexNodeTest_getName(this); }, "$testMain", function() { $java.okttsg_VertexNodeTest_testMain(this); }],
 otjb_Performance, 0, jl_Object, [otj_JSObject], 4, 3, 0, 0,
 okttsg_SSAOTest$testMain$1$3$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.okttsg_SSAOTest$testMain$1$3$1_invoke(this, var_1); }, "$invoke8", function(var_1) { $java.okttsg_SSAOTest$testMain$1$3$1_invoke0(this, var_1); }],
 jn_ByteBufferImpl, 0, jn_ByteBuffer, [], 0, 0, 0, ["$isReadOnly", function() { return $java.jn_ByteBufferImpl_isReadOnly(this); }],
@@ -84774,19 +84605,18 @@ var_1, var_2, var_3); }],
 oooi_DxQuickStep, 0, oooi_AbstractStepper, [oooip_DxStepperProcessingCallContext$dstepper_fn_t, oooip_DxWorldProcessIslandsInfo$dmemestimate_fn_t, oooip_DxStepperProcessingCallContext$dmaxcallcountestimate_fn_t], 0, 3, oooi_DxQuickStep_$callClinit, ["$ensureSize_invI", function(var_1) { return $java.oooi_DxQuickStep_ensureSize_invI(this, var_1); }, "$ensureSize_jointinfos", function(var_1) { return $java.oooi_DxQuickStep_ensureSize_jointinfos(this, var_1); }, "$dxQuickStepIsland", function(var_1) { $java.oooi_DxQuickStep_dxQuickStepIsland(this,
 var_1); }, "$dxEstimateMemoryRequirements", function(var_1, var_2, var_3, var_4, var_5, var_6) { return $java.oooi_DxQuickStep_dxEstimateMemoryRequirements(this, var_1, var_2, var_3, var_4, var_5, var_6); }, "$run5", function(var_1) { $java.oooi_DxQuickStep_run(this, var_1); }],
 oktg_IObject3D$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
-kt_Charsets, 0, jl_Object, [], 4, 3, kt_Charsets_$callClinit, 0]);
-$rt_metadata([oktsg_GBufferOutputNode, 0, oktsg_ShaderNode, [], 4, 3, $java.oktsg_GBufferOutputNode_$callClinit, ["$getVertPosition", function() { return $java.oktsg_GBufferOutputNode_getVertPosition(this); }, "$setVertPosition", function(var_1) { oktsg_GBufferOutputNode_setVertPosition(this, var_1); }, "$getFragColor", function() { return $java.oktsg_GBufferOutputNode_getFragColor(this); }, "$setFragColor", function(var_1) { oktsg_GBufferOutputNode_setFragColor(this, var_1); }, "$getFragNormal", function()
-{ return $java.oktsg_GBufferOutputNode_getFragNormal(this); }, "$setFragNormal", function(var_1) { oktsg_GBufferOutputNode_setFragNormal(this, var_1); }, "$getFragPosition", function() { return $java.oktsg_GBufferOutputNode_getFragPosition(this); }, "$setFragPosition", function(var_1) { oktsg_GBufferOutputNode_setFragPosition(this, var_1); }, "$getOutput", function() { return $java.oktsg_GBufferOutputNode_getOutput(this); }, "$setAlphaMode0", function(var_1) { oktsg_GBufferOutputNode_setAlphaMode(this, var_1);
-}, "$setAlphaCutoff", function(var_1) { oktsg_GBufferOutputNode_setAlphaCutoff(this, var_1); }, "$setCullFaceMode", function(var_1) { oktsg_GBufferOutputNode_setCullFaceMode(this, var_1); }, "$declarationFrag", function(var_1) { $java.oktsg_GBufferOutputNode_declarationFrag(this, var_1); }, "$prepareToDrawMesh0", function(var_1) { $java.oktsg_GBufferOutputNode_prepareToDrawMesh(this, var_1); }, "$executionVert", function(var_1) { $java.oktsg_GBufferOutputNode_executionVert(this, var_1); }, "$executionFrag",
-function(var_1) { $java.oktsg_GBufferOutputNode_executionFrag(this, var_1); }],
+kt_Charsets, 0, jl_Object, [], 4, 3, kt_Charsets_$callClinit, 0,
+oktsg_GBufferOutputNode, 0, oktsg_ShaderNode, [], 4, 3, $java.oktsg_GBufferOutputNode_$callClinit, ["$getVertPosition", function() { return $java.oktsg_GBufferOutputNode_getVertPosition(this); }, "$setVertPosition", function(var_1) { oktsg_GBufferOutputNode_setVertPosition(this, var_1); }, "$getFragColor", function() { return $java.oktsg_GBufferOutputNode_getFragColor(this); }, "$setFragColor", function(var_1) { oktsg_GBufferOutputNode_setFragColor(this, var_1); }, "$getFragNormal", function() { return $java.oktsg_GBufferOutputNode_getFragNormal(this);
+}, "$setFragNormal", function(var_1) { oktsg_GBufferOutputNode_setFragNormal(this, var_1); }, "$getFragPosition", function() { return $java.oktsg_GBufferOutputNode_getFragPosition(this); }, "$setFragPosition", function(var_1) { oktsg_GBufferOutputNode_setFragPosition(this, var_1); }, "$getOutput", function() { return $java.oktsg_GBufferOutputNode_getOutput(this); }, "$setAlphaMode0", function(var_1) { oktsg_GBufferOutputNode_setAlphaMode(this, var_1); }, "$setAlphaCutoff", function(var_1) { oktsg_GBufferOutputNode_setAlphaCutoff(this,
+var_1); }, "$setCullFaceMode", function(var_1) { oktsg_GBufferOutputNode_setCullFaceMode(this, var_1); }, "$declarationFrag", function(var_1) { $java.oktsg_GBufferOutputNode_declarationFrag(this, var_1); }, "$prepareToDrawMesh0", function(var_1) { $java.oktsg_GBufferOutputNode_prepareToDrawMesh(this, var_1); }, "$executionVert", function(var_1) { $java.oktsg_GBufferOutputNode_executionVert(this, var_1); }, "$executionFrag", function(var_1) { $java.oktsg_GBufferOutputNode_executionFrag(this, var_1); }],
 oktg_Object3D, 0, jl_Object, [oktg_IObject3D], 0, 3, 0, ["$getNode", function() { return $java.oktg_Object3D_getNode(this); }, "$setNode", function(var_1) { $java.oktg_Object3D_setNode(this, var_1); }, "$getPreviousTransform", function() { return $java.oktg_Object3D_getPreviousTransform(this); }, "$setPreviousTransform", function(var_1) { $java.oktg_Object3D_setPreviousTransform(this, var_1); }, "$setName", function(var_1) { $java.oktg_Object3D_setName(this, var_1); }, "$getMeshes0", function() { return $java.oktg_Object3D_getMeshes(this);
 }, "$getArmature", function() { return $java.oktg_Object3D_getArmature(this); }, "$setArmature", function(var_1) { $java.oktg_Object3D_setArmature(this, var_1); }, "$updatePreviousTransform0", function() { $java.oktg_Object3D_updatePreviousTransform(this); }, "$update", function(var_1) { $java.oktg_Object3D_update(this, var_1); }, "$render7", function(var_1) { $java.oktg_Object3D_render(this, var_1); }, "$clear", function() { $java.oktg_Object3D_clear(this); }, "$getPosition0", function() { return $java.oktg_Object3D_getPosition(this);
 }, "$getRotation0", function() { return $java.oktg_Object3D_getRotation(this); }, "$getScale0", function() { return $java.oktg_Object3D_getScale(this); }, "$getWorldMatrix", function() { return $java.oktg_Object3D_getWorldMatrix(this); }, "$setParentNode", function(var_1) { $java.oktg_Object3D_setParentNode(this, var_1); }, "$updateTransform0", function(var_1) { $java.oktg_Object3D_updateTransform(this, var_1); }, "$getWorldMatrix0", function(var_1, var_2) { return $java.oktg_Object3D_getWorldMatrix0(this, var_1,
 var_2); }],
 ju_LinkedList, 0, ju_AbstractSequentialList, [ju_Deque], 0, 3, 0, ["$size", function() { return $java.ju_LinkedList_size(this); }, "$listIterator0", function() { return $java.ju_LinkedList_listIterator(this); }, "$listIterator", function(var_1) { return $java.ju_LinkedList_listIterator0(this, var_1); }, "$poll", function() { return $java.ju_LinkedList_poll(this); }, "$addLast", function(var_1) { $java.ju_LinkedList_addLast(this, var_1); }, "$removeLast", function() { return $java.ju_LinkedList_removeLast(this);
 }, "$pollLast", function() { return $java.ju_LinkedList_pollLast(this); }, "$getLast", function() { return $java.ju_LinkedList_getLast(this); }],
-oktts_ShadowMappingBaseTest$testMain$2, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.oktts_ShadowMappingBaseTest$testMain$2_invoke(this); }, "$invoke2", function() { $java.oktts_ShadowMappingBaseTest$testMain$2_invoke0(this); }],
-otjc_JSString, 0, jl_Object, [otj_JSObject], 1, 3, 0, 0,
+oktts_ShadowMappingBaseTest$testMain$2, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.oktts_ShadowMappingBaseTest$testMain$2_invoke(this); }, "$invoke2", function() { $java.oktts_ShadowMappingBaseTest$testMain$2_invoke0(this); }]]);
+$rt_metadata([otjc_JSString, 0, jl_Object, [otj_JSObject], 1, 3, 0, 0,
 okts_IShader$DefaultImpls, 0, jl_Object, [], 4, 3, 0, 0,
 oooi_DxConvex$Edge, 0, jl_Object, [], 0, 0, 0, 0,
 otja_XMLHttpRequest, 0, jl_Object, [otj_JSObject], 1, 3, 0, 0,
@@ -84841,12 +84671,12 @@ oktts_BloomTest$testMain$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke
 oktt_FrameBufferAttachment, 0, jl_Object, [oktt_IFrameBufferAttachment], 4, 3, 0, ["$getGlHandle", function() { return $java.oktt_FrameBufferAttachment_getGlHandle(this); }, "$setGlHandle", function(var_1) { $java.oktt_FrameBufferAttachment_setGlHandle(this, var_1); }, "$getTarget", function() { return $java.oktt_FrameBufferAttachment_getTarget(this); }, "$getAttachment", function() { return $java.oktt_FrameBufferAttachment_getAttachment(this); }, "$getTexTarget", function() { return $java.oktt_FrameBufferAttachment_getTexTarget(this);
 }, "$getInternalFormat", function() { return $java.oktt_FrameBufferAttachment_getInternalFormat(this); }, "$getPixelFormat", function() { return $java.oktt_FrameBufferAttachment_getPixelFormat(this); }, "$getType", function() { return $java.oktt_FrameBufferAttachment_getType(this); }, "$getMipmapLevel", function() { return $java.oktt_FrameBufferAttachment_getMipmapLevel(this); }, "$getTexture1", function() { return $java.oktt_FrameBufferAttachment_getTexture(this); }, "$setTexture", function(var_1) { $java.oktt_FrameBufferAttachment_setTexture(this,
 var_1); }, "$isRenderBuffer", function() { return $java.oktt_FrameBufferAttachment_isRenderBuffer(this); }],
-oktgg_GLTFBuffer$read$3, 0, kji_Lambda, [kjf_Function2], 4, 0, 0, ["$invoke11", function(var_1, var_2) { return $java.oktgg_GLTFBuffer$read$3_invoke(this, var_1, var_2); }, "$invoke62", function(var_1, var_2) { $java.oktgg_GLTFBuffer$read$3_invoke0(this, var_1, var_2); }]]);
-$rt_metadata([oktgg_GLTFBuffer$read$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTFBuffer$read$2_invoke(this, var_1); }, "$invoke0", function(var_1) { $java.oktgg_GLTFBuffer$read$2_invoke0(this, var_1); }],
+oktgg_GLTFBuffer$read$3, 0, kji_Lambda, [kjf_Function2], 4, 0, 0, ["$invoke11", function(var_1, var_2) { return $java.oktgg_GLTFBuffer$read$3_invoke(this, var_1, var_2); }, "$invoke62", function(var_1, var_2) { $java.oktgg_GLTFBuffer$read$3_invoke0(this, var_1, var_2); }],
+oktgg_GLTFBuffer$read$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTFBuffer$read$2_invoke(this, var_1); }, "$invoke0", function(var_1) { $java.oktgg_GLTFBuffer$read$2_invoke0(this, var_1); }],
 oktgg_GLTFBuffer$read$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTFBuffer$read$1_invoke(this, var_1); }, "$invoke5", function(var_1) { $java.oktgg_GLTFBuffer$read$1_invoke0(this, var_1); }],
 jl_Double, 0, jl_Number, [jl_Comparable], 0, 3, $java.jl_Double_$callClinit, ["$doubleValue", function() { return $java.jl_Double_doubleValue(this); }],
-oktgg_GLTFAnimation$read$2$1$1$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTFAnimation$read$2$1$1$1$1_invoke(this, var_1); }, "$invoke10", function(var_1) { $java.oktgg_GLTFAnimation$read$2$1$1$1$1_invoke0(this, var_1); }],
-oktt_FrameBufferTest$testMain$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.oktt_FrameBufferTest$testMain$1_invoke(this); }, "$invoke2", function() { $java.oktt_FrameBufferTest$testMain$1_invoke0(this); }],
+oktgg_GLTFAnimation$read$2$1$1$1$1, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTFAnimation$read$2$1$1$1$1_invoke(this, var_1); }, "$invoke10", function(var_1) { $java.oktgg_GLTFAnimation$read$2$1$1$1$1_invoke0(this, var_1); }]]);
+$rt_metadata([oktt_FrameBufferTest$testMain$1, 0, kji_Lambda, [kjf_Function0], 4, 0, 0, ["$invoke6", function() { return $java.oktt_FrameBufferTest$testMain$1_invoke(this); }, "$invoke2", function() { $java.oktt_FrameBufferTest$testMain$1_invoke0(this); }],
 oooi_DxHashSpace$Node, 0, jl_Object, [], 0, 0, 0, 0,
 oktm_IVec2$Companion$Pool$2, 0, kji_Lambda, [kjf_Function1], 4, 0, oktm_IVec2$Companion$Pool$2_$callClinit, ["$invoke1", function(var_1) { return $java.oktm_IVec2$Companion$Pool$2_invoke(this, var_1); }, "$invoke63", function(var_1) { $java.oktm_IVec2$Companion$Pool$2_invoke0(this, var_1); }],
 okt_APP$api$1, 0, jl_Object, [okt_IApp], 4, 3, 0, ["$getPlatformType", function() { return $java.okt_APP$api$1_getPlatformType(this); }, "$getWidth", function() { return $java.okt_APP$api$1_getWidth(this); }, "$getHeight", function() { return $java.okt_APP$api$1_getHeight(this); }, "$getDeltaTime", function() { return $java.okt_APP$api$1_getDeltaTime(this); }, "$messageBox", function(var_1, var_2) { $java.okt_APP$api$1_messageBox(this, var_1, var_2); }],
@@ -84893,12 +84723,12 @@ oktgg_GLTFPrimitive$read$$inlined$forEach$lambda$1, 0, kji_Lambda, [kjf_Function
 oktgg_GLTFPrimitive$read$$inlined$forEach$lambda$2, 0, kji_Lambda, [kjf_Function1], 4, 0, 0, ["$invoke1", function(var_1) { return $java.oktgg_GLTFPrimitive$read$$inlined$forEach$lambda$2_invoke(this, var_1); }, "$invoke17", function(var_1) { $java.oktgg_GLTFPrimitive$read$$inlined$forEach$lambda$2_invoke0(this, var_1); }],
 oktmb_BoxMeshBuilder$build$2, 0, kji_Lambda, [kjf_Function1], 4, 0, oktmb_BoxMeshBuilder$build$2_$callClinit, ["$invoke1", function(var_1) { return $java.oktmb_BoxMeshBuilder$build$2_invoke(this, var_1); }, "$invoke36", function(var_1) { $java.oktmb_BoxMeshBuilder$build$2_invoke0(this, var_1); }],
 oktd_DataByteOrder, 0, jl_Enum, [], 12, 3, oktd_DataByteOrder_$callClinit, 0,
-ki_PlatformImplementations, 0, jl_Object, [], 0, 3, 0, ["$defaultPlatformRandom", function() { return $java.ki_PlatformImplementations_defaultPlatformRandom(this); }]]);
-$rt_metadata([oktgg_GLTFSparse$Indices, 0, jl_Object, [oktj_IJsonObjectIO], 4, 3, 0, ["$read", function(var_1) { oktgg_GLTFSparse$Indices_read(this, var_1); }, "$setByteOffset", function(var_1) { $java.oktgg_GLTFSparse$Indices_setByteOffset(this, var_1); }],
+ki_PlatformImplementations, 0, jl_Object, [], 0, 3, 0, ["$defaultPlatformRandom", function() { return $java.ki_PlatformImplementations_defaultPlatformRandom(this); }],
+oktgg_GLTFSparse$Indices, 0, jl_Object, [oktj_IJsonObjectIO], 4, 3, 0, ["$read", function(var_1) { oktgg_GLTFSparse$Indices_read(this, var_1); }, "$setByteOffset", function(var_1) { $java.oktgg_GLTFSparse$Indices_setByteOffset(this, var_1); }],
 oooi_CollisionLibccd$ccd_convex_t, 0, oooi_CollisionLibccd$ccd_obj_t, [], 0, 0, 0, 0,
 oktgg_GLTFScene, 0, jl_Object, [oktj_IJsonObjectIO, oktgg_IGLTFArrayElement], 4, 3, 0, ["$setName", function(var_1) { oktgg_GLTFScene_setName(this, var_1); }, "$getNodes0", function() { return oktgg_GLTFScene_getNodes(this); }, "$read", function(var_1) { $java.oktgg_GLTFScene_read(this, var_1); }, "$getGltf0", function() { return oktgg_GLTFScene_getGltf(this); }, "$getScene", function() { return oktgg_GLTFScene_getScene(this); }],
-oooi_CollisionLibccd$ccd_box_t, 0, oooi_CollisionLibccd$ccd_obj_t, [], 0, 0, 0, 0,
-oktsp_MotionBlur$Companion, 0, jl_Object, [], 4, 3, 0, ["$velocity1", function(var_1) { return $java.oktsp_MotionBlur$Companion_velocity(this, var_1); }, "$motionBlurCode", function(var_1, var_2) { return oktsp_MotionBlur$Companion_motionBlurCode(this, var_1, var_2); }],
+oooi_CollisionLibccd$ccd_box_t, 0, oooi_CollisionLibccd$ccd_obj_t, [], 0, 0, 0, 0]);
+$rt_metadata([oktsp_MotionBlur$Companion, 0, jl_Object, [], 4, 3, 0, ["$velocity1", function(var_1) { return $java.oktsp_MotionBlur$Companion_velocity(this, var_1); }, "$motionBlurCode", function(var_1, var_2) { return oktsp_MotionBlur$Companion_motionBlurCode(this, var_1, var_2); }],
 oktu_DefaultLog, 0, jl_Object, [oktu_ILog], 4, 3, 0, ["$getCollectLogs", function() { return $java.oktu_DefaultLog_getCollectLogs(this); }, "$setCollectLogs", function(var_1) { $java.oktu_DefaultLog_setCollectLogs(this, var_1); }, "$getLogs", function() { return $java.oktu_DefaultLog_getLogs(this); }, "$info", function(var_1, var_2, var_3) { $java.oktu_DefaultLog_info(this, var_1, var_2, var_3); }, "$info0", function(var_1, var_2) { $java.oktu_DefaultLog_info0(this, var_1, var_2); }],
 oktjj_JsonSimple3Object, 0, jl_Object, [oktj_IJsonObject], 4, 3, oktjj_JsonSimple3Object_$callClinit, ["$obj2", function(var_1) { return $java.oktjj_JsonSimple3Object_obj(this, var_1); }, "$obj0", function(var_1) { return $java.oktjj_JsonSimple3Object_obj0(this, var_1); }, "$array6", function(var_1) { return $java.oktjj_JsonSimple3Object_array(this, var_1); }, "$array4", function(var_1) { return $java.oktjj_JsonSimple3Object_array0(this, var_1); }, "$get37", function(var_1) { return $java.oktjj_JsonSimple3Object_get(this,
 var_1); }, "$values11", function(var_1) { $java.oktjj_JsonSimple3Object_values(this, var_1); }, "$contains", function(var_1) { return $java.oktjj_JsonSimple3Object_contains(this, var_1); }, "$obj", function(var_1, var_2) { return $java.oktjj_JsonSimple3Object_obj1(this, var_1, var_2); }, "$array", function(var_1, var_2) { return $java.oktjj_JsonSimple3Object_array1(this, var_1, var_2); }, "$get16", function(var_1, var_2) { return $java.oktjj_JsonSimple3Object_get0(this, var_1, var_2); }, "$objOrNull", function(var_1)
@@ -85041,8 +84871,8 @@ $rt_stringPool(["Can\'t enter monitor from another thread synchronously", "@", "
 "getNextMatch", "inverseProjectionView", "OIM_AUTOTLSCLEANUP", "OIM_MANUALTLSCLEANUP", "null cannot be cast to non-null type org.teavm.jso.dom.events.KeyboardEvent", "copyright", "generator", "version", "minVersion", "lightMatrix[", "cascadeEnd[", "$this$map", "transform", "$this$joinTo", "separator", "postfix", "truncated", "$this$joinToString", "joinTo(StringBuilder(), …ed, transform).toString()", "...", "$this$asIterable", "\'skip\' should be 1, but is: ", "Mouse", "Press some button on mouse or move mouse over window",
 "�", "averageCharsPerByte must be positive. Actual value is ", "maxCharsPerByte must be positive. Actual value is ", "newAction must be non-null", "uSceneColorMap", "uVelocityMap", "uBlurStrength", "uNumSamples", "aPositionName", "aUVName", "set", "DISABLED", "GIMPACT", "Cascaded shadow matrices", "Use W A S D keys to move object", "indices accessor must be SCALAR but was ", "unsupported componentType ", "GltfLoader: unsupported componentType ", "Empty list doesn\'t contain element at index ", "The centre of mass must be at the origin.",
 "inertia must be positive definite!", "Mesh Cube", "\nattribute vec3 aPosition;\nvarying vec3 vPosition;\nuniform mat4 projViewModelTrans;\n\nvoid main() {\n    vPosition = aPosition.xyz;\n    gl_Position = projViewModelTrans * vec4(aPosition, 1.0);\n}", "\nvarying vec3 vPosition;\n\nvoid main() {\n    gl_FragColor = vec4(vPosition, 1.0);\n}", "null cannot be cast to non-null type org.ksdfv.thelema.phys.ode4j.GeomContactPair", "intArray", "Use middle mouse button, shift key to rotate, move camera", "sceneMap",
-"brightnessMap", "Velocity Node", "o1", "null cannot be cast to non-null type org.ksdfv.thelema.phys.ode4j.IOdeGeom", "o2", "OdeHelper.createContactJ…d, contactGroup, contact)", "contact", "arg", "function", "op", "key", "default", "DONE", "INITIAL", "PARSED_ERROR", "PARSING_ARRAY", "PARSING_ENTRY", "PARSING_OBJECT", "inverseViewProjection", "Incorrect type. Must be one of GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, or GL_UNSIGNED_INT", "int", "float", "vec2", "vec3", "vec4", "mat2", "mat3", "mat4", "sampler1D", "sampler2D",
-"sampler3D", "samplerCube", "sampler2DArray", "bool", "geom", "main", "invoke(...)", "Trimesh shape", "heightProvider", "enabled body not tagged", "disabled body tagged", "unattached or disabled joint tagged", "attached enabled joint not tagged", "map.values", "map.values.elementAt(index)", "Shadow mapping base", "\nattribute vec3 aPosition;\nuniform vec3 pos;\nuniform mat4 viewProj;\n\nuniform mat4 lightMatrix;\n\nvarying vec4 lightSpacePos;\n\nvoid main() {\n    vec4 worldPos = vec4(aPosition + pos, 1.0);\n    lightSpacePos = lightMatrix * worldPos;\n    gl_Position = viewProj * vec4(aPosition + pos, 1.0);\n}",
+"brightnessMap", "o1", "null cannot be cast to non-null type org.ksdfv.thelema.phys.ode4j.IOdeGeom", "o2", "OdeHelper.createContactJ…d, contactGroup, contact)", "contact", "arg", "function", "op", "key", "default", "DONE", "INITIAL", "PARSED_ERROR", "PARSING_ARRAY", "PARSING_ENTRY", "PARSING_OBJECT", "inverseViewProjection", "Incorrect type. Must be one of GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, or GL_UNSIGNED_INT", "int", "float", "vec2", "vec3", "vec4", "mat2", "mat3", "mat4", "sampler1D", "sampler2D", "sampler3D",
+"samplerCube", "sampler2DArray", "bool", "geom", "main", "invoke(...)", "Trimesh shape", "heightProvider", "enabled body not tagged", "disabled body tagged", "unattached or disabled joint tagged", "attached enabled joint not tagged", "map.values", "map.values.elementAt(index)", "Shadow mapping base", "\nattribute vec3 aPosition;\nuniform vec3 pos;\nuniform mat4 viewProj;\n\nuniform mat4 lightMatrix;\n\nvarying vec4 lightSpacePos;\n\nvoid main() {\n    vec4 worldPos = vec4(aPosition + pos, 1.0);\n    lightSpacePos = lightMatrix * worldPos;\n    gl_Position = viewProj * vec4(aPosition + pos, 1.0);\n}",
 "\nuniform vec4 color;\nuniform sampler2D shadowMap;\n\nvarying vec4 lightSpacePos;\n\nfloat CalcShadowFactor(vec4 LightSpacePos) {\n    // convert to NDC space\n    vec3 projCoords = LightSpacePos.xyz / LightSpacePos.w;\n    \n    if (projCoords.z > 1.0)\n        return 0.0;\n    \n    projCoords = projCoords * 0.5 + 0.5;\n\n    float currentDepth = projCoords.z;\n    float closestDepth = texture2D(shadowMap, projCoords.xy).x;\n\n    float bias = 0.001;\n    if (currentDepth - bias > closestDepth)\n        return 1.0;\n    else"
 + "\n        return 0.0;\n}\n\nvoid main () {\n    float ShadowFactor = CalcShadowFactor(lightSpacePos);\n    gl_FragColor = vec4(color.xyz * (1.0 - ShadowFactor), color.a);\n}", "shadowMap", "\nattribute vec3 aPosition;\nuniform vec3 pos;\nuniform mat4 viewProj;\n\nvoid main() {\n    vec4 worldPos = vec4(aPosition + pos, 1.0);\n    gl_Position = viewProj * vec4(aPosition + pos, 1.0);\n}", "void main() {}", "normalScale", "normalColor", "normalMapMain(", "tangent", "biNormal", "GL_ARB_framebuffer_object", "GL_EXT_framebuffer_object",
 "Can\'t create mipmaps on GPU", "uniformLocations", "uniformLocationsMap", "mode", "attributes", "baseColor", "shaderChannels", "in_Stride = ", "IGNORE", "REPLACE", "REPORT", "arg1.xyz * arg2", "actions[i]", "animation", "You must call end() after each call to being()", "You must call render() before adding an animation", "You must call render() first", "blendingPosition.entries", "it.value", "blendingRotation.entries", "blendingScale.entries", "Call end() first", "FXAA", "Scale out of range.", "mat3x4", "channels",
@@ -85054,17 +84884,16 @@ $rt_stringPool(["Can\'t enter monitor from another thread synchronously", "@", "
 "; i++) {\n        lightSpacePos[i] = lightMatrix[i] * worldPos;    \n    }\n    \n    clipSpacePos = viewProj * worldPos;\n    gl_Position = clipSpacePos;\n}", "\nuniform vec4 color;\n\nuniform sampler2D shadowMap[", "];\nuniform float cascadeEnd[", "];\nvarying vec4 clipSpacePos;\n\nvoid main () {\n    gl_FragColor = color;\n\n    for (int i = 0; i < ", "; i++) {\n        if (clipSpacePos.z < cascadeEnd[i]) {\n            vec3 cascadeColor = vec3(1.0);\n        \n            if (i == 0) {\n                cascadeColor = vec3(1.0, 0.0, 0.0);\n            } else if (i == 1) {\n                cascadeColor = vec3(0.0, 1.0, 0.0);\n            } else if (i == 2) {\n                cascadeColor = vec3(0.0, 0.0, 1.0);\n            }\n            \n            float shadowFactor = 0.0;\n            vec4 lightSpacePos = lightSpacePos[i];\n            \n            vec3 projCoords "
 + "= (lightSpacePos.xyz / lightSpacePos.w) * 0.5 + 0.5;\n        \n            float currentDepth = projCoords.z;\n            float closestDepth = texture2D(shadowMap[i], projCoords.xy).x;\n        \n            float bias = 0.001;\n            if (currentDepth - bias > closestDepth) {\n                shadowFactor = 0.5;\n            }\n            \n            gl_FragColor = vec4(mix(gl_FragColor.xyz * (1.0 - shadowFactor), cascadeColor, 0.5), color.a);\n            break;\n        }    \n    }\n}", "shadowMap[",
 "uSkyboxVertexTransform", "uniform vec4 ", ".xyz + ", ".xyz * ", "attributePosition", "result", "Skybox", "\nattribute vec3 aPosition;\nvarying vec3 vPosition;\n\nuniform mat4 viewProj;\nuniform vec3 camPos;\nuniform float camFar;\n\nvoid main () {\n    vPosition = aPosition;\n    gl_Position = viewProj * vec4(aPosition * camFar + camPos, 1.0);\n}", "\nvarying vec3 vPosition;\nuniform samplerCube texture;\n\nvoid main () {\n    gl_FragColor = textureCube(texture, vPosition);\n}", "Invalid parameter: enc", "Incomplete % sequence at: ",
-"Invalid % sequence (", ") at ", "buildWrap", "Vertex Node", "body", "null cannot be cast to non-null type org.ode4j.ode.DGeom", "value.geom", "null cannot be cast to non-null type org.ksdfv.thelema.phys.ode4j.OdeCapsuleShape", "null cannot be cast to non-null type org.ksdfv.thelema.phys.ode4j.OdeCylinderShape", "null cannot be cast to non-null type org.ode4j.ode.DWorld", "QuickStepIsland Stage1", "QuickStepIsland Stage0-Joints", "QuickStepIsland Stage0-Bodies", "QuickStepIsland Stage3", "QuickStepIsland Stage2b Sync",
-"QuickStepIsland Stage2a Sync", "QuickStepIsland Stage2a", "QuickStepIsland Stage2b", "QuickStepIsland Stage2c", "QuickStepIsland Stage5", "QuickStepIsland Stage4LCP_Iteration Sync", "QuickStepIsland Stage4LCP_Iteration Start", "QuickStepIsland Stage4LCP_fc Start", "QuickStepIsland Stage4LCP_iMJ Sync", "QuickStepIsland Stage4LCP_ReorderPrep", "QuickStepIsland Stage4a", "QuickStepIsland Stage4LCP_iMJ", "QuickStepIsland Stage4b", "QuickStepIsland Stage4LCP_Ad", "QuickStepIsland Stage4LCP_fc", "QuickStepIsland Stage4LCP_Iteration",
-"QuickStepIsland Stage4LCP_ConstraintsReordering Sync", "QuickStepIsland Stage4LCP_ConstraintsReordering", "QuickStepIsland Stage6a Sync", "QuickStepIsland Stage6a", "QuickStepIsland Stage6b", "Charset.forName(\"UTF-8\")", "UTF-16", "Charset.forName(\"UTF-16\")", "UTF-16BE", "Charset.forName(\"UTF-16BE\")", "UTF-16LE", "Charset.forName(\"UTF-16LE\")", "US-ASCII", "Charset.forName(\"US-ASCII\")", "ISO-8859-1", "Charset.forName(\"ISO-8859-1\")", "fragNormal", "fragPosition", "layout (location = 0) out vec4 gColor;\n",
-"layout (location = 1) out vec4 gNormal;\n", "layout (location = 2) out vec4 gPosition;\n", "gColor = ", "gNormal = ", "gPosition = ", "if (gColor.a < ", "gColor.a = 1.0;\n", "previousTransform", "lightMatrix", "str.toString()", "Super calls with default arguments not supported in this target, function: vertSourceCode", "=== VERTEX ===\n", "Super calls with default arguments not supported in this target, function: fragSourceCode", "=== FRAGMENT ===\n", "Super calls with default arguments not supported in this target, function: sourceCode",
-"no uniform with name \'", "\' in shader", "Super calls with default arguments not supported in this target, function: getUniformLocation", "Super calls with default arguments not supported in this target, function: set3", "Super calls with default arguments not supported in this target, function: setMatrix4", "\nattribute vec2 ", ";\nattribute vec2 ", ";\n\nuniform vec2 translation;\nuniform vec2 scale;\nvarying vec2 uv;\n\nvoid main() {\n    uv = ", ";\n    gl_Position = vec4(translation.x + ", ".x * scale.x, translation.y + ",
-".y * scale.y, 0.0, 1.0);\n}", "            \nvarying vec2 uv;\nuniform sampler2D tex;\n\nvoid main() {\n    gl_FragColor = texture2D(tex, uv);\n}", "Either src or dest is null", "java.version", "1.8", "os.name", "TeaVM", "file.separator", "path.separator", "java.io.tmpdir", "java.vm.version", "user.home", "/tmp", "shortArray", "          \nattribute vec4 aPosition;\nattribute vec2 aUV;\nvarying vec2 uv;\n\nvoid main() {\n    uv = aUV;\n    gl_Position = aPosition;\n}", "                \nvarying vec2 uv;\n\nvoid main() {\n    gl_FragColor = vec4(uv, 1, 1);\n}",
-"Threshold Filter", "byteBuffer", "worldPosition", "occlusion", "roughness", "metallic", "PrincipledBSDF: receiveShadows enabled, but clipSpacePos is not set", "uDirLightsNum", "uPointLightsNum", "uSpotLightsNum", "uAmbientColor", "null cannot be cast to non-null type org.ksdfv.thelema.g3d.light.PointLight", "uPointLightPosition[", "uPointLightColor[", "uPointLightIntensity[", "uPointLightRange[", "uDirLightDirection[", "uDirLightColor[", "uDirLightIntensity[", "uDirLightCascadeEnd[", "uDirLightViewProj[", "dirLightTexUnits[cascadeIndex]",
-"uDirLightShadowMap[", "null cannot be cast to non-null type org.ksdfv.thelema.g3d.light.DirectionalLight", " = principledBSDFMain(", "uniform sampler2D uDirLightShadowMap[", "uniform float uDirLightCascadeEnd[", " vec4 vDirLightClipSpacePos[", "(0.0);\n", "uniform mat4 uDirLightViewProj[", "for (int i = 0; i < ", "; i++) {\n", "vDirLightClipSpacePos[i] = uDirLightViewProj[i] * ", "Emission Bloom", ", status: ", "STEP", "CUBICSPLINE", "An operation is not implemented.", "childNode", "Collection doesn\'t contain element at index ",
-"Index type is unknown", "Native", "LittleEndian", "BigEndian", "gl_FragColor.x += velocity.x * 20;\n", "gl_FragColor.y += velocity.y * 20;\n", "\nvarying vec2 uv;\nuniform sampler2D uSceneColorMap;\nuniform sampler2D uVelocityMap;\n\nconst vec3 VZERO = vec3(0.0, 0.0, 0.0);\n\nuniform float uBlurStrength;\n\nvoid main() {\n    vec3 vSum = VZERO;\n\n    vec2 velocity = texture2D(uVelocityMap, uv).xy * 0.5;    \n    //velocity *= uBlurStrength;\n    if (velocity.x != 0.0 || velocity.y != 0.0) {\n        float fNumSamples = ",
-".0 - 1.0;\n\n        for (int k = 0; k < ", "; ++k) {; \n            vec2 offset = velocity * (float(k) / fNumSamples - 0.5);        \n            vSum += texture2D(uSceneColorMap, uv + offset).xyz;\n        }\n\n        vSum /= ", ".0;\n\n        gl_FragColor = vec4(vSum, 1.0);\n    } else {\n        gl_FragColor = texture2D(uSceneColorMap, uv);\n    }\n\n", "\n}\n", "null cannot be cast to non-null type com.github.cliftonlabs.json_simple.JsonArray", "source.entries", "it.key", "ODE INTERNAL ERROR  ", "ODE Message ",
-"Step is zero."]);
+"Invalid % sequence (", ") at ", "buildWrap", "body", "null cannot be cast to non-null type org.ode4j.ode.DGeom", "value.geom", "null cannot be cast to non-null type org.ksdfv.thelema.phys.ode4j.OdeCapsuleShape", "null cannot be cast to non-null type org.ksdfv.thelema.phys.ode4j.OdeCylinderShape", "null cannot be cast to non-null type org.ode4j.ode.DWorld", "QuickStepIsland Stage1", "QuickStepIsland Stage0-Joints", "QuickStepIsland Stage0-Bodies", "QuickStepIsland Stage3", "QuickStepIsland Stage2b Sync", "QuickStepIsland Stage2a Sync",
+"QuickStepIsland Stage2a", "QuickStepIsland Stage2b", "QuickStepIsland Stage2c", "QuickStepIsland Stage5", "QuickStepIsland Stage4LCP_Iteration Sync", "QuickStepIsland Stage4LCP_Iteration Start", "QuickStepIsland Stage4LCP_fc Start", "QuickStepIsland Stage4LCP_iMJ Sync", "QuickStepIsland Stage4LCP_ReorderPrep", "QuickStepIsland Stage4a", "QuickStepIsland Stage4LCP_iMJ", "QuickStepIsland Stage4b", "QuickStepIsland Stage4LCP_Ad", "QuickStepIsland Stage4LCP_fc", "QuickStepIsland Stage4LCP_Iteration", "QuickStepIsland Stage4LCP_ConstraintsReordering Sync",
+"QuickStepIsland Stage4LCP_ConstraintsReordering", "QuickStepIsland Stage6a Sync", "QuickStepIsland Stage6a", "QuickStepIsland Stage6b", "Charset.forName(\"UTF-8\")", "UTF-16", "Charset.forName(\"UTF-16\")", "UTF-16BE", "Charset.forName(\"UTF-16BE\")", "UTF-16LE", "Charset.forName(\"UTF-16LE\")", "US-ASCII", "Charset.forName(\"US-ASCII\")", "ISO-8859-1", "Charset.forName(\"ISO-8859-1\")", "fragNormal", "fragPosition", "layout (location = 0) out vec4 gColor;\n", "layout (location = 1) out vec4 gNormal;\n", "layout (location = 2) out vec4 gPosition;\n",
+"gColor = ", "gNormal = ", "gPosition = ", "if (gColor.a < ", "gColor.a = 1.0;\n", "previousTransform", "lightMatrix", "str.toString()", "Super calls with default arguments not supported in this target, function: vertSourceCode", "=== VERTEX ===\n", "Super calls with default arguments not supported in this target, function: fragSourceCode", "=== FRAGMENT ===\n", "Super calls with default arguments not supported in this target, function: sourceCode", "no uniform with name \'", "\' in shader", "Super calls with default arguments not supported in this target, function: getUniformLocation",
+"Super calls with default arguments not supported in this target, function: set3", "Super calls with default arguments not supported in this target, function: setMatrix4", "\nattribute vec2 ", ";\nattribute vec2 ", ";\n\nuniform vec2 translation;\nuniform vec2 scale;\nvarying vec2 uv;\n\nvoid main() {\n    uv = ", ";\n    gl_Position = vec4(translation.x + ", ".x * scale.x, translation.y + ", ".y * scale.y, 0.0, 1.0);\n}", "            \nvarying vec2 uv;\nuniform sampler2D tex;\n\nvoid main() {\n    gl_FragColor = texture2D(tex, uv);\n}",
+"Either src or dest is null", "java.version", "1.8", "os.name", "TeaVM", "file.separator", "path.separator", "java.io.tmpdir", "java.vm.version", "user.home", "/tmp", "shortArray", "          \nattribute vec4 aPosition;\nattribute vec2 aUV;\nvarying vec2 uv;\n\nvoid main() {\n    uv = aUV;\n    gl_Position = aPosition;\n}", "                \nvarying vec2 uv;\n\nvoid main() {\n    gl_FragColor = vec4(uv, 1, 1);\n}", "Threshold Filter", "byteBuffer", "worldPosition", "occlusion", "roughness", "metallic", "PrincipledBSDF: receiveShadows enabled, but clipSpacePos is not set",
+"uDirLightsNum", "uPointLightsNum", "uSpotLightsNum", "uAmbientColor", "null cannot be cast to non-null type org.ksdfv.thelema.g3d.light.PointLight", "uPointLightPosition[", "uPointLightColor[", "uPointLightIntensity[", "uPointLightRange[", "uDirLightDirection[", "uDirLightColor[", "uDirLightIntensity[", "uDirLightCascadeEnd[", "uDirLightViewProj[", "dirLightTexUnits[cascadeIndex]", "uDirLightShadowMap[", "null cannot be cast to non-null type org.ksdfv.thelema.g3d.light.DirectionalLight", " = principledBSDFMain(",
+"uniform sampler2D uDirLightShadowMap[", "uniform float uDirLightCascadeEnd[", " vec4 vDirLightClipSpacePos[", "(0.0);\n", "uniform mat4 uDirLightViewProj[", "for (int i = 0; i < ", "; i++) {\n", "vDirLightClipSpacePos[i] = uDirLightViewProj[i] * ", "Emission Bloom", ", status: ", "STEP", "CUBICSPLINE", "An operation is not implemented.", "childNode", "Collection doesn\'t contain element at index ", "Index type is unknown", "Native", "LittleEndian", "BigEndian", "gl_FragColor.x += velocity.x * 20;\n", "gl_FragColor.y += velocity.y * 20;\n",
+"\nvarying vec2 uv;\nuniform sampler2D uSceneColorMap;\nuniform sampler2D uVelocityMap;\n\nconst vec3 VZERO = vec3(0.0, 0.0, 0.0);\n\nuniform float uBlurStrength;\n\nvoid main() {\n    vec3 vSum = VZERO;\n\n    vec2 velocity = texture2D(uVelocityMap, uv).xy * 0.5;    \n    //velocity *= uBlurStrength;\n    if (velocity.x != 0.0 || velocity.y != 0.0) {\n        float fNumSamples = ", ".0 - 1.0;\n\n        for (int k = 0; k < ", "; ++k) {; \n            vec2 offset = velocity * (float(k) / fNumSamples - 0.5);        \n            vSum += texture2D(uSceneColorMap, uv + offset).xyz;\n        }\n\n        vSum /= ",
+".0;\n\n        gl_FragColor = vec4(vSum, 1.0);\n    } else {\n        gl_FragColor = texture2D(uSceneColorMap, uv);\n    }\n\n", "\n}\n", "null cannot be cast to non-null type com.github.cliftonlabs.json_simple.JsonArray", "source.entries", "it.key", "ODE INTERNAL ERROR  ", "ODE Message ", "Step is zero."]);
 oktsp_SSAO_ssaoBlurCode = $rt_s(521);
 oktsp_SSAO_ssaoCombineCode = $rt_s(522);
 jl_String.prototype.toString = function() {
